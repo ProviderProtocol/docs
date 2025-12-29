@@ -580,6 +580,22 @@ interface ImageHandler<TParams = unknown> {
   /** Bind model ID to create executable model */
   bind(modelId: string): BoundImageModel<TParams>;
 }
+
+/**
+ * Type aliases for provider references in bound models.
+ * These are the Provider type constrained to having a specific modality handler.
+ */
+type LLMProvider<TParams = unknown> = Provider & {
+  readonly modalities: { llm: LLMHandler<TParams> };
+};
+
+type EmbeddingProvider<TParams = unknown> = Provider & {
+  readonly modalities: { embedding: EmbeddingHandler<TParams> };
+};
+
+type ImageProvider<TParams = unknown> = Provider & {
+  readonly modalities: { image: ImageHandler<TParams> };
+};
 ```
 
 ### 4.6 Provider Registration
@@ -1237,7 +1253,7 @@ const userMsg = new UserMessage('Hello, world!');
 
 // User message with image
 const imageMsg = new UserMessage([
-  Image.fromPath('diagram.png'),
+  await Image.fromPath('diagram.png'),
   'Please explain this diagram',
 ]);
 
@@ -1855,6 +1871,8 @@ By default, useLLM handles tool execution automatically:
 5. Loop continues until model returns without tool calls OR max iterations reached
 
 **Important:** useLLM does NOT validate tool arguments against the JSON Schema. The schema is provided to the model to guide its output, but validation and sanitization of LLM-provided arguments is the responsibility of the tool implementation. Always treat tool arguments as untrusted input.
+
+**Note on validation asymmetry:** This differs from structured outputs (Section 11.3), where providers MUST validate responses against the schema. The distinction is intentional: structured outputs are a contract with the developer about response format, while tool arguments are inputs to developer-controlled functions that should perform their own validation appropriate to their security context.
 
 ### 10.5 ToolUseStrategy
 
@@ -3290,11 +3308,20 @@ export async function doFetch(
 ): Promise<Response> {
   const fetchFn = config.fetch ?? globalThis.fetch;
   const timeout = config.timeout ?? 60000;
-  const retry = config.retry ?? { maxAttempts: 3, backoff: 'exponential' };
+  const retryStrategy = config.retryStrategy ?? new ExponentialBackoff();
 
   let lastError: Error | undefined;
+  let attempt = 0;
 
-  for (let attempt = 0; attempt < (retry.maxAttempts ?? 3); attempt++) {
+  while (true) {
+    // Check if strategy wants us to wait before request
+    if (retryStrategy.beforeRequest) {
+      const preDelay = await retryStrategy.beforeRequest();
+      if (preDelay > 0) {
+        await sleep(preDelay);
+      }
+    }
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -3309,38 +3336,65 @@ export async function doFetch(
       if (!response.ok) {
         const error = await normalizeHttpError(response, 'unknown', 'llm');
 
-        // Check if we should retry
-        const retryOn = retry.retryOn ?? ['RATE_LIMITED', 'NETWORK_ERROR', 'TIMEOUT'];
-        if (retryOn.includes(error.code) && attempt < (retry.maxAttempts ?? 3) - 1) {
+        // Ask strategy if we should retry
+        attempt++;
+        const retryDelay = await retryStrategy.onRetry(error, attempt);
+        if (retryDelay !== null) {
           lastError = error;
-          await sleep(getBackoffDelay(attempt, retry));
+          await sleep(retryDelay);
           continue;
         }
 
         throw error;
       }
 
+      // Success - reset strategy state
+      if (retryStrategy.reset) {
+        retryStrategy.reset();
+      }
+
       return response;
     } catch (error) {
       clearTimeout(timeoutId);
 
-      if (error instanceof UPPError) throw error;
+      if (error instanceof UPPError) {
+        // Ask strategy if we should retry
+        attempt++;
+        const retryDelay = await retryStrategy.onRetry(error, attempt);
+        if (retryDelay !== null) {
+          lastError = error;
+          await sleep(retryDelay);
+          continue;
+        }
+        throw error;
+      }
 
       // Network error or abort
       if (error instanceof DOMException && error.name === 'AbortError') {
         throw new UPPError('Request timed out', 'TIMEOUT', 'unknown', 'llm');
       }
 
-      lastError = error as Error;
+      // Wrap unknown errors
+      const uppError = new UPPError(
+        (error as Error).message ?? 'Network error',
+        'NETWORK_ERROR',
+        'unknown',
+        'llm',
+        undefined,
+        error as Error
+      );
 
-      if (attempt < (retry.maxAttempts ?? 3) - 1) {
-        await sleep(getBackoffDelay(attempt, retry));
+      attempt++;
+      const retryDelay = await retryStrategy.onRetry(uppError, attempt);
+      if (retryDelay !== null) {
+        lastError = uppError;
+        await sleep(retryDelay);
         continue;
       }
+
+      throw uppError;
     }
   }
-
-  throw lastError ?? new UPPError('Request failed', 'NETWORK_ERROR', 'unknown', 'llm');
 }
 
 /**
@@ -3413,24 +3467,142 @@ export async function normalizeHttpError(
   );
 }
 
-function getBackoffDelay(attempt: number, retry: RetryConfig): number {
-  const initial = retry.initialDelay ?? 1000;
-
-  switch (retry.backoff) {
-    case 'exponential':
-      return initial * Math.pow(2, attempt);
-    case 'linear':
-      return initial * (attempt + 1);
-    case 'none':
-    default:
-      return initial;
-  }
-}
-
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 ```
+
+---
+
+## 16. Conformance
+
+### 16.1 Provider Conformance Levels
+
+Providers may implement one or more modalities. For each modality, conformance is defined at multiple levels.
+
+#### 16.1.1 LLM Conformance
+
+**Level 1: Core (Required)**
+- Text input/output via `generate()` method
+- Return `LLMResponse` with `AssistantMessage` and `TokenUsage`
+- Basic configuration pass-through (`params`)
+- Error normalization to `UPPError` with correct `modality: 'llm'`
+- System prompt handling per vendor requirements
+
+**Level 2: Streaming**
+- `stream()` method implementation
+- Proper `MessageFragment` emission with correct `FragmentType`
+- `LLMStreamResult` with `response` promise
+- Support for `message_start`, `text_delta`, `message_stop` at minimum
+
+**Level 3: Tools**
+- Tool definition transformation (JSON Schema to vendor format)
+- Tool call detection in responses (`AssistantMessage.toolCalls`)
+- Tool result handling (`ToolResultMessage` transformation)
+- Note: Tool execution loop is handled by useLLM core, not providers
+
+**Level 4: Structured Output**
+- Transform `structure` schema to vendor format
+- Enable vendor's structured output mode
+- Parse and return structured data
+- Validate response if vendor lacks native support
+
+**Level 5: Multimodal Input**
+- Image input handling (base64, URL conversion)
+- Audio input handling (if supported by vendor)
+- Video input handling (if supported by vendor)
+
+#### 16.1.2 Embedding Conformance
+
+**Level 1: Core (Required)**
+- `embed()` method for single inputs
+- Return `EmbeddingResponse` with vectors and usage
+- Text input support
+- Error normalization with `modality: 'embedding'`
+
+**Level 2: Batch**
+- Batch embedding via provider's batch API
+- Respect `maxBatchSize` limits
+- Aggregate usage reporting
+
+**Level 3: Multimodal**
+- Image embedding support (if vendor supports)
+- Declare supported inputs in `supportedInputs`
+
+#### 16.1.3 Image Conformance
+
+**Level 1: Core (Required)**
+- `generate()` method for text-to-image
+- Return `ImageResponse` with `GeneratedImage` array
+- Declare capabilities in `ImageCapabilities`
+- Error normalization with `modality: 'image'`
+
+**Level 2: Editing**
+- `edit()` method for inpainting (if `capabilities.edit`)
+- Mask handling
+
+**Level 3: Variations**
+- `vary()` method (if `capabilities.vary`)
+- Strength/count parameters
+
+**Level 4: Streaming**
+- `stream()` method (if `capabilities.streaming`)
+- Progress and preview fragments
+
+**Level 5: Advanced**
+- `upscale()` method (if `capabilities.upscale`)
+- Outpainting support (if `capabilities.outpaint`)
+
+### 16.2 Conformance Requirements
+
+#### 16.2.1 Error Handling
+
+All providers MUST:
+- Normalize vendor errors to `UPPError`
+- Set appropriate `ErrorCode` based on HTTP status or vendor error type
+- Include `provider` name and `modality` in all errors
+- Preserve original error as `cause` when available
+
+#### 16.2.2 Configuration Pass-through
+
+All providers MUST:
+- Pass `params` to vendor API without modification (unless transformation required)
+- Support custom `baseUrl` for proxies
+- Support custom `fetch` implementation
+- Respect `timeout` setting
+- Use provided `retryStrategy` or sensible default
+
+#### 16.2.3 Metadata Handling
+
+All providers MUST:
+- Namespace their metadata under `metadata.{providerName}`
+- Preserve unknown metadata fields during round-trips
+- Extract vendor-specific response fields to metadata
+
+### 16.3 Interoperability Notes
+
+The following features are provider-dependent and may not transfer between providers:
+
+- Token counting algorithms and limits
+- Specific tool calling formats and behaviors
+- Streaming granularity and event types
+- Response metadata structure
+- Rate limiting behavior and headers
+- Supported modalities and model capabilities
+- Image size and format support
+- Embedding dimensions and normalization
+
+Developers should consult individual provider documentation for feature support details.
+
+### 16.4 Capability Declaration
+
+Providers SHOULD accurately declare their capabilities:
+
+- `LLMHandler`: No explicit capability interface (check for method existence)
+- `EmbeddingHandler`: Declare `supportedInputs` array
+- `ImageHandler`: Declare full `ImageCapabilities` object
+
+Applications SHOULD check capabilities before using optional features to ensure graceful degradation.
 
 ---
 
