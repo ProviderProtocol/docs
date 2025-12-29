@@ -74,7 +74,11 @@ This specification covers:
 | **Embedding** | A vector representation of text or other content |
 | **UPP** | Unified Provider Protocol |
 
-### 1.4 Modality Overview
+### 1.4 Requirements Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+### 1.5 Modality Overview
 
 | Entry Point | Purpose | Example Models |
 |-------------|---------|----------------|
@@ -352,8 +356,6 @@ class DynamicKey implements KeyStrategy {
 
 ### 4.3 Retry Strategies
 
-UPP provides built-in strategies for handling retries and rate limits:
-
 ```ts
 interface RetryStrategy {
   /**
@@ -375,116 +377,18 @@ interface RetryStrategy {
    */
   reset?(): void;
 }
-
-/** Exponential backoff with jitter (recommended default) */
-class ExponentialBackoff implements RetryStrategy {
-  constructor(options?: {
-    /** Maximum retry attempts (default: 3) */
-    maxAttempts?: number;
-    /** Initial delay in ms (default: 1000) */
-    initialDelay?: number;
-    /** Maximum delay in ms (default: 60000) */
-    maxDelay?: number;
-    /** Jitter factor 0-1 (default: 0.1) */
-    jitter?: number;
-    /** Error codes to retry on (default: RATE_LIMITED, NETWORK_ERROR, TIMEOUT) */
-    retryOn?: ErrorCode[];
-  });
-  onRetry(error: UPPError, attempt: number): number | null;
-  reset(): void;
-}
-
-/** Linear backoff with fixed delay */
-class LinearBackoff implements RetryStrategy {
-  constructor(options?: {
-    maxAttempts?: number;
-    delay?: number;
-    retryOn?: ErrorCode[];
-  });
-  onRetry(error: UPPError, attempt: number): number | null;
-}
-
-/** No retry - fail immediately */
-class NoRetry implements RetryStrategy {
-  onRetry(): null;
-}
-
-/** Token bucket for pre-emptive rate limiting */
-class TokenBucket implements RetryStrategy {
-  constructor(options: {
-    /** Tokens per interval */
-    tokens: number;
-    /** Interval in ms */
-    interval: number;
-    /** Maximum burst tokens */
-    maxTokens?: number;
-    /** Fallback strategy when rate limited */
-    fallback?: RetryStrategy;
-  });
-  onRetry(error: UPPError, attempt: number): number | null;
-  beforeRequest(): number;
-}
-
-/** Respects Retry-After headers from provider */
-class RetryAfterStrategy implements RetryStrategy {
-  constructor(options?: {
-    maxAttempts?: number;
-    /** Fallback delay if no Retry-After header (default: 1000ms) */
-    fallbackDelay?: number;
-  });
-  onRetry(error: UPPError, attempt: number): number | null;
-}
 ```
 
-Usage examples:
+Reference implementations (`ExponentialBackoff`, `LinearBackoff`, `NoRetry`, `TokenBucket`, `RetryAfterStrategy`) are provided by the UPP library. Custom strategies can be implemented by conforming to the `RetryStrategy` interface.
 
 ```ts
-import { ExponentialBackoff, TokenBucket, NoRetry } from '@providerprotocol/use';
-
-// Default exponential backoff
-const config: ProviderConfig = {
-  apiKey: process.env.API_KEY,
-  retryStrategy: new ExponentialBackoff(),
-};
-
-// Aggressive retry for batch jobs
-const batchConfig: ProviderConfig = {
-  apiKey: process.env.API_KEY,
-  retryStrategy: new ExponentialBackoff({
-    maxAttempts: 10,
-    maxDelay: 120000,
-  }),
-};
-
-// Pre-emptive rate limiting for high-volume apps
-const highVolumeConfig: ProviderConfig = {
-  apiKey: process.env.API_KEY,
-  retryStrategy: new TokenBucket({
-    tokens: 100,
-    interval: 60000,
-    fallback: new ExponentialBackoff(),
-  }),
-};
-
-// No retry - fail fast
-const realtimeConfig: ProviderConfig = {
-  apiKey: process.env.API_KEY,
-  retryStrategy: new NoRetry(),
-};
-
-// Custom strategy
+// Custom strategy example
 class MyCustomStrategy implements RetryStrategy {
   onRetry(error: UPPError, attempt: number): number | null {
     if (attempt >= 5) return null;
-    // Custom logic: check time of day, error type, etc.
     return error.code === 'RATE_LIMITED' ? 5000 : 1000;
   }
 }
-
-const customConfig: ProviderConfig = {
-  apiKey: process.env.API_KEY,
-  retryStrategy: new MyCustomStrategy(),
-};
 ```
 
 ### 4.4 Error Handling
@@ -645,8 +549,8 @@ interface UseLLMOptions<TParams = unknown> {
   /** A model reference from a provider factory */
   model: ModelReference;
 
-  /** Provider infrastructure configuration */
-  config: ProviderConfig;
+  /** Provider infrastructure configuration (optional - uses env vars if omitted) */
+  config?: ProviderConfig;
 
   /** Model-specific parameters (temperature, max_tokens, etc.) */
   params?: TParams;
@@ -741,7 +645,7 @@ interface BoundLLMModel<TParams = unknown> {
   /** The model identifier */
   readonly modelId: string;
 
-  /** Reference to the parent provider */
+  /** Reference to the parent provider (see LLMProvider in Section 4.5) */
   readonly provider: LLMProvider<TParams>;
 
   /** Execute a single non-streaming inference request */
@@ -751,7 +655,11 @@ interface BoundLLMModel<TParams = unknown> {
   stream(request: LLMRequest<TParams>): LLMStreamResult;
 }
 
-/** Request passed from useLLM core to providers */
+/**
+ * Request passed from useLLM core to providers.
+ * Note: config is required here because useLLM core resolves defaults
+ * before passing to providers. UseLLMOptions.config is optional for callers.
+ */
 interface LLMRequest<TParams = unknown> {
   /** All messages for this request (history + new input) */
   messages: Message[];
@@ -768,7 +676,7 @@ interface LLMRequest<TParams = unknown> {
   /** Structured output schema (if requested) */
   structure?: JSONSchema;
 
-  /** Provider infrastructure config */
+  /** Provider infrastructure config (resolved by useLLM core) */
   config: ProviderConfig;
 
   /** Abort signal for cancellation */
@@ -1086,19 +994,7 @@ abstract class Message {
  * Each provider defines its own metadata shape.
  */
 interface MessageMetadata {
-  google?: {
-    thought_signature?: string;
-    [key: string]: unknown;
-  };
-  openai?: {
-    reasoning_encrypted?: string;
-    [key: string]: unknown;
-  };
-  anthropic?: {
-    cache_control?: { type: 'ephemeral' };
-    [key: string]: unknown;
-  };
-  /** Extensible for other providers */
+  /** Extensible: each provider uses its own namespace */
   [provider: string]: Record<string, unknown> | undefined;
 }
 
@@ -1278,54 +1174,41 @@ const toolResultMsg = new ToolResultMessage([
 ]);
 ```
 
-### 6.5 Image Class
+### 6.5 Image Type
 
 ```ts
-class Image {
+interface Image {
   readonly source: ImageSource;
   readonly mimeType: string;
   readonly width?: number;
   readonly height?: number;
 
-  private constructor(source: ImageSource, mimeType: string);
-
-  /** Create from file path (reads file into memory) */
-  static fromPath(path: string): Promise<Image>;
-
-  /**
-   * Create from URL reference.
-   * Does NOT fetch the image - just stores the URL.
-   * Provider decides how to handle: pass URL directly if supported,
-   * or fetch and convert to base64 during request transformation.
-   */
-  static fromUrl(url: string, mimeType?: string): Image;
-
-  /** Create from raw bytes */
-  static fromBytes(data: Uint8Array, mimeType: string): Image;
-
-  /** Create from base64 string */
-  static fromBase64(base64: string, mimeType: string): Image;
-
   /** Check if this image has data loaded (false for URL sources) */
-  get hasData(): boolean;
+  readonly hasData: boolean;
 
-  /**
-   * Convert to base64 string.
-   * @throws Error if source is URL (no data loaded)
-   */
+  /** Convert to base64 string (throws if source is URL) */
   toBase64(): string;
 
-  /**
-   * Convert to data URL.
-   * @throws Error if source is URL (no data loaded)
-   */
+  /** Convert to data URL (throws if source is URL) */
   toDataUrl(): string;
 
-  /**
-   * Get raw bytes.
-   * @throws Error if source is URL (no data loaded)
-   */
+  /** Get raw bytes (throws if source is URL) */
   toBytes(): Uint8Array;
+}
+
+/** Static factory methods for creating Image instances */
+namespace Image {
+  /** Create from file path (reads file into memory) */
+  function fromPath(path: string): Promise<Image>;
+
+  /** Create from URL reference (does not fetch - providers handle URL conversion) */
+  function fromUrl(url: string, mimeType?: string): Image;
+
+  /** Create from raw bytes */
+  function fromBytes(data: Uint8Array, mimeType: string): Image;
+
+  /** Create from base64 string */
+  function fromBase64(base64: string, mimeType: string): Image;
 }
 ```
 
@@ -1360,7 +1243,7 @@ for (const msg of turn.messages) {
 A `Turn` represents the complete result of one inference call, including all messages produced during tool execution loops.
 
 ```ts
-interface Turn {
+interface Turn<TData = unknown> {
   /**
    * All messages produced during this inference, in chronological order.
    * Types: UserMessage, AssistantMessage (may include toolCalls), ToolResultMessage
@@ -1379,8 +1262,11 @@ interface Turn {
   /** Total number of inference cycles (1 + number of tool rounds) */
   readonly cycles: number;
 
-  /** Structured output data (if structure was provided) */
-  readonly data?: unknown;
+  /**
+   * Structured output data (if structure was provided).
+   * Type is inferred from the schema when using TypeScript.
+   */
+  readonly data?: TData;
 }
 
 interface ToolExecution {
@@ -1504,8 +1390,8 @@ class Thread {
   /** Add an assistant message */
   assistant(content: string | ContentBlock[]): this;
 
-  /** Get messages by role */
-  filter(role: 'user' | 'assistant'): Message[];
+  /** Get messages by type */
+  filter(type: MessageType): Message[];
 
   /** Get the last N messages */
   tail(count: number): Message[];
@@ -1720,6 +1606,8 @@ try {
 }
 ```
 
+**Abort behavior with tools:** When a stream is aborted during a tool execution loop, the abort signal propagates to any in-flight tool execution. The current tool's `run` function receives the abort via `AbortSignal` (if it accepts one). Pending tool calls that haven't started execution are skipped. The overall generation throws a `CANCELLED` error.
+
 ### 9.6 Streaming Event Order
 
 A typical streaming sequence:
@@ -1870,9 +1758,14 @@ By default, useLLM handles tool execution automatically:
 4. Result (or error) is sent back to the model as `ToolResultMessage`
 5. Loop continues until model returns without tool calls OR max iterations reached
 
+**Error handling:**
+- If `approval()` throws an exception, the exception propagates to the caller and aborts the generation
+- If `approval()` returns `false`, an error result is sent to the model
+- If the tool's `run` function throws, the error is caught and sent as an error result to the model
+
 **Important:** useLLM does NOT validate tool arguments against the JSON Schema. The schema is provided to the model to guide its output, but validation and sanitization of LLM-provided arguments is the responsibility of the tool implementation. Always treat tool arguments as untrusted input.
 
-**Note on validation asymmetry:** This differs from structured outputs (Section 11.3), where providers MUST validate responses against the schema. The distinction is intentional: structured outputs are a contract with the developer about response format, while tool arguments are inputs to developer-controlled functions that should perform their own validation appropriate to their security context.
+**Note on validation asymmetry:** This differs from structured outputs (Section 11), where providers MUST validate responses against the schema. The distinction is intentional: structured outputs are a contract with the developer about response format, while tool arguments are inputs to developer-controlled functions that should perform their own validation appropriate to their security context.
 
 ### 10.5 ToolUseStrategy
 
@@ -2177,8 +2070,8 @@ interface UseEmbeddingOptions<TParams = unknown> {
   /** A model reference from a provider factory */
   model: ModelReference;
 
-  /** Provider infrastructure configuration */
-  config: ProviderConfig;
+  /** Provider infrastructure configuration (optional - uses env vars if omitted) */
+  config?: ProviderConfig;
 
   /** Model-specific parameters (dimensions, encoding format, etc.) */
   params?: TParams;
@@ -2380,33 +2273,7 @@ for await (const progress of embedder.embedMany(documents, {
 
 ### 12.8 Provider-Specific Parameters
 
-```ts
-// OpenAI
-interface OpenAIEmbedParams {
-  dimensions?: number;                    // Output dimensions (for v3 models)
-  encoding_format?: 'float' | 'base64';   // Output format
-}
-
-// Voyage
-interface VoyageEmbedParams {
-  input_type?: 'query' | 'document';      // Optimization hint
-  truncation?: boolean;                   // Truncate long inputs
-}
-
-// Cohere
-interface CohereEmbedParams {
-  input_type: 'search_document' | 'search_query' | 'classification' | 'clustering';
-  truncate?: 'NONE' | 'START' | 'END';
-  embedding_types?: ('float' | 'int8' | 'uint8' | 'binary' | 'ubinary')[];
-}
-
-// Google
-interface GoogleEmbedParams {
-  taskType?: 'RETRIEVAL_QUERY' | 'RETRIEVAL_DOCUMENT' | 'SEMANTIC_SIMILARITY' |
-             'CLASSIFICATION' | 'CLUSTERING';
-  title?: string;                         // Document title (for RETRIEVAL_DOCUMENT)
-}
-```
+Each provider exports its own parameter types (e.g., `OpenAIEmbedParams`, `VoyageEmbedParams`). Consult provider documentation for available options such as output dimensions, encoding formats, and task type hints.
 
 ### 12.9 Similarity Utilities
 
@@ -2415,57 +2282,7 @@ UPP provides optional utilities for working with embeddings:
 ```ts
 import { cosineSimilarity, euclideanDistance, dotProduct } from '@providerprotocol/use/similarity';
 
-const embedding1 = await embedder.embed('Hello world');
-const embedding2 = await embedder.embed('Hi there');
-
 const similarity = cosineSimilarity(embedding1.vector, embedding2.vector);
-console.log(similarity); // 0.92
-
-const distance = euclideanDistance(embedding1.vector, embedding2.vector);
-console.log(distance); // 0.39
-
-const dot = dotProduct(embedding1.vector, embedding2.vector);
-console.log(dot); // 0.85
-```
-
-### 12.10 Semantic Search Example
-
-```ts
-import { useEmbedding } from '@providerprotocol/use';
-import { openai } from '@providerprotocol/use/openai';
-import { cosineSimilarity } from '@providerprotocol/use/similarity';
-
-const embedder = useEmbedding({
-  model: openai('text-embedding-3-small'),
-  config: { apiKey: process.env.OPENAI_API_KEY },
-});
-
-// Index documents
-const documents = [
-  'The quick brown fox jumps over the lazy dog',
-  'Machine learning is a subset of artificial intelligence',
-  'Paris is the capital of France',
-  'JavaScript is a programming language',
-];
-
-const docEmbeddings = await embedder.embedBatch(documents);
-
-// Search
-async function search(query: string, topK: number = 3) {
-  const queryEmbedding = await embedder.embed(query);
-
-  const scores = docEmbeddings.embeddings.map((doc, i) => ({
-    index: i,
-    document: documents[i],
-    score: cosineSimilarity(queryEmbedding.vector, doc.vector),
-  }));
-
-  return scores.sort((a, b) => b.score - a.score).slice(0, topK);
-}
-
-const results = await search('What is the capital of France?');
-console.log(results);
-// [{ index: 2, document: 'Paris is the capital of France', score: 0.92 }, ...]
 ```
 
 ---
@@ -2487,8 +2304,8 @@ interface UseImageOptions<TParams = unknown> {
   /** A model reference from a provider factory */
   model: ModelReference;
 
-  /** Provider infrastructure configuration */
-  config: ProviderConfig;
+  /** Provider infrastructure configuration (optional - uses env vars if omitted) */
+  config?: ProviderConfig;
 
   /** Model-specific parameters (size, quality, style, etc.) */
   params?: TParams;
@@ -2930,70 +2747,12 @@ if (sd.stream) {
 
 ### 13.14 Provider-Specific Parameters
 
-```ts
-// OpenAI DALL-E 3
-interface OpenAIImageParams {
-  size?: '1024x1024' | '1792x1024' | '1024x1792';
-  quality?: 'standard' | 'hd';
-  style?: 'vivid' | 'natural';
-  n?: number; // DALL-E 3 only supports 1
-}
-
-// OpenAI DALL-E 2
-interface OpenAIImage2Params {
-  size?: '256x256' | '512x512' | '1024x1024';
-  n?: number; // 1-10
-}
-
-// Stability AI
-interface StabilityImageParams {
-  steps?: number;                  // 10-50
-  cfg_scale?: number;              // 0-35
-  samples?: number;                // 1-10
-  seed?: number;
-  sampler?: 'DDIM' | 'DDPM' | 'K_DPMPP_2M' | 'K_DPMPP_2S_ANCESTRAL' |
-            'K_DPM_2' | 'K_DPM_2_ANCESTRAL' | 'K_EULER' | 'K_EULER_ANCESTRAL' |
-            'K_HEUN' | 'K_LMS';
-  style_preset?: 'enhance' | 'anime' | 'photographic' | 'digital-art' |
-                 'comic-book' | 'fantasy-art' | 'line-art' | 'analog-film' |
-                 'neon-punk' | 'isometric' | 'low-poly' | 'origami' |
-                 'modeling-compound' | 'cinematic' | '3d-model' | 'pixel-art' |
-                 'tile-texture';
-}
-
-// Google Imagen
-interface GoogleImageParams {
-  sampleCount?: number;            // 1-8
-  aspectRatio?: '1:1' | '3:4' | '4:3' | '9:16' | '16:9';
-  negativePrompt?: string;
-  personGeneration?: 'allow_adult' | 'dont_allow';
-  safetySetting?: 'block_some' | 'block_few' | 'block_fewest';
-}
-```
+Each provider exports its own parameter types (e.g., `OpenAIImageParams`, `StabilityImageParams`). Consult provider documentation for available options such as size, quality, style presets, and sampling parameters.
 
 ### 13.15 Capability Detection
 
 ```ts
-const imageGen = useImage({
-  model: openai('dall-e-3'),
-  config: { apiKey: process.env.OPENAI_API_KEY },
-});
-
 // Check capabilities before using optional features
-console.log('Capabilities:', imageGen.capabilities);
-// {
-//   generate: true,
-//   streaming: false,
-//   edit: true,
-//   vary: true,
-//   upscale: false,
-//   outpaint: false,
-//   imageToImage: false,
-//   maxImages: 1,
-//   supportedSizes: ['1024x1024', '1792x1024', '1024x1792'],
-//   supportedFormats: ['png']
-// }
-
 if (imageGen.capabilities.edit && imageGen.edit) {
   // Safe to use edit
 }
@@ -3150,49 +2909,26 @@ export {
   isToolResultMessage,
 };
 
-// --- Similarity Utilities ---
-export {
-  cosineSimilarity,
-  euclideanDistance,
-  dotProduct,
-};
+// --- Similarity Utilities (optional) ---
+// cosineSimilarity, euclideanDistance, dotProduct
+// Available from '@providerprotocol/use/similarity'
 ```
 
 ### 14.3 Provider Exports
 
-Each provider module exports a single factory function and its parameter types:
+Each provider module exports a single factory function and its own parameter types. The model ID passed to the factory determines which modality handler is used.
 
 ```ts
-// @providerprotocol/use/anthropic
-export { anthropic } from './providers/anthropic';
-export type { AnthropicLLMParams } from './providers/anthropic';
+// Pattern: @providerprotocol/use/{provider}
+import { openai } from '@providerprotocol/use/openai';
+import { anthropic } from '@providerprotocol/use/anthropic';
+import { google } from '@providerprotocol/use/google';
 
-// @providerprotocol/use/openai
-export { openai } from './providers/openai';
-export type { OpenAILLMParams } from './providers/openai';
-export type { OpenAIEmbedParams } from './providers/openai';
-export type { OpenAIImageParams } from './providers/openai';
-
-// @providerprotocol/use/google
-export { google } from './providers/google';
-export type { GoogleLLMParams } from './providers/google';
-export type { GoogleEmbedParams } from './providers/google';
-export type { GoogleImageParams } from './providers/google';
-
-// @providerprotocol/use/stability
-export { stability } from './providers/stability';
-export type { StabilityImageParams } from './providers/stability';
-
-// @providerprotocol/use/voyage
-export { voyage } from './providers/voyage';
-export type { VoyageEmbedParams } from './providers/voyage';
-
-// @providerprotocol/use/cohere
-export { cohere } from './providers/cohere';
-export type { CohereEmbedParams } from './providers/cohere';
+// Each provider also exports its parameter types
+import type { OpenAILLMParams } from '@providerprotocol/use/openai';
 ```
 
-Note: Each provider exports only one factory (`openai`, `anthropic`, etc.). The model ID passed to the factory determines which modality handler is used.
+Consult individual provider documentation for available parameter types and supported modalities.
 
 ---
 
@@ -3263,214 +2999,40 @@ Per [Section 2.7](#27-http-first-provider-implementation), providers SHOULD use 
 
 ### 15.4 Shared Utilities
 
-UPP provides utilities for provider implementations:
+UPP provides utilities for provider implementations. These are available from `@providerprotocol/use/http`.
 
 ```ts
-// upp/http.ts
+/**
+ * Resolve API key from ProviderConfig, supporting string, function, or KeyStrategy.
+ * Falls back to environment variable if provided and config.apiKey is not set.
+ * Throws UPPError with AUTHENTICATION_FAILED if no key is available.
+ */
+function resolveApiKey(config: ProviderConfig, envVar?: string): Promise<string>;
 
 /**
- * Resolve API key from various sources
+ * Execute fetch with retry, timeout, and error normalization.
+ * Uses config.retryStrategy for retry logic, config.timeout for request timeout,
+ * and config.fetch for custom fetch implementation.
+ * Automatically normalizes HTTP errors to UPPError.
  */
-export async function resolveApiKey(
-  config: ProviderConfig,
-  envVar?: string
-): Promise<string> {
-  const key = config.apiKey;
-
-  if (!key) {
-    // Fall back to environment variable
-    const envKey = typeof process !== 'undefined'
-      ? process.env?.[envVar ?? '']
-      : undefined;
-    if (!envKey) {
-      throw new UPPError(
-        'API key not configured',
-        'AUTHENTICATION_FAILED',
-        'unknown',
-        'llm'
-      );
-    }
-    return envKey;
-  }
-
-  if (typeof key === 'string') return key;
-  if (typeof key === 'function') return key();
-  return key.getKey();
-}
+function doFetch(url: string, init: RequestInit, config: ProviderConfig): Promise<Response>;
 
 /**
- * Execute fetch with retry and timeout
+ * Parse Server-Sent Events stream into JSON objects.
+ * Handles standard SSE format with "data:" prefix.
+ * Yields parsed JSON for each event, terminates on "[DONE]" message.
  */
-export async function doFetch(
-  url: string,
-  init: RequestInit,
-  config: ProviderConfig
-): Promise<Response> {
-  const fetchFn = config.fetch ?? globalThis.fetch;
-  const timeout = config.timeout ?? 60000;
-  const retryStrategy = config.retryStrategy ?? new ExponentialBackoff();
-
-  let lastError: Error | undefined;
-  let attempt = 0;
-
-  while (true) {
-    // Check if strategy wants us to wait before request
-    if (retryStrategy.beforeRequest) {
-      const preDelay = await retryStrategy.beforeRequest();
-      if (preDelay > 0) {
-        await sleep(preDelay);
-      }
-    }
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-
-    try {
-      const response = await fetchFn(url, {
-        ...init,
-        signal: init.signal ?? controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        const error = await normalizeHttpError(response, 'unknown', 'llm');
-
-        // Ask strategy if we should retry
-        attempt++;
-        const retryDelay = await retryStrategy.onRetry(error, attempt);
-        if (retryDelay !== null) {
-          lastError = error;
-          await sleep(retryDelay);
-          continue;
-        }
-
-        throw error;
-      }
-
-      // Success - reset strategy state
-      if (retryStrategy.reset) {
-        retryStrategy.reset();
-      }
-
-      return response;
-    } catch (error) {
-      clearTimeout(timeoutId);
-
-      if (error instanceof UPPError) {
-        // Ask strategy if we should retry
-        attempt++;
-        const retryDelay = await retryStrategy.onRetry(error, attempt);
-        if (retryDelay !== null) {
-          lastError = error;
-          await sleep(retryDelay);
-          continue;
-        }
-        throw error;
-      }
-
-      // Network error or abort
-      if (error instanceof DOMException && error.name === 'AbortError') {
-        throw new UPPError('Request timed out', 'TIMEOUT', 'unknown', 'llm');
-      }
-
-      // Wrap unknown errors
-      const uppError = new UPPError(
-        (error as Error).message ?? 'Network error',
-        'NETWORK_ERROR',
-        'unknown',
-        'llm',
-        undefined,
-        error as Error
-      );
-
-      attempt++;
-      const retryDelay = await retryStrategy.onRetry(uppError, attempt);
-      if (retryDelay !== null) {
-        lastError = uppError;
-        await sleep(retryDelay);
-        continue;
-      }
-
-      throw uppError;
-    }
-  }
-}
+function parseSSEStream(body: ReadableStream<Uint8Array>): AsyncGenerator<unknown>;
 
 /**
- * Parse Server-Sent Events stream
+ * Normalize HTTP error responses to UPPError.
+ * Maps HTTP status codes to appropriate ErrorCode values.
+ * Extracts error message from response body when available.
  */
-export async function* parseSSEStream(
-  body: ReadableStream<Uint8Array>
-): AsyncGenerator<unknown> {
-  const reader = body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() ?? '';
-
-      for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          const data = line.slice(6);
-          if (data === '[DONE]') return;
-          try {
-            yield JSON.parse(data);
-          } catch {
-            // Skip invalid JSON
-          }
-        }
-      }
-    }
-  } finally {
-    reader.releaseLock();
-  }
-}
-
-/**
- * Normalize HTTP errors to UPPError
- */
-export async function normalizeHttpError(
-  response: Response,
-  provider: string,
-  modality: Modality
-): Promise<UPPError> {
-  const body = await response.json().catch(() => ({}));
-
-  const codeMap: Record<number, ErrorCode> = {
-    400: 'INVALID_REQUEST',
-    401: 'AUTHENTICATION_FAILED',
-    403: 'AUTHENTICATION_FAILED',
-    404: 'MODEL_NOT_FOUND',
-    408: 'TIMEOUT',
-    413: 'CONTEXT_LENGTH_EXCEEDED',
-    429: 'RATE_LIMITED',
-    499: 'CANCELLED',
-    500: 'PROVIDER_ERROR',
-    502: 'PROVIDER_ERROR',
-    503: 'PROVIDER_ERROR',
-  };
-
-  return new UPPError(
-    body.error?.message ?? response.statusText,
-    codeMap[response.status] ?? 'PROVIDER_ERROR',
-    provider,
-    modality,
-    response.status,
-    body.error
-  );
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+function normalizeHttpError(response: Response, provider: string, modality: Modality): Promise<UPPError>;
 ```
+
+Reference implementations are provided by the UPP library.
 
 ---
 
@@ -3606,52 +3168,39 @@ Applications SHOULD check capabilities before using optional features to ensure 
 
 ---
 
-## Appendix A: LLM Provider Example (Anthropic)
+## Appendix A: Provider Implementation Pattern
+
+This appendix shows the minimal pattern for implementing a provider. Full implementations require consulting vendor API documentation.
+
+### A.1 Provider Entry Point
 
 ```ts
 // @providerprotocol/use/anthropic/index.ts
 import { createProvider } from '@providerprotocol/use';
-import { createLLMHandler, AnthropicLLMParams } from './llm';
+import { createLLMHandler } from './llm';
 
 export const anthropic = createProvider({
   name: 'anthropic',
   version: '1.0.0',
   modalities: {
     llm: createLLMHandler(),
-    // Anthropic doesn't have embedding or image APIs
   },
 });
 
 export type { AnthropicLLMParams } from './llm';
 ```
 
+### A.2 LLM Handler Pattern
+
 ```ts
 // @providerprotocol/use/anthropic/llm.ts
-import {
-  LLMHandler,
-  BoundLLMModel,
-  LLMResponse,
-  LLMStreamResult,
-  MessageFragment,
-  AssistantMessage,
-  Message,
-  Tool,
-  UPPError,
-  ProviderConfig,
-  LLMRequest,
-} from '@providerprotocol/use';
-import { resolveApiKey, doFetch, parseSSEStream } from '@providerprotocol/use/http';
-
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-const ANTHROPIC_VERSION = '2023-06-01';
+import { LLMHandler, BoundLLMModel, LLMResponse } from '@providerprotocol/use';
+import { resolveApiKey, doFetch } from '@providerprotocol/use/http';
 
 export interface AnthropicLLMParams {
   max_tokens?: number;
   temperature?: number;
-  top_p?: number;
-  top_k?: number;
-  stop_sequences?: string[];
-  metadata?: { user_id?: string };
+  // ... consult vendor documentation for full options
 }
 
 export function createLLMHandler(): LLMHandler<AnthropicLLMParams> {
@@ -3661,1262 +3210,100 @@ export function createLLMHandler(): LLMHandler<AnthropicLLMParams> {
         modelId,
 
         async complete(request) {
-        const apiKey = await resolveApiKey(request.config, 'ANTHROPIC_API_KEY');
-        const body = buildRequestBody(request, modelId);
+          const apiKey = await resolveApiKey(request.config, 'ANTHROPIC_API_KEY');
 
-        const response = await doFetch(
-          request.config.baseUrl ?? ANTHROPIC_API_URL,
-          {
+          // Transform UPP request to vendor format
+          const body = transformRequest(request, modelId);
+
+          const response = await doFetch(VENDOR_URL, {
             method: 'POST',
-            headers: buildHeaders(apiKey, request.config.apiVersion),
+            headers: { /* vendor headers */ },
             body: JSON.stringify(body),
-            signal: request.signal,
-          },
-          request.config
-        );
+          }, request.config);
 
-        const data = await response.json();
-        return buildLLMResponse(data);
-      },
+          const data = await response.json();
 
-      stream(request) {
-        let responseResolve: (res: LLMResponse) => void;
-        let responseReject: (error: Error) => void;
-        const responsePromise = new Promise<LLMResponse>((resolve, reject) => {
-          responseResolve = resolve;
-          responseReject = reject;
-        });
-
-        const result: LLMStreamResult = {
-          response: responsePromise,
-
-          async *[Symbol.asyncIterator]() {
-            try {
-              const apiKey = await resolveApiKey(request.config, 'ANTHROPIC_API_KEY');
-              const body = buildRequestBody(request, modelId);
-
-              const response = await doFetch(
-                request.config.baseUrl ?? ANTHROPIC_API_URL,
-                {
-                  method: 'POST',
-                  headers: buildHeaders(apiKey, request.config.apiVersion),
-                  body: JSON.stringify({ ...body, stream: true }),
-                  signal: request.signal,
-                },
-                request.config
-              );
-
-              const accumulated: AccumulatedResponse = {
-                id: '',
-                model: modelId,
-                content: [],
-                stop_reason: null,
-                usage: { input_tokens: 0, output_tokens: 0 },
-              };
-
-              for await (const event of parseSSEStream(response.body!)) {
-                const fragment = transformAnthropicEvent(event as AnthropicEvent, accumulated);
-                if (fragment) yield fragment;
-              }
-
-              responseResolve(buildLLMResponse(accumulated));
-            } catch (error) {
-              responseReject(error as Error);
-              throw error;
-            }
-          },
-        };
-
-        return result;
-      },
-    };
-  },
-};
-
-// --- Request Building ---
-
-function buildHeaders(apiKey: string, apiVersion?: string): Record<string, string> {
-  return {
-    'Content-Type': 'application/json',
-    'x-api-key': apiKey,
-    'anthropic-version': apiVersion ?? ANTHROPIC_VERSION,
-  };
-}
-
-function buildRequestBody(request: LLMRequest<AnthropicLLMParams>, modelId: string) {
-  return {
-    model: modelId,
-    messages: request.messages.map(transformMessageToAnthropic),
-    system: request.system,
-    tools: request.tools?.map(transformToolToAnthropic),
-    ...request.params,
-  };
-}
-
-function transformMessageToAnthropic(message: Message): AnthropicMessage {
-  if (message.type === 'user') {
-    return {
-      role: 'user',
-      content: message.content.map(block => {
-        switch (block.type) {
-          case 'text':
-            return { type: 'text', text: block.text };
-          case 'image':
-            if (block.source.type === 'url') {
-              throw new UPPError(
-                'Anthropic does not support URL images directly',
-                'INVALID_REQUEST',
-                'anthropic',
-                'llm'
-              );
-            }
-            return {
-              type: 'image',
-              source: {
-                type: 'base64',
-                media_type: block.mimeType,
-                data: block.source.type === 'base64'
-                  ? block.source.data
-                  : Buffer.from(block.source.data).toString('base64'),
-              },
-            };
-          default:
-            throw new UPPError(
-              `Unsupported content type: ${block.type}`,
-              'INVALID_REQUEST',
-              'anthropic',
-              'llm'
-            );
-        }
-      }),
-    };
-  }
-
-  if (message.type === 'assistant') {
-    const content: AnthropicContent[] = message.content.map(block => {
-      if (block.type === 'text') {
-        return { type: 'text', text: block.text };
-      }
-      throw new UPPError(
-        `Unsupported assistant content type: ${block.type}`,
-        'INVALID_REQUEST',
-        'anthropic',
-        'llm'
-      );
-    });
-
-    // Add tool uses
-    if (message.toolCalls) {
-      for (const call of message.toolCalls) {
-        content.push({
-          type: 'tool_use',
-          id: call.toolCallId,
-          name: call.toolName,
-          input: call.arguments,
-        });
-      }
-    }
-
-    return { role: 'assistant', content };
-  }
-
-  if (message.type === 'tool_result') {
-    return {
-      role: 'user',
-      content: message.results.map(result => ({
-        type: 'tool_result',
-        tool_use_id: result.toolCallId,
-        content: typeof result.result === 'string'
-          ? result.result
-          : JSON.stringify(result.result),
-        is_error: result.isError,
-      })),
-    };
-  }
-
-  throw new UPPError(
-    `Unknown message type: ${message.type}`,
-    'INVALID_REQUEST',
-    'anthropic',
-    'llm'
-  );
-}
-
-function transformToolToAnthropic(tool: Tool): AnthropicTool {
-  return {
-    name: tool.name,
-    description: tool.description,
-    input_schema: tool.parameters,
-  };
-}
-
-// --- Response Building ---
-
-function buildLLMResponse(data: AnthropicResponse | AccumulatedResponse): LLMResponse {
-  const textContent = data.content
-    .filter((c): c is AnthropicTextContent => c.type === 'text')
-    .map(c => ({ type: 'text' as const, text: c.text }));
-
-  const toolCalls = data.content
-    .filter((c): c is AnthropicToolUseContent => c.type === 'tool_use')
-    .map(c => ({
-      toolCallId: c.id,
-      toolName: c.name,
-      arguments: c.input,
-    }));
-
-  const message = new AssistantMessage(
-    textContent,
-    toolCalls.length > 0 ? toolCalls : undefined,
-    {
-      id: data.id,
-      metadata: {
-        anthropic: {
-          model: data.model,
-          stop_reason: data.stop_reason,
+          // Transform vendor response to UPP format
+          return transformResponse(data);
         },
-      },
-    }
-  );
 
-  return {
-    message,
-    usage: {
-      inputTokens: data.usage?.input_tokens ?? 0,
-      outputTokens: data.usage?.output_tokens ?? 0,
-      totalTokens: (data.usage?.input_tokens ?? 0) + (data.usage?.output_tokens ?? 0),
+        stream(request) {
+          // Similar pattern with SSE parsing
+          // Return LLMStreamResult with async iterator
+        },
+      };
     },
-    stopReason: data.stop_reason ?? 'end_turn',
   };
 }
-
-// --- Streaming ---
-
-function transformAnthropicEvent(
-  event: AnthropicEvent,
-  accumulated: AccumulatedResponse
-): MessageFragment | null {
-  switch (event.type) {
-    case 'message_start':
-      accumulated.id = event.message.id;
-      accumulated.model = event.message.model;
-      accumulated.usage = event.message.usage;
-      return { type: 'message_start', index: 0, delta: {} };
-
-    case 'content_block_start':
-      accumulated.content[event.index] = event.content_block;
-      if (event.content_block.type === 'tool_use') {
-        return {
-          type: 'tool_call_delta',
-          index: event.index,
-          delta: {
-            toolCallId: event.content_block.id,
-            toolName: event.content_block.name,
-          },
-        };
-      }
-      return { type: 'content_block_start', index: event.index, delta: {} };
-
-    case 'content_block_delta':
-      if (event.delta.type === 'text_delta') {
-        const block = accumulated.content[event.index] as AnthropicTextContent;
-        block.text = (block.text ?? '') + event.delta.text;
-        return {
-          type: 'text_delta',
-          index: event.index,
-          delta: { text: event.delta.text },
-        };
-      }
-      if (event.delta.type === 'thinking_delta') {
-        return {
-          type: 'reasoning_delta',
-          index: event.index,
-          delta: { text: event.delta.thinking },
-        };
-      }
-      if (event.delta.type === 'input_json_delta') {
-        return {
-          type: 'tool_call_delta',
-          index: event.index,
-          delta: { argumentsJson: event.delta.partial_json },
-        };
-      }
-      return null;
-
-    case 'content_block_stop':
-      return { type: 'content_block_stop', index: event.index, delta: {} };
-
-    case 'message_delta':
-      accumulated.stop_reason = event.delta.stop_reason;
-      if (event.usage) {
-        accumulated.usage = {
-          ...accumulated.usage,
-          output_tokens: event.usage.output_tokens,
-        };
-      }
-      return null;
-
-    case 'message_stop':
-      return { type: 'message_stop', index: 0, delta: {} };
-
-    default:
-      return null;
-  }
-}
-
-// --- Types ---
-
-interface AnthropicMessage {
-  role: 'user' | 'assistant';
-  content: AnthropicContent[];
-}
-
-type AnthropicContent =
-  | AnthropicTextContent
-  | AnthropicImageContent
-  | AnthropicToolUseContent
-  | AnthropicToolResultContent;
-
-interface AnthropicTextContent {
-  type: 'text';
-  text: string;
-}
-
-interface AnthropicImageContent {
-  type: 'image';
-  source: {
-    type: 'base64';
-    media_type: string;
-    data: string;
-  };
-}
-
-interface AnthropicToolUseContent {
-  type: 'tool_use';
-  id: string;
-  name: string;
-  input: Record<string, unknown>;
-}
-
-interface AnthropicToolResultContent {
-  type: 'tool_result';
-  tool_use_id: string;
-  content: string;
-  is_error?: boolean;
-}
-
-interface AnthropicTool {
-  name: string;
-  description: string;
-  input_schema: unknown;
-}
-
-interface AnthropicResponse {
-  id: string;
-  model: string;
-  content: AnthropicContent[];
-  stop_reason: string | null;
-  usage?: {
-    input_tokens: number;
-    output_tokens: number;
-  };
-}
-
-interface AccumulatedResponse {
-  id: string;
-  model: string;
-  content: AnthropicContent[];
-  stop_reason: string | null;
-  usage: {
-    input_tokens: number;
-    output_tokens: number;
-  };
-}
-
-type AnthropicEvent =
-  | { type: 'message_start'; message: AnthropicResponse }
-  | { type: 'content_block_start'; index: number; content_block: AnthropicContent }
-  | { type: 'content_block_delta'; index: number; delta: AnthropicDelta }
-  | { type: 'content_block_stop'; index: number }
-  | { type: 'message_delta'; delta: { stop_reason: string }; usage?: { output_tokens: number } }
-  | { type: 'message_stop' };
-
-type AnthropicDelta =
-  | { type: 'text_delta'; text: string }
-  | { type: 'thinking_delta'; thinking: string }
-  | { type: 'input_json_delta'; partial_json: string };
 ```
 
----
-
-## Appendix B: Embedding Provider Example (OpenAI)
+### A.3 Embedding Handler Pattern
 
 ```ts
-// @providerprotocol/use/openai/embed.ts
-import {
-  EmbeddingHandler,
-  BoundEmbeddingModel,
-  EmbeddingRequest,
-  EmbeddingResponse,
-  EmbeddingInput,
-  UPPError,
-} from '@providerprotocol/use';
-import { resolveApiKey, doFetch } from '@providerprotocol/use/http';
-
-const OPENAI_EMBED_URL = 'https://api.openai.com/v1/embeddings';
-
-export interface OpenAIEmbedParams {
-  /** Output dimensions (for text-embedding-3-* models) */
-  dimensions?: number;
-
-  /** Output encoding format */
-  encoding_format?: 'float' | 'base64';
-
-  /** User identifier for tracking */
-  user?: string;
-}
-
-// Model info for capabilities
-const MODEL_INFO: Record<string, { maxBatchSize: number; maxInputLength: number; dimensions: number }> = {
-  'text-embedding-3-small': { maxBatchSize: 2048, maxInputLength: 8191, dimensions: 1536 },
-  'text-embedding-3-large': { maxBatchSize: 2048, maxInputLength: 8191, dimensions: 3072 },
-  'text-embedding-ada-002': { maxBatchSize: 2048, maxInputLength: 8191, dimensions: 1536 },
-};
-
-export function createEmbeddingHandler(): EmbeddingHandler<OpenAIEmbedParams> {
+export function createEmbeddingHandler(): EmbeddingHandler<MyEmbedParams> {
   return {
     supportedInputs: ['text'],
 
-    bind(modelId: string): BoundEmbeddingModel<OpenAIEmbedParams> {
-      const info = MODEL_INFO[modelId] ?? {
+    bind(modelId: string): BoundEmbeddingModel<MyEmbedParams> {
+      return {
+        modelId,
         maxBatchSize: 2048,
         maxInputLength: 8191,
         dimensions: 1536,
-      };
-
-      return {
-        modelId,
-        maxBatchSize: info.maxBatchSize,
-        maxInputLength: info.maxInputLength,
-        dimensions: info.dimensions,
 
         async embed(request) {
-        const apiKey = await resolveApiKey(request.config, 'OPENAI_API_KEY');
-
-        // Normalize inputs to strings
-        const inputStrings = request.inputs.map(normalizeInput);
-
-        const body = {
-          model: modelId,
-          input: inputStrings,
-          ...request.params,
-        };
-
-        const response = await doFetch(
-          request.config.baseUrl ?? OPENAI_EMBED_URL,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify(body),
-            signal: request.signal,
-          },
-          request.config
-        );
-
-        const data = await response.json() as OpenAIEmbedResponse;
-
-        return {
-          embeddings: data.data.map((item, i) => ({
-            vector: decodeEmbedding(item.embedding, request.params?.encoding_format),
-            tokens: Math.ceil((data.usage?.prompt_tokens ?? 0) / data.data.length),
-          })),
-          usage: {
-            totalTokens: data.usage?.total_tokens ?? 0,
-          },
-        };
-      },
-    };
-  },
-};
-}
-
-function normalizeInput(input: EmbeddingInput): string {
-  if (typeof input === 'string') return input;
-  if (input.type === 'text') return input.text;
-  throw new UPPError(
-    'OpenAI embeddings only support text input',
-    'INVALID_REQUEST',
-    'openai',
-    'embedding'
-  );
-}
-
-function decodeEmbedding(
-  embedding: number[] | string,
-  format?: 'float' | 'base64'
-): number[] {
-  if (Array.isArray(embedding)) return embedding;
-
-  // Decode base64 to float32 array
-  const buffer = Buffer.from(embedding, 'base64');
-  const floats = new Float32Array(buffer.buffer, buffer.byteOffset, buffer.length / 4);
-  return Array.from(floats);
-}
-
-// --- Types ---
-
-interface OpenAIEmbedResponse {
-  object: 'list';
-  data: Array<{
-    object: 'embedding';
-    index: number;
-    embedding: number[] | string;
-  }>;
-  model: string;
-  usage?: {
-    prompt_tokens: number;
-    total_tokens: number;
+          // Transform inputs, call vendor API, return EmbeddingResponse
+        },
+      };
+    },
   };
 }
 ```
 
----
-
-## Appendix C: Image Provider Example (OpenAI)
+### A.4 Image Handler Pattern
 
 ```ts
-// @providerprotocol/use/openai/image.ts
-import {
-  ImageHandler,
-  BoundImageModel,
-  ImageRequest,
-  ImageResponse,
-  ImageEditRequest,
-  ImageVaryRequest,
-  ImageCapabilities,
-  Image,
-  UPPError,
-} from '@providerprotocol/use';
-import { resolveApiKey, doFetch } from '@providerprotocol/use/http';
-
-const OPENAI_IMAGE_URL = 'https://api.openai.com/v1/images';
-
-export interface OpenAIImageParams {
-  /** Image size */
-  size?: '1024x1024' | '1792x1024' | '1024x1792' | '256x256' | '512x512';
-
-  /** Image quality (DALL-E 3 only) */
-  quality?: 'standard' | 'hd';
-
-  /** Image style (DALL-E 3 only) */
-  style?: 'vivid' | 'natural';
-
-  /** Number of images (DALL-E 2: 1-10, DALL-E 3: 1) */
-  n?: number;
-
-  /** Response format */
-  response_format?: 'url' | 'b64_json';
-
-  /** User identifier */
-  user?: string;
-}
-
-const DALLE3_CAPABILITIES: ImageCapabilities = {
-  generate: true,
-  streaming: false,
-  edit: false,
-  vary: false,
-  upscale: false,
-  outpaint: false,
-  imageToImage: false,
-  maxImages: 1,
-  supportedSizes: ['1024x1024', '1792x1024', '1024x1792'],
-  supportedFormats: ['png'],
-};
-
-const DALLE2_CAPABILITIES: ImageCapabilities = {
-  generate: true,
-  streaming: false,
-  edit: true,
-  vary: true,
-  upscale: false,
-  outpaint: false,
-  imageToImage: false,
-  maxImages: 10,
-  supportedSizes: ['256x256', '512x512', '1024x1024'],
-  supportedFormats: ['png'],
-};
-
-export function createImageHandler(): ImageHandler<OpenAIImageParams> {
+export function createImageHandler(): ImageHandler<MyImageParams> {
   return {
-    bind(modelId: string): BoundImageModel<OpenAIImageParams> {
-      const isDalle3 = modelId.includes('dall-e-3');
-      const capabilities = isDalle3 ? DALLE3_CAPABILITIES : DALLE2_CAPABILITIES;
-
-      const model: BoundImageModel<OpenAIImageParams> = {
+    bind(modelId: string): BoundImageModel<MyImageParams> {
+      return {
         modelId,
-        capabilities,
+        capabilities: {
+          generate: true,
+          streaming: false,
+          edit: false,
+          vary: false,
+          upscale: false,
+          outpaint: false,
+          imageToImage: false,
+          maxImages: 1,
+          supportedSizes: ['1024x1024'],
+          supportedFormats: ['png'],
+        },
 
         async generate(request) {
-          const apiKey = await resolveApiKey(request.config, 'OPENAI_API_KEY');
-
-        const body = {
-          model: modelId,
-          prompt: request.prompt,
-          n: request.params?.n ?? 1,
-          size: request.params?.size ?? '1024x1024',
-          quality: request.params?.quality,
-          style: request.params?.style,
-          response_format: 'b64_json',
-          user: request.params?.user,
-        };
-
-        const response = await doFetch(
-          `${request.config.baseUrl ?? OPENAI_IMAGE_URL}/generations`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify(body),
-            signal: request.signal,
-          },
-          request.config
-        );
-
-        const data = await response.json() as OpenAIImageResponse;
-
-        return {
-          images: data.data.map((item, index) => ({
-            image: Image.fromBase64(item.b64_json!, 'image/png'),
-            metadata: { index },
-          })),
-          metadata: {
-            revisedPrompt: data.data[0]?.revised_prompt,
-          },
-        };
-      },
-    };
-
-    // Add edit for DALL-E 2
-    if (!isDalle3) {
-      model.edit = async function (request) {
-        const apiKey = await resolveApiKey(request.config, 'OPENAI_API_KEY');
-
-        const formData = new FormData();
-        formData.append('model', modelId);
-        formData.append('prompt', request.prompt);
-        formData.append('image', new Blob([request.image.toBytes()], { type: 'image/png' }));
-
-        if (request.mask) {
-          formData.append('mask', new Blob([request.mask.toBytes()], { type: 'image/png' }));
-        }
-
-        formData.append('n', String(request.params?.n ?? 1));
-        formData.append('size', request.params?.size ?? '1024x1024');
-        formData.append('response_format', 'b64_json');
-
-        const response = await doFetch(
-          `${request.config.baseUrl ?? OPENAI_IMAGE_URL}/edits`,
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${apiKey}`,
-            },
-            body: formData,
-            signal: request.signal,
-          },
-          request.config
-        );
-
-        const data = await response.json() as OpenAIImageResponse;
-
-        return {
-          images: data.data.map((item, index) => ({
-            image: Image.fromBase64(item.b64_json!, 'image/png'),
-            metadata: { index },
-          })),
-        };
-      };
-
-      model.vary = async function (request) {
-        const apiKey = await resolveApiKey(request.config, 'OPENAI_API_KEY');
-
-        const formData = new FormData();
-        formData.append('model', modelId);
-        formData.append('image', new Blob([request.image.toBytes()], { type: 'image/png' }));
-        formData.append('n', String(request.count ?? 1));
-        formData.append('size', request.params?.size ?? '1024x1024');
-        formData.append('response_format', 'b64_json');
-
-        const response = await doFetch(
-          `${request.config.baseUrl ?? OPENAI_IMAGE_URL}/variations`,
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${apiKey}`,
-            },
-            body: formData,
-            signal: request.signal,
-          },
-          request.config
-        );
-
-        const data = await response.json() as OpenAIImageResponse;
-
-        return {
-          images: data.data.map((item, index) => ({
-            image: Image.fromBase64(item.b64_json!, 'image/png'),
-            metadata: { index },
-          })),
-        };
-      };
-    }
-
-    return model;
-  },
-};
-}
-
-// --- Types ---
-
-interface OpenAIImageResponse {
-  created: number;
-  data: Array<{
-    url?: string;
-    b64_json?: string;
-    revised_prompt?: string;
-  }>;
-}
-```
-
----
-
-## Appendix D: Complete Usage Example
-
-```ts
-import { useLLM, useEmbedding, useImage, Thread, Image, RoundRobinKeys, ExponentialBackoff } from '@providerprotocol/use';
-import { anthropic } from '@providerprotocol/use/anthropic';
-import { openai } from '@providerprotocol/use/openai';
-import { cosineSimilarity } from '@providerprotocol/use/similarity';
-import type { AnthropicLLMParams } from '@providerprotocol/use/anthropic';
-import type { OpenAIEmbedParams, OpenAIImageParams } from '@providerprotocol/use/openai';
-
-// --- Shared Config ---
-
-const sharedConfig = {
-  timeout: 30000,
-  retryStrategy: new ExponentialBackoff({ maxAttempts: 3 }),
-};
-
-// --- LLM Setup ---
-
-const claude = useLLM({
-  model: anthropic('claude-sonnet-4-20250514'),
-  config: {
-    ...sharedConfig,
-    apiKey: new RoundRobinKeys([
-      process.env.ANTHROPIC_KEY_1!,
-      process.env.ANTHROPIC_KEY_2!,
-    ]),
-  },
-  params: {
-    max_tokens: 4096,
-    temperature: 0.7,
-  } as AnthropicLLMParams,
-  system: 'You are a helpful assistant with access to tools.',
-  tools: [
-    {
-      name: 'getWeather',
-      description: 'Get current weather for a location',
-      parameters: {
-        type: 'object',
-        properties: {
-          location: { type: 'string', description: 'City name' },
+          // Transform prompt, call vendor API, return ImageResponse
         },
-        required: ['location'],
-      },
-      async run({ location }: { location: string }) {
-        // Mock implementation
-        return `Weather in ${location}: 72°F, sunny`;
-      },
+
+        // Implement edit, vary, upscale if capabilities indicate support
+      };
     },
-  ],
-});
-
-// --- Embedding Setup ---
-
-const embedder = useEmbedding({
-  model: openai('text-embedding-3-large'),
-  config: {
-    ...sharedConfig,
-    apiKey: process.env.OPENAI_API_KEY,
-  },
-  params: {
-    dimensions: 1536,
-  } as OpenAIEmbedParams,
-});
-
-// --- Image Setup ---
-
-const dalle = useImage({
-  model: openai('dall-e-3'),
-  config: {
-    ...sharedConfig,
-    apiKey: process.env.OPENAI_API_KEY,
-  },
-  params: {
-    size: '1024x1024',
-    quality: 'hd',
-    style: 'vivid',
-  } as OpenAIImageParams,
-});
-
-// --- LLM Usage ---
-
-async function demonstrateLLM() {
-  console.log('=== LLM Demo ===\n');
-
-  // Simple generation
-  const turn1 = await claude.generate('What is 2 + 2?');
-  console.log('Simple:', turn1.response.text);
-  console.log('Tokens:', turn1.usage.totalTokens);
-
-  // Conversation with thread
-  const thread = new Thread();
-
-  const turn2 = await claude.generate(thread, 'My name is Alice.');
-  thread.append(turn2);
-
-  const turn3 = await claude.generate(thread, 'What is my name?');
-  thread.append(turn3);
-  console.log('\nConversation:', turn3.response.text);
-
-  // Tool usage
-  const turn4 = await claude.generate('What is the weather in Tokyo?');
-  console.log('\nWith tool:', turn4.response.text);
-  console.log('Tool executions:', turn4.toolExecutions.length);
-  console.log('Cycles:', turn4.cycles);
-
-  // Streaming
-  console.log('\nStreaming:');
-  const stream = claude.stream('Write a haiku about programming.');
-  for await (const fragment of stream) {
-    if (fragment.type === 'text_delta') {
-      process.stdout.write(fragment.delta.text ?? '');
-    }
-  }
-  console.log('\n');
-
-  // Serialize thread
-  const json = thread.toJSON();
-  console.log('Thread serialized:', JSON.stringify(json).length, 'bytes');
-}
-
-// --- Embedding Usage ---
-
-async function demonstrateEmbedding() {
-  console.log('=== Embedding Demo ===\n');
-
-  // Single embedding
-  const single = await embedder.embed('Hello, world!');
-  console.log('Single embedding dimensions:', single.dimensions);
-  console.log('First 5 values:', single.vector.slice(0, 5));
-
-  // Batch embedding
-  const documents = [
-    'The quick brown fox jumps over the lazy dog',
-    'Machine learning is a subset of artificial intelligence',
-    'Paris is the capital of France',
-    'TypeScript is a typed superset of JavaScript',
-  ];
-
-  const batch = await embedder.embedBatch(documents);
-  console.log('\nBatch embeddings:', batch.embeddings.length);
-  console.log('Total tokens:', batch.usage.totalTokens);
-
-  // Semantic search
-  const query = 'What is the capital of France?';
-  const queryEmbed = await embedder.embed(query);
-
-  const scores = batch.embeddings.map((doc, i) => ({
-    document: documents[i],
-    score: cosineSimilarity(queryEmbed.vector, doc.vector),
-  }));
-
-  scores.sort((a, b) => b.score - a.score);
-  console.log('\nSearch results for:', query);
-  scores.forEach((s, i) => {
-    console.log(`  ${i + 1}. [${s.score.toFixed(3)}] ${s.document}`);
-  });
-
-  // Large-scale embedding with progress
-  console.log('\nLarge-scale embedding:');
-  const manyDocs = Array.from({ length: 100 }, (_, i) => `Document number ${i + 1}`);
-
-  for await (const progress of embedder.embedMany(manyDocs, { batchSize: 25 })) {
-    console.log(`  Progress: ${progress.progress.percent.toFixed(0)}%`);
-    if (progress.done) {
-      console.log(`  Complete: ${progress.embeddings.length} embeddings`);
-    }
-  }
-}
-
-// --- Image Usage ---
-
-async function demonstrateImage() {
-  console.log('=== Image Demo ===\n');
-
-  // Check capabilities
-  console.log('Capabilities:', dalle.capabilities);
-
-  // Simple generation
-  console.log('\nGenerating image...');
-  const result = await dalle.generate(
-    'A serene Japanese garden with a koi pond, cherry blossoms, and a small wooden bridge, digital art style'
-  );
-
-  console.log('Generated:', result.images.length, 'image(s)');
-  console.log('Revised prompt:', result.metadata?.revisedPrompt);
-
-  // Save the image
-  const imageBytes = result.images[0].image.toBytes();
-  await Bun.write('generated-garden.png', imageBytes);
-  console.log('Saved to: generated-garden.png');
-
-  // Generation with negative prompt (if using a model that supports it)
-  const result2 = await dalle.generate({
-    prompt: 'A futuristic cityscape at sunset',
-    negativePrompt: 'people, cars, noise', // Note: DALL-E 3 ignores this
-  });
-
-  console.log('\nSecond generation complete');
-}
-
-// --- Combined Example ---
-
-async function demonstrateCombined() {
-  console.log('=== Combined Demo ===\n');
-
-  // Use LLM to generate an image prompt
-  const promptTurn = await claude.generate(
-    'Generate a detailed image prompt for a fantasy landscape. Just the prompt, nothing else.'
-  );
-  const imagePrompt = promptTurn.response.text;
-  console.log('Generated prompt:', imagePrompt);
-
-  // Generate the image
-  const imageResult = await dalle.generate(imagePrompt);
-  await Bun.write('fantasy-landscape.png', imageResult.images[0].image.toBytes());
-  console.log('Image saved');
-
-  // Create embeddings for image descriptions
-  const descriptions = [
-    imagePrompt,
-    'A dark and stormy night',
-    'A peaceful meadow with flowers',
-  ];
-
-  const embeddings = await embedder.embedBatch(descriptions);
-
-  // Find most similar description
-  const promptEmbedding = embeddings.embeddings[0];
-  const similarities = embeddings.embeddings.slice(1).map((e, i) => ({
-    description: descriptions[i + 1],
-    similarity: cosineSimilarity(promptEmbedding.vector, e.vector),
-  }));
-
-  console.log('\nSimilar descriptions:');
-  similarities.forEach(s => {
-    console.log(`  [${s.similarity.toFixed(3)}] ${s.description}`);
-  });
-}
-
-// --- Run Demos ---
-
-async function main() {
-  try {
-    await demonstrateLLM();
-    await demonstrateEmbedding();
-    await demonstrateImage();
-    await demonstrateCombined();
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-main();
-```
-
----
-
-## Appendix E: Key Strategy Implementations
-
-```ts
-// @providerprotocol/use/keys.ts
-
-import { KeyStrategy } from './types';
-
-/**
- * Round-robin through a list of API keys
- */
-export class RoundRobinKeys implements KeyStrategy {
-  private keys: string[];
-  private index = 0;
-
-  constructor(keys: string[]) {
-    if (keys.length === 0) {
-      throw new Error('RoundRobinKeys requires at least one key');
-    }
-    this.keys = keys;
-  }
-
-  getKey(): string {
-    const key = this.keys[this.index];
-    this.index = (this.index + 1) % this.keys.length;
-    return key;
-  }
-}
-
-/**
- * Weighted random selection of API keys
- */
-export class WeightedKeys implements KeyStrategy {
-  private keys: Array<{ key: string; weight: number }>;
-  private totalWeight: number;
-
-  constructor(keys: Array<{ key: string; weight: number }>) {
-    if (keys.length === 0) {
-      throw new Error('WeightedKeys requires at least one key');
-    }
-    this.keys = keys;
-    this.totalWeight = keys.reduce((sum, k) => sum + k.weight, 0);
-  }
-
-  getKey(): string {
-    let random = Math.random() * this.totalWeight;
-    for (const { key, weight } of this.keys) {
-      random -= weight;
-      if (random <= 0) return key;
-    }
-    return this.keys[this.keys.length - 1].key;
-  }
-}
-
-/**
- * Dynamic key selection based on custom logic
- */
-export class DynamicKey implements KeyStrategy {
-  private selector: () => string | Promise<string>;
-
-  constructor(selector: () => string | Promise<string>) {
-    this.selector = selector;
-  }
-
-  async getKey(): Promise<string> {
-    return this.selector();
-  }
-}
-
-/**
- * Failover keys - tries keys in order until one works
- */
-export class FailoverKeys implements KeyStrategy {
-  private keys: string[];
-  private currentIndex = 0;
-  private failedKeys = new Set<number>();
-  private resetTimeout: number;
-  private resetTimers = new Map<number, NodeJS.Timeout>();
-
-  constructor(keys: string[], options?: { resetTimeout?: number }) {
-    if (keys.length === 0) {
-      throw new Error('FailoverKeys requires at least one key');
-    }
-    this.keys = keys;
-    this.resetTimeout = options?.resetTimeout ?? 60000; // 1 minute default
-  }
-
-  getKey(): string {
-    // Find first non-failed key
-    for (let i = 0; i < this.keys.length; i++) {
-      const index = (this.currentIndex + i) % this.keys.length;
-      if (!this.failedKeys.has(index)) {
-        return this.keys[index];
-      }
-    }
-    // All keys failed, reset and try first
-    this.failedKeys.clear();
-    return this.keys[0];
-  }
-
-  /**
-   * Mark current key as failed
-   */
-  markFailed(): void {
-    this.failedKeys.add(this.currentIndex);
-
-    // Schedule reset
-    const index = this.currentIndex;
-    if (this.resetTimers.has(index)) {
-      clearTimeout(this.resetTimers.get(index));
-    }
-    this.resetTimers.set(
-      index,
-      setTimeout(() => {
-        this.failedKeys.delete(index);
-        this.resetTimers.delete(index);
-      }, this.resetTimeout)
-    );
-
-    // Move to next key
-    this.currentIndex = (this.currentIndex + 1) % this.keys.length;
-  }
-}
-
-/**
- * Time-based key rotation (e.g., different key per hour)
- */
-export class TimeRotatedKeys implements KeyStrategy {
-  private keys: string[];
-  private intervalMs: number;
-  private startTime: number;
-
-  constructor(keys: string[], options?: { intervalMs?: number }) {
-    if (keys.length === 0) {
-      throw new Error('TimeRotatedKeys requires at least one key');
-    }
-    this.keys = keys;
-    this.intervalMs = options?.intervalMs ?? 3600000; // 1 hour default
-    this.startTime = Date.now();
-  }
-
-  getKey(): string {
-    const elapsed = Date.now() - this.startTime;
-    const index = Math.floor(elapsed / this.intervalMs) % this.keys.length;
-    return this.keys[index];
-  }
+  };
 }
 ```
 
----
+### A.5 Key Implementation Requirements
 
-## Appendix F: Similarity Utilities
+1. **Request transformation**: Convert UPP `Message[]` to vendor message format
+2. **Response transformation**: Convert vendor response to `LLMResponse`, `EmbeddingResponse`, or `ImageResponse`
+3. **Error normalization**: Wrap vendor errors in `UPPError` with appropriate `ErrorCode` and `modality`
+4. **Streaming**: Parse SSE streams and emit `MessageFragment` objects
+5. **Metadata namespacing**: Store vendor-specific data under `metadata.{providerName}`
 
-```ts
-// @providerprotocol/use/similarity.ts
-
-/**
- * Calculate cosine similarity between two vectors
- * Returns value between -1 and 1 (1 = identical, 0 = orthogonal, -1 = opposite)
- */
-export function cosineSimilarity(a: number[], b: number[]): number {
-  if (a.length !== b.length) {
-    throw new Error('Vectors must have same length');
-  }
-
-  let dotProduct = 0;
-  let normA = 0;
-  let normB = 0;
-
-  for (let i = 0; i < a.length; i++) {
-    dotProduct += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
-  }
-
-  const magnitude = Math.sqrt(normA) * Math.sqrt(normB);
-  if (magnitude === 0) return 0;
-
-  return dotProduct / magnitude;
-}
-
-/**
- * Calculate Euclidean distance between two vectors
- * Returns value >= 0 (0 = identical)
- */
-export function euclideanDistance(a: number[], b: number[]): number {
-  if (a.length !== b.length) {
-    throw new Error('Vectors must have same length');
-  }
-
-  let sum = 0;
-  for (let i = 0; i < a.length; i++) {
-    const diff = a[i] - b[i];
-    sum += diff * diff;
-  }
-
-  return Math.sqrt(sum);
-}
-
-/**
- * Calculate dot product of two vectors
- */
-export function dotProduct(a: number[], b: number[]): number {
-  if (a.length !== b.length) {
-    throw new Error('Vectors must have same length');
-  }
-
-  let sum = 0;
-  for (let i = 0; i < a.length; i++) {
-    sum += a[i] * b[i];
-  }
-
-  return sum;
-}
-
-/**
- * Calculate Manhattan distance between two vectors
- */
-export function manhattanDistance(a: number[], b: number[]): number {
-  if (a.length !== b.length) {
-    throw new Error('Vectors must have same length');
-  }
-
-  let sum = 0;
-  for (let i = 0; i < a.length; i++) {
-    sum += Math.abs(a[i] - b[i]);
-  }
-
-  return sum;
-}
-
-/**
- * Normalize a vector to unit length
- */
-export function normalize(v: number[]): number[] {
-  const norm = Math.sqrt(v.reduce((sum, x) => sum + x * x, 0));
-  if (norm === 0) return v.slice();
-  return v.map(x => x / norm);
-}
-
-/**
- * Find top-k most similar vectors
- */
-export function topK(
-  query: number[],
-  candidates: number[][],
-  k: number,
-  metric: 'cosine' | 'euclidean' = 'cosine'
-): Array<{ index: number; score: number }> {
-  const scores = candidates.map((candidate, index) => {
-    const score = metric === 'cosine'
-      ? cosineSimilarity(query, candidate)
-      : -euclideanDistance(query, candidate); // Negate so higher is better
-    return { index, score };
-  });
-
-  scores.sort((a, b) => b.score - a.score);
-  return scores.slice(0, k);
-}
-```
+Consult vendor API documentation for specific request/response formats, authentication methods, and available parameters.
 
 ---
-
-## Appendix G: Migration from UPP-1.0
+## Appendix B: Migration from UPP-1.0
 
 ### Naming Changes
 
@@ -4975,10 +3362,10 @@ useImage({ model: openai('dall-e-3') });
 2. **`useImage()`** - Image generation interface
 3. **Unified providers** - Single factory per provider for all modalities
 4. **`ModelReference`** - Portable model references across modalities
-5. **Modality field in errors** - `UPPError.modality`
-6. **Additional key strategies** - `FailoverKeys`, `TimeRotatedKeys`
-7. **Similarity utilities** - `cosineSimilarity`, `euclideanDistance`, etc.
-8. **Image capabilities** - Runtime capability detection
+5. **`RetryStrategy`** - Pluggable retry/rate-limit handling
+6. **Modality field in errors** - `UPPError.modality`
+7. **Image capabilities** - Runtime capability detection
+8. **Conformance levels** - Clear provider implementation requirements
 
 ### Breaking Changes
 
@@ -5017,15 +3404,13 @@ sed -i 's/BoundModel/BoundLLMModel/g' src/**/*.ts
 - **Added** `BoundEmbeddingModel`, `BoundImageModel` types
 - **Added** `ImageCapabilities` for runtime feature detection
 - **Added** `embedMany()` for large-scale embedding with progress
-- **Added** similarity utilities (`cosineSimilarity`, `euclideanDistance`, `dotProduct`, etc.)
+- **Added** optional similarity utilities
 - **Added** image editing, variation, and upscaling interfaces
 - **Added** `RetryStrategy` interface for pluggable retry/rate-limit handling
-- **Added** built-in strategies: `ExponentialBackoff`, `LinearBackoff`, `NoRetry`, `TokenBucket`, `RetryAfterStrategy`
-- **Replaced** `RetryConfig` with `RetryStrategy` for flexibility and custom implementations
+- **Replaced** `RetryConfig` with `RetryStrategy` for flexibility
 - **Updated** `UPPError` with `modality` field
 - **Updated** provider structure to use unified factories
-- **Updated** provider import paths: `@providerprotocol/use/openai` (not `/providers/`)
-- **Added** complete provider implementation examples for all modalities
+- **Added** Conformance section (Section 16)
 - **Added** migration guide from UPP-1.0
 
 ### 1.0.0-draft
