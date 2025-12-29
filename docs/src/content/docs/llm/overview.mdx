@@ -176,6 +176,48 @@ console.log(turn2.response.text); // "Your name is Alice."
 UPP does not manage conversation history internally. Users control their own history, giving full flexibility over context management.
 </Aside>
 
+## LLMCapabilities
+
+LLMCapabilities declares what the **provider's API** supports, not individual model capabilities. If you attempt to use a feature (e.g., image input) with a model that doesn't support it, the provider's API will return an error—this is expected behavior. UPP cannot realistically track every model variant's actual capabilities.
+
+```typescript
+interface LLMCapabilities {
+  /** Provider API supports streaming responses */
+  streaming: boolean;
+
+  /** Provider API supports tool/function calling */
+  tools: boolean;
+
+  /** Provider API supports native structured output (JSON schema) */
+  structuredOutput: boolean;
+
+  /** Provider API supports image input */
+  imageInput: boolean;
+
+  /** Provider API supports video input */
+  videoInput: boolean;
+
+  /** Provider API supports audio input */
+  audioInput: boolean;
+}
+```
+
+Check capabilities before using features:
+
+```typescript
+if (!claude.capabilities.structuredOutput) {
+  throw new Error('This model does not support structured outputs');
+}
+
+if (!claude.capabilities.tools) {
+  // Use a different approach
+}
+```
+
+<Aside type="note">
+`llm()` core automatically checks capabilities and throws `INVALID_REQUEST` if you try to use an unsupported feature.
+</Aside>
+
 ## BoundLLMModel
 
 The low-level model interface used internally:
@@ -183,6 +225,7 @@ The low-level model interface used internally:
 ```typescript
 interface BoundLLMModel<TParams = unknown> {
   readonly modelId: string;
+  readonly capabilities: LLMCapabilities;
 
   /** Execute a single non-streaming request */
   complete(request: LLMRequest<TParams>): Promise<LLMResponse>;

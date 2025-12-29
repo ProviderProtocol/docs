@@ -136,6 +136,14 @@ export function createLLMHandler(): LLMHandler<AnthropicLLMParams> {
     bind(modelId: string): BoundLLMModel<AnthropicLLMParams> {
       return {
         modelId,
+        capabilities: {
+          streaming: true,
+          tools: true,
+          structuredOutput: true,
+          imageInput: true,  // Claude supports vision
+          videoInput: false,
+          audioInput: false,
+        },
 
         async complete(request) {
           const apiKey = await resolveApiKey(request.config, 'ANTHROPIC_API_KEY');
@@ -168,6 +176,10 @@ export function createLLMHandler(): LLMHandler<AnthropicLLMParams> {
   };
 }
 ```
+
+<Aside type="note">
+Capabilities reflect what the **provider's API** supports, not individual model capabilities. If a user attempts to use a feature with a model that doesn't support it, the provider's API will return an error—this is expected behavior.
+</Aside>
 
 ## Embedding Handler Pattern
 

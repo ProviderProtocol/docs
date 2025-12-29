@@ -13,6 +13,7 @@ Providers may implement one or more modalities. For each modality, conformance i
 
 ### Level 1: Core <Badge text="Required" variant="caution" />
 
+- Declare `LLMCapabilities` accurately for the provider's API
 - Text input/output via `generate()` method
 - Return `LLMResponse` with `AssistantMessage` and `TokenUsage`
 - Basic configuration pass-through (`params`)
@@ -40,14 +41,13 @@ Tool execution loop is handled by `llm()` core, not providers.
 
 - Transform `structure` schema to vendor format
 - Enable vendor's structured output mode
-- Parse and return structured data
-- Validate response if vendor lacks native support
+- Parse and return structured data as JSON
 
 ### Level 5: Multimodal Input
 
-- Image input handling (base64, URL conversion)
-- Audio input handling (if supported by vendor)
-- Video input handling (if supported by vendor)
+- Image input handling (base64, URL conversion) if `capabilities.imageInput: true`
+- Audio input handling if `capabilities.audioInput: true`
+- Video input handling if `capabilities.videoInput: true`
 
 ## Embedding Conformance
 

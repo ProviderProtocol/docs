@@ -81,7 +81,7 @@ interface JSONSchemaProperty {
 
 ## Provider Handling
 
-Different providers implement structured outputs differently:
+Structured output is a capability declared via `LLMCapabilities.structuredOutput`. If a provider's API doesn't support native structured outputs, `llm()` core will throw `INVALID_REQUEST` when `structure` is provided.
 
 | Provider | Implementation |
 |----------|----------------|
@@ -89,11 +89,15 @@ Different providers implement structured outputs differently:
 | OpenAI | Uses response_format with json_schema |
 | Google | Uses responseSchema |
 
+```typescript
+// Check before using
+if (claude.capabilities.structuredOutput) {
+  const turn = await claude.generate([], 'Extract data', { structure: schema });
+}
+```
+
 <Aside type="note">
-If a provider doesn't natively support structured outputs, it MUST:
-1. Attempt to get JSON output
-2. Validate the response against the schema
-3. Throw `UPPError` with code `INVALID_RESPONSE` if validation fails
+UPP does **not** validate responses against the schema—only that valid JSON was returned. Schema validation is your application's responsibility if needed.
 </Aside>
 
 ## Complex Schema Example
