@@ -202,7 +202,7 @@ useImage({ model: stability('stable-diffusion-xl-1024-v1-0') });
 Internally, each provider combines modality handlers:
 
 ```ts
-// @providerprotocol/use/providers/openai/index.ts
+// @providerprotocol/use/openai/index.ts
 import { createLLMHandler } from './llm';
 import { createEmbeddingHandler } from './embed';
 import { createImageHandler } from './image';
@@ -3185,7 +3185,7 @@ Note: Each provider exports only one factory (`openai`, `anthropic`, etc.). The 
 Each provider module exports a single factory that combines all modality handlers:
 
 ```ts
-// @providerprotocol/use/providers/openai/index.ts
+// @providerprotocol/use/openai/index.ts
 import { createProvider } from '@providerprotocol/use';
 import { createLLMHandler } from './llm';
 import { createEmbeddingHandler } from './embed';
@@ -3437,7 +3437,7 @@ function sleep(ms: number): Promise<void> {
 ## Appendix A: LLM Provider Example (Anthropic)
 
 ```ts
-// @providerprotocol/use/providers/anthropic/index.ts
+// @providerprotocol/use/anthropic/index.ts
 import { createProvider } from '@providerprotocol/use';
 import { createLLMHandler, AnthropicLLMParams } from './llm';
 
@@ -3454,7 +3454,7 @@ export type { AnthropicLLMParams } from './llm';
 ```
 
 ```ts
-// @providerprotocol/use/providers/anthropic/llm.ts
+// @providerprotocol/use/anthropic/llm.ts
 import {
   LLMHandler,
   BoundLLMModel,
@@ -3880,7 +3880,7 @@ type AnthropicDelta =
 ## Appendix B: Embedding Provider Example (OpenAI)
 
 ```ts
-// @providerprotocol/use/providers/openai/embed.ts
+// @providerprotocol/use/openai/embed.ts
 import {
   EmbeddingHandler,
   BoundEmbeddingModel,
@@ -4016,7 +4016,7 @@ interface OpenAIEmbedResponse {
 ## Appendix C: Image Provider Example (OpenAI)
 
 ```ts
-// @providerprotocol/use/providers/openai/image.ts
+// @providerprotocol/use/openai/image.ts
 import {
   ImageHandler,
   BoundImageModel,
