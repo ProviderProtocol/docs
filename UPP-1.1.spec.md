@@ -812,7 +812,7 @@ const claude = useLLM({
   params: {
     max_tokens: 4096,
     temperature: 0.7,
-  } as AnthropicParams,
+  } as AnthropicLLMParams,
   system: 'You are a friendly AI assistant.',
 });
 ```
@@ -4255,7 +4255,7 @@ const claude = useLLM({
   params: {
     max_tokens: 4096,
     temperature: 0.7,
-  } as AnthropicParams,
+  } as AnthropicLLMParams,
   system: 'You are a helpful assistant with access to tools.',
   tools: [
     {
