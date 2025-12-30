@@ -1,11 +1,17 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightPageActions from 'starlight-page-actions';
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
+			plugins: [
+				starlightPageActions({
+					baseUrl: 'https://providerprotocol.org/',
+				}),
+			],
 			title: 'UPP-1.1',
 			description: 'Unified Provider Protocol - A standard for multi-provider AI interoperability',
 			social: [
@@ -96,6 +102,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Anthropic', slug: 'api/providers/anthropic' },
 								{ label: 'OpenAI', slug: 'api/providers/openai' },
+								{ label: 'OpenRouter', slug: 'api/providers/openrouter' },
 								{ label: 'Google', slug: 'api/providers/google' },
 								{ label: 'Ollama', slug: 'api/providers/ollama' },
 							],

@@ -1,0 +1,320 @@
+---
+title: OpenRouter Provider
+description: OpenRouter provider for ProviderProtocol.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# OpenRouter Provider
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Provider for OpenRouter's unified API, providing access to hundreds of AI models from OpenAI, Anthropic, Google, Meta, Mistral, and many others through a single endpoint.
+
+## Import
+
+```typescript
+import { openrouter } from '@providerprotocol/ai/openrouter';
+import type { OpenRouterLLMParams, OpenRouterConfig } from '@providerprotocol/ai/openrouter';
+```
+
+## Usage
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { openrouter } from '@providerprotocol/ai/openrouter';
+
+const model = llm({
+  model: openrouter('openai/gpt-4o'),
+  system: 'You are a helpful assistant.',
+});
+
+const turn = await model.generate('Hello!');
+```
+
+## API Modes
+
+OpenRouter supports two API modes:
+
+```typescript
+// Chat Completions API (default, recommended)
+const model = openrouter('openai/gpt-4o');
+
+// Responses API (beta)
+const model = openrouter('openai/gpt-4o', { api: 'responses' });
+```
+
+<Aside type="note">
+Unlike the OpenAI provider which defaults to the Responses API, OpenRouter defaults to the **Chat Completions API** as it has broader model support.
+</Aside>
+
+### Chat Completions API
+
+The Chat Completions API is the standard, production-ready interface:
+- Endpoint: `https://openrouter.ai/api/v1/chat/completions`
+- Fully compatible with OpenAI's Chat Completions format
+- Supports all OpenRouter-specific routing features
+- Use `max_tokens` for output length control
+
+### Responses API (Beta)
+
+The Responses API is a newer, experimental interface:
+- Endpoint: `https://openrouter.ai/api/v1/responses`
+- Uses `input` instead of `messages`
+- Supports `reasoning` configuration for advanced models
+- Use `max_output_tokens` for output length control
+
+## Capabilities
+
+| Capability | Supported |
+|------------|-----------|
+| Streaming | Yes |
+| Tools | Yes |
+| Structured Output | Yes |
+| Image Input | Yes |
+| Audio Input | No |
+| Video Input | No |
+
+## Provider-Specific Parameters
+
+```typescript
+interface OpenRouterLLMParams {
+  // ============================================
+  // Common Parameters (both APIs)
+  // ============================================
+
+  /** Maximum number of tokens to generate */
+  max_tokens?: number;
+
+  /** Maximum output tokens (Responses API) */
+  max_output_tokens?: number;
+
+  /** Temperature for randomness (0.0 - 2.0) */
+  temperature?: number;
+
+  /** Top-p (nucleus) sampling (0.0 - 1.0) */
+  top_p?: number;
+
+  /** Top-k sampling (not available for OpenAI models) */
+  top_k?: number;
+
+  /** Frequency penalty (-2.0 - 2.0) */
+  frequency_penalty?: number;
+
+  /** Presence penalty (-2.0 - 2.0) */
+  presence_penalty?: number;
+
+  /** Repetition penalty (0.0 - 2.0) */
+  repetition_penalty?: number;
+
+  /** Custom stop sequences */
+  stop?: string | string[];
+
+  /** Seed for deterministic sampling */
+  seed?: number;
+
+  /** User identifier for abuse detection */
+  user?: string;
+
+  /** Enable logprobs */
+  logprobs?: boolean;
+
+  /** Number of top logprobs to return */
+  top_logprobs?: number;
+
+  /** Logit bias map */
+  logit_bias?: Record<number, number>;
+
+  /** Minimum probability threshold (0.0 - 1.0) */
+  min_p?: number;
+
+  /** Top-a sampling threshold (0.0 - 1.0) */
+  top_a?: number;
+
+  // ============================================
+  // Tool Calling
+  // ============================================
+
+  /** Whether to enable parallel tool calls */
+  parallel_tool_calls?: boolean;
+
+  // ============================================
+  // Structured Output
+  // ============================================
+
+  /** Response format for structured output (Chat Completions API only) */
+  response_format?: OpenRouterResponseFormat;
+
+  // ============================================
+  // OpenRouter-Specific Parameters
+  // ============================================
+
+  /**
+   * Prompt transforms to apply
+   * See: https://openrouter.ai/docs/guides/features/message-transforms
+   */
+  transforms?: string[];
+
+  /**
+   * Multiple models for routing
+   * See: https://openrouter.ai/docs/guides/features/model-routing
+   */
+  models?: string[];
+
+  /**
+   * Routing strategy
+   * - 'fallback': Try models in order until one succeeds
+   */
+  route?: 'fallback';
+
+  /**
+   * Provider routing preferences
+   * See: https://openrouter.ai/docs/guides/routing/provider-selection
+   */
+  provider?: OpenRouterProviderPreferences;
+
+  /**
+   * Predicted output for latency optimization
+   */
+  prediction?: {
+    type: 'content';
+    content: string;
+  };
+
+  /**
+   * Debug options (streaming only)
+   */
+  debug?: {
+    /** If true, returns the transformed request body sent to the provider */
+    echo_upstream_body?: boolean;
+  };
+
+  // ============================================
+  // Responses API Specific
+  // ============================================
+
+  /**
+   * Reasoning configuration (Responses API only)
+   */
+  reasoning?: {
+    effort?: 'low' | 'medium' | 'high';
+  };
+}
+```
+
+## Provider Preferences
+
+Control how OpenRouter routes requests to underlying providers:
+
+```typescript
+interface OpenRouterProviderPreferences {
+  /** Allow fallback to other providers if preferred is unavailable */
+  allow_fallbacks?: boolean;
+
+  /** Require specific parameters to be supported by the provider */
+  require_parameters?: boolean;
+
+  /** Data collection policy: 'allow' or 'deny' */
+  data_collection?: 'allow' | 'deny';
+
+  /** Order of provider preference (e.g., ['Azure', 'OpenAI']) */
+  order?: string[];
+
+  /** Ignore specific providers (e.g., ['Together']) */
+  ignore?: string[];
+
+  /** Quantization preferences (e.g., ['int4', 'int8', 'fp16']) */
+  quantizations?: string[];
+}
+```
+
+## Response Format
+
+```typescript
+type OpenRouterResponseFormat =
+  | { type: 'text' }
+  | { type: 'json_object' }
+  | {
+      type: 'json_schema';
+      json_schema: {
+        name: string;
+        description?: string;
+        schema: Record<string, unknown>;
+        strict?: boolean;
+      };
+    };
+```
+
+## Configuration
+
+```typescript
+const model = llm({
+  model: openrouter('anthropic/claude-3.5-sonnet'),
+  config: {
+    apiKey: process.env.OPENROUTER_API_KEY,
+    baseUrl: 'https://openrouter.ai/api/v1/chat/completions', // default for completions
+    timeout: 60000,
+  },
+  params: {
+    max_tokens: 4096,
+    temperature: 0.7,
+  },
+});
+```
+
+<Aside type="tip">
+If `apiKey` is not provided, the provider will look for `OPENROUTER_API_KEY` in environment variables.
+</Aside>
+
+## Model Routing
+
+OpenRouter supports intelligent model routing with fallbacks:
+
+```typescript
+const model = llm({
+  model: openrouter('openai/gpt-4o'),
+  params: {
+    // Try these models in order
+    models: ['openai/gpt-4o', 'anthropic/claude-3.5-sonnet', 'google/gemini-pro'],
+    route: 'fallback',
+    // Provider preferences
+    provider: {
+      allow_fallbacks: true,
+      require_parameters: true,
+      data_collection: 'deny',
+    },
+  },
+});
+```
+
+## Model Identifiers
+
+OpenRouter uses the format `provider/model-name`:
+
+```typescript
+// OpenAI models
+openrouter('openai/gpt-4o')
+openrouter('openai/gpt-4-turbo')
+openrouter('openai/o1-preview')
+
+// Anthropic models
+openrouter('anthropic/claude-3.5-sonnet')
+openrouter('anthropic/claude-3-opus')
+
+// Google models
+openrouter('google/gemini-pro')
+openrouter('google/gemini-1.5-pro')
+
+// Meta models
+openrouter('meta-llama/llama-3.1-70b-instruct')
+openrouter('meta-llama/llama-3.1-405b-instruct')
+
+// Mistral models
+openrouter('mistralai/mistral-large')
+openrouter('mistralai/mixtral-8x7b-instruct')
+```
+
+## Related
+
+- [llm()](/api/core/llm)
+- [Provider Conformance](/spec/providers/conformance)
