@@ -1,0 +1,78 @@
+---
+title: Spec Compliance
+description: How the ProviderProtocol library maps to UPP-1.1.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Specification Compliance Matrix
+
+This page documents how the `@providerprotocol/ai` library implements the [UPP-1.1 Specification](/spec/overview).
+
+## LLM Interface
+
+| Spec Requirement | Status | Implementation |
+|------------------|--------|----------------|
+| `llm()` factory function | <Badge text="Compliant" variant="success" /> | [`llm()`](/api/core/llm) |
+| Message types (User, Assistant, ToolResult) | <Badge text="Compliant" variant="success" /> | [`Message`](/api/types/messages) |
+| Turn result structure | <Badge text="Compliant" variant="success" /> | [`Turn`](/api/types/turn) |
+| Thread conversation utility | <Badge text="Compliant" variant="success" /> | [`Thread`](/api/types/thread) |
+| Streaming interface | <Badge text="Compliant" variant="success" /> | [`StreamResult`](/api/types/stream) |
+| Tool execution loop | <Badge text="Compliant" variant="success" /> | [`Tool`](/api/types/tool) |
+| Structured output | <Badge text="Compliant" variant="success" /> | [`structure` option](/api/core/llm#structured-output) |
+| Error normalization | <Badge text="Compliant" variant="success" /> | [`UPPError`](/api/errors) |
+| Capability declaration | <Badge text="Compliant" variant="success" /> | `LLMCapabilities` |
+
+## Provider Infrastructure
+
+| Spec Requirement | Status | Implementation |
+|------------------|--------|----------------|
+| Provider factory pattern | <Badge text="Compliant" variant="success" /> | [`createProvider()`](/api/core/provider) |
+| ProviderConfig structure | <Badge text="Compliant" variant="success" /> | Shared config interface |
+| Key strategies | <Badge text="Compliant" variant="success" /> | `RoundRobinKeys`, `WeightedKeys`, `DynamicKey` |
+| Retry strategies | <Badge text="Compliant" variant="success" /> | `ExponentialBackoff`, `LinearBackoff`, etc. |
+| Error code normalization | <Badge text="Compliant" variant="success" /> | 12 error codes mapped |
+
+## Modalities
+
+| Modality | Status | Notes |
+|----------|--------|-------|
+| `llm()` | <Badge text="Compliant" variant="success" /> | Full implementation |
+| `embedding()` | <Badge text="Planned" variant="note" /> | In development |
+| `image()` | <Badge text="Planned" variant="note" /> | In development |
+
+## Provider Support
+
+| Provider | LLM | Embedding | Image |
+|----------|-----|-----------|-------|
+| Anthropic | <Badge text="Yes" variant="success" /> | - | - |
+| OpenAI | <Badge text="Yes" variant="success" /> | <Badge text="Planned" variant="note" /> | <Badge text="Planned" variant="note" /> |
+| Google | <Badge text="Yes" variant="success" /> | <Badge text="Planned" variant="note" /> | - |
+| Ollama | <Badge text="Yes" variant="success" /> | - | - |
+
+## Conformance Levels
+
+### LLM Providers
+
+All included LLM providers implement:
+
+- **Level 1 (Core)**: Text generation, error normalization, capability declaration
+- **Level 2 (Streaming)**: Real-time streaming with proper event types
+- **Level 3 (Tools)**: Tool definition and execution support
+- **Level 4 (Structured Output)**: JSON Schema-based structured responses
+- **Level 5 (Multimodal)**: Image input support (provider-dependent)
+
+<Aside type="note">
+Conformance levels are defined in the [Provider Conformance](/spec/providers/conformance) specification.
+</Aside>
+
+## Deviations
+
+There are no known deviations from the UPP-1.1 specification.
+
+## Version History
+
+| Library Version | Spec Version | Notes |
+|-----------------|--------------|-------|
+| 0.0.2 | UPP-1.1-draft | Current |
+| 0.0.1 | UPP-1.0-draft | Initial release |

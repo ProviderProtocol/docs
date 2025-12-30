@@ -1,0 +1,132 @@
+---
+title: Google Provider
+description: Google Gemini provider for ProviderProtocol.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Google Provider
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Provider for Google's Gemini models.
+
+## Import
+
+```typescript
+import { google } from '@providerprotocol/ai/google';
+import type { GoogleLLMParams } from '@providerprotocol/ai/google';
+```
+
+## Usage
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+const gemini = llm({
+  model: google('gemini-2.0-flash'),
+  system: 'You are a helpful assistant.',
+});
+
+const turn = await gemini.generate('Hello!');
+```
+
+## Capabilities
+
+| Capability | Supported |
+|------------|-----------|
+| Streaming | Yes |
+| Tools | Yes |
+| Structured Output | Yes |
+| Image Input | Yes |
+| Audio Input | Yes |
+| Video Input | Yes |
+
+## Provider-Specific Parameters
+
+```typescript
+interface GoogleLLMParams {
+  /** Maximum output tokens to generate */
+  maxOutputTokens?: number;
+
+  /** Sampling temperature (0-2) */
+  temperature?: number;
+
+  /** Top-p (nucleus) sampling */
+  topP?: number;
+
+  /** Top-k sampling - only sample from top K tokens */
+  topK?: number;
+
+  /** Stop sequences - generation stops when encountered */
+  stopSequences?: string[];
+
+  /** Number of candidate responses to generate */
+  candidateCount?: number;
+
+  /** Response MIME type */
+  responseMimeType?: 'text/plain' | 'application/json';
+
+  /** JSON schema for structured responses */
+  responseSchema?: Record<string, unknown>;
+
+  /** Presence penalty - penalize tokens that appear at all */
+  presencePenalty?: number;
+
+  /** Frequency penalty - penalize tokens by frequency */
+  frequencyPenalty?: number;
+
+  /** Seed for deterministic sampling */
+  seed?: number;
+
+  /** Whether to return response log probabilities */
+  responseLogprobs?: boolean;
+
+  /** Number of log probabilities to return */
+  logprobs?: number;
+
+  /** Whether to include audio timestamps */
+  audioTimestamp?: boolean;
+
+  /** Extended thinking configuration */
+  thinkingConfig?: {
+    /** Whether thinking is enabled */
+    thinkingBudget?: number;
+    /** Include thinking in response */
+    includeThoughts?: boolean;
+  };
+}
+```
+
+<Aside type="note">
+Google uses camelCase for parameter names (e.g., `maxOutputTokens`) unlike other providers that use snake_case.
+</Aside>
+
+## Configuration
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+const gemini = llm({
+  model: google('gemini-2.0-flash'),
+  config: {
+    apiKey: process.env.GOOGLE_API_KEY,
+    timeout: 60000,
+  },
+  params: {
+    maxOutputTokens: 4096,
+    temperature: 0.7,
+  },
+});
+```
+
+<Aside type="tip">
+If `apiKey` is not provided, the provider will look for `GOOGLE_API_KEY` or `GOOGLE_GENERATIVE_AI_API_KEY` in environment variables.
+</Aside>
+
+## Related
+
+- [llm()](/api/core/llm)
+- [Provider Conformance](/spec/providers/conformance)

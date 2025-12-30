@@ -1,0 +1,149 @@
+---
+title: Streaming
+description: Streaming types for real-time LLM responses.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Streaming
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Types for handling streaming LLM responses.
+
+<Aside type="note" title="Specification">
+  Implements the [UPP-1.1 Streaming](/spec/llm/streaming) specification.
+</Aside>
+
+## Import
+
+```typescript
+import type { StreamResult, StreamEvent, StreamEventType } from '@providerprotocol/ai';
+```
+
+## StreamResult
+
+```typescript
+interface StreamResult<TData = unknown> extends AsyncIterable<StreamEvent> {
+  /** Promise that resolves to the complete Turn */
+  readonly turn: Promise<Turn<TData>>;
+
+  /** Abort the stream */
+  abort(): void;
+}
+```
+
+## StreamEvent
+
+```typescript
+interface StreamEvent {
+  /** Event type */
+  type: StreamEventType;
+
+  /** Content block index */
+  index: number;
+
+  /** Event payload */
+  delta: EventDelta;
+}
+```
+
+## StreamEventType
+
+| Type | Description |
+|------|-------------|
+| `message_start` | Message started |
+| `content_block_start` | Content block started |
+| `text_delta` | Text content chunk |
+| `tool_call_delta` | Tool call chunk |
+| `content_block_stop` | Content block completed |
+| `message_stop` | Message completed |
+
+## Basic Usage
+
+```typescript
+const stream = claude.stream('Write a haiku about coding');
+
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+// Get the complete turn after streaming
+const turn = await stream.turn;
+history.push(...turn.messages);
+```
+
+## Event Handling
+
+```typescript
+const stream = claude.stream('Tell me a story');
+
+for await (const event of stream) {
+  switch (event.type) {
+    case 'message_start':
+      console.log('Stream started');
+      break;
+    case 'text_delta':
+      process.stdout.write(event.delta.text ?? '');
+      break;
+    case 'tool_call_delta':
+      console.log('Tool call:', event.delta.toolName);
+      break;
+    case 'message_stop':
+      console.log('\nStream completed');
+      break;
+  }
+}
+```
+
+## Aborting Streams
+
+```typescript
+const stream = claude.stream('Write a very long story...');
+
+// Abort after 5 seconds
+const timeout = setTimeout(() => stream.abort(), 5000);
+
+try {
+  for await (const event of stream) {
+    process.stdout.write(event.delta.text ?? '');
+  }
+  clearTimeout(timeout);
+} catch (error) {
+  if (error instanceof UPPError && error.code === 'CANCELLED') {
+    console.log('Stream was aborted');
+  }
+}
+```
+
+## With Tools
+
+When tools are configured, the stream handles tool execution automatically:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [getWeather],
+});
+
+const stream = claude.stream('What is the weather in Tokyo?');
+
+for await (const event of stream) {
+  // You'll see text_delta events, then tool execution happens,
+  // then more text_delta events for the final response
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+const turn = await stream.turn;
+console.log(`\nTool executions: ${turn.toolExecutions.length}`);
+```
+
+## Related
+
+- [llm()](/api/core/llm)
+- [Turn](/api/types/turn)
+- [Streaming Specification](/spec/llm/streaming)

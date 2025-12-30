@@ -1,0 +1,169 @@
+---
+title: OpenAI Provider
+description: OpenAI provider for ProviderProtocol.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# OpenAI Provider
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Provider for OpenAI's GPT and o-series models.
+
+## Import
+
+```typescript
+import { openai } from '@providerprotocol/ai/openai';
+import type { OpenAILLMParams, OpenAIConfig } from '@providerprotocol/ai/openai';
+```
+
+## Usage
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+const gpt = llm({
+  model: openai('gpt-4o'),
+  system: 'You are a helpful assistant.',
+});
+
+const turn = await gpt.generate('Hello!');
+```
+
+## API Modes
+
+OpenAI supports two API modes:
+
+```typescript
+// Modern Responses API (default)
+const model = openai('gpt-4o');
+
+// Legacy Chat Completions API
+const model = openai('gpt-4o', { api: 'completions' });
+```
+
+## Capabilities
+
+| Capability | Supported |
+|------------|-----------|
+| Streaming | Yes |
+| Tools | Yes |
+| Structured Output | Yes |
+| Image Input | Yes |
+| Audio Input | Yes |
+| Video Input | No |
+
+## Provider-Specific Parameters
+
+```typescript
+interface OpenAILLMParams {
+  /** Maximum tokens to generate (legacy parameter) */
+  max_tokens?: number;
+
+  /** Maximum completion tokens (preferred for newer models) */
+  max_completion_tokens?: number;
+
+  /** Maximum output tokens (alternative name) */
+  max_output_tokens?: number;
+
+  /** Sampling temperature (0-2) */
+  temperature?: number;
+
+  /** Top-p (nucleus) sampling */
+  top_p?: number;
+
+  /** Frequency penalty (-2 to 2) - penalize tokens by frequency */
+  frequency_penalty?: number;
+
+  /** Presence penalty (-2 to 2) - penalize tokens that appear at all */
+  presence_penalty?: number;
+
+  /** Stop sequences */
+  stop?: string | string[];
+
+  /** Number of completions to generate */
+  n?: number;
+
+  /** Whether to return log probabilities */
+  logprobs?: boolean;
+
+  /** Number of top log probabilities to return (0-20) */
+  top_logprobs?: number;
+
+  /** Seed for deterministic sampling */
+  seed?: number;
+
+  /** User identifier for abuse monitoring */
+  user?: string;
+
+  /** Modify likelihood of specific tokens */
+  logit_bias?: Record<string, number>;
+
+  /** Whether to allow parallel tool calls */
+  parallel_tool_calls?: boolean;
+
+  /** Reasoning effort for o-series models */
+  reasoning_effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+
+  /** Reasoning configuration */
+  reasoning?: {
+    effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+    summary?: 'auto' | 'concise' | 'detailed';
+  };
+
+  /** Service tier for request routing */
+  service_tier?: 'auto' | 'default' | 'flex' | 'priority';
+
+  /** Context truncation strategy */
+  truncation?: 'auto' | 'disabled';
+
+  /** Predicted output for faster generation */
+  prediction?: {
+    type: 'content';
+    content: string | Array<{ type: 'text'; text: string }>;
+  };
+
+  /** Key for prompt caching */
+  prompt_cache_key?: string;
+
+  /** Store request for later retrieval */
+  store?: boolean;
+
+  /** Custom metadata for stored requests */
+  metadata?: Record<string, string>;
+
+  /** Previous response ID for multi-turn */
+  previous_response_id?: string;
+
+  /** Include context from previous response */
+  include?: Array<'file_search_call.results' | 'message.input_image.image_url' | 'computer_call_output.output.image_url'>;
+}
+```
+
+## Configuration
+
+```typescript
+const gpt = llm({
+  model: openai('gpt-4o'),
+  config: {
+    apiKey: process.env.OPENAI_API_KEY,
+    baseUrl: 'https://api.openai.com/v1', // default
+    timeout: 60000,
+  },
+  params: {
+    max_completion_tokens: 4096,
+    temperature: 0.7,
+  },
+});
+```
+
+<Aside type="tip">
+If `apiKey` is not provided, the provider will look for `OPENAI_API_KEY` in environment variables.
+</Aside>
+
+## Related
+
+- [llm()](/api/core/llm)
+- [Provider Conformance](/spec/providers/conformance)

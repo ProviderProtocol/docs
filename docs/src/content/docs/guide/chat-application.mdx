@@ -1,0 +1,353 @@
+---
+title: Building a Chat Application
+description: A complete CLI chat application with tools, conversation history, and persistence.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Building a Chat Application
+
+This tutorial walks through building a full-featured CLI chat application demonstrating:
+
+- Multiple tools with different parameter types
+- Thread-based conversation history
+- Persistence to disk (save/restore conversations)
+- Interactive command-line interface
+
+<Aside type="tip">
+This example uses OpenAI's GPT-4o, but you can swap in any provider by changing the import and model reference.
+</Aside>
+
+## The Complete Application
+
+```typescript
+import { llm, Thread } from "@providerprotocol/ai";
+import { openai } from "@providerprotocol/ai/openai";
+import { writeFile, readFile } from "node:fs/promises";
+import { createInterface } from "node:readline";
+import { existsSync } from "node:fs";
+
+const THREAD_FILE = "conversation.json";
+
+// Define multiple tools with different parameter patterns
+const tools = [
+  {
+    name: "get_weather",
+    description: "Get the current weather for a location",
+    parameters: {
+      type: "object",
+      properties: {
+        location: { type: "string", description: "City name" },
+      },
+      required: ["location"],
+    },
+    async run({ location }) {
+      console.log(`\n   🔧 Fetching weather for ${location}...`);
+      const temp = Math.floor(Math.random() * 35) + 40;
+      const conditions = ["sunny", "cloudy", "rainy", "partly cloudy", "windy"][
+        Math.floor(Math.random() * 5)
+      ];
+      const result = { location, temperature: `${temp}°F`, conditions };
+      console.log(`   ✅ Result: ${JSON.stringify(result)}`);
+      return JSON.stringify(result);
+    },
+  },
+  {
+    name: "get_stock_price",
+    description: "Get the current stock price for a ticker symbol",
+    parameters: {
+      type: "object",
+      properties: {
+        symbol: {
+          type: "string",
+          description: "Stock ticker symbol (e.g., AAPL)",
+        },
+      },
+      required: ["symbol"],
+    },
+    async run({ symbol }) {
+      console.log(`\n   🔧 Fetching stock price for ${symbol}...`);
+      const price = (Math.random() * 500 + 50).toFixed(2);
+      const change = (Math.random() * 10 - 5).toFixed(2);
+      const changePercent = (Math.random() * 5 - 2.5).toFixed(2);
+      const result = {
+        symbol: symbol.toUpperCase(),
+        price: `$${price}`,
+        change: `${change > 0 ? "+" : ""}${change}`,
+        changePercent: `${changePercent > 0 ? "+" : ""}${changePercent}%`,
+      };
+      console.log(`   ✅ Result: ${JSON.stringify(result)}`);
+      return JSON.stringify(result);
+    },
+  },
+  {
+    name: "roll_dice",
+    description: "Roll one or more dice with a specified number of sides",
+    parameters: {
+      type: "object",
+      properties: {
+        count: { type: "number", description: "Number of dice to roll" },
+        sides: { type: "number", description: "Number of sides per die" },
+      },
+      required: ["count", "sides"],
+    },
+    async run({ count, sides }) {
+      console.log(`\n   🔧 Rolling ${count}d${sides}...`);
+      const rolls = Array.from(
+        { length: count },
+        () => Math.floor(Math.random() * sides) + 1
+      );
+      const result = { rolls, total: rolls.reduce((a, b) => a + b, 0) };
+      console.log(`   ✅ Result: ${JSON.stringify(result)}`);
+      return JSON.stringify(result);
+    },
+  },
+  {
+    name: "generate_user",
+    description: "Generate a random fake user profile for testing",
+    parameters: {
+      type: "object",
+      properties: {},
+    },
+    async run() {
+      console.log(`\n   🔧 Generating fake user...`);
+      const firstNames = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank"];
+      const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones"];
+      const domains = ["gmail.com", "yahoo.com", "outlook.com"];
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const result = {
+        name: `${firstName} ${lastName}`,
+        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@${
+          domains[Math.floor(Math.random() * domains.length)]
+        }`,
+        age: Math.floor(Math.random() * 50) + 18,
+        id: Math.random().toString(36).substring(2, 10),
+      };
+      console.log(`   ✅ Result: ${JSON.stringify(result)}`);
+      return JSON.stringify(result);
+    },
+  },
+];
+
+// Create the LLM instance with tools
+const gpt = llm({
+  model: openai("gpt-4o"),
+  system: `You are a helpful assistant with access to tools. Use them when relevant.`,
+  tools,
+});
+
+// Load existing conversation or start fresh
+async function loadThread() {
+  if (existsSync(THREAD_FILE)) {
+    try {
+      const data = await readFile(THREAD_FILE, "utf-8");
+      const json = JSON.parse(data);
+      if (json.messages?.length > 0) {
+        console.log("\n📂 Loaded previous conversation\n");
+        return Thread.fromJSON(json);
+      }
+    } catch (e) {
+      // Ignore parse errors, start fresh
+    }
+  }
+  console.log("\n📝 Starting new conversation\n");
+  return new Thread();
+}
+
+// Save conversation to disk
+async function saveThread(thread) {
+  await writeFile(THREAD_FILE, JSON.stringify(thread.toJSON(), null, 2));
+}
+
+async function main() {
+  const thread = await loadThread();
+
+  // Show previous messages summary
+  const messages = thread.messages || [];
+  if (messages.length > 0) {
+    console.log("--- Previous Messages ---");
+    for (const msg of messages) {
+      const role = msg.type === "user" ? "You" : "Assistant";
+      const text = msg.text || "";
+      if (text) {
+        console.log(`${role}: ${text.substring(0, 100)}${text.length > 100 ? "..." : ""}`);
+      }
+    }
+    console.log("-------------------------\n");
+  }
+
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  console.log('💬 Chat with GPT-4o (type "exit" to quit, "clear" to reset)\n');
+
+  const prompt = () => {
+    rl.question("You: ", async (input) => {
+      const trimmed = input.trim();
+
+      if (trimmed.toLowerCase() === "exit") {
+        console.log("\n👋 Goodbye!\n");
+        rl.close();
+        return;
+      }
+
+      if (trimmed.toLowerCase() === "clear") {
+        await writeFile(THREAD_FILE, "{}");
+        console.log("\n🗑️  Conversation cleared. Restart to begin fresh.\n");
+        rl.close();
+        return;
+      }
+
+      if (!trimmed) {
+        prompt();
+        return;
+      }
+
+      try {
+        // Generate response using the thread for context
+        const turn = await gpt.generate(thread, trimmed);
+
+        console.log(`\nAssistant: ${turn.response.text}\n`);
+
+        // Append the turn to the thread
+        thread.append(turn);
+
+        // Persist to disk
+        await saveThread(thread);
+      } catch (error) {
+        console.error(`\n❌ Error: ${error.message}\n`);
+      }
+
+      prompt();
+    });
+  };
+
+  prompt();
+}
+
+main().catch(console.error);
+```
+
+## Sample Interaction
+
+```
+📝 Starting new conversation
+
+💬 Chat with GPT-4o (type "exit" to quit, "clear" to reset)
+
+You: whats the weather in sheboygan milwaukee and greenbay
+
+   🔧 Fetching weather for Sheboygan...
+   ✅ Result: {"location":"Sheboygan","temperature":"66°F","conditions":"cloudy"}
+
+   🔧 Fetching weather for Milwaukee...
+   ✅ Result: {"location":"Milwaukee","temperature":"64°F","conditions":"partly cloudy"}
+
+   🔧 Fetching weather for Green Bay...
+   ✅ Result: {"location":"Green Bay","temperature":"66°F","conditions":"sunny"}
+Assistant: Here is the current weather:
+
+- **Sheboygan:** 66°F, cloudy
+- **Milwaukee:** 64°F, partly cloudy
+- **Green Bay:** 66°F, sunny
+```
+
+Notice how the model calls all three weather tools in parallel, then formats the combined results.
+
+## Thread Serialization Format
+
+When persisted to disk via `thread.toJSON()`, the conversation looks like this:
+
+```json
+{
+  "id": "42d3c37f-1cdf-4549-aa5c-3f96fa90b7cc",
+  "messages": [
+    {
+      "id": "4d8ef1ff-ebc2-4888-bb8c-b0aef3d71f49",
+      "type": "user",
+      "content": [{ "type": "text", "text": "whats the weather in sheboygan milwaukee and greenbay" }],
+      "timestamp": "2025-12-30T03:31:38.954Z"
+    },
+    {
+      "id": "resp_0f7a0530...",
+      "type": "assistant",
+      "content": [],
+      "toolCalls": [
+        { "toolCallId": "call_9i0v...", "toolName": "get_weather", "arguments": { "location": "Sheboygan" } },
+        { "toolCallId": "call_J60P...", "toolName": "get_weather", "arguments": { "location": "Milwaukee" } },
+        { "toolCallId": "call_xh24...", "toolName": "get_weather", "arguments": { "location": "Green Bay" } }
+      ],
+      "timestamp": "2025-12-30T03:31:39.887Z"
+    },
+    {
+      "id": "f1af79ad-...",
+      "type": "tool_result",
+      "results": [
+        { "toolCallId": "call_9i0v...", "result": "{\"location\":\"Sheboygan\",\"temperature\":\"66°F\",\"conditions\":\"cloudy\"}" },
+        { "toolCallId": "call_J60P...", "result": "{\"location\":\"Milwaukee\",\"temperature\":\"64°F\",\"conditions\":\"partly cloudy\"}" },
+        { "toolCallId": "call_xh24...", "result": "{\"location\":\"Green Bay\",\"temperature\":\"66°F\",\"conditions\":\"sunny\"}" }
+      ],
+      "timestamp": "2025-12-30T03:31:39.888Z"
+    },
+    {
+      "id": "resp_0f7a0530...",
+      "type": "assistant",
+      "content": [{ "type": "text", "text": "Here is the current weather:
+
+- **Sheboygan:** 66°F, cloudy
+- **Milwaukee:** 64°F, partly cloudy
+- **Green Bay:** 66°F, sunny" }],
+      "timestamp": "2025-12-30T03:31:40.670Z"
+    }
+  ],
+  "createdAt": "2025-12-30T03:31:31.929Z",
+  "updatedAt": "2025-12-30T03:31:40.670Z"
+}
+```
+
+The serialization format preserves:
+- All message types (user, assistant, tool_result)
+- Tool calls and their arguments
+- Tool results with their call IDs
+- Timestamps for each message
+- Thread-level metadata (id, createdAt, updatedAt)
+
+## Key Concepts Demonstrated
+
+### 1. Thread Persistence
+
+```typescript
+// Save
+await writeFile(THREAD_FILE, JSON.stringify(thread.toJSON(), null, 2));
+
+// Load
+const json = JSON.parse(await readFile(THREAD_FILE, "utf-8"));
+const thread = Thread.fromJSON(json);
+```
+
+### 2. Tool Execution
+
+The `llm()` function handles tool execution automatically:
+1. Model requests tool calls
+2. Tools are executed in parallel
+3. Results are sent back to the model
+4. Model generates final response
+
+### 3. Conversation Context
+
+Using `Thread` with `generate()` maintains context:
+
+```typescript
+const turn = await gpt.generate(thread, userInput);
+thread.append(turn);
+```
+
+## Related
+
+- [Thread API Reference](/api/types/thread)
+- [Tool Types](/api/types/tool)
+- [llm() Function](/api/core/llm)
+

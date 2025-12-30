@@ -1,0 +1,212 @@
+---
+title: Messages
+description: Message types for LLM conversations.
+---
+
+import { Aside, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Messages
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Message types represent the building blocks of LLM conversations.
+
+<Aside type="note" title="Specification">
+  Implements the [UPP-1.1 Message Types](/spec/llm/messages).
+</Aside>
+
+## Import
+
+```typescript
+import {
+  Message,
+  UserMessage,
+  AssistantMessage,
+  ToolResultMessage,
+  isUserMessage,
+  isAssistantMessage,
+  isToolResultMessage,
+} from '@providerprotocol/ai';
+```
+
+## Message Base Class
+
+```typescript
+abstract class Message {
+  /** Unique message identifier */
+  readonly id: string;
+
+  /** Timestamp when message was created */
+  readonly timestamp: Date;
+
+  /** Provider-specific metadata */
+  readonly metadata?: MessageMetadata;
+
+  /** Message type discriminator */
+  abstract readonly type: MessageType;
+
+  /** Convenience accessor - concatenates all text content */
+  get text(): string;
+}
+
+type MessageType = 'user' | 'assistant' | 'tool_result';
+```
+
+## UserMessage
+
+Input from the user:
+
+```typescript
+class UserMessage extends Message {
+  readonly type = 'user';
+  readonly content: UserContent[];
+
+  constructor(
+    content: string | UserContent[],
+    options?: MessageOptions
+  );
+}
+
+type UserContent =
+  | TextBlock
+  | ImageBlock
+  | AudioBlock
+  | VideoBlock
+  | BinaryBlock;
+```
+
+### Creating User Messages
+
+<Tabs>
+  <TabItem label="Text">
+```typescript
+const msg = new UserMessage('Hello, how are you?');
+```
+  </TabItem>
+  <TabItem label="With Image">
+```typescript
+const msg = new UserMessage([
+  { type: 'text', text: 'What is in this image?' },
+  await Image.fromPath('photo.png').then(i => i.toBlock()),
+]);
+```
+  </TabItem>
+</Tabs>
+
+## AssistantMessage
+
+Response from the model:
+
+```typescript
+class AssistantMessage extends Message {
+  readonly type = 'assistant';
+  readonly content: AssistantContent[];
+
+  /** Tool calls requested by the model */
+  readonly toolCalls?: ToolCall[];
+
+  /** Check if this message has tool calls */
+  get hasToolCalls(): boolean;
+}
+
+type AssistantContent =
+  | TextBlock
+  | ImageBlock
+  | AudioBlock
+  | VideoBlock;
+```
+
+### Checking for Tool Calls
+
+```typescript
+if (message.hasToolCalls) {
+  for (const call of message.toolCalls!) {
+    console.log(`Tool: ${call.toolName}`);
+    console.log(`Args: ${JSON.stringify(call.arguments)}`);
+  }
+}
+```
+
+## ToolResultMessage
+
+Results of tool execution:
+
+```typescript
+class ToolResultMessage extends Message {
+  readonly type = 'tool_result';
+  readonly results: ToolResult[];
+
+  constructor(results: ToolResult[], options?: MessageOptions);
+}
+
+interface ToolResult {
+  toolCallId: string;
+  result: unknown;
+  isError?: boolean;
+}
+```
+
+## Type Guards
+
+```typescript
+import {
+  isUserMessage,
+  isAssistantMessage,
+  isToolResultMessage,
+} from '@providerprotocol/ai';
+
+for (const msg of turn.messages) {
+  if (isUserMessage(msg)) {
+    console.log('User said:', msg.text);
+  } else if (isAssistantMessage(msg)) {
+    console.log('Assistant replied:', msg.text);
+    if (msg.hasToolCalls) {
+      console.log('With tool calls:', msg.toolCalls);
+    }
+  } else if (isToolResultMessage(msg)) {
+    console.log('Tool results:', msg.results);
+  }
+}
+```
+
+## MessageOptions
+
+```typescript
+interface MessageOptions {
+  /** Custom message ID (auto-generated if omitted) */
+  id?: string;
+
+  /** Custom timestamp (current time if omitted) */
+  timestamp?: Date;
+
+  /** Provider-specific metadata */
+  metadata?: MessageMetadata;
+}
+```
+
+## MessageMetadata
+
+Provider-specific metadata, namespaced by provider name:
+
+```typescript
+interface MessageMetadata {
+  [provider: string]: Record<string, unknown> | undefined;
+}
+
+// Example
+const metadata: MessageMetadata = {
+  anthropic: {
+    cache_control: { type: 'ephemeral' },
+  },
+  google: {
+    thought_signature: 'abc123...',
+  },
+};
+```
+
+## Related
+
+- [Messages Specification](/spec/llm/messages)
+- [Content Types](/api/types/content)
+- [Turn](/api/types/turn)
+- [Thread](/api/types/thread)

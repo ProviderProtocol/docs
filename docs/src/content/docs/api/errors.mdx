@@ -1,0 +1,186 @@
+---
+title: Errors
+description: Error handling in the ProviderProtocol library.
+---
+
+import { Aside, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Errors
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+All errors across modalities are normalized to `UPPError` for consistent handling.
+
+<Aside type="note" title="Specification">
+  Implements the [UPP-1.1 Error Handling](/spec/errors) specification.
+</Aside>
+
+## Import
+
+```typescript
+import { UPPError } from '@providerprotocol/ai';
+import type { ErrorCode } from '@providerprotocol/ai';
+```
+
+## UPPError Class
+
+```typescript
+class UPPError extends Error {
+  /** Normalized error code */
+  readonly code: ErrorCode;
+
+  /** Provider that threw the error */
+  readonly provider: string;
+
+  /** Modality where error occurred */
+  readonly modality: Modality;
+
+  /** HTTP status code (if applicable) */
+  readonly statusCode?: number;
+
+  /** Original error (if wrapped) */
+  readonly cause?: Error;
+
+  /** Serialize to JSON */
+  toJSON(): Record<string, unknown>;
+}
+
+type Modality = 'llm' | 'embedding' | 'image' | 'audio' | 'video';
+```
+
+## Error Codes
+
+| Code | Description |
+|------|-------------|
+| `AUTHENTICATION_FAILED` | API key invalid or missing |
+| `RATE_LIMITED` | Too many requests |
+| `CONTEXT_LENGTH_EXCEEDED` | Input exceeds model's context window |
+| `MODEL_NOT_FOUND` | Model ID doesn't exist or is deprecated |
+| `INVALID_REQUEST` | Malformed request or invalid parameters |
+| `INVALID_RESPONSE` | Response failed validation (structured output) |
+| `CONTENT_FILTERED` | Content policy violation |
+| `QUOTA_EXCEEDED` | Usage limits reached |
+| `PROVIDER_ERROR` | Vendor API server error |
+| `NETWORK_ERROR` | Connection failure |
+| `TIMEOUT` | Request timed out |
+| `CANCELLED` | Request was aborted |
+
+## Basic Handling
+
+```typescript
+import { UPPError } from '@providerprotocol/ai';
+
+try {
+  const turn = await claude.generate('Hello');
+} catch (error) {
+  if (error instanceof UPPError) {
+    console.log('Error code:', error.code);
+    console.log('Provider:', error.provider);
+    console.log('Modality:', error.modality);
+
+    if (error.statusCode) {
+      console.log('HTTP status:', error.statusCode);
+    }
+
+    if (error.cause) {
+      console.log('Original error:', error.cause);
+    }
+  }
+}
+```
+
+## Handling by Code
+
+<Tabs>
+  <TabItem label="Switch">
+```typescript
+try {
+  const turn = await claude.generate('Hello');
+} catch (error) {
+  if (error instanceof UPPError) {
+    switch (error.code) {
+      case 'RATE_LIMITED':
+        console.log('Rate limited, waiting...');
+        await sleep(5000);
+        break;
+      case 'CONTEXT_LENGTH_EXCEEDED':
+        console.log('Input too long');
+        break;
+      case 'AUTHENTICATION_FAILED':
+        console.log('Check your API key');
+        break;
+      default:
+        throw error;
+    }
+  }
+}
+```
+  </TabItem>
+  <TabItem label="With Retry">
+```typescript
+async function generateWithRetry(prompt: string, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await claude.generate(prompt);
+    } catch (error) {
+      if (error instanceof UPPError) {
+        if (error.code === 'RATE_LIMITED' && i < maxRetries - 1) {
+          await sleep(Math.pow(2, i) * 1000);
+          continue;
+        }
+      }
+      throw error;
+    }
+  }
+}
+```
+  </TabItem>
+</Tabs>
+
+## Streaming Errors
+
+Errors during streaming are thrown from the async iterator:
+
+```typescript
+try {
+  const stream = claude.stream('Write a story');
+
+  for await (const event of stream) {
+    process.stdout.write(event.delta.text ?? '');
+  }
+} catch (error) {
+  if (error instanceof UPPError) {
+    if (error.code === 'CANCELLED') {
+      console.log('Stream was aborted');
+    } else {
+      console.log('Stream error:', error.message);
+    }
+  }
+}
+```
+
+## Cancellation
+
+When a request is cancelled via `stream.abort()`:
+
+```typescript
+const stream = claude.stream('Write a long story...');
+
+// Abort after 5 seconds
+setTimeout(() => stream.abort(), 5000);
+
+try {
+  for await (const event of stream) {
+    process.stdout.write(event.delta.text ?? '');
+  }
+} catch (error) {
+  if (error instanceof UPPError && error.code === 'CANCELLED') {
+    console.log('Request was cancelled');
+  }
+}
+```
+
+## Related
+
+- [Error Handling Specification](/spec/errors)
+- [Streaming](/api/types/stream)

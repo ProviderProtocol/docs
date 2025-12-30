@@ -3,11 +3,17 @@ title: LLM Interface Overview
 description: The llm() interface for chat and completion with Large Language Models.
 ---
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Aside, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # LLM Interface
 
+<Badge text="Specification" variant="note" />
+
 The `llm()` function provides a unified interface for chat and completion with Large Language Models.
+
+<Aside type="tip" title="Reference Implementation">
+  See the [`llm()` API Reference](/api/core/llm) for the ProviderProtocol implementation of this interface.
+</Aside>
 
 ## Function Signature
 
@@ -241,7 +247,7 @@ Providers return a single `LLMResponse`. The `llm()` core handles constructing t
 
 ## What's Next?
 
-- Learn about [Messages](/llm/messages/) - the building blocks of conversations
-- Understand [Turns](/llm/turns/) - the result of inference calls
-- Explore [Streaming](/llm/streaming/) for real-time responses
-- Add [Tools](/llm/tools/) for function calling
+- Learn about [Messages](/spec/llm/messages/) - the building blocks of conversations
+- Understand [Turns](/api/types/turn/) - the result of inference calls
+- Explore [Streaming](/spec/llm/streaming/) for real-time responses
+- Add [Tools](/spec/llm/tools/) for function calling

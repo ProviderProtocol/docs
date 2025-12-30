@@ -1,0 +1,82 @@
+---
+title: Specification Overview
+description: Introduction to the Unified Provider Protocol specification.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# UPP-1.1 Specification
+
+<Badge text="Version 1.1.0-draft" variant="note" />
+
+The Unified Provider Protocol (UPP) is a first-generation standard for simplifying AI inference and enabling multi-provider interoperability.
+
+## Abstract
+
+UPP defines uniform interfaces for interacting with Large Language Models, Embedding Models, Image Generation Models, and other AI inference APIs through modality-specific, consistent developer experiences.
+
+The protocol provides separate entry points for each modality—`llm()`, `embedding()`, `image()`—while sharing common provider infrastructure, configuration patterns, and design principles.
+
+<Aside type="tip" title="Reference Implementation">
+  See the [API Reference](/api/overview) for the ProviderProtocol library, a compliant implementation of UPP-1.1.
+</Aside>
+
+## Purpose
+
+Modern AI development requires interacting with multiple providers (Anthropic, OpenAI, Google, Stability, Voyage, etc.), each with distinct APIs, authentication schemes, and response formats. UPP-1.1 establishes a standard protocol that:
+
+- Provides modality-specific interfaces (`llm`, `embedding`, `image`)
+- Enables provider switching without application code changes
+- Maintains provider-native configuration to avoid abstraction leakage
+- Shares common infrastructure (auth, retry, HTTP) across modalities
+- Supports text, image, audio, video, embeddings, and future modalities
+
+## Scope
+
+This specification covers:
+
+- The `llm()` function interface (chat/completion)
+- The `embedding()` function interface (vector embeddings)
+- The `image()` function interface (image generation)
+- Provider adapter requirements for each modality
+- Shared infrastructure (ProviderConfig, KeyStrategy, error handling)
+- Message, Turn, and Thread data structures (LLM-specific)
+- Streaming response handling
+- Tool definition and execution
+
+## Modality Overview
+
+| Entry Point | Purpose | Example Models |
+|-------------|---------|----------------|
+| `llm()` | Chat, completion, reasoning | Claude, GPT-4, Gemini |
+| `embedding()` | Vector embeddings | text-embedding-3, Voyage, Cohere |
+| `image()` | Image generation/editing | DALL-E, Stable Diffusion, Imagen |
+
+Future modalities may include:
+- `audio()` - Speech-to-text, text-to-speech
+- `video()` - Video generation
+
+## Terminology
+
+| Term | Definition |
+|------|------------|
+| **Provider** | A vendor-specific adapter exposing one or more modality interfaces |
+| **Modality** | A distinct AI capability: LLM, embedding, image generation, etc. |
+| **BoundModel** | A model instance bound to a specific provider and model ID |
+| **Message** | A single message in an LLM conversation (user, assistant, or tool result) |
+| **Turn** | The complete result of one LLM inference call, containing all messages produced |
+| **StreamEvent** | A streaming event (lifecycle or content delta) |
+| **Thread** | A utility class for managing LLM conversation history |
+| **Embedding** | A vector representation of text or other content |
+| **UPP** | Unified Provider Protocol |
+
+## Requirements Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this specification are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+## Canonical Specification
+
+The complete formal specification is maintained at:
+- [UPP-1.1.spec.md](https://github.com/providerprotocol/upp/blob/main/UPP-1.1.spec.md)
+
+This documentation provides a more accessible presentation of the specification.

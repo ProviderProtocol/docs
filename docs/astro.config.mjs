@@ -9,7 +9,8 @@ export default defineConfig({
 			title: 'UPP-1.1',
 			description: 'Unified Provider Protocol - A standard for multi-provider AI interoperability',
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/providerprotocol/upp' },
+				{ icon: 'github', label: 'Library', href: 'https://github.com/ProviderProtocol/ai' },
+				{ icon: 'github', label: 'Spec', href: 'https://github.com/ProviderProtocol/Unified-Provider-Protocol' },
 			],
 			customCss: ['./src/styles/custom.css'],
 			head: [
@@ -29,61 +30,86 @@ export default defineConfig({
 				},
 			],
 			sidebar: [
+				{ label: 'Introduction', slug: 'introduction' },
 				{
-					label: 'Getting Started',
+					label: 'Specification',
 					items: [
-						{ label: 'Introduction', slug: 'introduction' },
-						{ label: 'Quick Start', slug: 'quick-start' },
-						{ label: 'Design Principles', slug: 'design-principles' },
+						{ label: 'Overview', slug: 'spec/overview' },
+						{ label: 'Design Principles', slug: 'spec/design-principles' },
+						{ label: 'Architecture', slug: 'spec/architecture' },
+						{
+							label: 'LLM',
+							collapsed: true,
+							items: [
+								{ label: 'Interface', slug: 'spec/llm/interface' },
+								{ label: 'Messages', slug: 'spec/llm/messages' },
+								{ label: 'Streaming', slug: 'spec/llm/streaming' },
+								{ label: 'Tools', slug: 'spec/llm/tools' },
+								{ label: 'Structured Output', slug: 'spec/llm/structured' },
+							],
+						},
+						{ label: 'Embedding', slug: 'spec/embedding/interface' },
+						{ label: 'Image', slug: 'spec/image/interface' },
+						{ label: 'Errors', slug: 'spec/errors' },
+						{ label: 'Conformance', slug: 'spec/providers/conformance' },
 					],
 				},
 				{
-					label: 'Core Concepts',
+					label: 'Guide',
 					items: [
-						{ label: 'Architecture', slug: 'core/architecture' },
-						{ label: 'Providers', slug: 'core/providers' },
-						{ label: 'Configuration', slug: 'core/configuration' },
-						{ label: 'Error Handling', slug: 'core/errors' },
+						{ label: 'Quick Start', slug: 'guide/quick-start' },
+						{ label: 'Chat Application', slug: 'guide/chat-application' },
+						{ label: 'Configuration', slug: 'guide/configuration' },
+						{ label: 'Providers', slug: 'guide/core-providers' },
+						{ label: 'Turns & History', slug: 'guide/turns' },
+						{ label: 'Threads', slug: 'guide/threads' },
+						{ label: 'Implementing Providers', slug: 'guide/providers' },
 					],
 				},
 				{
-					label: 'LLM Interface',
+					label: 'API Reference',
 					items: [
-						{ label: 'Overview', slug: 'llm/overview' },
-						{ label: 'Messages', slug: 'llm/messages' },
-						{ label: 'Turns', slug: 'llm/turns' },
-						{ label: 'Threads', slug: 'llm/threads' },
-						{ label: 'Streaming', slug: 'llm/streaming' },
-						{ label: 'Tools', slug: 'llm/tools' },
-						{ label: 'Structured Outputs', slug: 'llm/structured-outputs' },
-					],
-				},
-				{
-					label: 'Embedding Interface',
-					items: [
-						{ label: 'Overview', slug: 'embedding/overview' },
-						{ label: 'Batch Processing', slug: 'embedding/batch' },
-						{ label: 'Similarity Utilities', slug: 'embedding/similarity' },
-					],
-				},
-				{
-					label: 'Image Interface',
-					items: [
-						{ label: 'Overview', slug: 'image/overview' },
-						{ label: 'Generation', slug: 'image/generation' },
-						{ label: 'Editing & Variations', slug: 'image/editing' },
-					],
-				},
-				{
-					label: 'Provider Guide',
-					items: [
-						{ label: 'Implementation Guide', slug: 'providers/implementation' },
-						{ label: 'Conformance Levels', slug: 'providers/conformance' },
+						{ label: 'Overview', slug: 'api/overview' },
+						{
+							label: 'Core',
+							collapsed: true,
+							items: [
+								{ label: 'llm()', slug: 'api/core/llm' },
+								{ label: 'createProvider()', slug: 'api/core/provider' },
+								{ label: 'Image', slug: 'api/core/image' },
+							],
+						},
+						{
+							label: 'Types',
+							collapsed: true,
+							items: [
+								{ label: 'Messages', slug: 'api/types/messages' },
+								{ label: 'Turn', slug: 'api/types/turn' },
+								{ label: 'Thread', slug: 'api/types/thread' },
+								{ label: 'Streaming', slug: 'api/types/stream' },
+								{ label: 'Tool', slug: 'api/types/tool' },
+							],
+						},
+						{
+							label: 'Providers',
+							collapsed: true,
+							items: [
+								{ label: 'Anthropic', slug: 'api/providers/anthropic' },
+								{ label: 'OpenAI', slug: 'api/providers/openai' },
+								{ label: 'Google', slug: 'api/providers/google' },
+								{ label: 'Ollama', slug: 'api/providers/ollama' },
+							],
+						},
+						{ label: 'Errors', slug: 'api/errors' },
 					],
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [
+						{ label: 'Types', slug: 'reference/types' },
+						{ label: 'Spec Compliance', slug: 'reference/spec-compliance' },
+						{ label: 'Changelog', slug: 'reference/changelog' },
+					],
 				},
 			],
 		}),

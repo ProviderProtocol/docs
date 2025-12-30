@@ -1,0 +1,291 @@
+---
+title: llm()
+description: Create an LLM instance for chat and completion.
+---
+
+import { Aside, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# llm()
+
+<Badge text="UPP-1.1 Compliant" variant="success" />
+
+Creates an LLM instance for chat and completion with Large Language Models.
+
+<Aside type="note" title="Specification">
+  Implements the [UPP-1.1 LLM Interface](/spec/llm/interface).
+</Aside>
+
+## Import
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+// or
+import { ai } from '@providerprotocol/ai';
+ai.llm(options);
+```
+
+## Signature
+
+```typescript
+function llm<TParams = unknown>(options: LLMOptions<TParams>): LLMInstance<TParams>
+```
+
+## LLMOptions
+
+```typescript
+interface LLMOptions<TParams = unknown> {
+  /** A model reference from a provider factory (required) */
+  model: ModelReference;
+
+  /** Provider infrastructure configuration */
+  config?: ProviderConfig;
+
+  /** Model-specific parameters (temperature, max_tokens, etc.) */
+  params?: TParams;
+
+  /** System prompt for all inferences */
+  system?: string;
+
+  /** Tools available to the model */
+  tools?: Tool[];
+
+  /** Tool execution strategy */
+  toolStrategy?: ToolUseStrategy;
+
+  /** Structured output schema (JSON Schema) */
+  structure?: JSONSchema;
+}
+```
+
+## LLMInstance
+
+The returned instance provides:
+
+```typescript
+interface LLMInstance<TParams = unknown> {
+  /** Execute inference and return complete Turn */
+  generate(
+    historyOrInput: Message[] | Thread | InferenceInput,
+    ...input: InferenceInput[]
+  ): Promise<Turn>;
+
+  /** Execute streaming inference */
+  stream(
+    historyOrInput: Message[] | Thread | InferenceInput,
+    ...input: InferenceInput[]
+  ): StreamResult;
+
+  /** The bound model */
+  readonly model: BoundLLMModel<TParams>;
+
+  /** Current system prompt */
+  readonly system: string | undefined;
+
+  /** Current parameters */
+  readonly params: TParams | undefined;
+
+  /** Model capabilities */
+  readonly capabilities: LLMCapabilities;
+}
+```
+
+## Basic Usage
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant.',
+});
+
+// Simple generation
+const turn = await claude.generate('What is 2 + 2?');
+console.log(turn.response.text); // "4"
+```
+
+## Input Formats
+
+The `generate()` and `stream()` methods accept flexible input formats:
+
+<Tabs>
+  <TabItem label="String">
+```typescript
+// Simple string input
+const turn = await claude.generate('Hello!');
+```
+  </TabItem>
+  <TabItem label="With History">
+```typescript
+// Message array as history
+const history: Message[] = [];
+const turn = await claude.generate(history, 'Follow-up question');
+history.push(...turn.messages);
+```
+  </TabItem>
+  <TabItem label="Thread">
+```typescript
+// Using Thread utility
+const thread = new Thread();
+const turn = await claude.generate(thread, 'Hello!');
+thread.append(turn);
+```
+  </TabItem>
+  <TabItem label="Multi-part">
+```typescript
+// Multiple inputs combined
+const turn = await claude.generate(
+  'Look at this image:',
+  await Image.fromPath('diagram.png'),
+  'What does it show?'
+);
+```
+  </TabItem>
+</Tabs>
+
+## Streaming
+
+```typescript
+const stream = claude.stream('Write a haiku about coding');
+
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+// Get the complete turn after streaming
+const turn = await stream.turn;
+```
+
+## With Tools
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [{
+    name: 'getWeather',
+    description: 'Get weather for a location',
+    parameters: {
+      type: 'object',
+      properties: {
+        location: { type: 'string' },
+      },
+      required: ['location'],
+    },
+    async run({ location }) {
+      return `72°F and sunny in ${location}`;
+    },
+  }],
+});
+
+const turn = await claude.generate('What is the weather in Tokyo?');
+console.log(turn.response.text);
+// Tools are executed automatically in a loop
+```
+
+## Structured Output
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      age: { type: 'number' },
+    },
+    required: ['name', 'age'],
+  },
+});
+
+const turn = await claude.generate('Extract: John is 30 years old');
+console.log(turn.data); // { name: 'John', age: 30 }
+```
+
+## Full Configuration
+
+```typescript
+import { llm, RoundRobinKeys, ExponentialBackoff } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+import type { AnthropicLLMParams } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+
+  // Infrastructure configuration
+  config: {
+    apiKey: new RoundRobinKeys([key1, key2]),
+    baseUrl: 'https://my-proxy.example.com',
+    timeout: 30000,
+    retryStrategy: new ExponentialBackoff({ maxAttempts: 3 }),
+  },
+
+  // Model parameters (provider-specific)
+  params: {
+    max_tokens: 4096,
+    temperature: 0.7,
+  } as AnthropicLLMParams,
+
+  // System prompt
+  system: 'You are a friendly assistant.',
+
+  // Tools
+  tools: [getWeather, searchWeb],
+
+  // Tool execution strategy
+  toolStrategy: {
+    maxIterations: 5,
+    onToolCall: (tool, params) => console.log(`Calling ${tool.name}`),
+  },
+});
+```
+
+## Capabilities
+
+Check capabilities before using features:
+
+```typescript
+const claude = llm({ model: anthropic('claude-sonnet-4-20250514') });
+
+if (claude.capabilities.streaming) {
+  // Safe to use stream()
+}
+
+if (claude.capabilities.tools) {
+  // Safe to use tools
+}
+
+if (claude.capabilities.structuredOutput) {
+  // Safe to use structure option
+}
+
+if (claude.capabilities.imageInput) {
+  // Safe to send images
+}
+```
+
+## Error Handling
+
+```typescript
+import { UPPError } from '@providerprotocol/ai';
+
+try {
+  const turn = await claude.generate('Hello');
+} catch (error) {
+  if (error instanceof UPPError) {
+    console.log('Code:', error.code);
+    console.log('Provider:', error.provider);
+    console.log('Modality:', error.modality); // 'llm'
+  }
+}
+```
+
+## Related
+
+- [LLM Interface Specification](/spec/llm/interface)
+- [Messages](/api/types/messages)
+- [Turn](/api/types/turn)
+- [StreamResult](/api/types/stream)
+- [Tool](/api/types/tool)
