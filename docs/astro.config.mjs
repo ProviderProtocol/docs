@@ -12,11 +12,11 @@ export default defineConfig({
 					baseUrl: 'https://providerprotocol.org/',
 				}),
 			],
-			title: 'UPP-1.1',
+			title: 'UPP',
 			description: 'Unified Provider Protocol - A standard for multi-provider AI interoperability',
 			social: [
-				{ icon: 'github', label: 'Library', href: 'https://github.com/ProviderProtocol/ai' },
-				{ icon: 'github', label: 'Spec', href: 'https://github.com/ProviderProtocol/Unified-Provider-Protocol' },
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/ProviderProtocol' },
+				{ icon: 'npm', label: 'NPM', href: 'https://www.npmjs.com/package/@providerprotocol/ai' },
 			],
 			customCss: ['./src/styles/custom.css'],
 			head: [
@@ -37,29 +37,6 @@ export default defineConfig({
 			],
 			sidebar: [
 				{ label: 'Introduction', slug: 'introduction' },
-				{
-					label: 'Specification',
-					items: [
-						{ label: 'Overview', slug: 'spec/overview' },
-						{ label: 'Design Principles', slug: 'spec/design-principles' },
-						{ label: 'Architecture', slug: 'spec/architecture' },
-						{
-							label: 'LLM',
-							collapsed: true,
-							items: [
-								{ label: 'Interface', slug: 'spec/llm/interface' },
-								{ label: 'Messages', slug: 'spec/llm/messages' },
-								{ label: 'Streaming', slug: 'spec/llm/streaming' },
-								{ label: 'Tools', slug: 'spec/llm/tools' },
-								{ label: 'Structured Output', slug: 'spec/llm/structured' },
-							],
-						},
-						{ label: 'Embedding', slug: 'spec/embedding/interface' },
-						{ label: 'Image', slug: 'spec/image/interface' },
-						{ label: 'Errors', slug: 'spec/errors' },
-						{ label: 'Conformance', slug: 'spec/providers/conformance' },
-					],
-				},
 				{
 					label: 'Guide',
 					items: [
@@ -108,6 +85,29 @@ export default defineConfig({
 							],
 						},
 						{ label: 'Errors', slug: 'api/errors' },
+					],
+				},
+				{
+					label: 'Specification',
+					items: [
+						{ label: 'Overview', slug: 'spec/overview' },
+						{ label: 'Design Principles', slug: 'spec/design-principles' },
+						{ label: 'Architecture', slug: 'spec/architecture' },
+						{
+							label: 'LLM',
+							collapsed: true,
+							items: [
+								{ label: 'Interface', slug: 'spec/llm/interface' },
+								{ label: 'Messages', slug: 'spec/llm/messages' },
+								{ label: 'Streaming', slug: 'spec/llm/streaming' },
+								{ label: 'Tools', slug: 'spec/llm/tools' },
+								{ label: 'Structured Output', slug: 'spec/llm/structured' },
+							],
+						},
+						{ label: 'Embedding', slug: 'spec/embedding/interface' },
+						{ label: 'Image', slug: 'spec/image/interface' },
+						{ label: 'Errors', slug: 'spec/errors' },
+						{ label: 'Conformance', slug: 'spec/providers/conformance' },
 					],
 				},
 				{
