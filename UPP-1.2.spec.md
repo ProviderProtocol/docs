@@ -108,6 +108,29 @@ This specification uses language-agnostic pseudocode for examples. The pseudocod
 - Optional values: `Type?` or `Optional<Type>`
 - Comments: `// comment text`
 
+### 1.7 Code Examples
+
+Code examples in this specification use the placeholder package name `upp`. Implementations MUST choose an appropriate package name for their ecosystem. Examples:
+
+| Language | Example Package Name |
+|----------|---------------------|
+| JavaScript/TypeScript | `@upp/ai`, `unified-provider-protocol` |
+| Python | `upp-ai`, `unified_provider_protocol` |
+| Go | `github.com/org/upp` |
+| Rust | `upp-protocol` |
+
+Import syntax varies by language. Examples throughout this specification use JavaScript-style imports for readability:
+
+```pseudocode
+// Default export style
+import anthropic from "upp/anthropic"
+
+// Named export style
+import { llm, embedding } from "upp"
+```
+
+Implementations SHOULD provide both styles where the language supports them. The semantic behavior is identical regardless of import syntax.
+
 ---
 
 ## 2. Design Principles
@@ -211,6 +234,7 @@ UPP implementations SHOULD export both a namespace object and individual functio
 ```pseudocode
 import ai from "upp"
 import anthropic from "upp/anthropic"
+import voyage from "upp/voyage"
 
 claude = ai.llm({
   model: anthropic("claude-sonnet-4-20250514"),
@@ -218,7 +242,7 @@ claude = ai.llm({
 })
 
 embedder = ai.embedding({
-  model: anthropic("voyage-3")
+  model: voyage("voyage-3")
 })
 ```
 
@@ -634,7 +658,7 @@ image({ model: stability("stable-diffusion-xl-1024-v1-0") })
 
 When a modality function receives a `ModelReference`, it:
 1. Checks if the provider supports that modality
-2. Throws `UPPError` with code `INVALID_REQUEST` if not supported
+2. MUST throw `UPPError` with code `INVALID_REQUEST` if not supported
 3. Binds the model ID to create the executable model
 
 ---
@@ -987,7 +1011,7 @@ The provider MUST handle system prompts according to vendor requirements:
 If `structure` is provided:
 
 1. `llm()` core checks `capabilities.structuredOutput`
-2. If `false`, throws `UPPError` with code `INVALID_REQUEST`
+2. If `false`, MUST throw `UPPError` with code `INVALID_REQUEST`
 3. If `true`, the provider MUST:
    - Transform the JSON Schema to vendor-specific format (if different)
    - Enable structured output mode on the API request
@@ -996,9 +1020,9 @@ If `structure` is provided:
 UPP does NOT validate the response against the schema. Modern LLMs with structured output support reliably produce conformant output. If validation is required, it is the application's responsibility. UPP does NOT automatically retry on schema mismatch.
 
 Similarly, `llm()` core checks capabilities before using other features:
-- `tools` provided but `capabilities.tools` is `false` → throws `INVALID_REQUEST`
-- Image content provided but `capabilities.imageInput` is `false` → throws `INVALID_REQUEST`
-- `stream()` called but `capabilities.streaming` is `false` → throws `INVALID_REQUEST`
+- `tools` provided but `capabilities.tools` is `false` → MUST throw `INVALID_REQUEST`
+- Image content provided but `capabilities.imageInput` is `false` → MUST throw `INVALID_REQUEST`
+- `stream()` called but `capabilities.streaming` is `false` → MUST throw `INVALID_REQUEST`
 
 #### 5.10.6 Error Handling
 
@@ -1110,6 +1134,30 @@ Constructor accepts either a string (converted to TextBlock) or array of content
 | `result` | Any | Result value |
 | `isError` | Boolean? | Whether this is an error result (default false) |
 
+**MessageOptions Structure:**
+
+Optional configuration passed to message constructors.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | String? | Custom message ID (auto-generated if not provided) |
+| `metadata` | MessageMetadata? | Provider-namespaced metadata |
+
+**Message Construction:**
+
+All message types accept an optional `MessageOptions` parameter:
+
+```pseudocode
+// UserMessage construction
+UserMessage(content: String | List<UserContent>, options?: MessageOptions)
+
+// AssistantMessage construction
+AssistantMessage(content: String | List<AssistantContent>, toolCalls?: List<ToolCall>, options?: MessageOptions)
+
+// ToolResultMessage construction
+ToolResultMessage(results: List<ToolResult>, options?: MessageOptions)
+```
+
 ### 6.3 Content Blocks
 
 Content blocks represent discrete pieces of content within messages.
@@ -1182,6 +1230,8 @@ Content blocks represent discrete pieces of content within messages.
   metadata: {}      // optional
 }
 ```
+
+**Note:** `BinaryBlock` is only valid in `UserContent` (user inputs). Models do not produce binary outputs directly; they return text, images, audio, or video blocks. Applications sending arbitrary file data to models MUST use `BinaryBlock` in user messages.
 
 ### 6.4 Message Construction
 
@@ -1392,7 +1442,7 @@ print(turn.cycles)                // 1
 | `clear` | (none) | Thread | Clear all messages |
 | `toMessages` | (none) | List<Message> | Convert to plain message array |
 | `toJSON` | (none) | ThreadJSON | Serialize to JSON |
-| `[iterator]` | (none) | Iterator<Message> | Iterate over messages |
+| (iterable) | — | Iterator<Message> | Thread is iterable over its messages |
 
 **Thread Static Methods:**
 
@@ -1444,25 +1494,43 @@ messages.push(...turn.messages)
 
 **ThreadJSON Structure:**
 
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | String | Yes | Unique thread identifier |
+| `messages` | List<MessageJSON> | Yes | All messages in the thread |
+| `createdAt` | String (ISO 8601) | Yes | Thread creation timestamp |
+| `updatedAt` | String (ISO 8601) | Yes | Last update timestamp |
+
+**MessageJSON Structure:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | String | Yes | Unique message identifier |
+| `type` | MessageType | Yes | "user", "assistant", or "tool_result" |
+| `content` | List<ContentBlock> | Yes | Message content blocks |
+| `toolCalls` | List<ToolCall> | No | Tool calls (assistant messages only) |
+| `results` | List<ToolResult> | No | Tool results (tool_result messages only) |
+| `metadata` | MessageMetadata | No | Provider-namespaced metadata |
+| `timestamp` | String (ISO 8601) | Yes | Message timestamp |
+
+**Example:**
+
 ```pseudocode
+// ThreadJSON
 {
   id: "thread_abc123",
   messages: [<MessageJSON>, ...],
   createdAt: "2024-01-15T10:30:00Z",
   updatedAt: "2024-01-15T10:35:00Z"
 }
-```
 
-**MessageJSON Structure:**
-
-```pseudocode
+// MessageJSON
 {
   id: "msg_xyz789",
-  type: "user" | "assistant" | "tool_result",
-  content: [<ContentBlock>, ...],
-  toolCalls: [<ToolCall>, ...],    // assistant only
-  results: [<ToolResult>, ...],    // tool_result only
-  metadata: { ... },
+  type: "assistant",
+  content: [{ type: "text", text: "Hello!" }],
+  toolCalls: [],
+  metadata: {},
   timestamp: "2024-01-15T10:30:00Z"
 }
 ```
@@ -1479,7 +1547,7 @@ Streaming returns a `StreamResult` that is both an async iterable and provides a
 
 | Property/Method | Type | Description |
 |-----------------|------|-------------|
-| `[async iterator]` | AsyncIterator<StreamEvent> | Iterate over events |
+| (async iterable) | AsyncIterator<StreamEvent> | StreamResult is async iterable over events |
 | `turn` | Promise<Turn> | Resolves to complete Turn after streaming |
 | `abort()` | Function | Abort the stream |
 
@@ -1592,7 +1660,7 @@ try {
 }
 ```
 
-**Abort behavior with tools:** When a stream is aborted during a tool execution loop, the abort signal propagates to any in-flight tool execution. The current tool's `run` function receives the abort via `AbortSignal` (if it accepts one). Pending tool calls that haven't started execution are skipped. The overall generation throws a `CANCELLED` error.
+**Abort behavior with tools:** When a stream is aborted during a tool execution loop, the abort signal propagates to any in-flight tool execution. The current tool's `run` function receives the abort via `AbortSignal` (if it accepts one). Pending tool calls that haven't started execution MUST be skipped. The overall generation MUST throw a `CANCELLED` error.
 
 ### 9.6 Streaming Event Order
 
@@ -1744,6 +1812,8 @@ By default, `llm()` handles tool execution automatically:
 - If the tool's `run` function throws, the error is caught and sent as an error result to the model
 
 **Important:** `llm()` does NOT validate tool arguments against the JSON Schema. The schema is provided to the model to guide its output, but validation and sanitization of LLM-provided arguments is the responsibility of the tool implementation. Always treat tool arguments as untrusted input.
+
+**Note:** Similarly, UPP does not validate structured output responses against their schema (see Section 11). Schemas guide LLM behavior but validation is the application's responsibility in both cases.
 
 ### 10.5 ToolUseStrategy
 
@@ -1930,7 +2000,7 @@ Structured outputs use standard JSON Schema:
 
 ### 11.3 Provider Handling
 
-Structured output is a capability declared via `LLMCapabilities.structuredOutput`. If a provider's API doesn't support native structured outputs, the provider MUST set this to `false` and `llm()` core will throw `INVALID_REQUEST` when `structure` is provided.
+Structured output is a capability declared via `LLMCapabilities.structuredOutput`. If a provider's API doesn't support native structured outputs, the provider MUST set this to `false` and `llm()` core MUST throw `INVALID_REQUEST` when `structure` is provided.
 
 Providers with native support handle structured outputs according to vendor APIs:
 
@@ -2208,18 +2278,29 @@ for await (progress in embedder.embedMany(documents, {
 
 ### 12.8 Provider-Specific Parameters
 
-Each provider exports its own parameter types. Consult provider documentation for available options such as output dimensions, encoding formats, and task type hints.
+Each provider exports its own parameter types (e.g., `OpenAIEmbedParams`, `VoyageEmbedParams`). Consult provider documentation for available options such as output dimensions, encoding formats, and task type hints.
+
+**EmbeddingInputType:**
+
+Some providers distinguish between embeddings optimized for different use cases:
+
+| Value | Description |
+|-------|-------------|
+| `document` | Optimize embedding for storage/indexing (longer text, corpus documents) |
+| `query` | Optimize embedding for search queries (shorter text, retrieval queries) |
+
+Providers that support input type hints (e.g., Voyage, Cohere) MAY produce different embeddings for the same text depending on this value. Providers that do not support this feature MUST ignore the parameter.
 
 ```pseudocode
-// OpenAI embedding params
+// OpenAI embedding params (OpenAIEmbedParams)
 {
   dimensions: 1536,
   encoding_format: "float"
 }
 
-// Voyage embedding params
+// Voyage embedding params (VoyageEmbedParams)
 {
-  input_type: "document" | "query"
+  input_type: EmbeddingInputType  // "document" or "query"
 }
 ```
 
@@ -2346,7 +2427,7 @@ ImagePrompt = String | {
 
 | Property/Method | Type | Description |
 |-----------------|------|-------------|
-| `[async iterator]` | AsyncIterator<ImageStreamEvent> | Iterate over events |
+| (async iterable) | AsyncIterator<ImageStreamEvent> | ImageStreamResult is async iterable over events |
 | `result` | Promise<ImageResult> | Final result after streaming |
 | `abort()` | Function | Abort the generation |
 
@@ -2440,6 +2521,39 @@ ImagePrompt = String | {
 | `images` | List<GeneratedImage> | Generated images |
 | `metadata` | ImageMetadata? | Generation metadata |
 | `usage` | ImageUsage | Usage information |
+
+**ImageEditRequest Structure:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Base image to edit |
+| `mask` | Image | No | Edit mask (white = edit area) |
+| `prompt` | String | Yes | Edit instruction |
+| `negativePrompt` | String | No | What to avoid |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
+
+**ImageVaryRequest Structure:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Source image for variations |
+| `count` | Integer | No | Number of variations to generate |
+| `strength` | Float | No | Variation strength (0-1) |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
+
+**ImageUpscaleRequest Structure:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Image to upscale |
+| `scale` | Integer | No | Scale factor (2 or 4) |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
 
 **ImageProviderStreamResult:**
 
@@ -2570,17 +2684,17 @@ if (sd.stream) {
 
 ### 13.14 Provider-Specific Parameters
 
-Each provider exports its own parameter types. Consult provider documentation for available options.
+Each provider exports its own parameter types (e.g., `OpenAIImageParams`, `StabilityImageParams`). Consult provider documentation for available options.
 
 ```pseudocode
-// OpenAI DALL-E params
+// OpenAI DALL-E params (OpenAIImageParams)
 {
   size: "1024x1024" | "1792x1024" | "1024x1792",
   quality: "standard" | "hd",
   style: "vivid" | "natural"
 }
 
-// Stability params
+// Stability params (StabilityImageParams)
 {
   steps: 10-50,
   cfg_scale: 1-35,
@@ -2622,15 +2736,34 @@ if (imageGen.capabilities.streaming && imageGen.stream) {
 | `Union<A,B,...>` | One of multiple types | Discriminated by `type` field |
 | `Any` | Any JSON value | Any JSON value |
 
-### 14.2 Modality Types
+### 14.2 Platform Types
+
+The following types are assumed to be provided by the host language or runtime environment:
+
+| Type | Description |
+|------|-------------|
+| `AbortSignal` | A signal object that allows aborting asynchronous operations. Implementations SHOULD use the platform's standard abort mechanism (e.g., `AbortSignal` in JavaScript, `CancellationToken` in C#, `Context` in Go). |
+| `AsyncIterable<T>` | An object that can be asynchronously iterated, yielding values of type `T`. Used for streaming responses. |
+| `AsyncIterator<T>` | The iterator protocol for async iteration. |
+| `Promise<T>` | A promise/future that resolves to a value of type `T`. |
+| `Function` | A callable function. Specific signatures are defined where used. |
+
+### 14.3 Modality Types
 
 ```pseudocode
 Modality = "llm" | "embedding" | "image" | "audio" | "video"
 ```
 
-### 14.3 Complete Export List
+### 14.4 Schema Types
 
-UPP implementations SHOULD export the following:
+JSON Schema types used for tool parameters and structured outputs are defined in [Section 11.2](#112-schema-definition). The core types are:
+
+- `JSONSchema` - Root schema for structured outputs (must have `type: "object"`)
+- `JSONSchemaProperty` - Individual property definitions within a schema
+
+### 14.5 Complete Export List
+
+UPP implementations SHOULD export the following types through their language's standard public API mechanism. All types listed below are considered part of the public API surface and MUST be accessible to users of the implementation:
 
 **Entry Points:**
 - `llm`
@@ -2698,6 +2831,7 @@ UPP implementations SHOULD export the following:
 - `EmbeddingRequest`
 - `EmbeddingResponse`
 - `EmbeddingInput`
+- `EmbeddingInputType`
 - `Embedding`
 - `EmbeddingBatch`
 - `EmbeddingUsage`
@@ -2715,12 +2849,17 @@ UPP implementations SHOULD export the following:
 - `ImageResult`
 - `GeneratedImage`
 - `ImageUsage`
+- `ImageMetadata`
+- `ImageItemMetadata`
 - `ImageStreamResult`
 - `ImageStreamEvent`
 - `ImageProviderStreamResult`
 - `ImageEditInput`
+- `ImageEditRequest`
 - `ImageVaryInput`
+- `ImageVaryRequest`
 - `ImageUpscaleInput`
+- `ImageUpscaleRequest`
 - `ImageCapabilities`
 
 **Shared Infrastructure:**
@@ -2750,7 +2889,7 @@ UPP implementations SHOULD export the following:
 - `euclideanDistance`
 - `dotProduct`
 
-### 14.4 Provider Exports
+### 14.6 Provider Exports
 
 Each provider module exports a single factory function and its own parameter types. The model ID passed to the factory determines which modality handler is used.
 
@@ -2825,7 +2964,7 @@ CreateProviderOptions = {
 
 ### 15.3 HTTP-First Approach
 
-Per [Section 2.7](#27-http-first-provider-implementation), providers SHOULD use direct HTTP calls rather than vendor SDKs.
+Per Section 2.7 (HTTP-First Provider Implementation), providers SHOULD use direct HTTP calls rather than vendor SDKs.
 
 ### 15.4 Shared Utilities
 
@@ -2833,7 +2972,7 @@ UPP implementations SHOULD provide utilities for provider implementations:
 
 **resolveApiKey(config, envVar?) -> Promise<String>**
 
-Resolve API key from ProviderConfig, supporting string, function, or KeyStrategy. If `config.apiKey` is not set, automatically falls back to standard environment variables. Throws `UPPError` with `AUTHENTICATION_FAILED` if no key is available.
+Resolve API key from ProviderConfig, supporting string, function, or KeyStrategy. If `config.apiKey` is not set, automatically falls back to standard environment variables. MUST throw `UPPError` with `AUTHENTICATION_FAILED` if no key is available.
 
 **doFetch(url, init, config) -> Promise<Response>**
 
@@ -2884,7 +3023,7 @@ function createLLMHandler() -> LLMHandler {
 
         stream: (request) => {
           // Similar pattern with SSE parsing
-          // Return async iterator with response promise
+          // Return LLMStreamResult (async iterator with response promise)
         }
       }
     }
@@ -3535,9 +3674,19 @@ Returns a scalar value. For normalized vectors, equivalent to cosine similarity.
 - **Added** security considerations section
 - **Added** HTTP status code mapping table
 - **Added** `ImageProviderStreamResult` type definition and export
+- **Added** cross-reference note in Section 10.4 linking tool and structured output validation behavior
+- **Added** `EmbeddingInputType` enumeration (`document`/`query`) for provider-specific input type hints
+- **Added** `MessageOptions` structure definition with constructor signatures for all message types
+- **Added** Section 1.7 clarifying package naming conventions and import syntax
 - **Fixed** terminology: "fragments" → "events" in Image conformance (Section 16.1.3)
+- **Fixed** RFC 2119 compliance: "will throw" → "MUST throw" in Section 11.3
+- **Fixed** iterator notation to use language-agnostic `(iterable)` format instead of `[iterator]`
+- **Corrected** Section 16.4 capability declaration wording (1.1 incorrectly stated "no explicit capability interface")
+- **Updated** example model IDs to use dated format (e.g., `claude-haiku-4-20250514`) for accuracy; this is an example update, not a format requirement
+- **Updated** example package name to `upp` as a language-agnostic placeholder (implementations choose their own names)
 - **Clarified** provider implementation patterns across language paradigms
-- **Maintained** full semantic compatibility with UPP 1.1
+- **Clarified** `BinaryBlock` constraint: only valid in `UserContent`, not `AssistantContent`
+- **Maintained** semantic compatibility with UPP 1.1 (additive clarifications only, no breaking changes)
 
 ### 1.1.0-draft
 
