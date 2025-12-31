@@ -1,0 +1,145 @@
+---
+title: Specification Overview
+description: UPP-1.2 Specification Overview - A language-agnostic protocol for AI inference services.
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+# UPP-1.2 Specification
+
+<Badge text="Version 1.2.0-draft" variant="note" />
+<Badge text="Status: Draft" variant="caution" />
+
+The Unified Provider Protocol (UPP) is a **language-agnostic specification** for interacting with AI inference services. This document defines the protocol semantics, data structures, and implementation requirements for building UPP-compliant clients and providers in any programming language.
+
+## Abstract
+
+UPP establishes uniform interfaces for Large Language Models (LLM), Embedding Models, and Image Generation Models. The protocol enables multi-provider interoperability while preserving provider-native configuration and avoiding abstraction leakage.
+
+UPP provides separate entry points for each modality—`llm()`, `embedding()`, `image()`—while sharing common provider infrastructure, configuration patterns, and design principles.
+
+## Purpose
+
+Modern AI development requires interacting with multiple providers (Anthropic, OpenAI, Google, Stability, Voyage, etc.), each with distinct APIs, authentication schemes, and response formats. UPP-1.2 establishes a standard protocol that:
+
+- Provides modality-specific interfaces (`llm`, `embedding`, `image`)
+- Enables provider switching without application code changes
+- Maintains provider-native configuration to avoid abstraction leakage
+- Shares common infrastructure (auth, retry, HTTP) across modalities
+- Supports text, image, audio, video, embeddings, and future modalities
+
+## Scope
+
+This specification covers:
+
+| Area | Description |
+|------|-------------|
+| **LLM Interface** | The `llm()` function for chat/completion |
+| **Embedding Interface** | The `embedding()` function for vector embeddings |
+| **Image Interface** | The `image()` function for image generation |
+| **Provider Adapters** | Requirements for each modality |
+| **Shared Infrastructure** | ProviderConfig, KeyStrategy, error handling |
+| **Data Structures** | Message, Turn, and Thread (LLM-specific) |
+| **Streaming** | Response streaming handling |
+| **Tools** | Tool definition and execution |
+
+## Modality Overview
+
+<CardGrid>
+  <Card title="llm()" icon="comment-alt">
+    Chat, completion, and reasoning with Large Language Models like Claude, GPT-4, and Gemini.
+  </Card>
+  <Card title="embedding()" icon="list">
+    Vector embeddings for semantic search with models like text-embedding-3 and Voyage.
+  </Card>
+  <Card title="image()" icon="document">
+    Image generation and editing with DALL-E, Stable Diffusion, and Imagen.
+  </Card>
+</CardGrid>
+
+| Entry Point | Purpose | Example Models |
+|-------------|---------|----------------|
+| `llm()` | Chat, completion, reasoning | Claude, GPT-4, Gemini |
+| `embedding()` | Vector embeddings | text-embedding-3, Voyage, Cohere |
+| `image()` | Image generation/editing | DALL-E, Stable Diffusion, Imagen |
+
+<Aside type="tip" title="Future Modalities">
+  Future modalities may include:
+  - `audio()` — Speech-to-text, text-to-speech
+  - `video()` — Video generation
+</Aside>
+
+## Terminology
+
+| Term | Definition |
+|------|------------|
+| **Provider** | A vendor-specific adapter exposing one or more modality interfaces |
+| **Modality** | A distinct AI capability: LLM, embedding, image generation, etc. |
+| **BoundModel** | A model instance bound to a specific provider and model ID |
+| **Message** | A single message in an LLM conversation (user, assistant, or tool result) |
+| **Turn** | The complete result of one LLM inference call, containing all messages produced |
+| **StreamEvent** | A streaming event (lifecycle or content delta) |
+| **Thread** | A utility class for managing LLM conversation history |
+| **Embedding** | A vector representation of text or other content |
+| **UPP** | Unified Provider Protocol |
+
+## Requirements Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+## Notation Conventions
+
+This specification uses language-agnostic pseudocode for examples. The pseudocode follows these conventions:
+
+| Notation | Meaning |
+|----------|---------|
+| `function_name(arg1, arg2)` | Function calls |
+| `{key: value, key2: value2}` | Object/map literals |
+| `[item1, item2, item3]` | Array/list literals |
+| `object.property` | Property access |
+| `object.method(args)` | Method calls |
+| `await expression` | Async operations |
+| `for item in collection` | Iteration |
+| `variable: Type` | Type annotations |
+| `Type?` or `Optional<Type>` | Optional values |
+| `// comment text` | Comments |
+
+## Package Naming
+
+Code examples in this specification use the placeholder package name `upp`. Implementations MUST choose an appropriate package name for their ecosystem:
+
+| Language | Example Package Name |
+|----------|---------------------|
+| JavaScript/TypeScript | `@upp/ai`, `unified-provider-protocol` |
+| Python | `upp-ai`, `unified_provider_protocol` |
+| Go | `github.com/org/upp` |
+| Rust | `upp-protocol` |
+
+Import syntax varies by language. Examples throughout this specification use JavaScript-style imports for readability:
+
+```pseudocode
+// Default export style
+import anthropic from "upp/anthropic"
+
+// Named export style
+import { llm, embedding } from "upp"
+```
+
+Implementations SHOULD provide both styles where the language supports them. The semantic behavior is identical regardless of import syntax.
+
+## What's Next?
+
+<CardGrid>
+  <Card title="Design Principles" icon="open-book">
+    Learn about the [core principles](/spec/design-principles/) that guide UPP's design.
+  </Card>
+  <Card title="Architecture" icon="puzzle">
+    Understand the [architecture](/spec/architecture/) and data flow.
+  </Card>
+  <Card title="LLM Interface" icon="rocket">
+    Dive into the [LLM specification](/spec/llm/interface/).
+  </Card>
+  <Card title="Conformance" icon="approve-check">
+    Review [conformance requirements](/spec/providers/conformance/) for providers.
+  </Card>
+</CardGrid>

@@ -1,0 +1,274 @@
+---
+title: Data Type Definitions
+description: UPP-1.2 primitive types, platform types, and complete export list.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Data Type Definitions
+
+<Badge text="UPP-1.2" variant="note" />
+
+This section defines the data types used throughout the UPP specification and provides a complete list of exports that conforming implementations should provide.
+
+## Primitive Types
+
+| Type | Description | JSON Representation |
+|------|-------------|---------------------|
+| `String` | UTF-8 text | JSON string |
+| `Integer` | Signed integer (at least 64-bit) | JSON number |
+| `Float` | IEEE 754 double precision | JSON number |
+| `Boolean` | True or false | JSON boolean |
+| `Bytes` | Raw binary data | Base64-encoded JSON string |
+| `Timestamp` | Point in time | ISO 8601 string |
+| `Map<K,V>` | Key-value mapping | JSON object |
+| `List<T>` | Ordered collection | JSON array |
+| `Optional<T>` or `T?` | Value or null | JSON value or `null` |
+| `Union<A,B,...>` | One of multiple types | Discriminated by `type` field |
+| `Any` | Any JSON value | Any JSON value |
+
+## Platform Types
+
+The following types are assumed to be provided by the host language or runtime environment:
+
+| Type | Description |
+|------|-------------|
+| `AbortSignal` | A signal object that allows aborting asynchronous operations. Implementations SHOULD use the platform's standard abort mechanism (e.g., `AbortSignal` in JavaScript, `CancellationToken` in C#, `Context` in Go). |
+| `AsyncIterable<T>` | An object that can be asynchronously iterated, yielding values of type `T`. Used for streaming responses. |
+| `AsyncIterator<T>` | The iterator protocol for async iteration. |
+| `Promise<T>` | A promise/future that resolves to a value of type `T`. |
+| `Function` | A callable function. Specific signatures are defined where used. |
+
+## Modality Types
+
+```pseudocode
+Modality = "llm" | "embedding" | "image" | "audio" | "video"
+```
+
+The `Modality` type identifies which AI capability is being used. Currently supported modalities are:
+
+| Modality | Description |
+|----------|-------------|
+| `llm` | Large Language Model text generation |
+| `embedding` | Vector embedding generation |
+| `image` | Image generation and manipulation |
+| `audio` | Audio processing (future) |
+| `video` | Video processing (future) |
+
+## Schema Types
+
+JSON Schema types used for tool parameters and structured outputs are defined in the [Structured Output](/spec/llm/structured/) section. The core types are:
+
+- `JSONSchema` - Root schema for structured outputs (must have `type: "object"`)
+- `JSONSchemaProperty` - Individual property definitions within a schema
+
+## Complete Export List
+
+UPP implementations SHOULD export the following types through their language's standard public API mechanism. All types listed below are considered part of the public API surface and MUST be accessible to users of the implementation.
+
+### Entry Points
+
+| Export | Description |
+|--------|-------------|
+| `llm` | Create an LLM instance |
+| `embedding` | Create an embedding instance |
+| `image` | Create an image generation instance |
+| `ai` | Namespace containing all entry points |
+
+### LLM Types
+
+| Export | Description |
+|--------|-------------|
+| `LLMOptions` | Configuration options for `llm()` |
+| `LLMInstance` | The instance returned by `llm()` |
+| `LLMCapabilities` | Model capability flags |
+| `LLMProvider` | Provider handler interface |
+| `BoundLLMModel` | Model bound to a provider |
+| `LLMRequest` | Request structure for provider calls |
+| `LLMResponse` | Response structure from providers |
+| `LLMStreamResult` | Streaming result interface |
+| `InferenceInput` | Input types accepted by `generate()` |
+
+### Message Types
+
+| Export | Description |
+|--------|-------------|
+| `Message` | Union of all message types |
+| `UserMessage` | User-sent message |
+| `AssistantMessage` | Model-generated message |
+| `ToolResultMessage` | Tool execution results |
+| `MessageOptions` | Constructor options for messages |
+| `MessageMetadata` | Extensible metadata object |
+| `MessageType` | Message type discriminator |
+
+### Content Block Types
+
+| Export | Description |
+|--------|-------------|
+| `ContentBlock` | Union of all content block types |
+| `TextBlock` | Text content |
+| `ImageBlock` | Image content |
+| `AudioBlock` | Audio content |
+| `VideoBlock` | Video content |
+| `BinaryBlock` | Generic binary content (UserContent only) |
+| `ImageSource` | Image data source (base64, URL, bytes) |
+
+### Tool Types
+
+| Export | Description |
+|--------|-------------|
+| `ToolCall` | A tool invocation from the model |
+| `ToolResult` | Result of tool execution |
+| `Tool` | Tool definition |
+| `ToolUseStrategy` | Tool usage configuration |
+| `ToolExecution` | Executed tool call record |
+
+### Turn & Thread Types
+
+| Export | Description |
+|--------|-------------|
+| `Turn` | Complete inference result |
+| `TokenUsage` | Token consumption metrics |
+| `CycleUsage` | Per-cycle token breakdown |
+| `Thread` | Conversation manager utility |
+| `ThreadJSON` | Serialized thread format |
+
+### Streaming Types
+
+| Export | Description |
+|--------|-------------|
+| `StreamResult` | Streaming response interface |
+| `StreamEvent` | Individual stream event |
+| `StreamEventType` | Event type discriminator |
+| `EventDelta` | Incremental content update |
+
+### Schema Types
+
+| Export | Description |
+|--------|-------------|
+| `JSONSchema` | JSON Schema for structured output |
+| `JSONSchemaProperty` | Property definition in schema |
+
+### Embedding Types
+
+| Export | Description |
+|--------|-------------|
+| `EmbeddingOptions` | Configuration for `embedding()` |
+| `EmbeddingInstance` | Instance returned by `embedding()` |
+| `EmbeddingProvider` | Provider handler interface |
+| `BoundEmbeddingModel` | Model bound to a provider |
+| `EmbeddingRequest` | Request structure for providers |
+| `EmbeddingResponse` | Response with embeddings |
+| `EmbeddingInput` | Input types for embedding |
+| `EmbeddingInputType` | Input type hint (`document`/`query`) |
+| `Embedding` | Single embedding result |
+| `EmbeddingVector` | Vector with optional token count |
+| `EmbeddingBatch` | Batch embedding result |
+| `EmbeddingUsage` | Token usage for embeddings |
+| `EmbeddingProgress` | Progress during large-scale embedding |
+| `ProgressInfo` | Progress details (completed, total, percent) |
+| `EmbedManyOptions` | Options for batch embedding |
+
+### Image Types
+
+| Export | Description |
+|--------|-------------|
+| `ImageOptions` | Configuration for `image()` |
+| `ImageInstance` | Instance returned by `image()` |
+| `ImageProvider` | Provider handler interface |
+| `BoundImageModel` | Model bound to a provider |
+| `ImageRequest` | Request structure for providers |
+| `ImageResponse` | Response with generated images |
+| `ImagePrompt` | Generation prompt input |
+| `ImageResult` | Generation result |
+| `GeneratedImage` | Single generated image |
+| `ImageUsage` | Usage/billing information |
+| `ImageMetadata` | Generation metadata |
+| `ImageItemMetadata` | Per-image metadata |
+| `ImageStreamResult` | Streaming generation result |
+| `ImageStreamEvent` | Stream event types |
+| `ImageProviderStreamResult` | Provider-level stream result |
+| `ImageEditInput` | Input for image editing |
+| `ImageEditRequest` | Edit request to provider |
+| `ImageVaryInput` | Input for variations |
+| `ImageVaryRequest` | Variation request to provider |
+| `ImageUpscaleInput` | Input for upscaling |
+| `ImageUpscaleRequest` | Upscale request to provider |
+| `ImageCapabilities` | Model capabilities |
+
+### Shared Infrastructure
+
+| Export | Description |
+|--------|-------------|
+| `ProviderConfig` | Provider configuration options |
+| `KeyStrategy` | API key selection strategy interface |
+| `RoundRobinKeys` | Cycle through keys in order |
+| `WeightedKeys` | Random selection with weights |
+| `DynamicKey` | Custom async key selection |
+| `RetryStrategy` | Retry behavior interface |
+| `ExponentialBackoff` | Exponential delay between retries |
+| `LinearBackoff` | Fixed delay between retries |
+| `NoRetry` | Disable retries |
+| `TokenBucket` | Pre-emptive rate limiting |
+| `RetryAfterStrategy` | Honor server Retry-After headers |
+| `UPPError` | Standard error type |
+| `ErrorCode` | Error code enumeration |
+| `Modality` | Modality type enumeration |
+
+### Utilities
+
+| Export | Description |
+|--------|-------------|
+| `Image` | Image data wrapper class |
+| `isUserMessage` | Type guard for UserMessage |
+| `isAssistantMessage` | Type guard for AssistantMessage |
+| `isToolResultMessage` | Type guard for ToolResultMessage |
+
+### Similarity Utilities (Optional)
+
+These utilities are optional but recommended for embedding applications:
+
+| Export | Description |
+|--------|-------------|
+| `cosineSimilarity` | Cosine similarity between vectors |
+| `euclideanDistance` | Euclidean distance between vectors |
+| `dotProduct` | Dot product of vectors |
+
+<Aside type="note" title="Optional Exports">
+  Similarity utilities are OPTIONAL. Implementations MAY omit them or provide them in a separate module.
+</Aside>
+
+## Provider Exports
+
+Each provider module exports a single factory function, provider options types (if applicable), and modality-specific parameter types. The model ID passed to the factory determines which modality handler is used.
+
+```pseudocode
+// Pattern: "upp/{provider}"
+import openai from "upp/openai"
+import anthropic from "upp/anthropic"
+import google from "upp/google"
+
+// Each provider also exports its types
+// Provider options: OpenAIProviderOptions (for factory function)
+// Model params: OpenAILLMParams, AnthropicLLMParams, etc.
+```
+
+### Provider Options Types
+
+| Export | Provider | Description |
+|--------|----------|-------------|
+| `OpenAIProviderOptions` | openai | Factory options (e.g., `api` variant selection) |
+
+### Standard Provider Modules
+
+| Module | Factory | Description |
+|--------|---------|-------------|
+| `upp/anthropic` | `anthropic(modelId)` | Anthropic Claude models |
+| `upp/openai` | `openai(modelId)` | OpenAI GPT and DALL-E models |
+| `upp/google` | `google(modelId)` | Google Gemini models |
+| `upp/ollama` | `ollama(modelId)` | Local Ollama models |
+| `upp/openrouter` | `openrouter(modelId)` | OpenRouter gateway |
+
+<Aside type="tip" title="Provider Parameters">
+  Each provider exports typed parameter interfaces (e.g., `AnthropicLLMParams`, `OpenAIImageParams`) for type-safe configuration. Consult individual provider documentation for available options.
+</Aside>

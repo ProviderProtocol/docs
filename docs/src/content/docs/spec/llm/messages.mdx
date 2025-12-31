@@ -1,0 +1,459 @@
+---
+title: Messages
+description: UPP-1.2 Message types, content blocks, and construction.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Messages
+
+<Badge text="UPP-1.2" variant="note" />
+
+Messages are the fundamental unit of conversation in UPP's LLM interface. This section defines the message hierarchy, content blocks, and construction patterns.
+
+## Message Hierarchy
+
+Messages are represented as a type hierarchy, allowing type-safe handling and provider-specific transformations.
+
+### Base Message Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | String | Unique message identifier |
+| `timestamp` | Timestamp | When the message was created |
+| `metadata` | Map? | Provider-specific metadata, namespaced by provider |
+| `type` | MessageType | Message type discriminator |
+| `text` | String | Convenience accessor - concatenates all text blocks with "\n\n" |
+
+### MessageType Values
+
+| Value | Description |
+|-------|-------------|
+| `user` | User input message |
+| `assistant` | Assistant response message |
+| `tool_result` | Result of tool execution |
+
+### MessageMetadata Structure
+
+Provider-namespaced metadata. Each provider defines its own metadata shape.
+
+```pseudocode
+{
+  google: { thought_signature: "abc123..." },
+  openai: { reasoning_encrypted: "..." },
+  anthropic: { cache_control: { type: "ephemeral" } }
+}
+```
+
+## Message Types
+
+### UserMessage
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | "user" | Always "user" |
+| `content` | List&lt;UserContent&gt; | Content blocks |
+
+`UserContent` can be: `TextBlock`, `ImageBlock`, `AudioBlock`, `VideoBlock`, `BinaryBlock`
+
+Constructor accepts either a string (converted to TextBlock) or array of content blocks.
+
+### AssistantMessage
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | "assistant" | Always "assistant" |
+| `content` | List&lt;AssistantContent&gt; | Content blocks |
+| `toolCalls` | List&lt;ToolCall&gt;? | Tool calls requested by the model |
+| `hasToolCalls` | Boolean | Convenience: true if toolCalls is non-empty |
+
+`AssistantContent` can be: `TextBlock`, `ImageBlock`, `AudioBlock`, `VideoBlock`
+
+<Aside type="note" title="Mixed Responses">
+  Models can return both text AND tool calls in a single response (e.g., "I'll check the weather for you." + tool call). `AssistantMessage` handles both cases.
+</Aside>
+
+### ToolResultMessage
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | "tool_result" | Always "tool_result" |
+| `results` | List&lt;ToolResult&gt; | Tool execution results |
+
+### ToolCall Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `toolCallId` | String | Provider-assigned ID |
+| `toolName` | String | Name of tool to invoke |
+| `arguments` | Map | Arguments for the tool |
+
+### ToolResult Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `toolCallId` | String | Matching tool_call_id |
+| `result` | Any | Result value |
+| `isError` | Boolean? | Whether this is an error result (default false) |
+
+### MessageOptions Structure
+
+Optional configuration passed to message constructors.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | String? | Custom message ID (auto-generated if not provided) |
+| `metadata` | MessageMetadata? | Provider-namespaced metadata |
+
+## Message Construction
+
+All message types accept an optional `MessageOptions` parameter:
+
+```pseudocode
+// UserMessage construction
+UserMessage(content: String | List<UserContent>, options?: MessageOptions)
+
+// AssistantMessage construction
+AssistantMessage(content: String | List<AssistantContent>, toolCalls?: List<ToolCall>, options?: MessageOptions)
+
+// ToolResultMessage construction
+ToolResultMessage(results: List<ToolResult>, options?: MessageOptions)
+```
+
+### Examples
+
+```pseudocode
+// Text user message
+userMsg = UserMessage("Hello, world!")
+
+// User message with image
+imageMsg = UserMessage([
+  await Image.fromPath("diagram.png"),
+  "Please explain this diagram"
+])
+
+// User message with URL-based image
+urlImageMsg = UserMessage([
+  Image.fromUrl("https://example.com/image.png"),
+  "What is this?"
+])
+
+// Assistant message (text only)
+assistantMsg = AssistantMessage("I can help with that!")
+
+// Assistant message with tool calls (typically created by provider)
+assistantWithTools = AssistantMessage(
+  [{ type: "text", text: "I'll check the weather for you." }],
+  [{ toolCallId: "call_123", toolName: "getWeather", arguments: { location: "Tokyo" } }]
+)
+
+// Tool result message (created by llm() core after tool execution)
+toolResultMsg = ToolResultMessage([
+  { toolCallId: "call_123", result: "72°F, sunny" }
+])
+```
+
+## Content Blocks
+
+Content blocks represent discrete pieces of content within messages.
+
+### TextBlock
+
+```pseudocode
+{
+  type: "text",
+  text: "Hello, world!"
+}
+```
+
+### ImageBlock
+
+```pseudocode
+{
+  type: "image",
+  source: ImageSource,
+  mimeType: "image/png",
+  width: 1024,      // optional
+  height: 768       // optional
+}
+```
+
+**ImageSource Variants:**
+
+```pseudocode
+// Base64 encoded
+{ type: "base64", data: "iVBORw0KGgo..." }
+
+// URL reference
+{ type: "url", url: "https://example.com/image.png" }
+
+// Raw bytes
+{ type: "bytes", data: <binary data> }
+```
+
+### AudioBlock
+
+```pseudocode
+{
+  type: "audio",
+  data: <binary data>,
+  mimeType: "audio/wav",
+  duration: 5.5     // optional, seconds
+}
+```
+
+### VideoBlock
+
+```pseudocode
+{
+  type: "video",
+  data: <binary data>,
+  mimeType: "video/mp4",
+  duration: 30.0,   // optional, seconds
+  width: 1920,      // optional
+  height: 1080      // optional
+}
+```
+
+### BinaryBlock
+
+```pseudocode
+{
+  type: "binary",
+  data: <binary data>,
+  mimeType: "application/pdf",
+  metadata: {}      // optional
+}
+```
+
+<Aside type="caution" title="BinaryBlock Restriction">
+  `BinaryBlock` is only valid in `UserContent` (user inputs). Models do not produce binary outputs directly; they return text, images, audio, or video blocks. Applications sending arbitrary file data to models MUST use `BinaryBlock` in user messages.
+</Aside>
+
+## Image Type
+
+Implementations SHOULD provide an `Image` type with factory methods:
+
+### Image Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `source` | ImageSource | The image source |
+| `mimeType` | String | MIME type |
+| `width` | Integer? | Width in pixels |
+| `height` | Integer? | Height in pixels |
+| `hasData` | Boolean | True if data is loaded (false for URL sources) |
+
+### Image Methods
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `toBase64()` | String | Convert to base64 string (throws if URL source) |
+| `toDataUrl()` | String | Convert to data URL (throws if URL source) |
+| `toBytes()` | Bytes | Get raw bytes (throws if URL source) |
+
+### Image Factory Methods
+
+| Method | Description |
+|--------|-------------|
+| `Image.fromPath(path)` | Create from file path (reads file into memory) |
+| `Image.fromUrl(url, mimeType?)` | Create from URL reference (does not fetch) |
+| `Image.fromBytes(data, mimeType)` | Create from raw bytes |
+| `Image.fromBase64(base64, mimeType)` | Create from base64 string |
+
+## Type Guards
+
+UPP implementations SHOULD provide type guard functions for message handling:
+
+```pseudocode
+isUserMessage(msg: Message) -> Boolean
+isAssistantMessage(msg: Message) -> Boolean
+isToolResultMessage(msg: Message) -> Boolean
+
+// Usage
+for msg in turn.messages {
+  if (isAssistantMessage(msg)) {
+    print("Response:", msg.text)
+    if (msg.hasToolCalls) {
+      print("Tool calls:", msg.toolCalls)
+    }
+  } else if (isToolResultMessage(msg)) {
+    print("Tool results:", msg.results)
+  }
+}
+```
+
+## JSON Schema
+
+For serialization and validation, messages conform to the following JSON Schema:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "TextBlock": {
+      "type": "object",
+      "required": ["type", "text"],
+      "properties": {
+        "type": { "const": "text" },
+        "text": { "type": "string" }
+      }
+    },
+    "ImageSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "data"],
+          "properties": {
+            "type": { "const": "base64" },
+            "data": { "type": "string" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "url"],
+          "properties": {
+            "type": { "const": "url" },
+            "url": { "type": "string", "format": "uri" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "data"],
+          "properties": {
+            "type": { "const": "bytes" },
+            "data": { "type": "string", "contentEncoding": "base64" }
+          }
+        }
+      ]
+    },
+    "ImageBlock": {
+      "type": "object",
+      "required": ["type", "source", "mimeType"],
+      "properties": {
+        "type": { "const": "image" },
+        "source": { "$ref": "#/definitions/ImageSource" },
+        "mimeType": { "type": "string" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" }
+      }
+    },
+    "AudioBlock": {
+      "type": "object",
+      "required": ["type", "data", "mimeType"],
+      "properties": {
+        "type": { "const": "audio" },
+        "data": { "type": "string", "contentEncoding": "base64" },
+        "mimeType": { "type": "string" },
+        "duration": { "type": "number" }
+      }
+    },
+    "VideoBlock": {
+      "type": "object",
+      "required": ["type", "data", "mimeType"],
+      "properties": {
+        "type": { "const": "video" },
+        "data": { "type": "string", "contentEncoding": "base64" },
+        "mimeType": { "type": "string" },
+        "duration": { "type": "number" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" }
+      }
+    },
+    "BinaryBlock": {
+      "type": "object",
+      "required": ["type", "data", "mimeType"],
+      "properties": {
+        "type": { "const": "binary" },
+        "data": { "type": "string", "contentEncoding": "base64" },
+        "mimeType": { "type": "string" },
+        "metadata": { "type": "object" }
+      }
+    },
+    "ContentBlock": {
+      "oneOf": [
+        { "$ref": "#/definitions/TextBlock" },
+        { "$ref": "#/definitions/ImageBlock" },
+        { "$ref": "#/definitions/AudioBlock" },
+        { "$ref": "#/definitions/VideoBlock" },
+        { "$ref": "#/definitions/BinaryBlock" }
+      ]
+    },
+    "ToolCall": {
+      "type": "object",
+      "required": ["toolCallId", "toolName", "arguments"],
+      "properties": {
+        "toolCallId": { "type": "string" },
+        "toolName": { "type": "string" },
+        "arguments": { "type": "object" }
+      }
+    },
+    "ToolResult": {
+      "type": "object",
+      "required": ["toolCallId", "result"],
+      "properties": {
+        "toolCallId": { "type": "string" },
+        "result": {},
+        "isError": { "type": "boolean", "default": false }
+      }
+    },
+    "UserMessage": {
+      "type": "object",
+      "required": ["id", "type", "content", "timestamp"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "user" },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ContentBlock" }
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object" }
+      }
+    },
+    "AssistantMessage": {
+      "type": "object",
+      "required": ["id", "type", "content", "timestamp"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "assistant" },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ContentBlock" }
+        },
+        "toolCalls": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ToolCall" }
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object" }
+      }
+    },
+    "ToolResultMessage": {
+      "type": "object",
+      "required": ["id", "type", "results", "timestamp"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "tool_result" },
+        "results": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ToolResult" }
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object" }
+      }
+    },
+    "Message": {
+      "oneOf": [
+        { "$ref": "#/definitions/UserMessage" },
+        { "$ref": "#/definitions/AssistantMessage" },
+        { "$ref": "#/definitions/ToolResultMessage" }
+      ]
+    }
+  }
+}
+```
+
+<Aside type="tip" title="Schema Validation">
+  This schema can be used to validate serialized messages in JSON format. The `Message` definition at the bottom provides a union type for any valid message.
+</Aside>

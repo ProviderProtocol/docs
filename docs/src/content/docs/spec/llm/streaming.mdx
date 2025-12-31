@@ -1,0 +1,263 @@
+---
+title: Streaming
+description: UPP-1.2 streaming response handling and events.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Streaming
+
+<Badge text="UPP-1.2" variant="note" />
+
+Streaming allows receiving partial responses as they are generated, enabling real-time user interfaces and progressive content display.
+
+## StreamResult
+
+Streaming returns a `StreamResult` that is both an async iterable and provides access to the final `Turn`:
+
+| Property/Method | Type | Description |
+|-----------------|------|-------------|
+| (async iterable) | AsyncIterator&lt;StreamEvent&gt; | StreamResult is async iterable over events |
+| `turn` | Promise&lt;Turn&gt; | Resolves to complete Turn after streaming |
+| `abort()` | Function | Abort the stream |
+
+## StreamEvent
+
+During streaming, providers emit `StreamEvent` objects:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | StreamEventType | Event type |
+| `index` | Integer | Index of the content block this event belongs to |
+| `delta` | EventDelta | Event data (type-specific) |
+
+### StreamEventType Values
+
+| Value | Description |
+|-------|-------------|
+| `text_delta` | Partial text token |
+| `reasoning_delta` | Reasoning/thinking token |
+| `image_delta` | Partial image data |
+| `audio_delta` | Partial audio data |
+| `video_delta` | Partial video data |
+| `tool_call_delta` | Partial tool call |
+| `message_start` | Stream started |
+| `message_stop` | Stream complete |
+| `content_block_start` | New content block started |
+| `content_block_stop` | Content block complete |
+
+### EventDelta Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `text` | String? | Text content |
+| `data` | Bytes? | Binary data |
+| `toolCallId` | String? | Tool call ID |
+| `toolName` | String? | Tool name |
+| `argumentsJson` | String? | Partial JSON arguments |
+
+## Basic Streaming Usage
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "You are a helpful assistant."
+})
+
+history = []
+
+// Stream the response
+stream = claude.stream(history, "Write a haiku about programming.")
+
+for await (event in stream) {
+  if (event.type == "text_delta") {
+    print(event.delta.text, end="")
+  }
+}
+
+// Get the complete turn after streaming
+turn = await stream.turn
+history.push(...turn.messages)
+```
+
+## Streaming with Tools
+
+When tools are involved, streaming may pause while tools execute:
+
+```pseudocode
+stream = claude.stream(history, "What is the weather in Paris?")
+
+for await (event in stream) {
+  switch (event.type) {
+    case "text_delta":
+      print(event.delta.text, end="")
+      break
+    case "tool_call_delta":
+      // Tool call being streamed
+      print("[tool]", event.delta.toolName)
+      break
+    case "message_stop":
+      // A message completed (might be tool call, will continue after tool runs)
+      break
+  }
+}
+
+turn = await stream.turn
+print("Tool executions:", turn.toolExecutions)
+```
+
+## Aborting Streams
+
+```pseudocode
+stream = claude.stream(history, "Write a very long story...")
+
+// Cancel after 5 seconds
+setTimeout(() => {
+  stream.abort()
+}, 5000)
+
+try {
+  for await (event in stream) {
+    print(event.delta.text, end="")
+  }
+} catch (error) {
+  if (error instanceof UPPError && error.code == "CANCELLED") {
+    print("Stream was cancelled")
+  }
+}
+```
+
+<Aside type="note" title="Abort Behavior with Tools">
+  When a stream is aborted during a tool execution loop, the abort signal propagates to any in-flight tool execution. The current tool's `run` function receives the abort via `AbortSignal` (if it accepts one). Pending tool calls that haven't started execution MUST be skipped. The overall generation MUST throw a `CANCELLED` error.
+</Aside>
+
+## Streaming Event Order
+
+A typical streaming sequence:
+
+```
+message_start
+  content_block_start (index: 0)
+    text_delta "Hello"
+    text_delta " world"
+    text_delta "!"
+  content_block_stop (index: 0)
+message_stop
+```
+
+With tool calls:
+
+```
+message_start
+  content_block_start (index: 0)
+    text_delta "Let me check..."
+  content_block_stop (index: 0)
+  content_block_start (index: 1)
+    tool_call_delta { toolName: "getWeather" }
+    tool_call_delta { argumentsJson: '{"loc' }
+    tool_call_delta { argumentsJson: 'ation":"Paris"}' }
+  content_block_stop (index: 1)
+message_stop
+[tool execution happens here]
+message_start
+  content_block_start (index: 0)
+    text_delta "The weather is..."
+  content_block_stop (index: 0)
+message_stop
+```
+
+## Complete Streaming Example
+
+```pseudocode
+import { llm } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  system: "You are a creative writer."
+})
+
+async function streamResponse(prompt) {
+  stream = claude.stream(prompt)
+  fullText = ""
+
+  for await (event in stream) {
+    switch (event.type) {
+      case "message_start":
+        print("Starting response...")
+        break
+
+      case "content_block_start":
+        print("Block", event.index, "starting")
+        break
+
+      case "text_delta":
+        fullText += event.delta.text
+        print(event.delta.text, end="")
+        break
+
+      case "content_block_stop":
+        print("\nBlock", event.index, "complete")
+        break
+
+      case "message_stop":
+        print("\nResponse complete!")
+        break
+    }
+  }
+
+  // Get final turn with usage stats
+  turn = await stream.turn
+  print("Tokens used:", turn.usage.totalTokens)
+
+  return turn
+}
+
+turn = await streamResponse("Write a poem about the ocean")
+```
+
+## Handling Multiple Content Blocks
+
+Models may produce multiple content blocks in a single response:
+
+```pseudocode
+stream = claude.stream("Describe this image:", imageBlock)
+
+currentBlockIndex = -1
+currentBlockContent = ""
+
+for await (event in stream) {
+  if (event.type == "content_block_start") {
+    if (currentBlockIndex >= 0) {
+      print("\n--- End of block", currentBlockIndex, "---\n")
+    }
+    currentBlockIndex = event.index
+    currentBlockContent = ""
+    print("--- Block", event.index, "---")
+  }
+
+  if (event.type == "text_delta") {
+    currentBlockContent += event.delta.text
+    print(event.delta.text, end="")
+  }
+
+  if (event.type == "content_block_stop") {
+    // Block complete, currentBlockContent has full text
+  }
+}
+```
+
+## Streaming Requirements
+
+Providers that support streaming MUST:
+
+1. Set `capabilities.streaming` to `true`
+2. Implement the `stream()` method on `BoundLLMModel`
+3. Return an `LLMStreamResult` (async iterable with `response` promise)
+4. Emit at minimum: `message_start`, `text_delta`, `message_stop`
+5. Handle abort signals and throw `CANCELLED` when aborted
+
+<Aside type="caution" title="Capability Check">
+  If `stream()` is called but `capabilities.streaming` is `false`, `llm()` core MUST throw `UPPError` with code `INVALID_REQUEST`.
+</Aside>

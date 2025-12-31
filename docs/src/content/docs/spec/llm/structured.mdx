@@ -1,0 +1,293 @@
+---
+title: Structured Outputs
+description: UPP-1.2 structured output specification for constrained JSON responses.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Structured Outputs
+
+<Badge text="UPP-1.2" variant="note" />
+
+Structured outputs allow you to constrain model responses to a specific JSON schema, ensuring valid, parseable data.
+
+## Overview
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "Extract structured data from text.",
+  structure: {
+    type: "object",
+    properties: {
+      name: { type: "string", description: "Person name" },
+      age: { type: "integer", description: "Person age" },
+      email: { type: "string", format: "email" }
+    },
+    required: ["name", "age"]
+  }
+})
+
+turn = await claude.generate([], "John Doe is 30 years old, email: john@example.com")
+
+// turn.data contains the structured response
+print(turn.data)
+// { name: "John Doe", age: 30, email: "john@example.com" }
+
+// turn.response.text may contain raw JSON or be empty depending on provider
+```
+
+## Schema Definition
+
+Structured outputs use standard JSON Schema.
+
+### JSONSchema Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | "object" | Must be "object" |
+| `properties` | Map&lt;String, JSONSchemaProperty&gt; | Property definitions |
+| `required` | List&lt;String&gt;? | Required property names |
+| `additionalProperties` | Boolean? | Allow extra properties |
+| `description` | String? | Schema description |
+
+### JSONSchemaProperty Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | String | "string", "number", "integer", "boolean", "array", "object", "null" |
+| `description` | String? | Property description |
+| `enum` | List? | Allowed values |
+| `const` | Any? | Constant value |
+| `default` | Any? | Default value |
+
+### String-specific Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `minLength` | Integer? | Minimum length |
+| `maxLength` | Integer? | Maximum length |
+| `pattern` | String? | Regex pattern |
+| `format` | String? | "email", "uri", "date", "date-time", "uuid" |
+
+### Number-specific Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `minimum` | Number? | Minimum value (inclusive) |
+| `maximum` | Number? | Maximum value (inclusive) |
+| `exclusiveMinimum` | Number? | Minimum value (exclusive) |
+| `exclusiveMaximum` | Number? | Maximum value (exclusive) |
+| `multipleOf` | Number? | Must be multiple of this value |
+
+### Array-specific Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | JSONSchemaProperty? | Item schema |
+| `minItems` | Integer? | Minimum items |
+| `maxItems` | Integer? | Maximum items |
+| `uniqueItems` | Boolean? | Items must be unique |
+
+### Object-specific Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `properties` | Map? | Nested property definitions |
+| `required` | List&lt;String&gt;? | Required properties |
+| `additionalProperties` | Boolean? | Allow extra properties |
+
+## Provider Handling
+
+Structured output is a capability declared via `LLMCapabilities.structuredOutput`. If a provider's API doesn't support native structured outputs, the provider MUST set this to `false` and `llm()` core MUST throw `INVALID_REQUEST` when `structure` is provided.
+
+Providers with native support handle structured outputs according to vendor APIs:
+
+| Provider | Implementation |
+|----------|----------------|
+| Anthropic | Uses tool_choice with schema |
+| OpenAI | Uses response_format with json_schema |
+| Google | Uses responseSchema |
+
+<Aside type="note" title="No Schema Validation">
+  UPP does not validate responses against the schema—only that valid JSON was returned. Schema validation is the application's responsibility if needed.
+</Aside>
+
+## Complex Schema Example
+
+```pseudocode
+weatherSchema = {
+  type: "object",
+  properties: {
+    location: {
+      type: "object",
+      properties: {
+        city: { type: "string" },
+        country: { type: "string" },
+        coordinates: {
+          type: "object",
+          properties: {
+            lat: { type: "number" },
+            lon: { type: "number" }
+          },
+          required: ["lat", "lon"]
+        }
+      },
+      required: ["city", "country"]
+    },
+    current: {
+      type: "object",
+      properties: {
+        temperature: { type: "number" },
+        unit: { type: "string", enum: ["celsius", "fahrenheit"] },
+        conditions: { type: "string" },
+        humidity: { type: "integer", minimum: 0, maximum: 100 }
+      },
+      required: ["temperature", "unit", "conditions"]
+    },
+    forecast: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          date: { type: "string", format: "date" },
+          high: { type: "number" },
+          low: { type: "number" },
+          conditions: { type: "string" }
+        },
+        required: ["date", "high", "low"]
+      },
+      maxItems: 7
+    }
+  },
+  required: ["location", "current"]
+}
+
+weatherAI = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "Provide weather information in the requested format.",
+  structure: weatherSchema
+})
+
+turn = await weatherAI.generate([], "Weather in Tokyo for the next 3 days")
+weather = turn.data
+print(weather.location.city)   // "Tokyo"
+print(weather.forecast.length) // 3
+```
+
+## Structured Output with Tools
+
+Structured outputs can be combined with tools. The final response will be structured:
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  tools: [getWeatherTool],
+  structure: {
+    type: "object",
+    properties: {
+      summary: { type: "string" },
+      temperature: { type: "number" },
+      recommendation: { type: "string" }
+    },
+    required: ["summary", "temperature", "recommendation"]
+  }
+})
+
+// Model may call tools, but final response will be structured
+turn = await claude.generate([], "Should I bring an umbrella in Tokyo today?")
+print(turn.data)
+// { summary: "Sunny and warm", temperature: 72, recommendation: "No umbrella needed" }
+```
+
+## Use Cases
+
+### Data Extraction
+
+```pseudocode
+extractorSchema = {
+  type: "object",
+  properties: {
+    entities: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          type: { type: "string", enum: ["person", "organization", "location", "date"] },
+          context: { type: "string" }
+        },
+        required: ["name", "type"]
+      }
+    }
+  },
+  required: ["entities"]
+}
+```
+
+### Classification
+
+```pseudocode
+classifierSchema = {
+  type: "object",
+  properties: {
+    category: {
+      type: "string",
+      enum: ["bug", "feature", "question", "documentation"]
+    },
+    priority: {
+      type: "string",
+      enum: ["low", "medium", "high", "critical"]
+    },
+    confidence: {
+      type: "number",
+      minimum: 0,
+      maximum: 1
+    }
+  },
+  required: ["category", "priority", "confidence"]
+}
+```
+
+### API Response Generation
+
+```pseudocode
+apiResponseSchema = {
+  type: "object",
+  properties: {
+    success: { type: "boolean" },
+    data: {
+      type: "object",
+      properties: {
+        id: { type: "string", format: "uuid" },
+        status: { type: "string" },
+        createdAt: { type: "string", format: "date-time" }
+      }
+    },
+    errors: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          code: { type: "string" },
+          message: { type: "string" }
+        },
+        required: ["code", "message"]
+      }
+    }
+  },
+  required: ["success"]
+}
+```
+
+## Security Considerations
+
+<Aside type="caution" title="Structured Output Security">
+  - Structured output data comes from the model and should be validated
+  - Applications SHOULD NOT trust structured output for security decisions without validation
+  - Schema validation is the application's responsibility
+  - Like tool arguments, structured output should be treated as potentially untrusted data
+</Aside>

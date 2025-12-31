@@ -1,0 +1,119 @@
+---
+title: Changelog
+description: UPP specification version history and changes.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Changelog
+
+This document tracks changes between UPP specification versions.
+
+## 1.2.0-draft
+
+<Badge text="Current" variant="success" />
+
+### Formatting & Language Agnostic
+
+- **Reformatted** specification to be language-agnostic
+- **Replaced** language-specific syntax with pseudocode notation
+- **Added** JSON Schema definitions in appendices
+- **Added** implementation guidance for multiple programming languages
+- **Clarified** provider implementation patterns across language paradigms
+
+### New Content
+
+- **Added** security considerations section
+- **Added** HTTP status code mapping table
+- **Added** `ImageProviderStreamResult` type definition and export
+- **Added** cross-reference note in Section 10.4 linking tool and structured output validation behavior
+- **Added** `EmbeddingInputType` enumeration (`document`/`query`) for provider-specific input type hints
+- **Added** `MessageOptions` structure definition with constructor signatures for all message types
+- **Added** Section 1.7 clarifying package naming conventions and import syntax
+
+### Fixes
+
+- **Fixed** terminology: "fragments" → "events" in Image conformance
+- **Fixed** RFC 2119 compliance: "will throw" → "MUST throw" in structured output validation
+- **Fixed** iterator notation to use language-agnostic `(iterable)` format instead of `[iterator]`
+- **Corrected** capability declaration wording (1.1 incorrectly stated "no explicit capability interface")
+
+### Updates
+
+- **Updated** example model IDs to use dated format (e.g., `claude-haiku-4-20250514`) for accuracy; this is an example update, not a format requirement
+- **Updated** example package name to `upp` as a language-agnostic placeholder (implementations choose their own names)
+- **Clarified** `BinaryBlock` constraint: only valid in `UserContent`, not `AssistantContent`
+
+### Compatibility
+
+- **Maintained** semantic compatibility with UPP 1.1 (additive clarifications only, no breaking changes)
+
+---
+
+## 1.1.0-draft
+
+### Renaming
+
+- **Renamed** from "useAI Provider Protocol" to "Unified Provider Protocol"
+- **Renamed** package from `useAI` to `@providerprotocol/ai`
+- **Renamed** entry points: `useAI()` → `llm()`, `useEmbedding()` → `embedding()`, `useImage()` → `image()`
+
+### New Interfaces
+
+- **Added** `ai` namespace export for grouped imports
+- **Added** `embedding()` interface for vector embeddings
+- **Added** `image()` interface for image generation
+- **Added** unified provider factories (single export per provider)
+
+### New Types
+
+- **Added** `ModelReference` type for portable model references
+- **Added** `createProvider()` helper for provider implementations
+- **Added** `EmbeddingHandler`, `ImageHandler` interfaces
+- **Added** `BoundEmbeddingModel`, `BoundImageModel` types
+- **Added** `ImageCapabilities` for runtime feature detection
+
+### Embedding Features
+
+- **Added** `embedMany()` for large-scale embedding with progress
+- **Added** optional similarity utilities (`cosineSimilarity`, `euclideanDistance`, `dotProduct`)
+
+### Image Features
+
+- **Added** image editing, variation, and upscaling interfaces
+
+### Infrastructure
+
+- **Added** `RetryStrategy` interface for pluggable retry/rate-limit handling
+- **Replaced** `RetryConfig` with `RetryStrategy` for flexibility
+- **Updated** `UPPError` with `modality` field
+- **Updated** provider structure to use unified factories
+
+### Documentation
+
+- **Added** Conformance section defining compliance levels
+
+---
+
+## 1.0.0-draft
+
+<Badge text="Initial" variant="note" />
+
+- Initial draft specification (LLM-focused)
+- Core `llm()` interface for text generation
+- Message types: `UserMessage`, `AssistantMessage`, `ToolResultMessage`
+- Content blocks: `TextBlock`, `ImageBlock`
+- Tool support with JSON Schema definitions
+- Streaming interface with `StreamResult` and `StreamEvent`
+- Turn structure for inference results
+- Thread utility for conversation management
+- Provider protocol with `ModelReference` and `BoundLLMModel`
+- Error handling with `UPPError` and standard error codes
+- Key strategies for API key management
+- Provider configuration with `ProviderConfig`
+
+---
+
+<Aside type="note" title="Version Naming">
+  Versions marked as "draft" are working documents. Stable releases will drop the "-draft" suffix.
+</Aside>

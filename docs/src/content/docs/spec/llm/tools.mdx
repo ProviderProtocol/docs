@@ -1,0 +1,319 @@
+---
+title: Tools
+description: UPP-1.2 tool definition, execution, and strategies.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Tools
+
+<Badge text="UPP-1.2" variant="note" />
+
+Tools allow LLMs to interact with external systems, execute code, and access real-time information. UPP uses JSON Schema for tool parameter definitions.
+
+## Tool Definition
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | String | Yes | Tool name (must be unique within an llm() instance) |
+| `description` | String | Yes | Human-readable description for the model |
+| `parameters` | JSONSchema | Yes | JSON Schema defining parameters |
+| `run` | Function | Yes | Tool execution function |
+| `approval` | Function | No | Optional approval handler for sensitive operations |
+
+### JSONSchema Structure (for tool parameters)
+
+```pseudocode
+{
+  type: "object",
+  properties: {
+    paramName: {
+      type: "string" | "number" | "integer" | "boolean" | "array" | "object",
+      description: "Parameter description",
+      enum: [...],        // optional
+      items: {...},       // for arrays
+      properties: {...},  // for nested objects
+      required: [...],    // for nested objects
+      default: value      // optional
+    }
+  },
+  required: ["paramName", ...]
+}
+```
+
+## Tool Example
+
+```pseudocode
+getWeather = {
+  name: "getWeather",
+  description: "Get current weather for a location",
+  parameters: {
+    type: "object",
+    properties: {
+      location: {
+        type: "string",
+        description: "City name or coordinates"
+      },
+      units: {
+        type: "string",
+        enum: ["celsius", "fahrenheit"],
+        default: "celsius"
+      }
+    },
+    required: ["location"]
+  },
+  run: async (params) => {
+    weather = await fetchWeather(params.location, params.units ?? "celsius")
+    return weather.temp + "° " + params.units + ", " + weather.condition
+  }
+}
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "You are a weather assistant.",
+  tools: [getWeather]
+})
+```
+
+## Tool Approval
+
+For sensitive operations, tools can require approval:
+
+```pseudocode
+deleteFile = {
+  name: "deleteFile",
+  description: "Delete a file from the filesystem",
+  parameters: {
+    type: "object",
+    properties: {
+      path: { type: "string", description: "File path to delete" }
+    },
+    required: ["path"]
+  },
+  approval: async (params) => {
+    // UI prompt, admin check, path validation, etc.
+    return await promptUser("Allow deletion of " + params.path + "?")
+  },
+  run: async (params) => {
+    await fs.unlink(params.path)
+    return "Deleted " + params.path
+  }
+}
+```
+
+## Tool Execution Flow
+
+By default, `llm()` handles tool execution automatically:
+
+1. Model returns an `AssistantMessage` with `toolCalls`
+2. If `approval` is defined, it's called first (rejected = error result sent to model)
+3. Tool's `run` function is executed with arguments from the model
+4. Result (or error) is sent back to the model as `ToolResultMessage`
+5. Loop continues until model returns without tool calls OR max iterations reached
+
+### Error Handling
+
+- If `approval()` throws an exception, the exception propagates to the caller and aborts the generation
+- If `approval()` returns `false`, an error result is sent to the model
+- If the tool's `run` function throws, the error is caught and sent as an error result to the model
+
+<Aside type="caution" title="No Argument Validation">
+  `llm()` does NOT validate tool arguments against the JSON Schema. The schema is provided to the model to guide its output, but validation and sanitization of LLM-provided arguments is the responsibility of the tool implementation. Always treat tool arguments as untrusted input.
+</Aside>
+
+<Aside type="note" title="Structured Output Validation">
+  Similarly, UPP does not validate [structured output](/spec/llm/structured/) responses against their schema. Schemas guide LLM behavior but validation is the application's responsibility in both cases.
+</Aside>
+
+## ToolUseStrategy
+
+For custom control over tool execution:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `maxIterations` | Integer | Maximum tool execution rounds (default: 10) |
+| `onToolCall` | Function | Called when the model requests a tool call |
+| `onBeforeCall` | Function | Called before tool execution, return false to skip |
+| `onAfterCall` | Function | Called after tool execution |
+| `onError` | Function | Called on tool execution error |
+| `onMaxIterations` | Function | Called when max iterations reached |
+
+### Strategy Example
+
+```pseudocode
+strategy = {
+  maxIterations: 5,
+
+  onBeforeCall: async (tool, params) => {
+    print("Calling " + tool.name + " with", params)
+    return true  // Allow execution
+  },
+
+  onAfterCall: async (tool, params, result) => {
+    await logToolUsage(tool.name, params, result)
+  },
+
+  onError: async (tool, params, error) => {
+    await alertOps("Tool " + tool.name + " failed: " + error.message)
+  },
+
+  onMaxIterations: async (iterations) => {
+    print("Tool loop hit max iterations:", iterations)
+  }
+}
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  tools: [getWeather, searchWeb],
+  toolStrategy: strategy
+})
+```
+
+## Disabling Automatic Tool Execution
+
+To handle tool calls manually:
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  tools: [getWeather],
+  toolStrategy: { maxIterations: 0 }  // Disable auto-execution
+})
+
+turn = await claude.generate([], "What is the weather?")
+
+if (turn.response.hasToolCalls) {
+  // Handle manually
+  for toolCall in turn.response.toolCalls {
+    print("Model wants to call:", toolCall.toolName)
+    // Execute yourself, then continue conversation
+  }
+}
+```
+
+## Multiple Tool Calls
+
+Models may request multiple tool calls in a single response. `llm()` executes them in parallel by default:
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  tools: [getWeather, getTime]
+})
+
+// Model might call both tools simultaneously
+turn = await claude.generate(
+  "What is the weather and time in Tokyo and Paris?"
+)
+
+// turn.toolExecutions might contain 4 executions
+// (weather + time for each city)
+```
+
+## Complex Tool Example
+
+```pseudocode
+searchDatabase = {
+  name: "searchDatabase",
+  description: "Search the product database",
+  parameters: {
+    type: "object",
+    properties: {
+      query: {
+        type: "string",
+        description: "Search query"
+      },
+      filters: {
+        type: "object",
+        properties: {
+          category: {
+            type: "string",
+            enum: ["electronics", "clothing", "home", "sports"]
+          },
+          minPrice: { type: "number" },
+          maxPrice: { type: "number" },
+          inStock: { type: "boolean" }
+        }
+      },
+      limit: {
+        type: "integer",
+        description: "Maximum results to return",
+        default: 10
+      },
+      sortBy: {
+        type: "string",
+        enum: ["relevance", "price_low", "price_high", "newest"],
+        default: "relevance"
+      }
+    },
+    required: ["query"]
+  },
+  run: async (params) => {
+    results = await db.products.search({
+      query: params.query,
+      filters: params.filters ?? {},
+      limit: params.limit ?? 10,
+      sort: params.sortBy ?? "relevance"
+    })
+    return JSON.stringify(results)
+  }
+}
+```
+
+## Tool Security Considerations
+
+<Aside type="caution" title="Security Warning">
+  Tools execute arbitrary code based on LLM-provided arguments:
+
+  - Tool arguments MUST be treated as untrusted input
+  - Implementations MUST NOT automatically validate arguments against schema
+  - Tool implementations SHOULD validate and sanitize inputs
+  - Sensitive operations SHOULD use approval handlers
+  - File system and network operations SHOULD be sandboxed where possible
+</Aside>
+
+### Safe Tool Implementation
+
+```pseudocode
+readFile = {
+  name: "readFile",
+  description: "Read a file from the allowed directory",
+  parameters: {
+    type: "object",
+    properties: {
+      path: { type: "string", description: "Relative file path" }
+    },
+    required: ["path"]
+  },
+  run: async (params) => {
+    // Validate and sanitize path
+    safePath = path.normalize(params.path)
+
+    // Check for path traversal
+    if (safePath.includes("..") || path.isAbsolute(safePath)) {
+      throw new Error("Invalid path: must be relative without traversal")
+    }
+
+    // Restrict to allowed directory
+    fullPath = path.join(ALLOWED_DIR, safePath)
+    if (!fullPath.startsWith(ALLOWED_DIR)) {
+      throw new Error("Path outside allowed directory")
+    }
+
+    // Check file exists and is readable
+    if (!await fs.exists(fullPath)) {
+      throw new Error("File not found")
+    }
+
+    return await fs.readFile(fullPath, "utf-8")
+  }
+}
+```
+
+## Capability Check
+
+Providers that support tools MUST set `capabilities.tools` to `true`. If tools are provided but the capability is `false`, `llm()` MUST throw `UPPError` with code `INVALID_REQUEST`.

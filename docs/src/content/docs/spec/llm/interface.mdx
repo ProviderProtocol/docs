@@ -1,0 +1,399 @@
+---
+title: LLM Interface
+description: UPP-1.2 LLM Interface specification for chat and completion.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# LLM Interface
+
+<Badge text="UPP-1.2" variant="note" />
+
+The `llm()` function creates an LLM instance for chat and completion with Large Language Models.
+
+## Function Signature
+
+```pseudocode
+llm(options: LLMOptions) -> LLMInstance
+```
+
+## LLMOptions
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `model` | ModelReference | Yes | A model reference from a provider factory |
+| `config` | ProviderConfig | No | Provider infrastructure configuration (uses env vars if omitted) |
+| `params` | Map | No | Model-specific parameters (temperature, max_tokens, etc.) |
+| `system` | String | No | System prompt for all inferences |
+| `tools` | List&lt;Tool&gt; | No | Tools available to the model |
+| `toolStrategy` | ToolUseStrategy | No | Tool execution strategy |
+| `structure` | JSONSchema | No | Structured output schema |
+
+## LLMInstance
+
+The returned instance provides the following interface:
+
+| Method/Property | Type | Description |
+|-----------------|------|-------------|
+| `generate(...)` | Function | Execute inference and return complete Turn |
+| `stream(...)` | Function | Execute streaming inference |
+| `model` | BoundLLMModel | The bound model |
+| `system` | String? | Current system prompt |
+| `params` | Map? | Current parameters |
+| `capabilities` | LLMCapabilities | Provider API capabilities |
+
+### generate() Overloads
+
+```pseudocode
+// No history - single input
+generate(input: InferenceInput) -> Promise<Turn>
+
+// No history - multiple inputs
+generate(...inputs: InferenceInput[]) -> Promise<Turn>
+
+// With history
+generate(history: List<Message> | Thread, ...inputs: InferenceInput[]) -> Promise<Turn>
+```
+
+### stream() Overloads
+
+```pseudocode
+// No history - single input
+stream(input: InferenceInput) -> StreamResult
+
+// No history - multiple inputs
+stream(...inputs: InferenceInput[]) -> StreamResult
+
+// With history
+stream(history: List<Message> | Thread, ...inputs: InferenceInput[]) -> StreamResult
+```
+
+### InferenceInput Type
+
+```pseudocode
+InferenceInput = String | Message | ContentBlock
+```
+
+### History Detection
+
+`llm()` determines if the first argument is history or input:
+
+- `List<Message>` or `Thread` → history
+- `String`, `Message`, or `ContentBlock` → input (no history)
+
+```pseudocode
+// No history - one-shot inference
+await claude.generate("What is 2+2?")
+
+// No history - multiple inputs
+await claude.generate("Look at this:", imageBlock)
+
+// With history
+await claude.generate(history, "Follow-up question")
+await claude.generate(thread, "Continue the conversation")
+```
+
+## LLMCapabilities
+
+`LLMCapabilities` declares what the **provider's API** supports, not individual model capabilities. If a user attempts to use a feature with a model that doesn't support it, the provider's API will return an error—this is expected behavior.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `streaming` | Boolean | Provider API supports streaming responses |
+| `tools` | Boolean | Provider API supports tool/function calling |
+| `structuredOutput` | Boolean | Provider API supports native structured output |
+| `imageInput` | Boolean | Provider API supports image input |
+| `videoInput` | Boolean | Provider API supports video input |
+| `audioInput` | Boolean | Provider API supports audio input |
+
+<Aside type="note" title="Static Capabilities">
+  Capabilities are static. A provider's capabilities are constant for the lifetime of the provider instance and do not vary per-request or per-model. They reflect what the provider's API supports, determined at provider implementation time.
+</Aside>
+
+## BoundLLMModel
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `modelId` | String | The model identifier |
+| `capabilities` | LLMCapabilities | Provider API capabilities |
+| `complete(request)` | Function | Execute a single non-streaming inference request |
+| `stream(request)` | Function | Execute a single streaming inference request |
+
+### LLMRequest Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `messages` | List&lt;Message&gt; | All messages for this request (history + new input) |
+| `system` | String? | System prompt |
+| `params` | Map? | Model-specific parameters (passed through unchanged) |
+| `tools` | List&lt;Tool&gt;? | Tools available for this request |
+| `structure` | JSONSchema? | Structured output schema (if requested) |
+| `config` | ProviderConfig | Provider infrastructure config (resolved by llm() core) |
+| `signal` | AbortSignal? | Abort signal for cancellation |
+
+### LLMResponse Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `message` | AssistantMessage | The assistant's response |
+| `usage` | TokenUsage | Token consumption |
+| `stopReason` | String | Why generation stopped |
+
+### LLMStreamResult
+
+An async iterable of `StreamEvent` objects with a `response` property that resolves to `LLMResponse`.
+
+## Basic Usage
+
+```pseudocode
+import { llm } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: {
+    apiKey: env.ANTHROPIC_API_KEY
+  },
+  system: "You are a helpful assistant."
+})
+
+// Simple one-shot inference (no history needed)
+turn = await claude.generate("What is the capital of France?")
+print(turn.response.text)  // "The capital of France is Paris."
+```
+
+## Full Configuration
+
+```pseudocode
+import { llm, RoundRobinKeys, ExponentialBackoff } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: {
+    apiKey: RoundRobinKeys([
+      env.ANTHROPIC_KEY_1,
+      env.ANTHROPIC_KEY_2
+    ]),
+    baseUrl: "https://my-proxy.example.com",
+    timeout: 30000,
+    retryStrategy: ExponentialBackoff({ maxAttempts: 3 })
+  },
+  params: {
+    max_tokens: 4096,
+    temperature: 0.7
+  },
+  system: "You are a friendly AI assistant."
+})
+```
+
+## Conversation Flow
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "You are a helpful assistant."
+})
+
+// User manages their own history
+history = []
+
+// First turn
+turn1 = await claude.generate(history, "My name is Alice.")
+history.push(...turn1.messages)
+
+// Second turn (history preserved)
+turn2 = await claude.generate(history, "What is my name?")
+history.push(...turn2.messages)
+
+print(turn2.response.text)  // "Your name is Alice."
+```
+
+## Tool Execution Loop
+
+`llm()` core manages the tool execution loop. Providers only handle single request/response cycles.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  llm.generate(history, input)                               │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  1. Convert input to UserMessage                            │
+│  2. Append to messages array                                │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │  provider.complete()    │◄────────────────┐
+              │  (single request)       │                 │
+              └─────────────────────────┘                 │
+                            │                             │
+                            ▼                             │
+              ┌─────────────────────────┐                 │
+              │  response.hasToolCalls? │──── No ────┐    │
+              │                         │            │    │
+              └─────────────────────────┘            │    │
+                            │                        │    │
+                           Yes                       │    │
+                            │                        │    │
+                            ▼                        │    │
+              ┌─────────────────────────┐            │    │
+              │  iterations <           │── No ──►  Error │
+              │  maxIterations?         │                 │
+              └─────────────────────────┘                 │
+                            │                             │
+                           Yes                            │
+                            │                             │
+                            ▼                             │
+              ┌─────────────────────────┐                 │
+              │  Execute tools          │                 │
+              │  (parallel if multiple) │                 │
+              └─────────────────────────┘                 │
+                            │                             │
+                            ▼                             │
+              ┌─────────────────────────┐                 │
+              │  Append AssistantMsg    │                 │
+              │  (with toolCalls)       │                 │
+              │  Append ToolResultMsg   │                 │
+              │  to messages            │─────────────────┘
+              └─────────────────────────┘
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │  Build Turn from        │
+              │  accumulated messages   │
+              └─────────────────────────┘
+                            │
+                            ▼
+                        Return Turn
+```
+
+**Implementation Notes:**
+
+1. Each cycle increments `Turn.cycles`
+2. Token usage is aggregated across all cycles
+3. All messages (user, tool calls, tool results, final response) are collected in `Turn.messages`
+4. If `maxIterations` is reached, `onMaxIterations` callback fires and an error is thrown
+5. Tool execution order follows provider/model behavior (parallel if model returns multiple calls)
+
+## Provider Responsibilities
+
+### Request Transformation
+
+The provider MUST transform UPP structures to vendor format:
+
+- Convert `Message` types to vendor message format
+- Handle system prompt according to vendor requirements (top-level param vs message)
+- Convert `Tool` definitions from JSON Schema to vendor tool format
+- Convert binary data (images, audio) to vendor-required encoding (e.g., base64)
+- Transform structured output schema to vendor format (if supported)
+
+### Response Transformation
+
+The provider MUST transform vendor responses to UPP structures:
+
+- Map vendor response to `AssistantMessage` (which may include `toolCalls`)
+- Map streaming chunks to `StreamEvent` with appropriate event metadata
+- Preserve vendor-specific metadata in `Message.metadata` under the provider's namespace
+
+<Aside type="note">
+  The provider returns a single `LLMResponse`. `llm()` core handles constructing the full `Turn` including tool loops.
+</Aside>
+
+### System Prompt Handling
+
+The provider MUST handle system prompts according to vendor requirements:
+
+| Provider | System Prompt Handling |
+|----------|----------------------|
+| Anthropic | Top-level `system` parameter |
+| OpenAI | Message with `role: "system"` |
+| Google | `systemInstruction` field |
+
+`llm()` accepts system prompts at the options level and providers transform accordingly.
+
+### Metadata Handling
+
+Providers MUST handle their own metadata namespace in `Message.metadata`:
+
+**Extracting metadata from responses:**
+
+```pseudocode
+// Google provider extracting thought_signature
+message = AssistantMessage(content, toolCalls, {
+  metadata: {
+    google: {
+      thought_signature: vendorResponse.thought_signature
+    }
+  }
+})
+```
+
+**Including metadata in requests:**
+
+```pseudocode
+// When sending messages back to the API, providers extract their namespace
+function transformToVendor(message) {
+  googleMeta = message.metadata?.google
+  return {
+    role: message.type,
+    content: transformContent(message.content),
+    // Include provider-specific fields
+    thought_signature: googleMeta?.thought_signature
+  }
+}
+```
+
+Providers SHOULD preserve unknown metadata fields during round-trips to support future API additions.
+
+### Structured Output Handling
+
+If `structure` is provided:
+
+1. `llm()` core checks `capabilities.structuredOutput`
+2. If `false`, MUST throw `UPPError` with code `INVALID_REQUEST`
+3. If `true`, the provider MUST:
+   - Transform the JSON Schema to vendor-specific format (if different)
+   - Enable structured output mode on the API request
+   - Parse the response as JSON and return the parsed object
+
+<Aside type="note" title="No Schema Validation">
+  UPP does NOT validate the response against the schema. Modern LLMs with structured output support reliably produce conformant output. If validation is required, it is the application's responsibility. UPP does NOT automatically retry on schema mismatch.
+</Aside>
+
+### Capability Checks
+
+`llm()` core checks capabilities before using features:
+
+- `tools` provided but `capabilities.tools` is `false` → MUST throw `INVALID_REQUEST`
+- Image content provided but `capabilities.imageInput` is `false` → MUST throw `INVALID_REQUEST`
+- `stream()` called but `capabilities.streaming` is `false` → MUST throw `INVALID_REQUEST`
+- `structure` provided but `capabilities.structuredOutput` is `false` → MUST throw `INVALID_REQUEST`
+
+### Error Handling
+
+The provider MUST normalize errors to `UPPError`:
+
+```pseudocode
+class UPPError extends Error {
+  code: ErrorCode
+  provider: String
+  modality: Modality
+  statusCode: Integer?
+  cause: Error?
+
+  constructor(message, code, provider, modality, statusCode?, cause?) {
+    super(message)
+    this.code = code
+    this.provider = provider
+    this.modality = modality
+    this.statusCode = statusCode
+    this.cause = cause
+  }
+}
+```
+
+See [Error Handling](/spec/errors/) for full details on error codes, HTTP status mapping, and retry strategies.

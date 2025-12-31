@@ -1,0 +1,408 @@
+---
+title: Provider Implementation Guide
+description: UPP-1.2 guide for implementing custom providers.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Provider Implementation Guide
+
+<Badge text="UPP-1.2" variant="note" />
+
+This guide covers implementing UPP-compliant providers for any vendor API.
+
+## Provider Module Structure
+
+Each provider module exports a single factory that combines all modality handlers:
+
+```pseudocode
+// Provider implementation structure
+
+import { createProvider } from "upp"
+import { createLLMHandler } from "./llm"
+import { createEmbeddingHandler } from "./embed"
+import { createImageHandler } from "./image"
+
+openai = createProvider({
+  name: "openai",
+  version: "1.0.0",
+  modalities: {
+    llm: createLLMHandler(),
+    embedding: createEmbeddingHandler(),
+    image: createImageHandler()
+  }
+})
+
+// Export provider and param types
+export { openai }
+export type { OpenAILLMParams, OpenAIEmbedParams, OpenAIImageParams }
+```
+
+## createProvider Helper
+
+UPP implementations SHOULD provide a helper to create providers:
+
+```pseudocode
+function createProvider(options: CreateProviderOptions) -> Provider {
+  provider = function(modelId: String) -> ModelReference {
+    return { modelId: modelId, provider: provider }
+  }
+
+  provider.name = options.name
+  provider.version = options.version
+  provider.modalities = options.modalities
+
+  return provider
+}
+```
+
+### CreateProviderOptions Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | String | Yes | Provider name (e.g., "openai", "anthropic") |
+| `version` | String | Yes | Provider version string |
+| `modalities` | ModalityHandlers | Yes | Supported modality handlers |
+
+### ModalityHandlers Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `llm` | LLMHandler | No | Handler for LLM operations |
+| `embedding` | EmbeddingHandler | No | Handler for embedding operations |
+| `image` | ImageHandler | No | Handler for image operations |
+
+<Aside type="note" title="Optional Handlers">
+  At least one modality handler should be provided. Attempting to use an unsupported modality will throw `UPPError` with code `INVALID_REQUEST`.
+</Aside>
+
+## HTTP-First Approach
+
+Per the [Design Principles](/spec/design-principles/), providers SHOULD use direct HTTP calls rather than vendor SDKs.
+
+**Benefits:**
+
+| Benefit | Description |
+|---------|-------------|
+| Minimal dependencies | Avoid large SDK packages |
+| Full control | Manage transformations, streaming, retries directly |
+| Consistency | All providers follow the same pattern |
+| Transparency | Inspect what's sent over the wire |
+| Bundle size | Critical for edge and browser deployments |
+
+## Shared Utilities
+
+UPP implementations SHOULD provide utilities for provider implementations:
+
+### resolveApiKey
+
+```pseudocode
+resolveApiKey(config, envVar?) -> Promise<String>
+```
+
+Resolve API key from ProviderConfig, supporting string, function, or KeyStrategy. If `config.apiKey` is not set, automatically falls back to standard environment variables. MUST throw `UPPError` with `AUTHENTICATION_FAILED` if no key is available.
+
+### doFetch
+
+```pseudocode
+doFetch(url, init, config) -> Promise<Response>
+```
+
+Execute fetch with retry, timeout, and error normalization. Uses `config.retryStrategy` for retry logic, `config.timeout` for request timeout, and `config.fetch` for custom fetch implementation. Automatically normalizes HTTP errors to `UPPError`.
+
+### parseSSEStream
+
+```pseudocode
+parseSSEStream(body) -> AsyncGenerator<Any>
+```
+
+Parse Server-Sent Events stream into JSON objects. Handles standard SSE format with "data:" prefix. Yields parsed JSON for each event, terminates on "[DONE]" message.
+
+### normalizeHttpError
+
+```pseudocode
+normalizeHttpError(response, provider, modality) -> Promise<UPPError>
+```
+
+Normalize HTTP error responses to `UPPError`. Maps HTTP status codes to appropriate `ErrorCode` values. Extracts error message from response body when available.
+
+## LLM Handler Pattern
+
+```pseudocode
+function createLLMHandler() -> LLMHandler {
+  return {
+    bind(modelId: String) -> BoundLLMModel {
+      return {
+        modelId: modelId,
+        capabilities: {
+          streaming: true,
+          tools: true,
+          structuredOutput: true,
+          imageInput: true,
+          videoInput: false,
+          audioInput: false
+        },
+
+        complete: async (request) => {
+          apiKey = await resolveApiKey(request.config, "VENDOR_API_KEY")
+
+          // Transform UPP request to vendor format
+          body = transformRequest(request, modelId)
+
+          response = await doFetch(VENDOR_URL, {
+            method: "POST",
+            headers: { Authorization: "Bearer " + apiKey, ... },
+            body: JSON.stringify(body)
+          }, request.config)
+
+          data = await response.json()
+
+          // Transform vendor response to UPP format
+          return transformResponse(data)
+        },
+
+        stream: (request) => {
+          // Similar pattern with SSE parsing
+          // Return LLMStreamResult (async iterator with response promise)
+        }
+      }
+    }
+  }
+}
+```
+
+## Embedding Handler Pattern
+
+```pseudocode
+function createEmbeddingHandler() -> EmbeddingHandler {
+  return {
+    supportedInputs: ["text"],
+
+    bind(modelId: String) -> BoundEmbeddingModel {
+      return {
+        modelId: modelId,
+        maxBatchSize: 2048,
+        maxInputLength: 8191,
+        dimensions: 1536,
+
+        embed: async (request) => {
+          apiKey = await resolveApiKey(request.config, "VENDOR_API_KEY")
+
+          // Transform inputs to vendor format
+          body = {
+            model: modelId,
+            input: request.inputs.map(transformInput),
+            ...request.params
+          }
+
+          response = await doFetch(VENDOR_URL, {
+            method: "POST",
+            headers: { Authorization: "Bearer " + apiKey },
+            body: JSON.stringify(body)
+          }, request.config)
+
+          data = await response.json()
+
+          // Return EmbeddingResponse
+          return {
+            embeddings: data.data.map(d => ({
+              vector: d.embedding,
+              tokens: d.usage?.tokens
+            })),
+            usage: { totalTokens: data.usage.total_tokens }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Image Handler Pattern
+
+```pseudocode
+function createImageHandler() -> ImageHandler {
+  return {
+    bind(modelId: String) -> BoundImageModel {
+      return {
+        modelId: modelId,
+        capabilities: {
+          generate: true,
+          streaming: false,
+          edit: false,
+          vary: false,
+          upscale: false,
+          outpaint: false,
+          imageToImage: false,
+          maxImages: 1,
+          supportedSizes: ["1024x1024"],
+          supportedFormats: ["png"]
+        },
+
+        generate: async (request) => {
+          apiKey = await resolveApiKey(request.config, "VENDOR_API_KEY")
+
+          body = {
+            model: modelId,
+            prompt: request.prompt,
+            ...request.params
+          }
+
+          response = await doFetch(VENDOR_URL, {
+            method: "POST",
+            headers: { Authorization: "Bearer " + apiKey },
+            body: JSON.stringify(body)
+          }, request.config)
+
+          data = await response.json()
+
+          // Return ImageResponse
+          return transformImageResponse(data)
+        }
+
+        // Implement edit, vary, upscale if capabilities indicate support
+      }
+    }
+  }
+}
+```
+
+## Key Implementation Requirements
+
+1. **Request transformation:** Convert UPP `Message[]` to vendor message format
+2. **Response transformation:** Convert vendor response to `LLMResponse`, `EmbeddingResponse`, or `ImageResponse`
+3. **Error normalization:** Wrap vendor errors in `UPPError` with appropriate `ErrorCode` and `modality`
+4. **Streaming:** Parse SSE streams and emit `StreamEvent` objects
+5. **Metadata namespacing:** Store vendor-specific data under `metadata.{providerName}`
+
+## Language-Specific Implementation Notes
+
+### Object-Oriented Languages (Java, C#, PHP)
+
+```pseudocode
+// Use interfaces/abstract classes for handlers
+interface LLMHandler {
+  BoundLLMModel bind(String modelId)
+}
+
+// Use classes for bound models
+class OpenAIBoundLLMModel implements BoundLLMModel {
+  String modelId
+  LLMCapabilities capabilities
+
+  LLMResponse complete(LLMRequest request)
+  LLMStreamResult stream(LLMRequest request)
+}
+```
+
+### Systems Languages (Rust, Go)
+
+```pseudocode
+// Rust: Use traits
+trait LLMHandler {
+  fn bind(&self, model_id: &str) -> Box<dyn BoundLLMModel>;
+}
+
+// Go: Use interfaces
+type LLMHandler interface {
+  Bind(modelID string) BoundLLMModel
+}
+```
+
+### Dynamic Languages (Python, Ruby, JavaScript)
+
+```pseudocode
+// Use duck typing and factory functions
+def create_llm_handler():
+  def bind(model_id):
+    return BoundLLMModel(model_id, ...)
+  return {"bind": bind}
+```
+
+## Request Transformation Example
+
+```pseudocode
+function transformMessagesToVendor(messages: List<Message>) -> List<VendorMessage> {
+  return messages.map(msg => {
+    switch (msg.type) {
+      case "user":
+        return {
+          role: "user",
+          content: transformContent(msg.content)
+        }
+      case "assistant":
+        result = {
+          role: "assistant",
+          content: transformContent(msg.content)
+        }
+        if (msg.toolCalls) {
+          result.tool_calls = msg.toolCalls.map(tc => ({
+            id: tc.toolCallId,
+            type: "function",
+            function: {
+              name: tc.toolName,
+              arguments: JSON.stringify(tc.arguments)
+            }
+          }))
+        }
+        return result
+      case "tool_result":
+        return msg.results.map(r => ({
+          role: "tool",
+          tool_call_id: r.toolCallId,
+          content: JSON.stringify(r.result)
+        }))
+    }
+  }).flat()
+}
+```
+
+## Response Transformation Example
+
+```pseudocode
+function transformVendorResponse(data: VendorResponse) -> LLMResponse {
+  choice = data.choices[0]
+  message = choice.message
+
+  // Build content blocks
+  content = []
+  if (message.content) {
+    content.push({ type: "text", text: message.content })
+  }
+
+  // Extract tool calls
+  toolCalls = null
+  if (message.tool_calls) {
+    toolCalls = message.tool_calls.map(tc => ({
+      toolCallId: tc.id,
+      toolName: tc.function.name,
+      arguments: JSON.parse(tc.function.arguments)
+    }))
+  }
+
+  return {
+    message: AssistantMessage(content, toolCalls, {
+      metadata: {
+        openai: {
+          finish_reason: choice.finish_reason,
+          model: data.model
+        }
+      }
+    }),
+    usage: {
+      inputTokens: data.usage.prompt_tokens,
+      outputTokens: data.usage.completion_tokens,
+      totalTokens: data.usage.total_tokens
+    },
+    stopReason: choice.finish_reason
+  }
+}
+```
+
+## Testing Recommendations
+
+1. **Unit tests** for transformation functions
+2. **Integration tests** against vendor APIs (with test keys)
+3. **Mock tests** for error handling paths
+4. **Streaming tests** with synthetic SSE data
+5. **Capability tests** verifying accurate declarations

@@ -1,0 +1,230 @@
+---
+title: Turns
+description: UPP-1.2 Turn structure representing complete inference results.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Turns
+
+<Badge text="UPP-1.2" variant="note" />
+
+A `Turn` represents the complete result of one inference call, including all messages produced during tool execution loops.
+
+## Turn Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `messages` | List&lt;Message&gt; | All messages produced, in chronological order |
+| `response` | AssistantMessage | The final assistant response (convenience accessor) |
+| `toolExecutions` | List&lt;ToolExecution&gt; | Tool executions that occurred |
+| `usage` | TokenUsage | Aggregate token usage for the entire turn |
+| `cycles` | Integer | Total number of inference cycles (1 + tool rounds) |
+| `data` | Any? | Structured output data (if structure was provided) |
+
+## ToolExecution Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `toolName` | String | The tool that was called |
+| `toolCallId` | String | Tool call ID |
+| `arguments` | Map | Arguments passed to the tool |
+| `result` | Any | Result returned by the tool |
+| `isError` | Boolean | Whether the execution resulted in an error |
+| `duration` | Integer | Execution duration in milliseconds |
+| `approved` | Boolean? | Whether approval was required and granted |
+
+## TokenUsage Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputTokens` | Integer | Input tokens across all cycles |
+| `outputTokens` | Integer | Output tokens across all cycles |
+| `totalTokens` | Integer | Total tokens |
+| `cycles` | List&lt;CycleUsage&gt;? | Per-cycle breakdown (if available) |
+
+### CycleUsage Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputTokens` | Integer | Input tokens for this cycle |
+| `outputTokens` | Integer | Output tokens for this cycle |
+
+## Turn with Tool Calls
+
+When tools are involved, the turn contains all intermediate messages:
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "You are a helpful assistant.",
+  tools: [getWeather]
+})
+
+history = []
+
+// This turn might involve tool calls
+turn = await claude.generate(history, "What is the weather in Tokyo?")
+
+// Turn contains ALL messages from this inference:
+// 1. UserMessage: "What is the weather in Tokyo?"
+// 2. AssistantMessage: { toolCalls: [{ toolName: "getWeather", arguments: { location: "Tokyo" } }] }
+// 3. ToolResultMessage: [{ result: "72°F, sunny" }]
+// 4. AssistantMessage: "The weather in Tokyo is 72°F and sunny!"
+
+print(turn.messages.length)  // 4
+print(turn.response.text)    // "The weather in Tokyo is 72°F and sunny!"
+print(turn.toolExecutions)   // [{ toolName: "getWeather", ... }]
+print(turn.cycles)           // 2 (initial + after tool)
+
+// Append all messages to history for next turn
+history.push(...turn.messages)
+```
+
+## Turn Without Tool Calls
+
+When no tools are called, the turn contains just the user input and assistant response:
+
+```pseudocode
+turn = await claude.generate("Hello!")
+
+print(turn.messages.length)       // 2
+print(turn.messages[0].type)      // "user"
+print(turn.messages[1].type)      // "assistant"
+print(turn.response.text)         // "Hello! How can I help you today?"
+print(turn.response.hasToolCalls) // false
+print(turn.toolExecutions)        // []
+print(turn.cycles)                // 1
+```
+
+## Message Flow Diagram
+
+```
+Simple Turn (no tools):
+┌──────────────────┐    ┌───────────────────┐
+│   UserMessage    │ -> │ AssistantMessage  │
+│   "Hello!"       │    │ "Hello! How..."   │
+└──────────────────┘    └───────────────────┘
+
+Turn with tools:
+┌──────────────────┐    ┌───────────────────┐    ┌───────────────────┐    ┌───────────────────┐
+│   UserMessage    │ -> │ AssistantMessage  │ -> │ ToolResultMessage │ -> │ AssistantMessage  │
+│   "Weather?"     │    │ (with toolCalls)  │    │ "72°F, sunny"     │    │ "The weather..."  │
+└──────────────────┘    └───────────────────┘    └───────────────────┘    └───────────────────┘
+```
+
+## Accessing Turn Data
+
+```pseudocode
+// The response property is a convenience accessor for the final AssistantMessage
+print(turn.response.text)
+
+// For structured output, use the data property
+if (turn.data) {
+  print(turn.data.name)  // Parsed JSON data
+}
+
+// Check tool executions
+for exec in turn.toolExecutions {
+  print("Called:", exec.toolName)
+  print("Args:", exec.arguments)
+  print("Result:", exec.result)
+  print("Duration:", exec.duration, "ms")
+  if (exec.isError) {
+    print("Tool returned an error")
+  }
+}
+
+// Check token usage
+print("Input tokens:", turn.usage.inputTokens)
+print("Output tokens:", turn.usage.outputTokens)
+print("Total tokens:", turn.usage.totalTokens)
+print("Inference cycles:", turn.cycles)
+
+// Per-cycle breakdown (if available)
+if (turn.usage.cycles) {
+  for (i, cycle) in enumerate(turn.usage.cycles) {
+    print("Cycle", i + 1, ":", cycle.inputTokens, "in,", cycle.outputTokens, "out")
+  }
+}
+```
+
+## Appending to History
+
+The standard pattern for managing conversation history:
+
+```pseudocode
+history = []
+
+// First turn
+turn1 = await claude.generate(history, "My name is Alice.")
+history.push(...turn1.messages)
+
+// Second turn
+turn2 = await claude.generate(history, "What is my name?")
+history.push(...turn2.messages)
+
+// History now contains:
+// 1. UserMessage: "My name is Alice."
+// 2. AssistantMessage: "Nice to meet you, Alice!"
+// 3. UserMessage: "What is my name?"
+// 4. AssistantMessage: "Your name is Alice."
+```
+
+<Aside type="tip" title="Message Spread">
+  Always use `...turn.messages` (spread) when appending to history. This handles multi-message turns (with tool calls) correctly.
+</Aside>
+
+## JSON Schema
+
+```json
+{
+  "type": "object",
+  "required": ["messages", "response", "toolExecutions", "usage", "cycles"],
+  "properties": {
+    "messages": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Message" }
+    },
+    "response": { "$ref": "#/definitions/AssistantMessage" },
+    "toolExecutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["toolName", "toolCallId", "arguments", "result", "isError", "duration"],
+        "properties": {
+          "toolName": { "type": "string" },
+          "toolCallId": { "type": "string" },
+          "arguments": { "type": "object" },
+          "result": {},
+          "isError": { "type": "boolean" },
+          "duration": { "type": "integer" },
+          "approved": { "type": "boolean" }
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "required": ["inputTokens", "outputTokens", "totalTokens"],
+      "properties": {
+        "inputTokens": { "type": "integer" },
+        "outputTokens": { "type": "integer" },
+        "totalTokens": { "type": "integer" },
+        "cycles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "inputTokens": { "type": "integer" },
+              "outputTokens": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "cycles": { "type": "integer" },
+    "data": {}
+  }
+}
+```

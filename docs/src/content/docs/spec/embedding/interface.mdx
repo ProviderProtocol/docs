@@ -1,0 +1,310 @@
+---
+title: Embedding Interface
+description: UPP-1.2 Embedding Interface specification for vector embeddings.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Embedding Interface
+
+<Badge text="UPP-1.2" variant="note" />
+
+The `embedding()` function creates an embedder instance for generating vector embeddings from text and other content.
+
+## Function Signature
+
+```pseudocode
+embedding(options: EmbeddingOptions) -> EmbeddingInstance
+```
+
+## EmbeddingOptions
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `model` | ModelReference | Yes | A model reference from a provider factory |
+| `config` | ProviderConfig | No | Provider infrastructure configuration |
+| `params` | Map | No | Model-specific parameters (dimensions, encoding format, etc.) |
+
+## EmbeddingInstance
+
+| Method/Property | Type | Description |
+|-----------------|------|-------------|
+| `embed(input)` | Function | Embed a single input |
+| `embedBatch(inputs)` | Function | Embed multiple inputs in a single request |
+| `embedMany(inputs, options)` | Function | Embed with automatic batching for large sets |
+| `model` | BoundEmbeddingModel | The bound model |
+| `params` | Map? | Current parameters |
+
+### EmbeddingInput Type
+
+```pseudocode
+EmbeddingInput = String | TextBlock | ImageBlock
+```
+
+### EmbedManyOptions Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `batchSize` | Integer? | Maximum inputs per batch (default: provider limit) |
+| `concurrency` | Integer? | Concurrency limit (default: 1) |
+| `signal` | AbortSignal? | Abort signal |
+
+## Embedding Results
+
+### Embedding Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `vector` | List&lt;Float&gt; | The embedding vector |
+| `dimensions` | Integer | Vector dimensionality |
+| `input` | EmbeddingInput | The input that was embedded |
+| `tokens` | Integer? | Token count (if available) |
+
+### EmbeddingBatch Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `embeddings` | List&lt;Embedding&gt; | Embeddings in same order as inputs |
+| `usage` | EmbeddingUsage | Aggregate usage |
+
+### EmbeddingUsage Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `totalTokens` | Integer | Total tokens processed |
+
+### EmbeddingProgress Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `embeddings` | List&lt;Embedding&gt; | Completed embeddings so far |
+| `progress` | ProgressInfo | Progress information |
+| `done` | Boolean | True when all complete |
+
+### ProgressInfo Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `completed` | Integer | Number completed |
+| `total` | Integer | Total count |
+| `percent` | Float | Percentage complete |
+
+## BoundEmbeddingModel
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `modelId` | String | The model identifier |
+| `maxBatchSize` | Integer | Maximum inputs per batch |
+| `maxInputLength` | Integer | Maximum input length (tokens or characters) |
+| `dimensions` | Integer | Output dimensions (may be configurable) |
+| `embed(request)` | Function | Execute embedding request |
+
+### EmbeddingRequest Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputs` | List&lt;EmbeddingInput&gt; | Inputs to embed |
+| `params` | Map? | Model-specific parameters |
+| `config` | ProviderConfig | Provider infrastructure config |
+| `signal` | AbortSignal? | Abort signal |
+
+### EmbeddingResponse Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `embeddings` | List&lt;EmbeddingVector&gt; | Embedding vectors with optional token counts |
+| `usage` | EmbeddingUsage | Aggregate usage |
+
+### EmbeddingVector Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `vector` | List&lt;Float&gt; | The embedding vector |
+| `tokens` | Integer? | Token count |
+
+## Basic Usage
+
+```pseudocode
+import { embedding } from "upp"
+import openai from "upp/openai"
+
+embedder = embedding({
+  model: openai("text-embedding-3-large"),
+  config: {
+    apiKey: env.OPENAI_API_KEY
+  },
+  params: {
+    dimensions: 1536
+  }
+})
+
+// Single embedding
+result = await embedder.embed("What is the capital of France?")
+print(result.vector.length)  // 1536
+print(result.dimensions)     // 1536
+
+// Batch embedding
+batch = await embedder.embedBatch([
+  "First document to embed",
+  "Second document to embed",
+  "Third document to embed"
+])
+
+print(batch.embeddings.length)  // 3
+print(batch.usage.totalTokens)  // Total tokens used
+```
+
+## Large-Scale Embedding
+
+For embedding large document sets:
+
+```pseudocode
+documents = await loadDocuments()  // 10,000 documents
+
+for await (progress in embedder.embedMany(documents, {
+  batchSize: 100,
+  concurrency: 2
+})) {
+  print("Progress:", progress.progress.percent + "%")
+
+  // Process embeddings as they complete
+  await storeInVectorDB(progress.embeddings)
+
+  if (progress.done) {
+    print("All embeddings complete")
+  }
+}
+```
+
+## Provider-Specific Parameters
+
+Each provider exports its own parameter types (e.g., `OpenAIEmbedParams`, `VoyageEmbedParams`). Consult provider documentation for available options such as output dimensions, encoding formats, and task type hints.
+
+### EmbeddingInputType
+
+Some providers distinguish between embeddings optimized for different use cases:
+
+| Value | Description |
+|-------|-------------|
+| `document` | Optimize embedding for storage/indexing (longer text, corpus documents) |
+| `query` | Optimize embedding for search queries (shorter text, retrieval queries) |
+
+Providers that support input type hints (e.g., Voyage, Cohere) MAY produce different embeddings for the same text depending on this value. Providers that do not support this feature MUST ignore the parameter.
+
+```pseudocode
+// OpenAI embedding params (OpenAIEmbedParams)
+{
+  dimensions: 1536,
+  encoding_format: "float"
+}
+
+// Voyage embedding params (VoyageEmbedParams)
+{
+  input_type: EmbeddingInputType  // "document" or "query"
+}
+```
+
+## Similarity Utilities
+
+UPP implementations SHOULD provide optional utilities for working with embeddings:
+
+### Cosine Similarity
+
+```pseudocode
+cosineSimilarity(a: List<Float>, b: List<Float>) -> Float
+// Returns value between -1 and 1
+```
+
+**Formula:**
+```
+cosine_similarity(a, b) = dot(a, b) / (norm(a) * norm(b))
+
+where:
+  dot(a, b) = sum(a[i] * b[i]) for all i
+  norm(x) = sqrt(sum(x[i]^2)) for all i
+```
+
+Returns a value between -1 and 1, where 1 indicates identical direction.
+
+### Euclidean Distance
+
+```pseudocode
+euclideanDistance(a: List<Float>, b: List<Float>) -> Float
+// Returns non-negative value
+```
+
+**Formula:**
+```
+euclidean_distance(a, b) = sqrt(sum((a[i] - b[i])^2)) for all i
+```
+
+Returns a non-negative value, where 0 indicates identical vectors.
+
+### Dot Product
+
+```pseudocode
+dotProduct(a: List<Float>, b: List<Float>) -> Float
+```
+
+**Formula:**
+```
+dot_product(a, b) = sum(a[i] * b[i]) for all i
+```
+
+Returns a scalar value. For normalized vectors, equivalent to cosine similarity.
+
+### Usage Example
+
+```pseudocode
+import { cosineSimilarity } from "upp/similarity"
+
+// Embed two texts
+emb1 = await embedder.embed("What is machine learning?")
+emb2 = await embedder.embed("How does AI work?")
+
+// Calculate similarity
+similarity = cosineSimilarity(emb1.vector, emb2.vector)
+print("Similarity:", similarity)  // e.g., 0.87
+```
+
+## Semantic Search Example
+
+```pseudocode
+// Index documents
+documents = ["doc1 content", "doc2 content", "doc3 content"]
+embeddings = await embedder.embedBatch(documents)
+
+// Store in vector database
+for (i, doc) in enumerate(documents) {
+  await vectorDB.insert({
+    id: "doc_" + i,
+    content: doc,
+    vector: embeddings.embeddings[i].vector
+  })
+}
+
+// Search
+query = "find relevant information"
+queryEmb = await embedder.embed(query)
+results = await vectorDB.search(queryEmb.vector, topK=5)
+```
+
+## Conformance
+
+### Level 1: Core (Required)
+
+- `embed()` method for single inputs
+- Return `EmbeddingResponse` with vectors and usage
+- Text input support
+- Error normalization with `modality: "embedding"`
+
+### Level 2: Batch
+
+- Batch embedding via provider's batch API
+- Respect `maxBatchSize` limits
+- Aggregate usage reporting
+
+### Level 3: Multimodal
+
+- Image embedding support (if vendor supports)
+- Declare supported inputs in `supportedInputs`

@@ -1,0 +1,225 @@
+---
+title: Threads
+description: UPP-1.2 Thread utility for managing conversation history.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Threads
+
+<Badge text="UPP-1.2" variant="note" />
+
+`Thread` is an **optional** utility class for managing conversation history. UPP does not manage threads internally—users control their own history.
+
+## Thread Structure
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | String | Unique thread identifier |
+| `messages` | List&lt;Message&gt; | All messages in the thread (read-only) |
+| `length` | Integer | Number of messages |
+
+## Thread Methods
+
+| Method | Parameters | Return Type | Description |
+|--------|------------|-------------|-------------|
+| `append` | turn: Turn | Thread | Append messages from a turn |
+| `push` | ...messages: Message[] | Thread | Add raw messages |
+| `user` | content: String \| List&lt;ContentBlock&gt; | Thread | Add a user message |
+| `assistant` | content: String \| List&lt;ContentBlock&gt; | Thread | Add an assistant message |
+| `filter` | type: MessageType | List&lt;Message&gt; | Get messages by type |
+| `tail` | count: Integer | List&lt;Message&gt; | Get the last N messages |
+| `slice` | start?: Integer, end?: Integer | Thread | Create new thread with subset |
+| `clear` | (none) | Thread | Clear all messages |
+| `toMessages` | (none) | List&lt;Message&gt; | Convert to plain message array |
+| `toJSON` | (none) | ThreadJSON | Serialize to JSON |
+| (iterable) | — | Iterator&lt;Message&gt; | Thread is iterable over its messages |
+
+## Thread Static Methods
+
+| Method | Parameters | Return Type | Description |
+|--------|------------|-------------|-------------|
+| `fromJSON` | json: ThreadJSON | Thread | Deserialize from JSON |
+
+## Basic Usage
+
+```pseudocode
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY },
+  system: "You are a helpful assistant."
+})
+
+// Using Thread utility
+thread = Thread()
+
+turn1 = await claude.generate(thread, "My name is Bob.")
+thread.append(turn1)
+
+turn2 = await claude.generate(thread, "What did I just tell you?")
+thread.append(turn2)
+
+print(turn2.response.text)  // "You told me your name is Bob."
+print(thread.length)        // 4 messages
+
+// Serialize for storage
+json = thread.toJSON()
+storage.set("conversation", json)
+
+// Restore later
+restored = Thread.fromJSON(storage.get("conversation"))
+```
+
+## Using Raw Arrays
+
+Threads are optional—you can use plain arrays:
+
+```pseudocode
+messages = []
+
+turn = await claude.generate(messages, "Hello!")
+messages.push(...turn.messages)
+```
+
+<Aside type="tip" title="Thread vs Array">
+  Use `Thread` when you need convenience methods like `filter`, `tail`, `slice`, or serialization. Use raw arrays for simple cases.
+</Aside>
+
+## Thread Iteration
+
+Thread is iterable, allowing direct use in loops:
+
+```pseudocode
+thread = Thread()
+// ... add messages ...
+
+// Iterate over messages
+for msg in thread {
+  print(msg.type, ":", msg.text)
+}
+
+// Filter by type
+userMessages = thread.filter("user")
+assistantMessages = thread.filter("assistant")
+```
+
+## Thread Manipulation
+
+```pseudocode
+thread = Thread()
+
+// Add messages via convenience methods
+thread.user("Hello!")
+thread.assistant("Hi there!")
+
+// Or append turns from inference
+turn = await claude.generate(thread, "Continue...")
+thread.append(turn)
+
+// Get recent context
+lastFive = thread.tail(5)
+
+// Create a window of messages
+recentThread = thread.slice(-10)  // Last 10 messages
+
+// Clear and start fresh
+thread.clear()
+```
+
+## Thread Serialization
+
+### ThreadJSON Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | String | Yes | Unique thread identifier |
+| `messages` | List&lt;MessageJSON&gt; | Yes | All messages in the thread |
+| `createdAt` | String (ISO 8601) | Yes | Thread creation timestamp |
+| `updatedAt` | String (ISO 8601) | Yes | Last update timestamp |
+
+### MessageJSON Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | String | Yes | Unique message identifier |
+| `type` | MessageType | Yes | "user", "assistant", or "tool_result" |
+| `content` | List&lt;ContentBlock&gt; | Yes | Message content blocks |
+| `toolCalls` | List&lt;ToolCall&gt; | No | Tool calls (assistant messages only) |
+| `results` | List&lt;ToolResult&gt; | No | Tool results (tool_result messages only) |
+| `metadata` | MessageMetadata | No | Provider-namespaced metadata |
+| `timestamp` | String (ISO 8601) | Yes | Message timestamp |
+
+### Serialization Example
+
+```pseudocode
+// ThreadJSON
+{
+  id: "thread_abc123",
+  messages: [<MessageJSON>, ...],
+  createdAt: "2024-01-15T10:30:00Z",
+  updatedAt: "2024-01-15T10:35:00Z"
+}
+
+// MessageJSON
+{
+  id: "msg_xyz789",
+  type: "assistant",
+  content: [{ type: "text", text: "Hello!" }],
+  toolCalls: [],
+  metadata: {},
+  timestamp: "2024-01-15T10:30:00Z"
+}
+```
+
+## Persistence Example
+
+```pseudocode
+// Save conversation to database
+async function saveConversation(thread, userId) {
+  json = thread.toJSON()
+  await db.conversations.upsert({
+    id: thread.id,
+    userId: userId,
+    data: json,
+    updatedAt: new Date()
+  })
+}
+
+// Load conversation from database
+async function loadConversation(threadId) {
+  record = await db.conversations.findById(threadId)
+  if (record) {
+    return Thread.fromJSON(record.data)
+  }
+  return Thread()
+}
+
+// Usage
+thread = await loadConversation("thread_123")
+turn = await claude.generate(thread, "Hello again!")
+thread.append(turn)
+await saveConversation(thread, currentUser.id)
+```
+
+## Context Window Management
+
+For long conversations, you may need to manage context:
+
+```pseudocode
+// Simple sliding window
+function getContextWindow(thread, maxMessages) {
+  if (thread.length <= maxMessages) {
+    return thread.toMessages()
+  }
+  return thread.tail(maxMessages)
+}
+
+// Use with inference
+context = getContextWindow(thread, 20)
+turn = await claude.generate(context, "Continue our discussion...")
+thread.append(turn)
+```
+
+<Aside type="note" title="No Built-in Truncation">
+  UPP does not automatically truncate history. Managing context length is the application's responsibility.
+</Aside>

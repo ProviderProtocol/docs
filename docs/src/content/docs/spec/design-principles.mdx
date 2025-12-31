@@ -1,0 +1,177 @@
+---
+title: Design Principles
+description: Core design principles guiding the Unified Provider Protocol.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Design Principles
+
+<Badge text="UPP-1.2" variant="note" />
+
+These principles guide all design decisions in UPP. They represent fundamental trade-offs and philosophy that shape the protocol.
+
+## Provider Transparency
+
+Configuration passes through to providers unchanged. UPP does not impose its own defaults or transform model parameters. When no config is supplied, provider defaults apply.
+
+**Rationale:** Developers should reference provider documentation directly. UPP avoids "morphic magic" that obscures what's actually sent to the API.
+
+```pseudocode
+// These parameters go directly to the Anthropic API
+claude = llm({
+  model: anthropic("claude-sonnet-4-20250514"),
+  params: {
+    max_tokens: 4096,
+    temperature: 0.7
+  }
+})
+```
+
+<Aside type="note" title="No Hidden Defaults">
+  UPP never applies hidden defaults. If you don't specify `temperature`, the provider's API decides the default—not UPP.
+</Aside>
+
+## Explicit Over Magic
+
+UPP favors explicit APIs over implicit behavior:
+
+| Explicit Choice | Instead of Magic |
+|-----------------|------------------|
+| Separate entry points per modality | No modal switches or runtime detection |
+| `generate()` for complete responses, `stream()` for streaming | No await/non-await magic |
+| Users manage their own conversation history | No hidden state mutation |
+| System prompts declared at configuration | Not buried in message arrays |
+
+```pseudocode
+// Explicit: You choose streaming vs non-streaming
+turn = await claude.generate("Hello")  // Complete response
+stream = claude.stream("Hello")        // Streaming response
+
+// Explicit: You manage your history
+history = []
+turn = await claude.generate(history, "Hello")
+history.push(...turn.messages)  // You decide what to keep
+```
+
+## Modality-Specific Interfaces
+
+Each modality gets a purpose-built interface optimized for its use case:
+
+| Modality | Characteristics |
+|----------|-----------------|
+| **LLM** | Conversational with messages, turns, streaming, tools |
+| **Embedding** | Batch-oriented, returns vectors, no conversation |
+| **Image** | Prompt-based, returns images, supports editing/variation |
+
+<Aside type="caution" title="Why Not One Interface?">
+  Forcing all modalities through a single interface creates awkward abstractions. An embedding API doesn't need "messages" or "tools." An image API doesn't need "conversation history."
+</Aside>
+
+```pseudocode
+// Each modality has its own optimized interface
+llm({ model: openai("gpt-4o") })
+embedding({ model: openai("text-embedding-3-small") })
+image({ model: openai("dall-e-3") })
+```
+
+## Shared Infrastructure
+
+While interfaces differ, providers share common infrastructure:
+
+| Infrastructure | Purpose |
+|----------------|---------|
+| `ProviderConfig` | apiKey, baseUrl, timeout, retry |
+| `KeyStrategy` | RoundRobin, Weighted, Dynamic key selection |
+| `RetryStrategy` | Exponential backoff, rate limiting |
+| Error handling | `UPPError`, `ErrorCode` normalization |
+| HTTP utilities | SSE parsing, request building |
+
+```pseudocode
+// Same config works across modalities
+config = {
+  apiKey: env.OPENAI_API_KEY,
+  timeout: 30000,
+  retryStrategy: ExponentialBackoff({ maxAttempts: 3 })
+}
+
+llmInstance = llm({ model: openai("gpt-4o"), config: config })
+embedder = embedding({ model: openai("text-embedding-3-large"), config: config })
+imageGen = image({ model: openai("dall-e-3"), config: config })
+```
+
+## Progressive Complexity
+
+Simple use cases require minimal code. Advanced features are opt-in.
+
+**Simple case:**
+```pseudocode
+claude = llm({ model: anthropic("claude-haiku-4-20250514") })
+turn = await claude.generate("Hello!")
+```
+
+**Full complexity when needed:**
+```pseudocode
+claude = llm({
+  model: anthropic("claude-sonnet-4-20250514"),
+  config: {
+    apiKey: RoundRobinKeys([key1, key2]),
+    baseUrl: "https://my-proxy.example.com",
+    timeout: 30000,
+    retryStrategy: ExponentialBackoff({ maxAttempts: 3 })
+  },
+  params: { max_tokens: 4096, temperature: 0.7 },
+  system: "You are a helpful assistant.",
+  tools: [getWeather, searchWeb],
+  toolStrategy: { maxIterations: 5 }
+})
+```
+
+## Interoperability Where Possible
+
+UPP enables provider switching for common operations. However, provider-specific features may not translate.
+
+<Aside type="caution" title="No Feature Parity Guarantee">
+  The protocol does not guarantee feature parity—it guarantees **interface consistency**. Not all features work with all providers.
+</Aside>
+
+```pseudocode
+// These work the same way
+llm({ model: anthropic("claude-sonnet-4-20250514") })
+llm({ model: openai("gpt-4o") })
+llm({ model: google("gemini-pro") })
+
+// But provider-specific params may differ
+// Anthropic: { max_tokens: 4096 }
+// OpenAI: { max_completion_tokens: 4096 }
+```
+
+## HTTP-First Provider Implementation
+
+UPP **strongly recommends** that providers wrap vendor REST APIs directly using native HTTP primitives (e.g., `fetch`, `http.request`, `curl`) rather than depending on first-party vendor SDKs.
+
+**Rationale:**
+
+| Benefit | Description |
+|---------|-------------|
+| **Minimal dependencies** | Avoid pulling in large SDK packages and their transitive dependencies |
+| **Full control** | Direct HTTP access allows providers to manage request/response transformation, streaming, retries, and timeouts without SDK abstractions interfering |
+| **Consistency** | All providers follow the same HTTP-based pattern |
+| **Transparency** | Developers can inspect exactly what's sent over the wire |
+| **Bundle size** | Critical for edge deployments and browser environments |
+
+<Aside type="note">
+  Providers MAY use vendor SDKs if there's a compelling reason, but this should be the exception.
+</Aside>
+
+## Summary
+
+| Principle | Key Takeaway |
+|-----------|--------------|
+| Provider Transparency | Pass-through config, reference vendor docs |
+| Explicit Over Magic | Clear APIs, no hidden behavior |
+| Modality-Specific | Purpose-built interfaces per capability |
+| Shared Infrastructure | Common auth, retry, errors across modalities |
+| Progressive Complexity | Simple defaults, advanced opt-in |
+| Interoperability | Interface consistency, not feature parity |
+| HTTP-First | Direct API calls over vendor SDKs |

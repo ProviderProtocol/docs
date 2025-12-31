@@ -1,0 +1,207 @@
+---
+title: Conformance
+description: UPP-1.2 provider conformance requirements and levels.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Conformance
+
+<Badge text="UPP-1.2" variant="note" />
+
+Providers may implement one or more modalities. For each modality, conformance is defined at multiple levels.
+
+## LLM Conformance
+
+### Level 1: Core (Required)
+
+- Declare `LLMCapabilities` accurately for the provider's API
+- Text input/output via `complete()` method
+- Return `LLMResponse` with `AssistantMessage` and `TokenUsage`
+- Basic configuration pass-through (`params`)
+- Error normalization to `UPPError` with correct `modality: "llm"`
+- System prompt handling per vendor requirements
+
+### Level 2: Streaming
+
+**Requirement:** `capabilities.streaming: true`
+
+- `stream()` method implementation
+- Proper `StreamEvent` emission with correct `StreamEventType`
+- `LLMStreamResult` with `response` promise
+- Support for `message_start`, `text_delta`, `message_stop` at minimum
+
+### Level 3: Tools
+
+**Requirement:** `capabilities.tools: true`
+
+- Tool definition transformation (JSON Schema to vendor format)
+- Tool call detection in responses (`AssistantMessage.toolCalls`)
+- Tool result handling (`ToolResultMessage` transformation)
+
+<Aside type="note">
+  Tool execution loop is handled by `llm()` core, not providers.
+</Aside>
+
+### Level 4: Structured Output
+
+**Requirement:** `capabilities.structuredOutput: true`
+
+- Transform `structure` schema to vendor format
+- Enable vendor's structured output mode
+- Parse and return structured data as JSON
+
+### Level 5: Multimodal Input
+
+**Requirement:** Corresponding capability flags
+
+- Image input handling (base64, URL conversion) if `imageInput: true`
+- Video input handling if `videoInput: true`
+- Audio input handling if `audioInput: true`
+
+## Embedding Conformance
+
+### Level 1: Core (Required)
+
+- `embed()` method for single inputs
+- Return `EmbeddingResponse` with vectors and usage
+- Text input support
+- Error normalization with `modality: "embedding"`
+
+### Level 2: Batch
+
+- Batch embedding via provider's batch API
+- Respect `maxBatchSize` limits
+- Aggregate usage reporting
+
+### Level 3: Multimodal
+
+- Image embedding support (if vendor supports)
+- Declare supported inputs in `supportedInputs`
+
+## Image Conformance
+
+### Level 1: Core (Required)
+
+- `generate()` method for text-to-image
+- Return `ImageResponse` with `GeneratedImage` array
+- Declare capabilities in `ImageCapabilities`
+- Error normalization with `modality: "image"`
+
+### Level 2: Editing
+
+**Requirement:** `capabilities.edit: true`
+
+- `edit()` method for inpainting
+- Mask handling
+
+### Level 3: Variations
+
+**Requirement:** `capabilities.vary: true`
+
+- `vary()` method
+- Strength/count parameters
+
+### Level 4: Streaming
+
+**Requirement:** `capabilities.streaming: true`
+
+- `stream()` method
+- Progress and preview events
+
+### Level 5: Advanced
+
+- `upscale()` method (if `capabilities.upscale: true`)
+- Outpainting support (if `capabilities.outpaint: true`)
+
+## Conformance Requirements
+
+### Error Handling
+
+All providers MUST:
+
+- Normalize vendor errors to `UPPError`
+- Set appropriate `ErrorCode` based on HTTP status or vendor error type
+- Include `provider` name and `modality` in all errors
+- Preserve original error as `cause` when available
+
+### Configuration Pass-through
+
+All providers MUST:
+
+- Pass `params` to vendor API without modification (unless transformation required)
+- Support custom `baseUrl` for proxies
+- Support custom `fetch` implementation
+- Respect `timeout` setting
+- Use provided `retryStrategy` or sensible default
+
+### Metadata Handling
+
+All providers MUST:
+
+- Namespace their metadata under `metadata.{providerName}`
+- Preserve unknown metadata fields during round-trips
+- Extract vendor-specific response fields to metadata
+
+## Capability Declaration
+
+Providers MUST accurately declare their capabilities:
+
+| Modality | Capability Location |
+|----------|-------------------|
+| **LLMHandler** | Via `LLMCapabilities` on `BoundLLMModel` |
+| **EmbeddingHandler** | Declare `supportedInputs` array |
+| **ImageHandler** | Declare full `ImageCapabilities` object |
+
+<Aside type="tip" title="Graceful Degradation">
+  Applications SHOULD check capabilities before using optional features to ensure graceful degradation.
+</Aside>
+
+## Interoperability Notes
+
+The following features are provider-dependent and may not transfer between providers:
+
+| Feature | Notes |
+|---------|-------|
+| Token counting | Algorithms and limits vary |
+| Tool calling formats | Vendor-specific behaviors |
+| Streaming granularity | Event types differ |
+| Response metadata | Structure varies |
+| Rate limiting | Behavior and headers differ |
+| Modalities | Not all providers support all modalities |
+| Image sizes/formats | Provider-specific support |
+| Embedding dimensions | Model-specific |
+
+Developers should consult individual provider documentation for feature support details.
+
+## Conformance Summary Table
+
+### LLM Providers
+
+| Provider | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+|----------|---------|---------|---------|---------|---------|
+| Anthropic | Core | Streaming | Tools | Structured | Image |
+| OpenAI | Core | Streaming | Tools | Structured | Image, Audio |
+| Google | Core | Streaming | Tools | Structured | Image, Video, Audio |
+| Ollama | Core | Streaming | Tools | - | Image |
+
+### Embedding Providers
+
+| Provider | Level 1 | Level 2 | Level 3 |
+|----------|---------|---------|---------|
+| OpenAI | Core | Batch | - |
+| Voyage | Core | Batch | - |
+| Cohere | Core | Batch | - |
+| Google | Core | Batch | Image |
+
+### Image Providers
+
+| Provider | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+|----------|---------|---------|---------|---------|---------|
+| OpenAI (DALL-E) | Core | Edit | Vary | - | - |
+| Stability | Core | Edit | Vary | - | Upscale |
+| Google (Imagen) | Core | - | - | - | - |
+
+<Aside type="caution" title="Evolving Support">
+  This table represents typical support levels. Actual capabilities may vary by model version and should be verified via the `capabilities` property at runtime.
+</Aside>

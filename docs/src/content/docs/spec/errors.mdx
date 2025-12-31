@@ -1,0 +1,340 @@
+---
+title: Error Handling
+description: UPP-1.2 error handling, error codes, and retry strategies.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Error Handling
+
+<Badge text="UPP-1.2" variant="note" />
+
+UPP normalizes all provider errors to a standard `UPPError` type, enabling consistent error handling across all modalities and providers.
+
+## UPPError Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `message` | String | Human-readable error message |
+| `code` | ErrorCode | Standardized error code |
+| `provider` | String | Provider name (e.g., "anthropic") |
+| `modality` | Modality | Which modality: "llm", "embedding", "image" |
+| `statusCode` | Integer? | HTTP status code if applicable |
+| `cause` | Error? | Original underlying error |
+
+```pseudocode
+class UPPError extends Error {
+  code: ErrorCode
+  provider: String
+  modality: Modality
+  statusCode: Integer?
+  cause: Error?
+
+  constructor(message, code, provider, modality, statusCode?, cause?) {
+    super(message)
+    this.code = code
+    this.provider = provider
+    this.modality = modality
+    this.statusCode = statusCode
+    this.cause = cause
+  }
+}
+```
+
+## ErrorCode Values
+
+| Code | Description |
+|------|-------------|
+| `AUTHENTICATION_FAILED` | Invalid or missing API key |
+| `RATE_LIMITED` | Too many requests |
+| `CONTEXT_LENGTH_EXCEEDED` | Input exceeds model context limit |
+| `MODEL_NOT_FOUND` | Requested model doesn't exist |
+| `INVALID_REQUEST` | Malformed request |
+| `INVALID_RESPONSE` | Response failed validation (e.g., structured output) |
+| `CONTENT_FILTERED` | Content policy violation |
+| `QUOTA_EXCEEDED` | Usage limits exceeded |
+| `PROVIDER_ERROR` | Provider-side error |
+| `NETWORK_ERROR` | Connection failure |
+| `TIMEOUT` | Request timed out |
+| `CANCELLED` | Operation was cancelled |
+
+## Modality Values
+
+| Value | Description |
+|-------|-------------|
+| `llm` | Large Language Model operations |
+| `embedding` | Vector embedding operations |
+| `image` | Image generation operations |
+| `audio` | Audio operations (future) |
+| `video` | Video operations (future) |
+
+## HTTP Status Code Mapping
+
+Providers MUST map HTTP status codes to appropriate error codes:
+
+| HTTP Status | UPP Error Code |
+|-------------|----------------|
+| 400 | `INVALID_REQUEST` (or `CONTEXT_LENGTH_EXCEEDED` if indicated) |
+| 401 | `AUTHENTICATION_FAILED` |
+| 403 | `AUTHENTICATION_FAILED` or `QUOTA_EXCEEDED` |
+| 404 | `MODEL_NOT_FOUND` |
+| 429 | `RATE_LIMITED` |
+| 500, 502, 503 | `PROVIDER_ERROR` |
+
+## Error Handling Example
+
+```pseudocode
+import { llm, UPPError } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: { apiKey: env.ANTHROPIC_API_KEY }
+})
+
+try {
+  turn = await claude.generate("Hello!")
+} catch (error) {
+  if (error instanceof UPPError) {
+    switch (error.code) {
+      case "AUTHENTICATION_FAILED":
+        print("Invalid API key")
+        break
+      case "RATE_LIMITED":
+        print("Rate limited, retry after:", error.cause?.retryAfter)
+        break
+      case "CONTEXT_LENGTH_EXCEEDED":
+        print("Input too long for model")
+        break
+      case "MODEL_NOT_FOUND":
+        print("Model not available:", error.message)
+        break
+      case "CONTENT_FILTERED":
+        print("Content policy violation")
+        break
+      case "TIMEOUT":
+        print("Request timed out")
+        break
+      case "CANCELLED":
+        print("Request was cancelled")
+        break
+      default:
+        print("Provider error:", error.provider, error.message)
+    }
+
+    // Additional context
+    print("Modality:", error.modality)
+    print("HTTP Status:", error.statusCode)
+  } else {
+    throw error  // Unexpected error
+  }
+}
+```
+
+## Retry Strategies
+
+UPP provides pluggable retry strategies for handling transient failures.
+
+### RetryStrategy Interface
+
+| Method | Parameters | Return Type | Description |
+|--------|------------|-------------|-------------|
+| `onRetry` | error: UPPError, attempt: Integer | Integer \| null \| Promise | Returns delay in ms before retry, or null to stop |
+| `beforeRequest` | (none) | Integer \| Promise&lt;Integer&gt; | Optional. Returns delay before making request (pre-emptive rate limiting) |
+| `reset` | (none) | void | Optional. Reset strategy state after success |
+
+### Standard Implementations
+
+#### ExponentialBackoff
+
+```pseudocode
+ExponentialBackoff({
+  maxAttempts: 5,
+  initialDelay: 1000,
+  maxDelay: 30000,
+  jitter: true
+})
+```
+
+Increases delay exponentially between retries. Optional jitter adds randomization to prevent thundering herd.
+
+#### LinearBackoff
+
+```pseudocode
+LinearBackoff({
+  maxAttempts: 3,
+  delay: 2000
+})
+```
+
+Fixed delay between retries.
+
+#### NoRetry
+
+```pseudocode
+NoRetry()
+```
+
+Disables automatic retries.
+
+#### TokenBucket
+
+```pseudocode
+TokenBucket({
+  capacity: 100,
+  refillRate: 10  // tokens per second
+})
+```
+
+Pre-emptive rate limiting using token bucket algorithm.
+
+#### RetryAfterStrategy
+
+```pseudocode
+RetryAfterStrategy({
+  fallbackDelay: 5000
+})
+```
+
+Honors server `Retry-After` headers when present.
+
+### Custom Strategy Example
+
+```pseudocode
+class MyCustomStrategy implements RetryStrategy {
+  onRetry(error, attempt) {
+    if (attempt >= 5) return null  // Stop retrying
+    if (error.code == "RATE_LIMITED") return 5000  // 5 second delay
+    return 1000  // 1 second delay for other errors
+  }
+}
+```
+
+### Using Retry Strategies
+
+```pseudocode
+import { llm, ExponentialBackoff } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: {
+    apiKey: env.ANTHROPIC_API_KEY,
+    retryStrategy: ExponentialBackoff({
+      maxAttempts: 3,
+      initialDelay: 1000,
+      maxDelay: 10000
+    })
+  }
+})
+```
+
+## Key Strategies
+
+UPP provides built-in key strategies for API key management, which can help with rate limiting.
+
+### KeyStrategy Interface
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getKey()` | String \| Promise&lt;String&gt; | Get the next API key to use |
+
+### RoundRobinKeys
+
+Cycles through a list of API keys in order:
+
+```pseudocode
+strategy = RoundRobinKeys(["sk-1", "sk-2", "sk-3"])
+// First call returns "sk-1", second "sk-2", third "sk-3", fourth "sk-1", etc.
+```
+
+### WeightedKeys
+
+Random selection with weights:
+
+```pseudocode
+strategy = WeightedKeys([
+  { key: "sk-primary", weight: 0.8 },
+  { key: "sk-backup", weight: 0.2 }
+])
+// 80% chance of returning "sk-primary"
+```
+
+### DynamicKey
+
+Custom async key selection logic:
+
+```pseudocode
+strategy = DynamicKey(() => {
+  return fetchKeyFromSecretManager()
+})
+```
+
+### Using Key Strategies
+
+```pseudocode
+import { llm, RoundRobinKeys } from "upp"
+import anthropic from "upp/anthropic"
+
+claude = llm({
+  model: anthropic("claude-haiku-4-20250514"),
+  config: {
+    apiKey: RoundRobinKeys([
+      env.ANTHROPIC_KEY_1,
+      env.ANTHROPIC_KEY_2,
+      env.ANTHROPIC_KEY_3
+    ])
+  }
+})
+```
+
+## JSON Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["message", "code", "provider", "modality"],
+  "properties": {
+    "message": { "type": "string" },
+    "code": {
+      "type": "string",
+      "enum": [
+        "AUTHENTICATION_FAILED",
+        "RATE_LIMITED",
+        "CONTEXT_LENGTH_EXCEEDED",
+        "MODEL_NOT_FOUND",
+        "INVALID_REQUEST",
+        "INVALID_RESPONSE",
+        "CONTENT_FILTERED",
+        "QUOTA_EXCEEDED",
+        "PROVIDER_ERROR",
+        "NETWORK_ERROR",
+        "TIMEOUT",
+        "CANCELLED"
+      ]
+    },
+    "provider": { "type": "string" },
+    "modality": {
+      "type": "string",
+      "enum": ["llm", "embedding", "image", "audio", "video"]
+    },
+    "statusCode": { "type": "integer" },
+    "cause": { "type": "object" }
+  }
+}
+```
+
+## Provider Requirements
+
+All providers MUST:
+
+1. Normalize vendor errors to `UPPError`
+2. Set appropriate `ErrorCode` based on HTTP status or vendor error type
+3. Include `provider` name and `modality` in all errors
+4. Preserve original error as `cause` when available
+
+<Aside type="note" title="API Key Security">
+  - API keys MUST NOT be logged
+  - API keys SHOULD NOT be included in error messages
+</Aside>

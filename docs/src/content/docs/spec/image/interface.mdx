@@ -1,0 +1,417 @@
+---
+title: Image Interface
+description: UPP-1.2 Image Interface specification for image generation.
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+# Image Interface
+
+<Badge text="UPP-1.2" variant="note" />
+
+The `image()` function creates an image generator instance for text-to-image generation, editing, and variations.
+
+## Function Signature
+
+```pseudocode
+image(options: ImageOptions) -> ImageInstance
+```
+
+## ImageOptions
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `model` | ModelReference | Yes | A model reference from a provider factory |
+| `config` | ProviderConfig | No | Provider infrastructure configuration |
+| `params` | Map | No | Model-specific parameters (size, quality, style, etc.) |
+
+## ImageInstance
+
+| Method/Property | Type | Description |
+|-----------------|------|-------------|
+| `generate(input)` | Function | Generate images from a text prompt |
+| `stream(input)` | Function? | Generate with streaming progress (if supported) |
+| `edit(input)` | Function? | Edit an existing image (inpainting) |
+| `vary(input)` | Function? | Create variations of an existing image |
+| `upscale(input)` | Function? | Upscale an image to higher resolution |
+| `model` | BoundImageModel | The bound model |
+| `params` | Map? | Current parameters |
+| `capabilities` | ImageCapabilities | Model capabilities |
+
+### ImagePrompt Type
+
+```pseudocode
+ImagePrompt = String | {
+  prompt: String,
+  negativePrompt: String?,
+  referenceImages: List<Image>?,
+  seed: Integer?
+}
+```
+
+## Image Results
+
+### ImageResult Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `images` | List&lt;GeneratedImage&gt; | Generated images |
+| `metadata` | ImageMetadata? | Generation metadata |
+| `usage` | ImageUsage | Usage/billing information |
+
+### GeneratedImage Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `image` | Image | The generated image |
+| `metadata` | ImageItemMetadata? | Per-image metadata |
+
+### ImageItemMetadata Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `seed` | Integer? | Seed used for this image |
+| `index` | Integer? | Image index in batch |
+| `finishReason` | String? | "success" or "content_filtered" |
+
+### ImageMetadata Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `seed` | Integer? | Seed used (for reproducibility) |
+| `revisedPrompt` | String? | Model's revised prompt (if applicable) |
+
+### ImageUsage Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `imagesGenerated` | Integer | Number of images generated |
+| `cost` | Float? | Provider-specific cost units |
+
+## Streaming Generation
+
+### ImageStreamResult Interface
+
+| Property/Method | Type | Description |
+|-----------------|------|-------------|
+| (async iterable) | AsyncIterator&lt;ImageStreamEvent&gt; | ImageStreamResult is async iterable over events |
+| `result` | Promise&lt;ImageResult&gt; | Final result after streaming |
+| `abort()` | Function | Abort the generation |
+
+### ImageStreamEvent Types
+
+```pseudocode
+// Progress event
+{ type: "progress", percent: Integer, stage: String? }
+
+// Preview event
+{ type: "preview", image: Image, index: Integer }
+
+// Complete event
+{ type: "complete", image: GeneratedImage, index: Integer }
+```
+
+## Image Editing
+
+### ImageEditInput Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Base image to edit |
+| `mask` | Image | No | Mask indicating edit region (white = edit area) |
+| `prompt` | String | Yes | Edit instruction |
+| `negativePrompt` | String | No | What to avoid |
+
+### ImageVaryInput Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Source image for variations |
+| `count` | Integer | No | Number of variations to generate |
+| `strength` | Float | No | Variation strength (0-1, higher = more different) |
+
+### ImageUpscaleInput Structure
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Image to upscale |
+| `scale` | Integer | No | Target scale factor (2 or 4) |
+
+## Capabilities
+
+### ImageCapabilities Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `generate` | Boolean | Supports text-to-image generation |
+| `streaming` | Boolean | Supports streaming progress |
+| `edit` | Boolean | Supports image editing/inpainting |
+| `vary` | Boolean | Supports variations |
+| `upscale` | Boolean | Supports upscaling |
+| `outpaint` | Boolean | Supports outpainting |
+| `imageToImage` | Boolean | Supports image-to-image |
+| `maxImages` | Integer | Maximum images per request |
+| `supportedSizes` | List&lt;String&gt; | Supported output sizes |
+| `supportedAspectRatios` | List&lt;String&gt;? | Supported aspect ratios |
+| `supportedFormats` | List&lt;String&gt; | Supported formats: "png", "jpeg", "webp" |
+
+## BoundImageModel
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `modelId` | String | The model identifier |
+| `capabilities` | ImageCapabilities | Model capabilities |
+| `generate(request)` | Function | Generate images |
+| `stream(request)` | Function? | Stream generation progress (optional) |
+| `edit(request)` | Function? | Edit an image (optional) |
+| `vary(request)` | Function? | Create variations (optional) |
+| `upscale(request)` | Function? | Upscale an image (optional) |
+
+### ImageRequest Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `prompt` | String | Generation prompt |
+| `negativePrompt` | String? | What to avoid |
+| `referenceImages` | List&lt;Image&gt;? | Reference images |
+| `seed` | Integer? | Seed for reproducibility |
+| `params` | Map? | Model-specific parameters |
+| `config` | ProviderConfig | Provider infrastructure config |
+| `signal` | AbortSignal? | Abort signal |
+
+### ImageResponse Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `images` | List&lt;GeneratedImage&gt; | Generated images |
+| `metadata` | ImageMetadata? | Generation metadata |
+| `usage` | ImageUsage | Usage information |
+
+### ImageEditRequest Structure
+
+Provider-level request for image editing operations:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Base image to edit |
+| `mask` | Image | No | Edit mask (white = edit area) |
+| `prompt` | String | Yes | Edit instruction |
+| `negativePrompt` | String | No | What to avoid |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
+
+### ImageVaryRequest Structure
+
+Provider-level request for image variation operations:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Source image for variations |
+| `count` | Integer | No | Number of variations to generate |
+| `strength` | Float | No | Variation strength (0-1) |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
+
+### ImageUpscaleRequest Structure
+
+Provider-level request for image upscaling operations:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `image` | Image | Yes | Image to upscale |
+| `scale` | Integer | No | Scale factor (2 or 4) |
+| `params` | Map | No | Model-specific parameters |
+| `config` | ProviderConfig | Yes | Provider infrastructure config |
+| `signal` | AbortSignal | No | Abort signal |
+
+### ImageProviderStreamResult
+
+An async iterable of `ImageStreamEvent` objects with a `response` property that resolves to `ImageResponse`. Used by providers implementing streaming generation.
+
+## Basic Usage
+
+```pseudocode
+import { image } from "upp"
+import openai from "upp/openai"
+
+dalle = image({
+  model: openai("dall-e-3"),
+  config: {
+    apiKey: env.OPENAI_API_KEY
+  },
+  params: {
+    size: "1024x1024",
+    quality: "hd"
+  }
+})
+
+// Simple generation
+result = await dalle.generate("A sunset over mountains, oil painting style")
+
+print(result.images.length)            // 1
+print(result.metadata?.revisedPrompt)  // DALL-E's enhanced prompt
+
+// Save the image
+imageData = result.images[0].image.toBytes()
+await writeFile("sunset.png", imageData)
+```
+
+## Advanced Generation
+
+```pseudocode
+import { image } from "upp"
+import stability from "upp/stability"
+
+sd = image({
+  model: stability("stable-diffusion-xl-1024-v1-0"),
+  config: {
+    apiKey: env.STABILITY_API_KEY
+  },
+  params: {
+    steps: 30,
+    cfg_scale: 7,
+    samples: 4
+  }
+})
+
+// Generation with negative prompt
+result = await sd.generate({
+  prompt: "A photorealistic cat sitting on a windowsill, golden hour lighting",
+  negativePrompt: "cartoon, drawing, illustration, low quality, blurry",
+  seed: 12345
+})
+
+print(result.images.length)   // 4
+print(result.metadata?.seed)  // 12345
+
+// Save all images
+for (i, img) in enumerate(result.images) {
+  await writeFile("cat-" + i + ".png", img.image.toBytes())
+}
+```
+
+## Image Editing
+
+```pseudocode
+// Check if editing is supported
+if (dalle.capabilities.edit && dalle.edit) {
+  edited = await dalle.edit({
+    image: await Image.fromPath("./photo.png"),
+    mask: await Image.fromPath("./mask.png"),  // White = edit area
+    prompt: "Replace the sky with a starry night"
+  })
+
+  await writeFile("edited.png", edited.images[0].image.toBytes())
+}
+```
+
+## Image Variations
+
+```pseudocode
+// Check if variations are supported
+if (dalle.capabilities.vary && dalle.vary) {
+  variations = await dalle.vary({
+    image: await Image.fromPath("./original.png"),
+    count: 3,
+    strength: 0.7  // 0 = identical, 1 = completely different
+  })
+
+  for (i, img) in enumerate(variations.images) {
+    await writeFile("variation-" + i + ".png", img.image.toBytes())
+  }
+}
+```
+
+## Streaming Progress
+
+```pseudocode
+// Check if streaming is supported
+if (sd.stream) {
+  stream = sd.stream({
+    prompt: "A cyberpunk cityscape at night, neon lights, rain"
+  })
+
+  for await (event in stream) {
+    switch (event.type) {
+      case "progress":
+        print(event.percent + "% - " + event.stage)
+        break
+      case "preview":
+        // Display low-res preview
+        displayPreview(event.image, event.index)
+        break
+      case "complete":
+        print("Image " + event.index + " complete")
+        break
+    }
+  }
+
+  finalResult = await stream.result
+  print("Generated " + finalResult.images.length + " images")
+}
+```
+
+## Provider-Specific Parameters
+
+Each provider exports its own parameter types (e.g., `OpenAIImageParams`, `StabilityImageParams`). Consult provider documentation for available options.
+
+```pseudocode
+// OpenAI DALL-E params (OpenAIImageParams)
+{
+  size: "1024x1024" | "1792x1024" | "1024x1792",
+  quality: "standard" | "hd",
+  style: "vivid" | "natural"
+}
+
+// Stability params (StabilityImageParams)
+{
+  steps: 10-50,
+  cfg_scale: 1-35,
+  samples: 1-10,
+  style_preset: "anime" | "photographic" | "digital-art" | ...
+}
+```
+
+## Capability Detection
+
+```pseudocode
+// Check capabilities before using optional features
+if (imageGen.capabilities.edit && imageGen.edit) {
+  // Safe to use edit
+}
+
+if (imageGen.capabilities.streaming && imageGen.stream) {
+  // Safe to use streaming
+}
+```
+
+## Conformance
+
+### Level 1: Core (Required)
+
+- `generate()` method for text-to-image
+- Return `ImageResponse` with `GeneratedImage` array
+- Declare capabilities in `ImageCapabilities`
+- Error normalization with `modality: "image"`
+
+### Level 2: Editing
+
+- `edit()` method for inpainting (if `capabilities.edit`)
+- Mask handling
+
+### Level 3: Variations
+
+- `vary()` method (if `capabilities.vary`)
+- Strength/count parameters
+
+### Level 4: Streaming
+
+- `stream()` method (if `capabilities.streaming`)
+- Progress and preview events
+
+### Level 5: Advanced
+
+- `upscale()` method (if `capabilities.upscale`)
+- Outpainting support (if `capabilities.outpaint`)

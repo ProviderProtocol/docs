@@ -24,7 +24,7 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:title',
-						content: 'UPP-1.1 - Unified Provider Protocol',
+						content: 'UPP-1.2 - Unified Provider Protocol',
 					},
 				},
 				{
@@ -99,6 +99,8 @@ export default defineConfig({
 							items: [
 								{ label: 'Interface', slug: 'spec/llm/interface' },
 								{ label: 'Messages', slug: 'spec/llm/messages' },
+								{ label: 'Turns', slug: 'spec/llm/turns' },
+								{ label: 'Threads', slug: 'spec/llm/threads' },
 								{ label: 'Streaming', slug: 'spec/llm/streaming' },
 								{ label: 'Tools', slug: 'spec/llm/tools' },
 								{ label: 'Structured Output', slug: 'spec/llm/structured' },
@@ -107,15 +109,17 @@ export default defineConfig({
 						{ label: 'Embedding', slug: 'spec/embedding/interface' },
 						{ label: 'Image', slug: 'spec/image/interface' },
 						{ label: 'Errors', slug: 'spec/errors' },
-						{ label: 'Conformance', slug: 'spec/providers/conformance' },
-					],
-				},
-				{
-					label: 'Reference',
-					items: [
-						{ label: 'Types', slug: 'reference/types' },
-						{ label: 'Spec Compliance', slug: 'reference/spec-compliance' },
-						{ label: 'Changelog', slug: 'reference/changelog' },
+						{
+							label: 'Providers',
+							collapsed: true,
+							items: [
+								{ label: 'Conformance', slug: 'spec/providers/conformance' },
+								{ label: 'Implementation Guide', slug: 'spec/providers/implementation' },
+							],
+						},
+						{ label: 'Security', slug: 'spec/security' },
+						{ label: 'Types', slug: 'spec/types' },
+						{ label: 'Changelog', slug: 'spec/changelog' },
 					],
 				},
 			],
