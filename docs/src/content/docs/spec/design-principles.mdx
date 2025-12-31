@@ -17,7 +17,7 @@ Configuration passes through to providers unchanged. UPP does not impose its own
 
 **Rationale:** Developers should reference provider documentation directly. UPP avoids "morphic magic" that obscures what's actually sent to the API.
 
-```pseudocode
+```text
 // These parameters go directly to the Anthropic API
 claude = llm({
   model: anthropic("claude-sonnet-4-20250514"),
@@ -43,7 +43,7 @@ UPP favors explicit APIs over implicit behavior:
 | Users manage their own conversation history | No hidden state mutation |
 | System prompts declared at configuration | Not buried in message arrays |
 
-```pseudocode
+```text
 // Explicit: You choose streaming vs non-streaming
 turn = await claude.generate("Hello")  // Complete response
 stream = claude.stream("Hello")        // Streaming response
@@ -68,7 +68,7 @@ Each modality gets a purpose-built interface optimized for its use case:
   Forcing all modalities through a single interface creates awkward abstractions. An embedding API doesn't need "messages" or "tools." An image API doesn't need "conversation history."
 </Aside>
 
-```pseudocode
+```text
 // Each modality has its own optimized interface
 llm({ model: openai("gpt-4o") })
 embedding({ model: openai("text-embedding-3-small") })
@@ -87,7 +87,7 @@ While interfaces differ, providers share common infrastructure:
 | Error handling | `UPPError`, `ErrorCode` normalization |
 | HTTP utilities | SSE parsing, request building |
 
-```pseudocode
+```text
 // Same config works across modalities
 config = {
   apiKey: env.OPENAI_API_KEY,
@@ -105,13 +105,13 @@ imageGen = image({ model: openai("dall-e-3"), config: config })
 Simple use cases require minimal code. Advanced features are opt-in.
 
 **Simple case:**
-```pseudocode
+```text
 claude = llm({ model: anthropic("claude-haiku-4-20250514") })
 turn = await claude.generate("Hello!")
 ```
 
 **Full complexity when needed:**
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-sonnet-4-20250514"),
   config: {
@@ -135,7 +135,7 @@ UPP enables provider switching for common operations. However, provider-specific
   The protocol does not guarantee feature parity—it guarantees **interface consistency**. Not all features work with all providers.
 </Aside>
 
-```pseudocode
+```text
 // These work the same way
 llm({ model: anthropic("claude-sonnet-4-20250514") })
 llm({ model: openai("gpt-4o") })

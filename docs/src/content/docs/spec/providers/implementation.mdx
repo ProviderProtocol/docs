@@ -15,7 +15,7 @@ This guide covers implementing UPP-compliant providers for any vendor API.
 
 Each provider module exports a single factory that combines all modality handlers:
 
-```pseudocode
+```text
 // Provider implementation structure
 
 import { createProvider } from "upp"
@@ -42,7 +42,7 @@ export type { OpenAILLMParams, OpenAIEmbedParams, OpenAIImageParams }
 
 UPP implementations SHOULD provide a helper to create providers:
 
-```pseudocode
+```text
 function createProvider(options: CreateProviderOptions) -> Provider {
   provider = function(modelId: String) -> ModelReference {
     return { modelId: modelId, provider: provider }
@@ -96,7 +96,7 @@ UPP implementations SHOULD provide utilities for provider implementations:
 
 ### resolveApiKey
 
-```pseudocode
+```text
 resolveApiKey(config, envVar?) -> Promise<String>
 ```
 
@@ -104,7 +104,7 @@ Resolve API key from ProviderConfig, supporting string, function, or KeyStrategy
 
 ### doFetch
 
-```pseudocode
+```text
 doFetch(url, init, config) -> Promise<Response>
 ```
 
@@ -112,7 +112,7 @@ Execute fetch with retry, timeout, and error normalization. Uses `config.retrySt
 
 ### parseSSEStream
 
-```pseudocode
+```text
 parseSSEStream(body) -> AsyncGenerator<Any>
 ```
 
@@ -120,7 +120,7 @@ Parse Server-Sent Events stream into JSON objects. Handles standard SSE format w
 
 ### normalizeHttpError
 
-```pseudocode
+```text
 normalizeHttpError(response, provider, modality) -> Promise<UPPError>
 ```
 
@@ -128,7 +128,7 @@ Normalize HTTP error responses to `UPPError`. Maps HTTP status codes to appropri
 
 ## LLM Handler Pattern
 
-```pseudocode
+```text
 function createLLMHandler() -> LLMHandler {
   return {
     bind(modelId: String) -> BoundLLMModel {
@@ -173,7 +173,7 @@ function createLLMHandler() -> LLMHandler {
 
 ## Embedding Handler Pattern
 
-```pseudocode
+```text
 function createEmbeddingHandler() -> EmbeddingHandler {
   return {
     supportedInputs: ["text"],
@@ -220,7 +220,7 @@ function createEmbeddingHandler() -> EmbeddingHandler {
 
 ## Image Handler Pattern
 
-```pseudocode
+```text
 function createImageHandler() -> ImageHandler {
   return {
     bind(modelId: String) -> BoundImageModel {
@@ -279,7 +279,7 @@ function createImageHandler() -> ImageHandler {
 
 ### Object-Oriented Languages (Java, C#, PHP)
 
-```pseudocode
+```text
 // Use interfaces/abstract classes for handlers
 interface LLMHandler {
   BoundLLMModel bind(String modelId)
@@ -297,7 +297,7 @@ class OpenAIBoundLLMModel implements BoundLLMModel {
 
 ### Systems Languages (Rust, Go)
 
-```pseudocode
+```text
 // Rust: Use traits
 trait LLMHandler {
   fn bind(&self, model_id: &str) -> Box<dyn BoundLLMModel>;
@@ -311,7 +311,7 @@ type LLMHandler interface {
 
 ### Dynamic Languages (Python, Ruby, JavaScript)
 
-```pseudocode
+```text
 // Use duck typing and factory functions
 def create_llm_handler():
   def bind(model_id):
@@ -321,7 +321,7 @@ def create_llm_handler():
 
 ## Request Transformation Example
 
-```pseudocode
+```text
 function transformMessagesToVendor(messages: List<Message>) -> List<VendorMessage> {
   return messages.map(msg => {
     switch (msg.type) {
@@ -359,7 +359,7 @@ function transformMessagesToVendor(messages: List<Message>) -> List<VendorMessag
 
 ## Response Transformation Example
 
-```pseudocode
+```text
 function transformVendorResponse(data: VendorResponse) -> LLMResponse {
   choice = data.choices[0]
   message = choice.message

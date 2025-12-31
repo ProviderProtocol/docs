@@ -37,7 +37,7 @@ Messages are represented as a type hierarchy, allowing type-safe handling and pr
 
 Provider-namespaced metadata. Each provider defines its own metadata shape.
 
-```pseudocode
+```text
 {
   google: { thought_signature: "abc123..." },
   openai: { reasoning_encrypted: "..." },
@@ -109,7 +109,7 @@ Optional configuration passed to message constructors.
 
 All message types accept an optional `MessageOptions` parameter:
 
-```pseudocode
+```text
 // UserMessage construction
 UserMessage(content: String | List<UserContent>, options?: MessageOptions)
 
@@ -122,7 +122,7 @@ ToolResultMessage(results: List<ToolResult>, options?: MessageOptions)
 
 ### Examples
 
-```pseudocode
+```text
 // Text user message
 userMsg = UserMessage("Hello, world!")
 
@@ -159,7 +159,7 @@ Content blocks represent discrete pieces of content within messages.
 
 ### TextBlock
 
-```pseudocode
+```text
 {
   type: "text",
   text: "Hello, world!"
@@ -168,7 +168,7 @@ Content blocks represent discrete pieces of content within messages.
 
 ### ImageBlock
 
-```pseudocode
+```text
 {
   type: "image",
   source: ImageSource,
@@ -180,7 +180,7 @@ Content blocks represent discrete pieces of content within messages.
 
 **ImageSource Variants:**
 
-```pseudocode
+```text
 // Base64 encoded
 { type: "base64", data: "iVBORw0KGgo..." }
 
@@ -193,7 +193,7 @@ Content blocks represent discrete pieces of content within messages.
 
 ### AudioBlock
 
-```pseudocode
+```text
 {
   type: "audio",
   data: <binary data>,
@@ -204,7 +204,7 @@ Content blocks represent discrete pieces of content within messages.
 
 ### VideoBlock
 
-```pseudocode
+```text
 {
   type: "video",
   data: <binary data>,
@@ -217,7 +217,7 @@ Content blocks represent discrete pieces of content within messages.
 
 ### BinaryBlock
 
-```pseudocode
+```text
 {
   type: "binary",
   data: <binary data>,
@@ -265,7 +265,7 @@ Implementations SHOULD provide an `Image` type with factory methods:
 
 UPP implementations SHOULD provide type guard functions for message handling:
 
-```pseudocode
+```text
 isUserMessage(msg: Message) -> Boolean
 isAssistantMessage(msg: Message) -> Boolean
 isToolResultMessage(msg: Message) -> Boolean

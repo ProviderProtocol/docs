@@ -13,7 +13,7 @@ The `llm()` function creates an LLM instance for chat and completion with Large 
 
 ## Function Signature
 
-```pseudocode
+```text
 llm(options: LLMOptions) -> LLMInstance
 ```
 
@@ -44,7 +44,7 @@ The returned instance provides the following interface:
 
 ### generate() Overloads
 
-```pseudocode
+```text
 // No history - single input
 generate(input: InferenceInput) -> Promise<Turn>
 
@@ -57,7 +57,7 @@ generate(history: List<Message> | Thread, ...inputs: InferenceInput[]) -> Promis
 
 ### stream() Overloads
 
-```pseudocode
+```text
 // No history - single input
 stream(input: InferenceInput) -> StreamResult
 
@@ -70,7 +70,7 @@ stream(history: List<Message> | Thread, ...inputs: InferenceInput[]) -> StreamRe
 
 ### InferenceInput Type
 
-```pseudocode
+```text
 InferenceInput = String | Message | ContentBlock
 ```
 
@@ -81,7 +81,7 @@ InferenceInput = String | Message | ContentBlock
 - `List<Message>` or `Thread` → history
 - `String`, `Message`, or `ContentBlock` → input (no history)
 
-```pseudocode
+```text
 // No history - one-shot inference
 await claude.generate("What is 2+2?")
 
@@ -145,7 +145,7 @@ An async iterable of `StreamEvent` objects with a `response` property that resol
 
 ## Basic Usage
 
-```pseudocode
+```text
 import { llm } from "upp"
 import anthropic from "upp/anthropic"
 
@@ -164,7 +164,7 @@ print(turn.response.text)  // "The capital of France is Paris."
 
 ## Full Configuration
 
-```pseudocode
+```text
 import { llm, RoundRobinKeys, ExponentialBackoff } from "upp"
 import anthropic from "upp/anthropic"
 
@@ -189,7 +189,7 @@ claude = llm({
 
 ## Conversation Flow
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -321,7 +321,7 @@ Providers MUST handle their own metadata namespace in `Message.metadata`:
 
 **Extracting metadata from responses:**
 
-```pseudocode
+```text
 // Google provider extracting thought_signature
 message = AssistantMessage(content, toolCalls, {
   metadata: {
@@ -334,7 +334,7 @@ message = AssistantMessage(content, toolCalls, {
 
 **Including metadata in requests:**
 
-```pseudocode
+```text
 // When sending messages back to the API, providers extract their namespace
 function transformToVendor(message) {
   googleMeta = message.metadata?.google
@@ -377,7 +377,7 @@ If `structure` is provided:
 
 The provider MUST normalize errors to `UPPError`:
 
-```pseudocode
+```text
 class UPPError extends Error {
   code: ErrorCode
   provider: String

@@ -13,7 +13,7 @@ Structured outputs allow you to constrain model responses to a specific JSON sch
 
 ## Overview
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -116,7 +116,7 @@ Providers with native support handle structured outputs according to vendor APIs
 
 ## Complex Schema Example
 
-```pseudocode
+```text
 weatherSchema = {
   type: "object",
   properties: {
@@ -181,7 +181,7 @@ print(weather.forecast.length) // 3
 
 Structured outputs can be combined with tools. The final response will be structured:
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -207,7 +207,7 @@ print(turn.data)
 
 ### Data Extraction
 
-```pseudocode
+```text
 extractorSchema = {
   type: "object",
   properties: {
@@ -230,7 +230,7 @@ extractorSchema = {
 
 ### Classification
 
-```pseudocode
+```text
 classifierSchema = {
   type: "object",
   properties: {
@@ -254,7 +254,7 @@ classifierSchema = {
 
 ### API Response Generation
 
-```pseudocode
+```text
 apiResponseSchema = {
   type: "object",
   properties: {

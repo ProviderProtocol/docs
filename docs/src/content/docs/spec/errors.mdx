@@ -22,7 +22,7 @@ UPP normalizes all provider errors to a standard `UPPError` type, enabling consi
 | `statusCode` | Integer? | HTTP status code if applicable |
 | `cause` | Error? | Original underlying error |
 
-```pseudocode
+```text
 class UPPError extends Error {
   code: ErrorCode
   provider: String
@@ -83,7 +83,7 @@ Providers MUST map HTTP status codes to appropriate error codes:
 
 ## Error Handling Example
 
-```pseudocode
+```text
 import { llm, UPPError } from "upp"
 import anthropic from "upp/anthropic"
 
@@ -147,7 +147,7 @@ UPP provides pluggable retry strategies for handling transient failures.
 
 #### ExponentialBackoff
 
-```pseudocode
+```text
 ExponentialBackoff({
   maxAttempts: 5,
   initialDelay: 1000,
@@ -160,7 +160,7 @@ Increases delay exponentially between retries. Optional jitter adds randomizatio
 
 #### LinearBackoff
 
-```pseudocode
+```text
 LinearBackoff({
   maxAttempts: 3,
   delay: 2000
@@ -171,7 +171,7 @@ Fixed delay between retries.
 
 #### NoRetry
 
-```pseudocode
+```text
 NoRetry()
 ```
 
@@ -179,7 +179,7 @@ Disables automatic retries.
 
 #### TokenBucket
 
-```pseudocode
+```text
 TokenBucket({
   capacity: 100,
   refillRate: 10  // tokens per second
@@ -190,7 +190,7 @@ Pre-emptive rate limiting using token bucket algorithm.
 
 #### RetryAfterStrategy
 
-```pseudocode
+```text
 RetryAfterStrategy({
   fallbackDelay: 5000
 })
@@ -200,7 +200,7 @@ Honors server `Retry-After` headers when present.
 
 ### Custom Strategy Example
 
-```pseudocode
+```text
 class MyCustomStrategy implements RetryStrategy {
   onRetry(error, attempt) {
     if (attempt >= 5) return null  // Stop retrying
@@ -212,7 +212,7 @@ class MyCustomStrategy implements RetryStrategy {
 
 ### Using Retry Strategies
 
-```pseudocode
+```text
 import { llm, ExponentialBackoff } from "upp"
 import anthropic from "upp/anthropic"
 
@@ -243,7 +243,7 @@ UPP provides built-in key strategies for API key management, which can help with
 
 Cycles through a list of API keys in order:
 
-```pseudocode
+```text
 strategy = RoundRobinKeys(["sk-1", "sk-2", "sk-3"])
 // First call returns "sk-1", second "sk-2", third "sk-3", fourth "sk-1", etc.
 ```
@@ -252,7 +252,7 @@ strategy = RoundRobinKeys(["sk-1", "sk-2", "sk-3"])
 
 Random selection with weights:
 
-```pseudocode
+```text
 strategy = WeightedKeys([
   { key: "sk-primary", weight: 0.8 },
   { key: "sk-backup", weight: 0.2 }
@@ -264,7 +264,7 @@ strategy = WeightedKeys([
 
 Custom async key selection logic:
 
-```pseudocode
+```text
 strategy = DynamicKey(() => {
   return fetchKeyFromSecretManager()
 })
@@ -272,7 +272,7 @@ strategy = DynamicKey(() => {
 
 ### Using Key Strategies
 
-```pseudocode
+```text
 import { llm, RoundRobinKeys } from "upp"
 import anthropic from "upp/anthropic"
 

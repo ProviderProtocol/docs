@@ -13,7 +13,7 @@ The `image()` function creates an image generator instance for text-to-image gen
 
 ## Function Signature
 
-```pseudocode
+```text
 image(options: ImageOptions) -> ImageInstance
 ```
 
@@ -40,7 +40,7 @@ image(options: ImageOptions) -> ImageInstance
 
 ### ImagePrompt Type
 
-```pseudocode
+```text
 ImagePrompt = String | {
   prompt: String,
   negativePrompt: String?,
@@ -100,7 +100,7 @@ ImagePrompt = String | {
 
 ### ImageStreamEvent Types
 
-```pseudocode
+```text
 // Progress event
 { type: "progress", percent: Integer, stage: String? }
 
@@ -232,7 +232,7 @@ An async iterable of `ImageStreamEvent` objects with a `response` property that 
 
 ## Basic Usage
 
-```pseudocode
+```text
 import { image } from "upp"
 import openai from "upp/openai"
 
@@ -260,7 +260,7 @@ await writeFile("sunset.png", imageData)
 
 ## Advanced Generation
 
-```pseudocode
+```text
 import { image } from "upp"
 import stability from "upp/stability"
 
@@ -294,7 +294,7 @@ for (i, img) in enumerate(result.images) {
 
 ## Image Editing
 
-```pseudocode
+```text
 // Check if editing is supported
 if (dalle.capabilities.edit && dalle.edit) {
   edited = await dalle.edit({
@@ -309,7 +309,7 @@ if (dalle.capabilities.edit && dalle.edit) {
 
 ## Image Variations
 
-```pseudocode
+```text
 // Check if variations are supported
 if (dalle.capabilities.vary && dalle.vary) {
   variations = await dalle.vary({
@@ -326,7 +326,7 @@ if (dalle.capabilities.vary && dalle.vary) {
 
 ## Streaming Progress
 
-```pseudocode
+```text
 // Check if streaming is supported
 if (sd.stream) {
   stream = sd.stream({
@@ -357,7 +357,7 @@ if (sd.stream) {
 
 Each provider exports its own parameter types (e.g., `OpenAIImageParams`, `StabilityImageParams`). Consult provider documentation for available options.
 
-```pseudocode
+```text
 // OpenAI DALL-E params (OpenAIImageParams)
 {
   size: "1024x1024" | "1792x1024" | "1024x1792",
@@ -376,7 +376,7 @@ Each provider exports its own parameter types (e.g., `OpenAIImageParams`, `Stabi
 
 ## Capability Detection
 
-```pseudocode
+```text
 // Check capabilities before using optional features
 if (imageGen.capabilities.edit && imageGen.edit) {
   // Safe to use edit

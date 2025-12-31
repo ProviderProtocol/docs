@@ -47,7 +47,7 @@ UPP implementations SHOULD export both a namespace object and individual functio
 
 ### Namespace Style (Recommended)
 
-```pseudocode
+```text
 import ai from "upp"
 import anthropic from "upp/anthropic"
 import voyage from "upp/voyage"
@@ -64,7 +64,7 @@ embedder = ai.embedding({
 
 ### Direct Import Style
 
-```pseudocode
+```text
 import { llm, embedding } from "upp"
 import openai from "upp/openai"
 
@@ -74,7 +74,7 @@ embedder = embedding({ model: openai("text-embedding-3-small") })
 
 ### Mix and Match
 
-```pseudocode
+```text
 import { ai, llm } from "upp"
 
 // Use direct import for frequently-used functions
@@ -88,7 +88,7 @@ imageGen = ai.image({ ... })
 
 A provider exports a single factory function that returns a `ModelReference`. The same factory works with any modality—the model ID determines which handler is used.
 
-```pseudocode
+```text
 import openai from "upp/openai"
 import anthropic from "upp/anthropic"
 import stability from "upp/stability"
@@ -107,7 +107,7 @@ image({ model: stability("stable-diffusion-xl-1024-v1-0") })
 
 Internally, each provider combines modality handlers:
 
-```pseudocode
+```text
 // Provider implementation structure
 openai_provider = createProvider({
   name: "openai",
@@ -140,7 +140,7 @@ The provider is also callable as a function:
 
 Some providers may offer additional options for vendor-specific operational choices—for example, selecting between different API variants. These options are passed to the **provider factory function**, not to `ProviderConfig`:
 
-```pseudocode
+```text
 // Provider factory signature with optional options
 providerFactory(modelId: String, options?: ProviderOptions) -> ModelReference
 ```
@@ -167,7 +167,7 @@ The `api` option allows selecting between OpenAI's API variants:
 
 **Usage:**
 
-```pseudocode
+```text
 // Use the modern Responses API (default)
 gpt = llm({
   model: openai("gpt-4o")
@@ -198,7 +198,7 @@ Provider options should be:
   Use provider options for operational choices that don't change the fundamental provider identity (e.g., API version selection). Use separate provider modules for distinct services or deployments.
 </Aside>
 
-```pseudocode
+```text
 // Provider as function
 modelRef = provider(modelId, options?)
 
@@ -247,7 +247,7 @@ UPP separates configuration into distinct layers:
 | **Model Params** | Model behavior parameters | No (modality-specific) |
 | **Modality Options** | Interface-specific settings | No |
 
-```pseudocode
+```text
 import openai from "upp/openai"
 
 // Provider config is shared
@@ -300,7 +300,7 @@ The `ProviderConfig` structure contains infrastructure and connection settings s
 
 Each modality handler has a `bind` method that creates an executable bound model:
 
-```pseudocode
+```text
 // LLMHandler
 interface LLMHandler {
   bind(modelId: String) -> BoundLLMModel
@@ -322,7 +322,7 @@ interface ImageHandler {
 
 Providers are imported from their respective modules:
 
-```pseudocode
+```text
 import openai from "upp/openai"
 import anthropic from "upp/anthropic"
 import google from "upp/google"

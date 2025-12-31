@@ -54,7 +54,7 @@ A `Turn` represents the complete result of one inference call, including all mes
 
 When tools are involved, the turn contains all intermediate messages:
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -86,7 +86,7 @@ history.push(...turn.messages)
 
 When no tools are called, the turn contains just the user input and assistant response:
 
-```pseudocode
+```text
 turn = await claude.generate("Hello!")
 
 print(turn.messages.length)       // 2
@@ -116,7 +116,7 @@ Turn with tools:
 
 ## Accessing Turn Data
 
-```pseudocode
+```text
 // The response property is a convenience accessor for the final AssistantMessage
 print(turn.response.text)
 
@@ -154,7 +154,7 @@ if (turn.usage.cycles) {
 
 The standard pattern for managing conversation history:
 
-```pseudocode
+```text
 history = []
 
 // First turn

@@ -41,7 +41,7 @@ The following types are assumed to be provided by the host language or runtime e
 
 ## Modality Types
 
-```pseudocode
+```text
 Modality = "llm" | "embedding" | "image" | "audio" | "video"
 ```
 
@@ -242,7 +242,7 @@ These utilities are optional but recommended for embedding applications:
 
 Each provider module exports a single factory function, provider options types (if applicable), and modality-specific parameter types. The model ID passed to the factory determines which modality handler is used.
 
-```pseudocode
+```text
 // Pattern: "upp/{provider}"
 import openai from "upp/openai"
 import anthropic from "upp/anthropic"

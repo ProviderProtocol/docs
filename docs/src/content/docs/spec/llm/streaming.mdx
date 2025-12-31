@@ -58,7 +58,7 @@ During streaming, providers emit `StreamEvent` objects:
 
 ## Basic Streaming Usage
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -85,7 +85,7 @@ history.push(...turn.messages)
 
 When tools are involved, streaming may pause while tools execute:
 
-```pseudocode
+```text
 stream = claude.stream(history, "What is the weather in Paris?")
 
 for await (event in stream) {
@@ -109,7 +109,7 @@ print("Tool executions:", turn.toolExecutions)
 
 ## Aborting Streams
 
-```pseudocode
+```text
 stream = claude.stream(history, "Write a very long story...")
 
 // Cancel after 5 seconds
@@ -169,7 +169,7 @@ message_stop
 
 ## Complete Streaming Example
 
-```pseudocode
+```text
 import { llm } from "upp"
 import anthropic from "upp/anthropic"
 
@@ -221,7 +221,7 @@ turn = await streamResponse("Write a poem about the ocean")
 
 Models may produce multiple content blocks in a single response:
 
-```pseudocode
+```text
 stream = claude.stream("Describe this image:", imageBlock)
 
 currentBlockIndex = -1

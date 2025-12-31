@@ -43,7 +43,7 @@ import { Aside, Badge } from '@astrojs/starlight/components';
 
 ## Basic Usage
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -74,7 +74,7 @@ restored = Thread.fromJSON(storage.get("conversation"))
 
 Threads are optional—you can use plain arrays:
 
-```pseudocode
+```text
 messages = []
 
 turn = await claude.generate(messages, "Hello!")
@@ -89,7 +89,7 @@ messages.push(...turn.messages)
 
 Thread is iterable, allowing direct use in loops:
 
-```pseudocode
+```text
 thread = Thread()
 // ... add messages ...
 
@@ -105,7 +105,7 @@ assistantMessages = thread.filter("assistant")
 
 ## Thread Manipulation
 
-```pseudocode
+```text
 thread = Thread()
 
 // Add messages via convenience methods
@@ -151,7 +151,7 @@ thread.clear()
 
 ### Serialization Example
 
-```pseudocode
+```text
 // ThreadJSON
 {
   id: "thread_abc123",
@@ -173,7 +173,7 @@ thread.clear()
 
 ## Persistence Example
 
-```pseudocode
+```text
 // Save conversation to database
 async function saveConversation(thread, userId) {
   json = thread.toJSON()
@@ -205,7 +205,7 @@ await saveConversation(thread, currentUser.id)
 
 For long conversations, you may need to manage context:
 
-```pseudocode
+```text
 // Simple sliding window
 function getContextWindow(thread, maxMessages) {
   if (thread.length <= maxMessages) {

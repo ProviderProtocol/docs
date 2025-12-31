@@ -23,7 +23,7 @@ Tools allow LLMs to interact with external systems, execute code, and access rea
 
 ### JSONSchema Structure (for tool parameters)
 
-```pseudocode
+```text
 {
   type: "object",
   properties: {
@@ -43,7 +43,7 @@ Tools allow LLMs to interact with external systems, execute code, and access rea
 
 ## Tool Example
 
-```pseudocode
+```text
 getWeather = {
   name: "getWeather",
   description: "Get current weather for a location",
@@ -80,7 +80,7 @@ claude = llm({
 
 For sensitive operations, tools can require approval:
 
-```pseudocode
+```text
 deleteFile = {
   name: "deleteFile",
   description: "Delete a file from the filesystem",
@@ -141,7 +141,7 @@ For custom control over tool execution:
 
 ### Strategy Example
 
-```pseudocode
+```text
 strategy = {
   maxIterations: 5,
 
@@ -175,7 +175,7 @@ claude = llm({
 
 To handle tool calls manually:
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -198,7 +198,7 @@ if (turn.response.hasToolCalls) {
 
 Models may request multiple tool calls in a single response. `llm()` executes them in parallel by default:
 
-```pseudocode
+```text
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
   config: { apiKey: env.ANTHROPIC_API_KEY },
@@ -216,7 +216,7 @@ turn = await claude.generate(
 
 ## Complex Tool Example
 
-```pseudocode
+```text
 searchDatabase = {
   name: "searchDatabase",
   description: "Search the product database",
@@ -278,7 +278,7 @@ searchDatabase = {
 
 ### Safe Tool Implementation
 
-```pseudocode
+```text
 readFile = {
   name: "readFile",
   description: "Read a file from the allowed directory",

@@ -26,7 +26,7 @@ This section outlines security considerations for UPP implementations and applic
 
 ### Secure Key Configuration
 
-```pseudocode
+```text
 // Good: Environment variable
 config = { apiKey: env.ANTHROPIC_API_KEY }
 
@@ -56,7 +56,7 @@ Tools execute arbitrary code based on LLM-provided arguments. This creates signi
 
 ### Secure Tool Implementation
 
-```pseudocode
+```text
 readFile = {
   name: "readFile",
   description: "Read a file from the allowed directory",
@@ -102,7 +102,7 @@ readFile = {
 
 For dangerous operations, require explicit approval:
 
-```pseudocode
+```text
 executeCommand = {
   name: "executeCommand",
   description: "Execute a shell command",
@@ -137,7 +137,7 @@ executeCommand = {
 | Size limits | Large content SHOULD be size-limited |
 | Content filtering | Content filtering errors SHOULD be handled gracefully |
 
-```pseudocode
+```text
 function processImageInput(image: Image) {
   // Validate MIME type
   allowedTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"]
@@ -165,7 +165,7 @@ function processImageInput(image: Image) {
 | Proxy validation | Proxy configurations SHOULD be carefully validated |
 | Timeout settings | Prevent resource exhaustion |
 
-```pseudocode
+```text
 // Good: HTTPS by default
 config = {
   baseUrl: "https://api.anthropic.com"
@@ -194,7 +194,7 @@ Structured output data comes from the model and should not be implicitly trusted
 | Schema validation | Schema validation is the application's responsibility |
 | Untrusted data | Like tool arguments, structured output should be treated as potentially untrusted |
 
-```pseudocode
+```text
 // Get structured output
 turn = await claude.generate("Extract user data from: John, admin, password123")
 
@@ -222,7 +222,7 @@ if (userData.role === "admin") {
 
 LLMs can be susceptible to prompt injection attacks where user input manipulates the model's behavior.
 
-```pseudocode
+```text
 // Vulnerable: Direct user input in prompt
 userInput = request.body.message
 await claude.generate("Help the user: " + userInput)
@@ -243,7 +243,7 @@ await claude.generate({
 
 If tools interact with databases, protect against SQL injection:
 
-```pseudocode
+```text
 // WRONG: String concatenation
 searchProducts = {
   name: "searchProducts",
@@ -264,7 +264,7 @@ searchProducts = {
 
 ## Rate Limiting and Resource Protection
 
-```pseudocode
+```text
 // Protect against resource exhaustion
 claude = llm({
   model: anthropic("claude-haiku-4-20250514"),
