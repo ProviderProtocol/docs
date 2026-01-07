@@ -13,7 +13,7 @@ export default defineConfig({
 					baseUrl: 'https://providerprotocol.org/',
 				}),
 			],
-			title: 'UPP',
+			title: 'Provider Protocol',
 			description: 'Unified Provider Protocol - A standard for multi-provider AI interoperability',
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/ProviderProtocol' },
@@ -51,45 +51,81 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'API Reference',
+					label: 'SDK Reference',
+					collapsed: false,
 					items: [
-						{ label: 'Overview', slug: 'api/overview' },
+						{ label: 'Overview', slug: 'sdk' },
 						{
-							label: 'Core',
+							label: '@providerprotocol/ai',
 							collapsed: true,
 							items: [
-								{ label: 'llm()', slug: 'api/core/llm' },
-								{ label: 'createProvider()', slug: 'api/core/provider' },
-								{ label: 'Image', slug: 'api/core/image' },
+								{ label: 'llm()', slug: 'sdk/core/functions/llm' },
+								{ label: 'createProvider()', slug: 'sdk/core/functions/createprovider' },
+								{
+									label: 'Classes',
+									collapsed: true,
+									items: [
+										{ label: 'Thread', slug: 'sdk/core/classes/thread' },
+										{ label: 'Message', slug: 'sdk/core/classes/message' },
+										{ label: 'UserMessage', slug: 'sdk/core/classes/usermessage' },
+										{ label: 'AssistantMessage', slug: 'sdk/core/classes/assistantmessage' },
+										{ label: 'ToolResultMessage', slug: 'sdk/core/classes/toolresultmessage' },
+										{ label: 'Image', slug: 'sdk/core/classes/image' },
+										{ label: 'UPPError', slug: 'sdk/core/classes/upperror' },
+									],
+								},
+								{
+									label: 'Interfaces',
+									collapsed: true,
+									autogenerate: { directory: 'sdk/core/interfaces' },
+								},
+								{
+									label: 'Types',
+									collapsed: true,
+									autogenerate: { directory: 'sdk/core/type-aliases' },
+								},
 							],
 						},
 						{
-							label: 'Types',
+							label: '/anthropic',
 							collapsed: true,
-							items: [
-								{ label: 'Messages', slug: 'api/types/messages' },
-								{ label: 'Turn', slug: 'api/types/turn' },
-								{ label: 'Thread', slug: 'api/types/thread' },
-								{ label: 'Streaming', slug: 'api/types/stream' },
-								{ label: 'Tool', slug: 'api/types/tool' },
-							],
+							autogenerate: { directory: 'sdk/anthropic' },
 						},
 						{
-							label: 'Providers',
+							label: '/openai',
 							collapsed: true,
-							items: [
-								{ label: 'Anthropic', slug: 'api/providers/anthropic' },
-								{ label: 'OpenAI', slug: 'api/providers/openai' },
-								{ label: 'OpenRouter', slug: 'api/providers/openrouter' },
-								{ label: 'Google', slug: 'api/providers/google' },
-								{ label: 'Ollama', slug: 'api/providers/ollama' },
-							],
+							autogenerate: { directory: 'sdk/openai' },
 						},
-						{ label: 'Errors', slug: 'api/errors' },
+						{
+							label: '/google',
+							collapsed: true,
+							autogenerate: { directory: 'sdk/google' },
+						},
+						{
+							label: '/ollama',
+							collapsed: true,
+							autogenerate: { directory: 'sdk/ollama' },
+						},
+						{
+							label: '/openrouter',
+							collapsed: true,
+							autogenerate: { directory: 'sdk/openrouter' },
+						},
+						{
+							label: '/xai',
+							collapsed: true,
+							autogenerate: { directory: 'sdk/xai' },
+						},
+						{
+							label: '/http',
+							collapsed: true,
+							autogenerate: { directory: 'sdk/http' },
+						},
 					],
 				},
 				{
 					label: 'Specification',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'spec/overview' },
 						{ label: 'Design Principles', slug: 'spec/design-principles' },

@@ -1,0 +1,166 @@
+---
+title: "Interface: XAIResponsesParams"
+---
+
+[**@providerprotocol/ai**](../../README.md)
+
+***
+
+[@providerprotocol/ai](../../modules.md) / [xai](../README.md) / XAIResponsesParams
+
+# Interface: XAIResponsesParams
+
+Defined in: [src/providers/xai/types.ts:105](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L105)
+
+xAI Responses API parameters (OpenAI Responses-compatible).
+
+These parameters are passed through to the xAI `/v1/responses` endpoint.
+The Responses API provides stateful conversation support with features like
+`previous_response_id` for continuing conversations across requests.
+
+## Example
+
+```typescript
+const params: XAIResponsesParams = {
+  max_output_tokens: 1000,
+  temperature: 0.7,
+  store: true, // Enable stateful storage
+  previous_response_id: 'resp_123...', // Continue previous conversation
+};
+```
+
+## See
+
+ - [XAICompletionsParams](XAICompletionsParams.md) for Chat Completions API parameters
+ - [XAIMessagesParams](XAIMessagesParams.md) for Messages API parameters
+
+## Properties
+
+### include?
+
+> `optional` **include**: `string`[]
+
+Defined in: [src/providers/xai/types.ts:129](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L129)
+
+Fields to include in output
+
+***
+
+### max\_output\_tokens?
+
+> `optional` **max\_output\_tokens**: `number`
+
+Defined in: [src/providers/xai/types.ts:107](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L107)
+
+Maximum output tokens
+
+***
+
+### metadata?
+
+> `optional` **metadata**: `Record`\<`string`, `string`\>
+
+Defined in: [src/providers/xai/types.ts:141](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L141)
+
+Metadata key-value pairs
+
+***
+
+### parallel\_tool\_calls?
+
+> `optional` **parallel\_tool\_calls**: `boolean`
+
+Defined in: [src/providers/xai/types.ts:116](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L116)
+
+Whether to enable parallel tool calls
+
+***
+
+### previous\_response\_id?
+
+> `optional` **previous\_response\_id**: `string`
+
+Defined in: [src/providers/xai/types.ts:132](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L132)
+
+Continue from a previous response
+
+***
+
+### reasoning?
+
+> `optional` **reasoning**: `object`
+
+Defined in: [src/providers/xai/types.ts:119](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L119)
+
+Reasoning configuration
+
+#### effort?
+
+> `optional` **effort**: `"high"` \| `"low"`
+
+#### encrypted\_content?
+
+> `optional` **encrypted\_content**: `boolean`
+
+Include encrypted reasoning content for continuation
+
+***
+
+### search\_parameters?
+
+> `optional` **search\_parameters**: [`XAISearchParameters`](XAISearchParameters.md)
+
+Defined in: [src/providers/xai/types.ts:147](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L147)
+
+Live Search parameters (deprecated, will be removed Dec 15, 2025)
+Use Agent Tools API instead for new implementations
+
+***
+
+### store?
+
+> `optional` **store**: `boolean`
+
+Defined in: [src/providers/xai/types.ts:135](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L135)
+
+Store response for continuation
+
+***
+
+### store\_messages?
+
+> `optional` **store\_messages**: `boolean`
+
+Defined in: [src/providers/xai/types.ts:138](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L138)
+
+Store messages on xAI servers (default: true)
+
+***
+
+### temperature?
+
+> `optional` **temperature**: `number`
+
+Defined in: [src/providers/xai/types.ts:110](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L110)
+
+Temperature for randomness (0.0 - 2.0)
+
+***
+
+### top\_p?
+
+> `optional` **top\_p**: `number`
+
+Defined in: [src/providers/xai/types.ts:113](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L113)
+
+Top-p (nucleus) sampling (0.0 - 1.0)
+
+***
+
+### truncation?
+
+> `optional` **truncation**: `"auto"` \| `"disabled"`
+
+Defined in: [src/providers/xai/types.ts:126](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/providers/xai/types.ts#L126)
+
+Truncation strategy

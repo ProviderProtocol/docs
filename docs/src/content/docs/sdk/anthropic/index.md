@@ -1,0 +1,42 @@
+---
+title: "anthropic"
+---
+
+[**@providerprotocol/ai**](../README.md)
+
+***
+
+[@providerprotocol/ai](../modules.md) / anthropic
+
+# anthropic
+
+Anthropic provider for UPP (Unified Provider Protocol)
+
+This module exports the Anthropic provider for use with Claude models.
+Anthropic's Claude models are known for their strong reasoning capabilities
+and safety-focused design.
+
+## Example
+
+```ts
+import { anthropic } from '@providerprotocol/ai/anthropic';
+import { llm } from '@providerprotocol/ai';
+
+// Create an LLM instance with Claude
+const model = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  params: { max_tokens: 1000 }
+});
+
+// Generate a response
+const turn = await model.generate('Explain quantum computing.');
+console.log(turn.response.text);
+```
+
+## Interfaces
+
+- [AnthropicLLMParams](interfaces/AnthropicLLMParams.md)
+
+## Variables
+
+- [anthropic](variables/anthropic.md)
