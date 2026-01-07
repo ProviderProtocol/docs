@@ -17,7 +17,8 @@ export default defineConfig({
 			description: 'Unified Provider Protocol - A standard for multi-provider AI interoperability',
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/ProviderProtocol' },
-				{ icon: 'npm', label: 'NPM', href: 'https://www.npmjs.com/package/@providerprotocol/ai' },
+				{ icon: 'rocket', label: 'AI SDK', href: 'https://www.npmjs.com/package/@providerprotocol/ai' },
+				{ icon: 'puzzle', label: 'Agents SDK', href: 'https://www.npmjs.com/package/@providerprotocol/agents' },
 			],
 			customCss: ['./src/styles/custom.css'],
 			head: [
