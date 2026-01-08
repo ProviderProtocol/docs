@@ -125,6 +125,51 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Agents Reference',
+					collapsed: false,
+					items: [
+						{ label: 'Overview', slug: 'agents' },
+						{
+							label: '@providerprotocol/agents',
+							collapsed: true,
+							items: [
+								{ label: 'agent()', slug: 'agents/core/functions/agent' },
+								{ label: 'AgentState', slug: 'agents/core/classes/agentstate' },
+								{
+									label: 'Interfaces',
+									collapsed: true,
+									autogenerate: { directory: 'agents/core/interfaces' },
+								},
+								{
+									label: 'Types',
+									collapsed: true,
+									autogenerate: { directory: 'agents/core/type-aliases' },
+								},
+							],
+						},
+						{
+							label: '/execution',
+							collapsed: true,
+							autogenerate: { directory: 'agents/execution' },
+						},
+						{
+							label: '/middleware',
+							collapsed: true,
+							autogenerate: { directory: 'agents/middleware' },
+						},
+						{
+							label: '/thread-tree',
+							collapsed: true,
+							autogenerate: { directory: 'agents/thread-tree' },
+						},
+						{
+							label: '/checkpoint',
+							collapsed: true,
+							autogenerate: { directory: 'agents/checkpoint' },
+						},
+					],
+				},
+				{
 					label: 'Specification',
 					collapsed: true,
 					items: [
