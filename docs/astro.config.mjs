@@ -52,77 +52,9 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'SDK Reference',
+					label: '@providerprotocol/ai',
 					collapsed: false,
-					items: [
-						{ label: 'Overview', slug: 'sdk' },
-						{
-							label: '@providerprotocol/ai',
-							collapsed: true,
-							items: [
-								{ label: 'llm()', slug: 'sdk/core/functions/llm' },
-								{ label: 'createProvider()', slug: 'sdk/core/functions/createprovider' },
-								{
-									label: 'Classes',
-									collapsed: true,
-									items: [
-										{ label: 'Thread', slug: 'sdk/core/classes/thread' },
-										{ label: 'Message', slug: 'sdk/core/classes/message' },
-										{ label: 'UserMessage', slug: 'sdk/core/classes/usermessage' },
-										{ label: 'AssistantMessage', slug: 'sdk/core/classes/assistantmessage' },
-										{ label: 'ToolResultMessage', slug: 'sdk/core/classes/toolresultmessage' },
-										{ label: 'Image', slug: 'sdk/core/classes/image' },
-										{ label: 'UPPError', slug: 'sdk/core/classes/upperror' },
-									],
-								},
-								{
-									label: 'Interfaces',
-									collapsed: true,
-									autogenerate: { directory: 'sdk/core/interfaces' },
-								},
-								{
-									label: 'Types',
-									collapsed: true,
-									autogenerate: { directory: 'sdk/core/type-aliases' },
-								},
-							],
-						},
-						{
-							label: '/anthropic',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/anthropic' },
-						},
-						{
-							label: '/openai',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/openai' },
-						},
-						{
-							label: '/google',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/google' },
-						},
-						{
-							label: '/ollama',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/ollama' },
-						},
-						{
-							label: '/openrouter',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/openrouter' },
-						},
-						{
-							label: '/xai',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/xai' },
-						},
-						{
-							label: '/http',
-							collapsed: true,
-							autogenerate: { directory: 'sdk/http' },
-						},
-					],
+					autogenerate: { directory: 'ai' },
 				},
 				{
 					label: 'Agents Reference',

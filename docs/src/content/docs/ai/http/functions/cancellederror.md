@@ -1,0 +1,40 @@
+---
+title: "Function: cancelledError()"
+---
+
+[**@providerprotocol/ai**](../../index.md)
+
+***
+
+[@providerprotocol/ai](./index.md) / [http](../index.md) / cancelledError
+
+# Function: cancelledError()
+
+> **cancelledError**(`provider`, `modality`): [`UPPError`](../../core/classes/upperror.md)
+
+Defined in: [src/http/errors.ts:181](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/http/errors.ts#L181)
+
+Creates a UPPError for user-initiated request cancellation.
+
+Use this when the request is aborted via a user-provided AbortSignal,
+distinct from timeout-based cancellation.
+
+## Parameters
+
+### provider
+
+`string`
+
+Provider identifier for error context
+
+### modality
+
+[`Modality`](../../core/type-aliases/modality.md)
+
+Request modality for error context
+
+## Returns
+
+[`UPPError`](../../core/classes/upperror.md)
+
+A UPPError with CANCELLED code
