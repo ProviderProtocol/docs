@@ -1,0 +1,56 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isHomePage = Astro.props.slug === '' || Astro.props.slug === 'index';
+---
+
+{!isHomePage && <Default {...Astro.props}><slot /></Default>}
+
+<div class="terminal-copyright">
+  <div class="terminal-line">
+    <span class="prompt">user@providerprotocol</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span> <span class="command">echo $COPYRIGHT</span>
+  </div>
+  <div class="terminal-output">@providerprotocol/2026</div>
+</div>
+
+<style>
+  .terminal-copyright {
+    background: var(--term-bg-panel, #0c0c0c);
+    border-top: 1px solid #1a1a1a;
+    padding: 1.5rem;
+    font-family: var(--sl-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .terminal-line {
+    color: var(--term-text-dim, #606060);
+    margin-bottom: 0.25rem;
+  }
+
+  .prompt {
+    color: var(--term-green, #00ff41);
+  }
+
+  .separator {
+    color: var(--term-text-dim, #606060);
+  }
+
+  .path {
+    color: var(--term-cyan, #00d4ff);
+  }
+
+  .dollar {
+    color: var(--term-text-dim, #606060);
+    margin-right: 0.5rem;
+  }
+
+  .command {
+    color: var(--term-text, #b0b0b0);
+  }
+
+  .terminal-output {
+    color: var(--term-text-dim, #606060);
+    padding-left: 0;
+  }
+</style>

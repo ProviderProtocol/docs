@@ -1,0 +1,332 @@
+---
+// Terminal Effects - Adds interactive terminal aesthetics
+---
+
+<script is:inline>
+// ═══════════════════════════════════════════════════════════════════════════════
+// PROVIDER PROTOCOL TERMINAL EFFECTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Terminal typing effect for certain elements
+  const initTypingEffect = () => {
+    const elements = document.querySelectorAll('.typing-effect');
+    elements.forEach(el => {
+      const text = el.textContent;
+      el.textContent = '';
+      el.style.visibility = 'visible';
+
+      let i = 0;
+      const typeChar = () => {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeChar, 30 + Math.random() * 50);
+        }
+      };
+      typeChar();
+    });
+  };
+
+  // Add terminal cursor to focused inputs
+  const initTerminalInputs = () => {
+    document.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('focus', () => {
+        input.classList.add('terminal-active');
+      });
+      input.addEventListener('blur', () => {
+        input.classList.remove('terminal-active');
+      });
+    });
+  };
+
+  // Glitch effect on hover for certain elements (subtle)
+  const initGlitchEffect = () => {
+    const glitchElements = document.querySelectorAll('.glitch-hover');
+    glitchElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
+        setTimeout(() => {
+          el.style.transform = 'translate(0, 0)';
+        }, 50);
+      });
+    });
+  };
+
+  // Random scanline intensity variation
+  const initScanlineVariation = () => {
+    const vary = () => {
+      const variation = 0.02 + Math.random() * 0.02;
+      document.documentElement.style.setProperty('--scanline-opacity', variation.toString());
+      setTimeout(vary, 2000 + Math.random() * 3000);
+    };
+    vary();
+  };
+
+  // CRT screen warm-up effect on page load
+  const initWarmupEffect = () => {
+    const body = document.body;
+    body.style.filter = 'brightness(0.8)';
+    setTimeout(() => {
+      body.style.transition = 'filter 0.5s ease';
+      body.style.filter = 'brightness(1)';
+    }, 100);
+  };
+
+  // Terminal command easter egg in console
+  const initConsoleEasterEgg = () => {
+    console.log('%c╔═══════════════════════════════════════════════════════════════════╗', 'color: #00ff41');
+    console.log('%c║                                                                   ║', 'color: #00ff41');
+    console.log('%c║   PROVIDER PROTOCOL TERMINAL v1.2.0                               ║', 'color: #00ff41');
+    console.log('%c║   System initialized successfully                                 ║', 'color: #00ff41');
+    console.log('%c║                                                                   ║', 'color: #00ff41');
+    console.log('%c║   > Welcome to the documentation terminal                         ║', 'color: #00cc33');
+    console.log('%c║   > Type "help" in your mind for guidance                         ║', 'color: #00cc33');
+    console.log('%c║                                                                   ║', 'color: #00ff41');
+    console.log('%c╚═══════════════════════════════════════════════════════════════════╝', 'color: #00ff41');
+  };
+
+  // Matrix-style random character in background (very subtle)
+  const initMatrixRain = () => {
+    // Only on home page and if user hasn't disabled animations
+    if (!document.querySelector('.hero')) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrix-bg';
+    canvas.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.03;
+    `;
+    document.body.prepend(canvas);
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ff41';
+      ctx.font = `${fontSize}px monospace`;
+
+      drops.forEach((y, i) => {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * fontSize, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      });
+    };
+
+    setInterval(draw, 100);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  };
+
+  // Initialize subtle sound effects (opt-in via data attribute)
+  const initSoundEffects = () => {
+    // Create audio context on first user interaction
+    let audioCtx = null;
+
+    const playKeystroke = () => {
+      if (!audioCtx) return;
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      oscillator.frequency.value = 800 + Math.random() * 200;
+      oscillator.type = 'square';
+      gainNode.gain.value = 0.02;
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+
+      oscillator.start(audioCtx.currentTime);
+      oscillator.stop(audioCtx.currentTime + 0.05);
+    };
+
+    // Enable audio on first click if data-terminal-sounds is set
+    document.addEventListener('click', () => {
+      if (!audioCtx && document.body.dataset.terminalSounds === 'enabled') {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }, { once: true });
+
+    // Keystroke sounds for inputs (if enabled)
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('keydown', playKeystroke);
+    });
+  };
+
+  // Add terminal status to page title
+  const initDynamicTitle = () => {
+    const originalTitle = document.title;
+    let blink = true;
+
+    setInterval(() => {
+      document.title = blink ? `> ${originalTitle}_` : `> ${originalTitle}`;
+      blink = !blink;
+    }, 1000);
+  };
+
+  // Initialize all effects
+  initWarmupEffect();
+  initConsoleEasterEgg();
+  initTerminalInputs();
+  initGlitchEffect();
+  // initMatrixRain(); // Uncomment for subtle matrix background
+  // initDynamicTitle(); // Uncomment for blinking cursor in title
+  // initScanlineVariation(); // Uncomment for varying scanlines
+});
+
+// Handle page transitions (for Astro View Transitions)
+document.addEventListener('astro:page-load', () => {
+  // Re-initialize effects after page navigation
+  document.body.style.filter = 'brightness(0.9)';
+  setTimeout(() => {
+    document.body.style.transition = 'filter 0.3s ease';
+    document.body.style.filter = 'brightness(1)';
+  }, 50);
+});
+</script>
+
+<style is:global>
+/* Additional terminal styles injected via component */
+
+/* Terminal input styling */
+.terminal-active {
+  caret-color: var(--term-green) !important;
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { caret-color: var(--term-green); }
+  51%, 100% { caret-color: transparent; }
+}
+
+/* Typing effect initial state */
+.typing-effect {
+  visibility: hidden;
+}
+
+/* Search modal terminal styling */
+dialog[open] {
+  animation: terminal-open 0.2s ease;
+}
+
+@keyframes terminal-open {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Terminal prompt styling for search */
+.search-inner::before {
+  content: '>';
+  color: var(--term-green);
+  margin-right: 0.5rem;
+  font-family: var(--sl-font-mono);
+}
+
+/* Status indicator for loading states */
+.loading-terminal::after {
+  content: '...';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+/* Error state styling */
+.error-terminal {
+  color: var(--term-red) !important;
+  text-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+}
+
+/* Success state styling */
+.success-terminal {
+  color: var(--term-green) !important;
+  text-shadow: 0 0 10px var(--term-green-glow);
+}
+
+/* Blink animation for important elements */
+.blink-terminal {
+  animation: terminal-blink 1s step-end infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+/* Terminal window chrome effect */
+.terminal-window {
+  position: relative;
+  background: var(--term-bg);
+  border: 1px solid var(--term-green-dim);
+  padding: 0;
+}
+
+.terminal-window::before {
+  content: '[ TERMINAL ] ─────────────────────────────────────────';
+  display: block;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-bottom: 1px solid var(--term-green-dim);
+  padding: 0.5rem 1rem;
+  font-family: var(--sl-font-mono);
+  font-size: 0.7rem;
+  color: var(--term-green-dim);
+  letter-spacing: 0.05em;
+}
+
+.terminal-window-content {
+  padding: 1rem;
+}
+
+/* Retro monitor curve effect (optional, add class to body) */
+.crt-curve {
+  border-radius: 20px / 15px;
+  box-shadow:
+    inset 0 0 100px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+/* Noise overlay (very subtle) */
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+</style>

@@ -3,96 +3,138 @@ title: Provider Protocol
 description: A first-generation standard for simplifying AI inference and enabling multi-provider interoperability.
 template: splash
 hero:
-  tagline: Provider Protocol provides uniform interfaces for interacting with LLMs, Embeddings, and Image Generation across providers.
+  tagline: "// Unified interfaces for LLM and Embedding across providers"
   actions:
-    - text: Get Started
+    - text: "$ ./init --start"
       link: /introduction/
       icon: right-arrow
       variant: primary
-    - text: View on GitHub
+    - text: "$ git clone"
       link: https://github.com/ProviderProtocol/ai
       icon: external
 ---
 
 import { Badge, Card, CardGrid } from '@astrojs/starlight/components';
 
-## Why Provider Protocol?
+<div class="boot-sequence">
+  <div class="line">[<span class="ok">OK</span>] Initializing Provider Protocol v1.2.0...</div>
+  <div class="line">[<span class="ok">OK</span>] Loading multi-provider runtime...</div>
+  <div class="line">[<span class="ok">OK</span>] Connecting to inference endpoints...</div>
+  <div class="line">[<span class="ok">OK</span>] AI interfaces ready.</div>
+  <div class="line">[<span class="ok">OK</span>] System operational. Welcome, developer.</div>
+</div>
 
-Modern AI development requires interacting with multiple providers—Anthropic, OpenAI, Google, Stability, and more—each with distinct APIs, authentication schemes, and response formats. **Provider Protocol** solves this by providing a unified protocol.
+<div style="text-align: center; margin-bottom: 3rem;">
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║     ██████╗ ██████╗  ██████╗ ██╗   ██╗██╗██████╗ ███████╗██████╗             ║
+║     ██╔══██╗██╔══██╗██╔═══██╗██║   ██║██║██╔══██╗██╔════╝██╔══██╗            ║
+║     ██████╔╝██████╔╝██║   ██║██║   ██║██║██║  ██║█████╗  ██████╔╝            ║
+║     ██╔═══╝ ██╔══██╗██║   ██║╚██╗ ██╔╝██║██║  ██║██╔══╝  ██╔══██╗            ║
+║     ██║     ██║  ██║╚██████╔╝ ╚████╔╝ ██║██████╔╝███████╗██║  ██║            ║
+║     ╚═╝     ╚═╝  ╚═╝ ╚═════╝   ╚═══╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝            ║
+║                                                                               ║
+║     ██████╗ ██████╗  ██████╗ ████████╗ ██████╗  ██████╗ ██████╗ ██╗          ║
+║     ██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝██╔═══██╗██╔════╝██╔═══██╗██║          ║
+║     ██████╔╝██████╔╝██║   ██║   ██║   ██║   ██║██║     ██║   ██║██║          ║
+║     ██╔═══╝ ██╔══██╗██║   ██║   ██║   ██║   ██║██║     ██║   ██║██║          ║
+║     ██║     ██║  ██║╚██████╔╝   ██║   ╚██████╔╝╚██████╗╚██████╔╝███████╗     ║
+║     ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝  ╚═════╝ ╚═════╝ ╚══════╝     ║
+║                                                                               ║
+║                    [ Unified Provider Protocol ]                              ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+</div>
+
+## > cat ./README.md
+
+Modern AI development requires interacting with multiple providers—**Anthropic**, **OpenAI**, **Google**, **Stability**, and more—each with distinct APIs, authentication schemes, and response formats.
+
+**Provider Protocol** solves this fragmentation by providing a unified protocol that works everywhere.
 
 <CardGrid stagger>
-	<Card title="Multi-Provider Support" icon="rocket">
+	<Card title="> providers --list" icon="rocket">
 		Switch between Anthropic, OpenAI, Google, and other providers without changing your application code.
 	</Card>
-	<Card title="Modality-Specific APIs" icon="puzzle">
-		Purpose-built interfaces for LLM (`llm()`), embeddings (`embedding()`), and image generation (`image()`).
+	<Card title="> modality --help" icon="puzzle">
+		Purpose-built interfaces: `llm()`, `embedding()`, and `image()` for each modality.
 	</Card>
-	<Card title="Provider Transparency" icon="open-book">
+	<Card title="> config --transparent" icon="open-book">
 		Configuration passes through unchanged—reference provider docs directly with no hidden transformations.
 	</Card>
-	<Card title="Shared Infrastructure" icon="setting">
+	<Card title="> utils --shared" icon="setting">
 		Common patterns for authentication, retry strategies, error handling, and HTTP utilities.
 	</Card>
 </CardGrid>
 
-## Quick Example
+## > ./demo.ts
 
 ```typescript
-import { llm, embedding, image } from '@providerprotocol/ai';
+import { llm, embedding } from '@providerprotocol/ai';
 import { anthropic } from '@providerprotocol/ai/anthropic';
 import { openai } from '@providerprotocol/ai/openai';
 
-// LLM inference
+// ┌─────────────────────────────────────────────────────────────┐
+// │ LLM INFERENCE                                               │
+// └─────────────────────────────────────────────────────────────┘
 const claude = llm({
   model: anthropic('claude-sonnet-4-20250514'),
   system: 'You are a helpful assistant.',
 });
 const turn = await claude.generate('What is the capital of France?');
 console.log(turn.response.text);
+// => "The capital of France is Paris."
 
-// Embeddings
+// ┌─────────────────────────────────────────────────────────────┐
+// │ EMBEDDINGS                                                  │
+// └─────────────────────────────────────────────────────────────┘
 const embedder = embedding({
   model: openai('text-embedding-3-large'),
 });
 const result = await embedder.embed('Hello, world!');
-console.log(result.vector.length);
-
-// Image generation
-const dalle = image({
-  model: openai('dall-e-3'),
-});
-const img = await dalle.generate('A sunset over mountains');
+console.log(`Vector dimensions: ${result.vector.length}`);
+// => "Vector dimensions: 3072"
 ```
 
-## Specification Status
+## > status --spec
 
-<Badge text="UPP-1.2.0-draft" variant="note" /> <Badge text="Current" variant="success" />
+<Badge text="UPP-1.2.0-draft" variant="note" /> <Badge text="ACTIVE" variant="success" />
 
-| Section | Status | Description |
-|---------|--------|-------------|
-| **Core Architecture** | <Badge text="Stable" variant="success" size="small" /> | Provider model, configuration, entry points |
-| **LLM Interface** | <Badge text="Stable" variant="success" size="small" /> | `llm()`, generate/stream, tools, structured output |
-| **Embedding Interface** | <Badge text="Stable" variant="success" size="small" /> | `embedding()`, batch processing, similarity utilities |
-| **Image Interface** | <Badge text="Stable" variant="success" size="small" /> | `image()`, generation, editing, variations |
-| **Error Handling** | <Badge text="Stable" variant="success" size="small" /> | UPPError, error codes, retry strategies |
-| Audio Interface | <Badge text="Planned" variant="default" size="small" /> | Future: `audio()` for speech-to-text, TTS |
-| Video Interface | <Badge text="Planned" variant="default" size="small" /> | Future: `video()` for video generation |
+| MODULE | STATUS | DESCRIPTION |
+|--------|--------|-------------|
+| **core/** | <Badge text="STABLE" variant="success" size="small" /> | Provider model, configuration, entry points |
+| **llm/** | <Badge text="STABLE" variant="success" size="small" /> | `llm()`, generate/stream, tools, structured output |
+| **embedding/** | <Badge text="STABLE" variant="success" size="small" /> | `embedding()`, batch processing, similarity utilities |
+| image/ | <Badge text="PLANNED" variant="default" size="small" /> | `image()`, generation, editing, variations |
+| **errors/** | <Badge text="STABLE" variant="success" size="small" /> | UPPError, error codes, retry strategies |
+| audio/ | <Badge text="PLANNED" variant="default" size="small" /> | Future: `audio()` for speech-to-text, TTS |
+| video/ | <Badge text="PLANNED" variant="default" size="small" /> | Future: `video()` for video generation |
 
-### Version History
+## > git log --oneline
 
-| Version | Status | Description |
-|---------|--------|-------------|
+**UPP (Unified Provider Protocol)**
+
+| VERSION | STATUS | CHANGELOG |
+|---------|--------|-----------|
 | **UPP-1.2** | Draft | Language-agnostic reformat, security section, clarifications |
 | UPP-1.1 | Draft | Multi-modality support (LLM, Embedding, Image) |
 | UPP-1.0 | Draft | Initial LLM-focused specification |
 
+**UAP (Unified Agent Protocol)**
+
+| VERSION | STATUS | CHANGELOG |
+|---------|--------|-----------|
+| **UAP-1.0** | Draft | Initial agent specification, middleware, checkpoints |
+
 ---
 
 <CardGrid>
-	<Card title="Read the Spec" icon="document">
-		Dive into the [full introduction](/introduction/) to understand UPP's goals and terminology.
+	<Card title="> man upp" icon="document">
+		Read the [full specification](/introduction/) to understand UPP's goals and terminology.
 	</Card>
-	<Card title="Start Building" icon="laptop">
-		Follow the [Quick Start guide](/quick-start/) to integrate UPP into your project.
+	<Card title="> npm start" icon="laptop">
+		Follow the [Quick Start guide](/guide/quick-start/) to integrate UPP into your project.
 	</Card>
 </CardGrid>
