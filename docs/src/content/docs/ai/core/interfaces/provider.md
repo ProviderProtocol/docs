@@ -10,7 +10,7 @@ title: "Interface: Provider()"
 
 # Interface: Provider()\<TOptions\>
 
-Defined in: [src/types/provider.ts:337](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L337)
+Defined in: [src/types/provider.ts:337](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/provider.ts#L337)
 
 Provider factory function with metadata and modality handlers.
 
@@ -45,7 +45,7 @@ Provider-specific options passed to the factory
 
 > **Provider**(`modelId`, `options?`): [`ModelReference`](modelreference.md)\<`TOptions`\>
 
-Defined in: [src/types/provider.ts:345](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L345)
+Defined in: [src/types/provider.ts:345](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/provider.ts#L345)
 
 Creates a model reference with optional provider-specific options.
 
@@ -75,7 +75,7 @@ A model reference for use with llm() or other functions
 
 > `readonly` **modalities**: `object`
 
-Defined in: [src/types/provider.ts:354](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L354)
+Defined in: [src/types/provider.ts:354](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/provider.ts#L354)
 
 Supported modalities and their handlers
 
@@ -97,7 +97,7 @@ Supported modalities and their handlers
 
 > `readonly` **name**: `string`
 
-Defined in: [src/types/provider.ts:348](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L348)
+Defined in: [src/types/provider.ts:348](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/provider.ts#L348)
 
 Provider name (e.g., 'openai', 'anthropic')
 
@@ -107,6 +107,6 @@ Provider name (e.g., 'openai', 'anthropic')
 
 > `readonly` **version**: `string`
 
-Defined in: [src/types/provider.ts:351](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L351)
+Defined in: [src/types/provider.ts:351](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/provider.ts#L351)
 
 Provider version string

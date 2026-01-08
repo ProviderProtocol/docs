@@ -10,7 +10,7 @@ title: "Interface: AgentStreamResult"
 
 # Interface: AgentStreamResult
 
-Defined in: [src/execution/types.ts:284](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L284)
+Defined in: [src/execution/types.ts:284](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L284)
 
 Streaming result from agent execution providing async iteration and final result access.
 
@@ -42,7 +42,7 @@ stream.abort();
 
 > **result**: `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/execution/types.ts:288](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L288)
+Defined in: [src/execution/types.ts:288](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L288)
 
 Promise that resolves to the final result after stream completes
 
@@ -52,7 +52,7 @@ Promise that resolves to the final result after stream completes
 
 > **\[asyncIterator\]**(): `AsyncIterator`\<[`AgentStreamEvent`](agentstreamevent.md)\>
 
-Defined in: [src/execution/types.ts:286](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L286)
+Defined in: [src/execution/types.ts:286](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L286)
 
 Async iterator for consuming stream events
 
@@ -66,7 +66,7 @@ Async iterator for consuming stream events
 
 > **abort**(): `void`
 
-Defined in: [src/execution/types.ts:290](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L290)
+Defined in: [src/execution/types.ts:290](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L290)
 
 Abort the stream and cancel execution
 

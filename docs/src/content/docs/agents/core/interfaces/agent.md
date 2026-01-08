@@ -10,7 +10,7 @@ title: "Interface: Agent"
 
 # Interface: Agent
 
-Defined in: [src/agent/types.ts:166](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L166)
+Defined in: [src/agent/types.ts:166](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L166)
 
 Core agent interface for AI-powered autonomous execution.
 
@@ -59,7 +59,7 @@ console.log(result2.turn.response.text); // "Alice"
 
 > `readonly` **id**: `string`
 
-Defined in: [src/agent/types.ts:174](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L174)
+Defined in: [src/agent/types.ts:174](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L174)
 
 Unique agent identifier in UUIDv4 format.
 
@@ -74,7 +74,7 @@ tracing, and correlating agent activity across systems.
 
 > `readonly` **model**: `ModelReference`
 
-Defined in: [src/agent/types.ts:183](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L183)
+Defined in: [src/agent/types.ts:183](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L183)
 
 The model reference bound to this agent.
 
@@ -89,7 +89,7 @@ It cannot be changed after the agent is instantiated.
 
 > `readonly` `optional` **system**: `string`
 
-Defined in: [src/agent/types.ts:201](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L201)
+Defined in: [src/agent/types.ts:201](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L201)
 
 System prompt that guides agent behavior.
 
@@ -104,7 +104,7 @@ the agent responds to user inputs.
 
 > `readonly` **tools**: `Tool`\<`unknown`, `unknown`\>[]
 
-Defined in: [src/agent/types.ts:192](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L192)
+Defined in: [src/agent/types.ts:192](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L192)
 
 Tools available to this agent for execution.
 
@@ -119,7 +119,7 @@ during agent execution when the model decides to use them.
 
 > **ask**(`input`, `state`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/agent/types.ts:282](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L282)
+Defined in: [src/agent/types.ts:282](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L282)
 
 Multi-turn execution with automatic conversation history management.
 
@@ -174,7 +174,7 @@ state = result2.state;
 
 > **generate**(`input`, `state`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/agent/types.ts:223](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L223)
+Defined in: [src/agent/types.ts:223](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L223)
 
 Execute the agent and return the turn result with updated state.
 
@@ -218,7 +218,7 @@ console.log(newState.messages.length);
 
 > **query**(`input`): `Promise`\<`Turn`\<`unknown`\>\>
 
-Defined in: [src/agent/types.ts:301](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L301)
+Defined in: [src/agent/types.ts:301](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L301)
 
 Stateless single-turn execution for one-off queries.
 
@@ -254,7 +254,7 @@ console.log(turn.response.text);
 
 > **stream**(`input`, `state`): [`AgentStreamResult`](agentstreamresult.md)
 
-Defined in: [src/agent/types.ts:250](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L250)
+Defined in: [src/agent/types.ts:250](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/agent/types.ts#L250)
 
 Execute the agent with streaming response.
 

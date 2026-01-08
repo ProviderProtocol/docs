@@ -10,7 +10,7 @@ title: "Interface: Middleware"
 
 # Interface: Middleware
 
-Defined in: [src/middleware/types.ts:107](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L107)
+Defined in: [src/middleware/types.ts:107](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L107)
 
 Middleware interface for implementing cross-cutting concerns in agent execution.
 
@@ -67,7 +67,7 @@ const timingMiddleware: Middleware = {
 
 > **name**: `string`
 
-Defined in: [src/middleware/types.ts:114](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L114)
+Defined in: [src/middleware/types.ts:114](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L114)
 
 Unique name identifying this middleware.
 
@@ -80,7 +80,7 @@ and unique within the middleware chain.
 
 > `optional` **after**(`context`, `result`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/middleware/types.ts:161](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L161)
+Defined in: [src/middleware/types.ts:161](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L161)
 
 Hook called after agent execution completes successfully.
 
@@ -126,7 +126,7 @@ async after(context, result) {
 
 > `optional` **before**(`context`): `Promise`\<`void` \| [`MiddlewareContext`](middlewarecontext.md)\>
 
-Defined in: [src/middleware/types.ts:137](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L137)
+Defined in: [src/middleware/types.ts:137](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L137)
 
 Hook called before agent execution begins.
 
@@ -166,7 +166,7 @@ async before(context) {
 
 > `optional` **onError**(`context`, `error`): `Promise`\<`void` \| [`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/middleware/types.ts:192](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L192)
+Defined in: [src/middleware/types.ts:192](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L192)
 
 Hook called when an error occurs during agent execution.
 

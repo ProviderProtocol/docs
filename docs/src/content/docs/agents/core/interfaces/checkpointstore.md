@@ -10,7 +10,7 @@ title: "Interface: CheckpointStore"
 
 # Interface: CheckpointStore
 
-Defined in: [src/checkpoint/types.ts:54](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L54)
+Defined in: [src/checkpoint/types.ts:54](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L54)
 
 Interface for checkpoint storage implementations.
 
@@ -53,7 +53,7 @@ await store.delete('session-123');
 
 > **delete**(`sessionId`): `Promise`\<`void`\>
 
-Defined in: [src/checkpoint/types.ts:136](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L136)
+Defined in: [src/checkpoint/types.ts:136](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L136)
 
 Deletes all checkpoints for a session.
 
@@ -89,7 +89,7 @@ await store.delete('completed-session');
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [src/checkpoint/types.ts:161](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L161)
+Defined in: [src/checkpoint/types.ts:161](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L161)
 
 Lists all session IDs that have checkpoints.
 
@@ -124,7 +124,7 @@ for (const sessionId of sessions) {
 
 > **load**(`sessionId`): `Promise`\<[`AgentStateJSON`](agentstatejson.md) \| `null`\>
 
-Defined in: [src/checkpoint/types.ts:97](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L97)
+Defined in: [src/checkpoint/types.ts:97](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L97)
 
 Loads the most recent checkpoint for a session.
 
@@ -165,7 +165,7 @@ if (saved) {
 
 > **loadMetadata**(`sessionId`): `Promise`\<[`CheckpointMetadata`](checkpointmetadata.md) \| `null`\>
 
-Defined in: [src/checkpoint/types.ts:117](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L117)
+Defined in: [src/checkpoint/types.ts:117](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L117)
 
 Loads checkpoint metadata without loading the full state.
 
@@ -202,7 +202,7 @@ if (meta) {
 
 > **save**(`sessionId`, `state`): `Promise`\<`void`\>
 
-Defined in: [src/checkpoint/types.ts:73](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L73)
+Defined in: [src/checkpoint/types.ts:73](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L73)
 
 Saves a checkpoint of the current agent state.
 

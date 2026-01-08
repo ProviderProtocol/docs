@@ -10,7 +10,7 @@ title: "Interface: LLMResponse"
 
 # Interface: LLMResponse
 
-Defined in: [src/types/llm.ts:238](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L238)
+Defined in: [src/types/llm.ts:238](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L238)
 
 **`Internal`**
 
@@ -24,7 +24,7 @@ Does not include tool loop handling - that's managed by llm() core.
 
 > `optional` **data**: `unknown`
 
-Defined in: [src/types/llm.ts:252](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L252)
+Defined in: [src/types/llm.ts:252](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L252)
 
 Structured output data extracted by the provider.
 Present when a structure schema was requested and successfully extracted.
@@ -35,7 +35,7 @@ Present when a structure schema was requested and successfully extracted.
 
 > **message**: [`AssistantMessage`](../classes/assistantmessage.md)
 
-Defined in: [src/types/llm.ts:240](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L240)
+Defined in: [src/types/llm.ts:240](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L240)
 
 The assistant's response message
 
@@ -45,7 +45,7 @@ The assistant's response message
 
 > **stopReason**: `string`
 
-Defined in: [src/types/llm.ts:246](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L246)
+Defined in: [src/types/llm.ts:246](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L246)
 
 Stop reason from the provider
 
@@ -55,6 +55,6 @@ Stop reason from the provider
 
 > **usage**: [`TokenUsage`](tokenusage.md)
 
-Defined in: [src/types/llm.ts:243](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L243)
+Defined in: [src/types/llm.ts:243](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L243)
 
 Token usage for this cycle

@@ -10,7 +10,7 @@ title: "Interface: ToolExecutionResult"
 
 # Interface: ToolExecutionResult
 
-Defined in: [src/execution/tool-ordering.ts:277](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L277)
+Defined in: [src/execution/tool-ordering.ts:277](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L277)
 
 Result of executing a single tool call, including timing and error information.
 
@@ -24,7 +24,7 @@ Result of executing a single tool call, including timing and error information.
 
 > **call**: `ToolCall`
 
-Defined in: [src/execution/tool-ordering.ts:279](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L279)
+Defined in: [src/execution/tool-ordering.ts:279](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L279)
 
 The tool call that was executed
 
@@ -34,7 +34,7 @@ The tool call that was executed
 
 > **duration**: `number`
 
-Defined in: [src/execution/tool-ordering.ts:287](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L287)
+Defined in: [src/execution/tool-ordering.ts:287](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L287)
 
 Execution duration in milliseconds
 
@@ -44,7 +44,7 @@ Execution duration in milliseconds
 
 > `optional` **error**: `string`
 
-Defined in: [src/execution/tool-ordering.ts:285](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L285)
+Defined in: [src/execution/tool-ordering.ts:285](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L285)
 
 Error message if isError is true
 
@@ -54,7 +54,7 @@ Error message if isError is true
 
 > **isError**: `boolean`
 
-Defined in: [src/execution/tool-ordering.ts:283](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L283)
+Defined in: [src/execution/tool-ordering.ts:283](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L283)
 
 Whether the tool execution threw an error
 
@@ -64,6 +64,6 @@ Whether the tool execution threw an error
 
 > **result**: `unknown`
 
-Defined in: [src/execution/tool-ordering.ts:281](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L281)
+Defined in: [src/execution/tool-ordering.ts:281](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L281)
 
 The result returned from the tool (null if error)

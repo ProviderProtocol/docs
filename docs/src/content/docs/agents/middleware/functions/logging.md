@@ -12,7 +12,7 @@ title: "Function: logging()"
 
 > **logging**(`options`): [`Middleware`](../../core/interfaces/middleware.md)
 
-Defined in: [src/middleware/logging.ts:91](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/logging.ts#L91)
+Defined in: [src/middleware/logging.ts:91](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/logging.ts#L91)
 
 Creates a logging middleware that records agent execution activity.
 

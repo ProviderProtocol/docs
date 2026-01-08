@@ -10,7 +10,7 @@ title: "Interface: ExecutionGroup"
 
 # Interface: ExecutionGroup
 
-Defined in: [src/execution/tool-ordering.ts:14](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L14)
+Defined in: [src/execution/tool-ordering.ts:14](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L14)
 
 Represents a group of tool calls that can execute together.
 
@@ -29,7 +29,7 @@ while non-barrier groups can execute all calls in parallel.
 
 > **calls**: `ToolCall`[]
 
-Defined in: [src/execution/tool-ordering.ts:16](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L16)
+Defined in: [src/execution/tool-ordering.ts:16](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L16)
 
 Tool calls in this group that can execute together
 
@@ -39,7 +39,7 @@ Tool calls in this group that can execute together
 
 > **isBarrier**: `boolean`
 
-Defined in: [src/execution/tool-ordering.ts:22](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L22)
+Defined in: [src/execution/tool-ordering.ts:22](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L22)
 
 Whether this group contains a sequential tool (acts as barrier).
 When true, calls in this group execute one at a time.

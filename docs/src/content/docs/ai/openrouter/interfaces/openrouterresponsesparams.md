@@ -10,7 +10,7 @@ title: "Interface: OpenRouterResponsesParams"
 
 # Interface: OpenRouterResponsesParams
 
-Defined in: [src/providers/openrouter/types.ts:121](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L121)
+Defined in: [src/providers/openrouter/types.ts:121](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L121)
 
 Parameters for OpenRouter's Responses API (beta).
 
@@ -28,7 +28,7 @@ supports features like reasoning configuration.
 
 > `optional` **max\_output\_tokens**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:123](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L123)
+Defined in: [src/providers/openrouter/types.ts:123](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L123)
 
 Maximum output tokens
 
@@ -38,7 +38,7 @@ Maximum output tokens
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/openrouter/types.ts:132](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L132)
+Defined in: [src/providers/openrouter/types.ts:132](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L132)
 
 Whether to enable parallel tool calls
 
@@ -48,7 +48,7 @@ Whether to enable parallel tool calls
 
 > `optional` **reasoning**: `object`
 
-Defined in: [src/providers/openrouter/types.ts:137](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L137)
+Defined in: [src/providers/openrouter/types.ts:137](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L137)
 
 Reasoning configuration
 
@@ -62,7 +62,7 @@ Reasoning configuration
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:126](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L126)
+Defined in: [src/providers/openrouter/types.ts:126](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L126)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -72,6 +72,6 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:129](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openrouter/types.ts#L129)
+Defined in: [src/providers/openrouter/types.ts:129](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openrouter/types.ts#L129)
 
 Top-p (nucleus) sampling (0.0 - 1.0)

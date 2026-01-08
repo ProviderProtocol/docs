@@ -10,7 +10,7 @@ title: "Interface: ExecutionResult"
 
 # Interface: ExecutionResult
 
-Defined in: [src/execution/types.ts:184](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L184)
+Defined in: [src/execution/types.ts:184](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L184)
 
 Result from an execution strategy containing the turn and final state.
 
@@ -24,7 +24,7 @@ in the strategy interface.
 
 > **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/execution/types.ts:188](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L188)
+Defined in: [src/execution/types.ts:188](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L188)
 
 New immutable state after execution completes
 
@@ -34,6 +34,6 @@ New immutable state after execution completes
 
 > **turn**: `Turn`
 
-Defined in: [src/execution/types.ts:186](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L186)
+Defined in: [src/execution/types.ts:186](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L186)
 
 The complete UPP Turn from the final LLM response

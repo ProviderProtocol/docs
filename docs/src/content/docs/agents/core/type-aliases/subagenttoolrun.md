@@ -12,7 +12,7 @@ title: "Type Alias: SubAgentToolRun()"
 
 > **SubAgentToolRun** = (`params`, `context?`) => `Promise`\<`string`\>
 
-Defined in: [src/subagent/index.ts:421](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L421)
+Defined in: [src/subagent/index.ts:421](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/subagent/index.ts#L421)
 
 Function signature for a sub-agent tool's run method.
 

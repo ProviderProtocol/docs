@@ -12,7 +12,7 @@ title: "Function: fileCheckpoints()"
 
 > **fileCheckpoints**(`options`): [`CheckpointStore`](../../core/interfaces/checkpointstore.md)
 
-Defined in: [src/checkpoint/file.ts:105](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/file.ts#L105)
+Defined in: [src/checkpoint/file.ts:105](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/file.ts#L105)
 
 Creates a file-based checkpoint store for persisting agent state.
 

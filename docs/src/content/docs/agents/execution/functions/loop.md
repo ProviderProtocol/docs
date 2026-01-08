@@ -12,7 +12,7 @@ title: "Function: loop()"
 
 > **loop**(`options`): [`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
-Defined in: [src/execution/loop.ts:62](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/loop.ts#L62)
+Defined in: [src/execution/loop.ts:62](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/loop.ts#L62)
 
 Creates a loop execution strategy for agent execution.
 

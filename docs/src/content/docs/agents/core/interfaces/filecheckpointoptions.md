@@ -10,7 +10,7 @@ title: "Interface: FileCheckpointOptions"
 
 # Interface: FileCheckpointOptions
 
-Defined in: [src/checkpoint/types.ts:169](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L169)
+Defined in: [src/checkpoint/types.ts:169](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L169)
 
 Configuration options for the file-based checkpoint store.
 
@@ -24,7 +24,7 @@ fileCheckpoints for the factory function that uses these options.
 
 > `optional` **dir**: `string`
 
-Defined in: [src/checkpoint/types.ts:188](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L188)
+Defined in: [src/checkpoint/types.ts:188](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L188)
 
 Directory path for storing checkpoint files.
 

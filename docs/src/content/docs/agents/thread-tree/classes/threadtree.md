@@ -10,7 +10,7 @@ title: "Class: ThreadTree"
 
 # Class: ThreadTree
 
-Defined in: [src/thread-tree/index.ts:172](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L172)
+Defined in: [src/thread-tree/index.ts:172](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L172)
 
 A tree-structured collection of conversation threads with branching support.
 
@@ -61,7 +61,7 @@ const restored = ThreadTree.fromJSON(json);
 
 > **new ThreadTree**(`root?`): `ThreadTree`
 
-Defined in: [src/thread-tree/index.ts:210](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L210)
+Defined in: [src/thread-tree/index.ts:210](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L210)
 
 Creates a new ThreadTree instance.
 
@@ -98,7 +98,7 @@ const tree = new ThreadTree(existingRoot);
 
 > `readonly` **nodes**: `Map`\<`string`, [`ThreadNode`](threadnode.md)\>
 
-Defined in: [src/thread-tree/index.ts:189](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L189)
+Defined in: [src/thread-tree/index.ts:189](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L189)
 
 Map of all nodes in the tree, keyed by node ID.
 Provides O(1) lookup for branch and checkout operations.
@@ -109,7 +109,7 @@ Provides O(1) lookup for branch and checkout operations.
 
 > `readonly` **root**: [`ThreadNode`](threadnode.md)
 
-Defined in: [src/thread-tree/index.ts:177](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L177)
+Defined in: [src/thread-tree/index.ts:177](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L177)
 
 The root node of the tree, representing the initial conversation state.
 This node has no parent (parentId is null).
@@ -122,7 +122,7 @@ This node has no parent (parentId is null).
 
 > **get** **current**(): [`ThreadNode`](threadnode.md)
 
-Defined in: [src/thread-tree/index.ts:242](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L242)
+Defined in: [src/thread-tree/index.ts:242](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L242)
 
 Gets the currently active node in the tree.
 
@@ -148,7 +148,7 @@ The currently active ThreadNode
 
 > **branch**(`fromId`, `name?`): `string`
 
-Defined in: [src/thread-tree/index.ts:274](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L274)
+Defined in: [src/thread-tree/index.ts:274](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L274)
 
 Creates a new branch from an existing node.
 
@@ -204,7 +204,7 @@ const altBranchId = tree.branch(tree.root.id);
 
 > **checkout**(`nodeId`): `void`
 
-Defined in: [src/thread-tree/index.ts:315](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L315)
+Defined in: [src/thread-tree/index.ts:315](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L315)
 
 Switches the active node to a different position in the tree.
 
@@ -247,7 +247,7 @@ tree.checkout(leaves[0]);
 
 > **getBranches**(): `Map`\<`string`, `string` \| `undefined`\>
 
-Defined in: [src/thread-tree/index.ts:395](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L395)
+Defined in: [src/thread-tree/index.ts:395](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L395)
 
 Gets all named branches in the tree.
 
@@ -276,7 +276,7 @@ for (const [id, name] of branches) {
 
 > **getLeaves**(): `string`[]
 
-Defined in: [src/thread-tree/index.ts:366](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L366)
+Defined in: [src/thread-tree/index.ts:366](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L366)
 
 Gets all leaf nodes in the tree.
 
@@ -309,7 +309,7 @@ for (const leafId of leaves) {
 
 > **history**(): [`AgentState`](../../core/classes/agentstate.md)
 
-Defined in: [src/thread-tree/index.ts:340](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L340)
+Defined in: [src/thread-tree/index.ts:340](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L340)
 
 Gets the agent state for the current node with tree metadata attached.
 
@@ -337,7 +337,7 @@ const nodeId = state.metadata['_threadTreeNodeId'];
 
 > **toJSON**(): [`ThreadTreeJSON`](../../core/interfaces/threadtreejson.md)
 
-Defined in: [src/thread-tree/index.ts:421](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L421)
+Defined in: [src/thread-tree/index.ts:421](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L421)
 
 Serializes the entire tree to a JSON-compatible object.
 
@@ -363,7 +363,7 @@ await Bun.write('conversation-tree.json', JSON.stringify(json, null, 2));
 
 > `static` **fromJSON**(`json`): `ThreadTree`
 
-Defined in: [src/thread-tree/index.ts:455](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L455)
+Defined in: [src/thread-tree/index.ts:455](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/index.ts#L455)
 
 Deserializes a ThreadTree from a JSON object.
 

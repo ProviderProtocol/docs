@@ -12,7 +12,7 @@ title: "Function: fileSearchTool()"
 
 > **fileSearchTool**(`options`): [`OpenAIFileSearchTool`](../interfaces/openaifilesearchtool.md)
 
-Defined in: [src/providers/openai/types.ts:1306](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openai/types.ts#L1306)
+Defined in: [src/providers/openai/types.ts:1306](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openai/types.ts#L1306)
 
 Creates a file search tool configuration for the Responses API.
 

@@ -12,7 +12,7 @@ title: "Function: withToolContext()"
 
 > **withToolContext**(`tool`, `handler`): `Tool`
 
-Defined in: [src/execution/tool-context.ts:239](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-context.ts#L239)
+Defined in: [src/execution/tool-context.ts:239](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-context.ts#L239)
 
 Creates a context-aware tool wrapper for existing tools.
 

@@ -10,7 +10,7 @@ title: "Interface: ToolExecutionContext"
 
 # Interface: ToolExecutionContext
 
-Defined in: [src/execution/types.ts:700](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L700)
+Defined in: [src/execution/types.ts:700](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L700)
 
 Context injected into tools during execution.
 
@@ -46,7 +46,7 @@ const myTool: Tool = {
 
 > **agentId**: `string`
 
-Defined in: [src/execution/types.ts:702](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L702)
+Defined in: [src/execution/types.ts:702](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L702)
 
 Agent instance ID for context inheritance
 
@@ -56,7 +56,7 @@ Agent instance ID for context inheritance
 
 > `optional` **onSubagentEvent**: [`OnSubagentEvent`](../type-aliases/onsubagentevent.md)
 
-Defined in: [src/execution/types.ts:708](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L708)
+Defined in: [src/execution/types.ts:708](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L708)
 
 Callback for propagating sub-agent events to parent
 
@@ -66,7 +66,7 @@ Callback for propagating sub-agent events to parent
 
 > **stateId**: `string`
 
-Defined in: [src/execution/types.ts:704](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L704)
+Defined in: [src/execution/types.ts:704](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L704)
 
 Current state snapshot ID for tracing
 
@@ -76,6 +76,6 @@ Current state snapshot ID for tracing
 
 > **toolCallId**: `string`
 
-Defined in: [src/execution/types.ts:706](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L706)
+Defined in: [src/execution/types.ts:706](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L706)
 
 Tool call ID from the model response

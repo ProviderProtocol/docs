@@ -10,7 +10,7 @@ title: "Interface: AgentStrategy"
 
 # Interface: AgentStrategy
 
-Defined in: [src/execution/types.ts:56](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L56)
+Defined in: [src/execution/types.ts:56](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L56)
 
 Agent lifecycle hooks for execution control and observability.
 
@@ -40,7 +40,7 @@ const strategy: AgentStrategy = {
 
 > `optional` **onAct**: (`step`, `actions`) => `void`
 
-Defined in: [src/execution/types.ts:83](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L83)
+Defined in: [src/execution/types.ts:83](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L83)
 
 Called during the action phase when tool calls are made.
 
@@ -68,7 +68,7 @@ Array of tool calls the model wants to execute
 
 > `optional` **onComplete**: (`result`) => `void`
 
-Defined in: [src/execution/types.ts:103](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L103)
+Defined in: [src/execution/types.ts:103](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L103)
 
 Called when execution completes successfully.
 
@@ -90,7 +90,7 @@ The final generation result
 
 > `optional` **onError**: (`error`, `state`) => `void` \| [`GenerateResult`](generateresult.md)
 
-Defined in: [src/execution/types.ts:112](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L112)
+Defined in: [src/execution/types.ts:112](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L112)
 
 Called when an error occurs during execution.
 Can optionally return a fallback result to recover from the error.
@@ -121,7 +121,7 @@ Optional fallback result to use instead of throwing
 
 > `optional` **onObserve**: (`step`, `observations`) => `void`
 
-Defined in: [src/execution/types.ts:90](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L90)
+Defined in: [src/execution/types.ts:90](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L90)
 
 Called during the observation phase after tools execute.
 
@@ -149,7 +149,7 @@ Array of tool execution results
 
 > `optional` **onReason**: (`step`, `reasoning`) => `void`
 
-Defined in: [src/execution/types.ts:76](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L76)
+Defined in: [src/execution/types.ts:76](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L76)
 
 Called during the reasoning phase (ReAct strategy only).
 
@@ -177,7 +177,7 @@ The model's reasoning output text
 
 > `optional` **onStepEnd**: (`step`, `result`) => `void`
 
-Defined in: [src/execution/types.ts:97](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L97)
+Defined in: [src/execution/types.ts:97](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L97)
 
 Called when a step completes, after all tool executions.
 
@@ -211,7 +211,7 @@ Object containing the turn and updated state
 
 > `optional` **onStepStart**: (`step`, `state`) => `void`
 
-Defined in: [src/execution/types.ts:69](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L69)
+Defined in: [src/execution/types.ts:69](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L69)
 
 Called when a step begins, before any LLM calls.
 
@@ -239,7 +239,7 @@ The current agent state at step start
 
 > `optional` **stopCondition**: (`state`) => `boolean` \| `Promise`\<`boolean`\>
 
-Defined in: [src/execution/types.ts:62](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L62)
+Defined in: [src/execution/types.ts:62](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L62)
 
 Evaluate whether execution should stop after the current step.
 

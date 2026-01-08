@@ -12,7 +12,7 @@ title: "Function: contentBlockStop()"
 
 > **contentBlockStop**(`index`): [`StreamEvent`](../interfaces/streamevent.md)
 
-Defined in: [src/types/stream.ts:259](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L259)
+Defined in: [src/types/stream.ts:259](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/stream.ts#L259)
 
 Creates a content block stop stream event.
 

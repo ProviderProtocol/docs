@@ -12,7 +12,7 @@ title: "Function: orderToolCalls()"
 
 > **orderToolCalls**(`toolCalls`, `tools`): [`ExecutionGroup`](../interfaces/executiongroup.md)[]
 
-Defined in: [src/execution/tool-ordering.ts:118](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L118)
+Defined in: [src/execution/tool-ordering.ts:118](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L118)
 
 Orders tool calls into execution groups respecting all dependency types.
 

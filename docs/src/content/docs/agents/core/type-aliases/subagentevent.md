@@ -12,7 +12,7 @@ title: "Type Alias: SubagentEvent"
 
 > **SubagentEvent** = [`SubagentStartEvent`](../interfaces/subagentstartevent.md) \| [`SubagentInnerEvent`](../interfaces/subagentinnerevent.md) \| [`SubagentEndEvent`](../interfaces/subagentendevent.md)
 
-Defined in: [src/execution/types.ts:662](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L662)
+Defined in: [src/execution/types.ts:662](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L662)
 
 Union type for all sub-agent events.
 

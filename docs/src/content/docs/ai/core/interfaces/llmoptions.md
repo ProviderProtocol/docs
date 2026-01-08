@@ -10,7 +10,7 @@ title: "Interface: LLMOptions"
 
 # Interface: LLMOptions\<TParams\>
 
-Defined in: [src/types/llm.ts:90](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L90)
+Defined in: [src/types/llm.ts:90](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L90)
 
 Options for creating an LLM instance with the llm() function.
 
@@ -42,7 +42,7 @@ Provider-specific parameter type
 
 > `optional` **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/llm.ts:96](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L96)
+Defined in: [src/types/llm.ts:96](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L96)
 
 Provider infrastructure configuration (optional - uses env vars if omitted)
 
@@ -52,7 +52,7 @@ Provider infrastructure configuration (optional - uses env vars if omitted)
 
 > **model**: [`ModelReference`](modelreference.md)\<`any`\>
 
-Defined in: [src/types/llm.ts:93](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L93)
+Defined in: [src/types/llm.ts:93](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L93)
 
 A model reference from a provider factory
 
@@ -62,7 +62,7 @@ A model reference from a provider factory
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/llm.ts:99](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L99)
+Defined in: [src/types/llm.ts:99](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L99)
 
 Model-specific parameters (temperature, max_tokens, etc.)
 
@@ -72,7 +72,7 @@ Model-specific parameters (temperature, max_tokens, etc.)
 
 > `optional` **structure**: [`JSONSchema`](jsonschema.md)
 
-Defined in: [src/types/llm.ts:119](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L119)
+Defined in: [src/types/llm.ts:119](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L119)
 
 Structured output schema (JSON Schema)
 
@@ -82,7 +82,7 @@ Structured output schema (JSON Schema)
 
 > `optional` **system**: `string` \| `unknown`[]
 
-Defined in: [src/types/llm.ts:110](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L110)
+Defined in: [src/types/llm.ts:110](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L110)
 
 System prompt for all inferences.
 
@@ -98,7 +98,7 @@ Array formats are passed through directly to the provider.
 
 > `optional` **tools**: [`Tool`](tool.md)\<`unknown`, `unknown`\>[]
 
-Defined in: [src/types/llm.ts:113](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L113)
+Defined in: [src/types/llm.ts:113](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L113)
 
 Tools available to the model
 
@@ -108,6 +108,6 @@ Tools available to the model
 
 > `optional` **toolStrategy**: [`ToolUseStrategy`](toolusestrategy.md)
 
-Defined in: [src/types/llm.ts:116](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/llm.ts#L116)
+Defined in: [src/types/llm.ts:116](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/types/llm.ts#L116)
 
 Tool execution strategy

@@ -12,7 +12,7 @@ title: "Type Alias: PlanStepStatus"
 
 > **PlanStepStatus** = `"pending"` \| `"in_progress"` \| `"completed"` \| `"failed"`
 
-Defined in: [src/state/types.ts:12](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L12)
+Defined in: [src/state/types.ts:12](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L12)
 
 Status of a plan step during agent execution.
 

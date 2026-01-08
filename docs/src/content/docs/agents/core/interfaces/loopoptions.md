@@ -10,7 +10,7 @@ title: "Interface: LoopOptions"
 
 # Interface: LoopOptions
 
-Defined in: [src/execution/types.ts:356](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L356)
+Defined in: [src/execution/types.ts:356](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L356)
 
 Configuration options for the loop execution strategy.
 
@@ -33,7 +33,7 @@ const agent = createAgent({
 
 > `optional` **maxIterations**: `number`
 
-Defined in: [src/execution/types.ts:361](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L361)
+Defined in: [src/execution/types.ts:361](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L361)
 
 Maximum number of tool execution rounds before stopping.
 

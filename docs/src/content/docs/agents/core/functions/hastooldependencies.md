@@ -12,7 +12,7 @@ title: "Function: hasToolDependencies()"
 
 > **hasToolDependencies**(`tools`): `boolean`
 
-Defined in: [src/execution/tool-ordering.ts:233](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L233)
+Defined in: [src/execution/tool-ordering.ts:233](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L233)
 
 Checks if any tools in the array have execution dependencies defined.
 

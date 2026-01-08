@@ -10,7 +10,7 @@ title: "Interface: SubagentExecutionTrace"
 
 # Interface: SubagentExecutionTrace
 
-Defined in: [src/state/types.ts:75](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L75)
+Defined in: [src/state/types.ts:75](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L75)
 
 Sub-agent execution trace for checkpoint persistence and observability.
 
@@ -51,7 +51,7 @@ const trace: SubagentExecutionTrace = {
 
 > **endTime**: `number`
 
-Defined in: [src/state/types.ts:92](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L92)
+Defined in: [src/state/types.ts:92](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L92)
 
 Execution end timestamp in milliseconds since Unix epoch
 
@@ -61,7 +61,7 @@ Execution end timestamp in milliseconds since Unix epoch
 
 > `optional` **error**: `string`
 
-Defined in: [src/state/types.ts:101](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L101)
+Defined in: [src/state/types.ts:101](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L101)
 
 Error message describing what went wrong (present when `success` is false)
 
@@ -71,7 +71,7 @@ Error message describing what went wrong (present when `success` is false)
 
 > **parentToolCallId**: `string`
 
-Defined in: [src/state/types.ts:83](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L83)
+Defined in: [src/state/types.ts:83](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L83)
 
 Tool call ID from the parent agent that spawned this sub-agent
 
@@ -81,7 +81,7 @@ Tool call ID from the parent agent that spawned this sub-agent
 
 > **prompt**: `string`
 
-Defined in: [src/state/types.ts:86](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L86)
+Defined in: [src/state/types.ts:86](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L86)
 
 The task or prompt given to the sub-agent
 
@@ -91,7 +91,7 @@ The task or prompt given to the sub-agent
 
 > `optional` **result**: `string`
 
-Defined in: [src/state/types.ts:98](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L98)
+Defined in: [src/state/types.ts:98](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L98)
 
 The sub-agent's final response (present when `success` is true)
 
@@ -101,7 +101,7 @@ The sub-agent's final response (present when `success` is true)
 
 > **startTime**: `number`
 
-Defined in: [src/state/types.ts:89](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L89)
+Defined in: [src/state/types.ts:89](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L89)
 
 Execution start timestamp in milliseconds since Unix epoch
 
@@ -111,7 +111,7 @@ Execution start timestamp in milliseconds since Unix epoch
 
 > **subagentId**: `string`
 
-Defined in: [src/state/types.ts:77](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L77)
+Defined in: [src/state/types.ts:77](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L77)
 
 Unique identifier for this sub-agent instance
 
@@ -121,7 +121,7 @@ Unique identifier for this sub-agent instance
 
 > **subagentType**: `string`
 
-Defined in: [src/state/types.ts:80](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L80)
+Defined in: [src/state/types.ts:80](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L80)
 
 Type or name identifying the sub-agent's role or capabilities
 
@@ -131,7 +131,7 @@ Type or name identifying the sub-agent's role or capabilities
 
 > **success**: `boolean`
 
-Defined in: [src/state/types.ts:95](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L95)
+Defined in: [src/state/types.ts:95](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L95)
 
 Whether the sub-agent completed its task successfully
 
@@ -141,7 +141,7 @@ Whether the sub-agent completed its task successfully
 
 > `optional` **toolExecutions**: [`ToolExecutionTrace`](toolexecutiontrace.md)[]
 
-Defined in: [src/state/types.ts:104](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L104)
+Defined in: [src/state/types.ts:104](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L104)
 
 Ordered list of tool executions performed by the sub-agent
 
@@ -151,6 +151,6 @@ Ordered list of tool executions performed by the sub-agent
 
 > `optional` **usage**: `TokenUsage`
 
-Defined in: [src/state/types.ts:107](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L107)
+Defined in: [src/state/types.ts:107](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L107)
 
 Token usage statistics for the sub-agent's LLM calls

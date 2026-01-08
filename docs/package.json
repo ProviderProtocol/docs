@@ -6,8 +6,12 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:clean": "rm -rf .astro node_modules/.astro && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf .astro node_modules/.astro dist",
+    "clean:ai": "rm -rf src/content/docs/ai && mkdir -p src/content/docs/ai",
+    "clean:agents": "rm -rf src/content/docs/agents && mkdir -p src/content/docs/agents"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.1",

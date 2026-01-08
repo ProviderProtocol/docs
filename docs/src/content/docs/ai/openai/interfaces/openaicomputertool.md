@@ -10,7 +10,7 @@ title: "Interface: OpenAIComputerTool"
 
 # Interface: OpenAIComputerTool
 
-Defined in: [src/providers/openai/types.ts:1161](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openai/types.ts#L1161)
+Defined in: [src/providers/openai/types.ts:1161](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openai/types.ts#L1161)
 
 Computer tool for Responses API
 Enables the model to interact with computer interfaces
@@ -21,7 +21,7 @@ Enables the model to interact with computer interfaces
 
 > `optional` **computer**: `object`
 
-Defined in: [src/providers/openai/types.ts:1164](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openai/types.ts#L1164)
+Defined in: [src/providers/openai/types.ts:1164](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openai/types.ts#L1164)
 
 Computer tool configuration
 
@@ -49,4 +49,4 @@ Environment configuration
 
 > **type**: `"computer"`
 
-Defined in: [src/providers/openai/types.ts:1162](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/openai/types.ts#L1162)
+Defined in: [src/providers/openai/types.ts:1162](https://github.com/ProviderProtocol/ai/blob/974e5220fcaeb4809e60044f5211b3c7497a622e/src/providers/openai/types.ts#L1162)

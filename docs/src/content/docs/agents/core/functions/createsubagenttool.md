@@ -12,7 +12,7 @@ title: "Function: createSubAgentTool()"
 
 > **createSubAgentTool**(`options`): `Tool`
 
-Defined in: [src/subagent/index.ts:209](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L209)
+Defined in: [src/subagent/index.ts:209](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/subagent/index.ts#L209)
 
 Creates a UPP Tool from a UAP Agent with full event propagation.
 
