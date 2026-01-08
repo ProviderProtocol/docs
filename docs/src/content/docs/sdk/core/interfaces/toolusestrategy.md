@@ -12,10 +12,11 @@ title: "Interface: ToolUseStrategy"
 
 Defined in: [src/types/tool.ts:146](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/types/tool.ts#L146)
 
-Strategy for controlling tool execution behavior.
+Strategy for controlling tool execution behavior, including input/output transformation.
 
 Provides hooks for monitoring and controlling the tool execution
-loop during LLM inference.
+loop during LLM inference. Hooks can transform parameters before execution
+and transform results before returning to the model.
 
 ## Example
 
@@ -45,11 +46,12 @@ Maximum number of tool execution rounds (default: 10)
 
 ### onAfterCall()?
 
-> `optional` **onAfterCall**(`tool`, `params`, `result`): `void` \| `Promise`\<`void`\>
+> `optional` **onAfterCall**(`tool`, `params`, `result`): `void` \| `AfterCallResult` \| `Promise`\<`void` \| `AfterCallResult`\>
 
 Defined in: [src/types/tool.ts:174](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/types/tool.ts#L174)
 
-Called after tool execution completes.
+Called after tool execution completes. Can optionally transform the result
+before returning it to the model.
 
 #### Parameters
 
@@ -73,17 +75,20 @@ The result from the tool
 
 #### Returns
 
-`void` \| `Promise`\<`void`\>
+`void` \| `AfterCallResult` \| `Promise`\<`void` \| `AfterCallResult`\>
+
+- `void` - Use the original result
+- `AfterCallResult` - Transform result before returning to model (e.g., `{ result: transformedData }`)
 
 ***
 
 ### onBeforeCall()?
 
-> `optional` **onBeforeCall**(`tool`, `params`): `boolean` \| `Promise`\<`boolean`\>
+> `optional` **onBeforeCall**(`tool`, `params`): `boolean` \| `BeforeCallResult` \| `Promise`\<`boolean` \| `BeforeCallResult`\>
 
 Defined in: [src/types/tool.ts:165](https://github.com/ProviderProtocol/ai/blob/1371aa52f0fff5bd5bfdb45a7fdb59d2ae80d714/src/types/tool.ts#L165)
 
-Called before tool execution.
+Called before tool execution. Can skip execution or transform parameters.
 
 #### Parameters
 
@@ -101,9 +106,11 @@ The parameters for the call
 
 #### Returns
 
-`boolean` \| `Promise`\<`boolean`\>
+`boolean` \| `BeforeCallResult` \| `Promise`\<`boolean` \| `BeforeCallResult`\>
 
-False to skip execution, true to proceed
+- `false` - Skip execution
+- `true` - Proceed with original params
+- `BeforeCallResult` - Control execution and optionally transform params (e.g., `{ proceed: true, params: transformedParams }`)
 
 ***
 
@@ -188,3 +195,22 @@ The parameters for the call
 #### Returns
 
 `void` \| `Promise`\<`void`\>
+
+## Related Types
+
+### BeforeCallResult
+
+Result object for `onBeforeCall` when controlling execution and transforming parameters:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `proceed` | `boolean` | Whether to proceed with tool execution |
+| `params` | `unknown?` | Transformed parameters to use (optional) |
+
+### AfterCallResult
+
+Result object for `onAfterCall` when transforming the result:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | `unknown` | Transformed result to return to the model |

@@ -96,6 +96,8 @@ for await (const event of model.stream('Tell me a story')) {
 - [ToolExecution](interfaces/ToolExecution.md)
 - [ToolResult](interfaces/ToolResult.md)
 - [ToolUseStrategy](interfaces/ToolUseStrategy.md)
+- [BeforeCallResult](interfaces/BeforeCallResult.md)
+- [AfterCallResult](interfaces/AfterCallResult.md)
 - [Turn](interfaces/Turn.md)
 - [VideoBlock](interfaces/VideoBlock.md)
 
