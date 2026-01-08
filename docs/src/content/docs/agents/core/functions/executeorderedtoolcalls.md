@@ -2,21 +2,21 @@
 title: "Function: executeOrderedToolCalls()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / executeOrderedToolCalls
+[@providerprotocol/agents](./index.md) / [index](../index.md) / executeOrderedToolCalls
 
 # Function: executeOrderedToolCalls()
 
-> **executeOrderedToolCalls**(`toolCalls`, `tools`, `executor`): `Promise`\<[`ToolExecutionResult`](../interfaces/ToolExecutionResult.md)[]\>
+> **executeOrderedToolCalls**(`toolCalls`, `tools`, `executor`): `Promise`\<[`ToolExecutionResult`](../interfaces/toolexecutionresult.md)[]\>
 
-Defined in: [src/execution/tool-ordering.ts:363](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-ordering.ts#L363)
+Defined in: [src/execution/tool-ordering.ts:363](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L363)
 
 Executes tool calls respecting dependency ordering.
 
-This is a high-level function that combines [orderToolCalls](orderToolCalls.md) with
+This is a high-level function that combines [orderToolCalls](ordertoolcalls.md) with
 execution logic. It orders the tool calls, then executes them in groups
 while respecting barriers and dependencies.
 
@@ -41,13 +41,13 @@ Tool definitions with potential dependencies
 
 ### executor
 
-[`ToolExecutor`](../type-aliases/ToolExecutor.md)
+[`ToolExecutor`](../type-aliases/toolexecutor.md)
 
 Function to execute a single tool call
 
 ## Returns
 
-`Promise`\<[`ToolExecutionResult`](../interfaces/ToolExecutionResult.md)[]\>
+`Promise`\<[`ToolExecutionResult`](../interfaces/toolexecutionresult.md)[]\>
 
 Array of execution results in completion order
 
@@ -95,5 +95,5 @@ for (const result of results) {
 
 ## See
 
- - [orderToolCalls](orderToolCalls.md) for just the ordering logic
+ - [orderToolCalls](ordertoolcalls.md) for just the ordering logic
  - UAP-1.0 Spec Sections 8.5 and 8.6

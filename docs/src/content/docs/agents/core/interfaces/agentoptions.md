@@ -2,15 +2,15 @@
 title: "Interface: AgentOptions"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / AgentOptions
+[@providerprotocol/agents](./index.md) / [index](../index.md) / AgentOptions
 
 # Interface: AgentOptions
 
-Defined in: [src/agent/types.ts:47](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L47)
+Defined in: [src/agent/types.ts:47](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L47)
 
 Configuration options for creating an agent instance.
 
@@ -51,7 +51,7 @@ const options: AgentOptions = {
 
 > `optional` **\_llmInstance**: `LLMInstance`\<`unknown`\>
 
-Defined in: [src/agent/types.ts:123](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L123)
+Defined in: [src/agent/types.ts:123](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L123)
 
 **`Internal`**
 
@@ -66,9 +66,9 @@ for production use.
 
 ### checkpoints?
 
-> `optional` **checkpoints**: [`CheckpointStore`](CheckpointStore.md)
+> `optional` **checkpoints**: [`CheckpointStore`](checkpointstore.md)
 
-Defined in: [src/agent/types.ts:104](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L104)
+Defined in: [src/agent/types.ts:104](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L104)
 
 Checkpoint store for step-level state persistence.
 
@@ -79,7 +79,7 @@ execution step, enabling recovery and replay capabilities.
 
 #### See
 
-[CheckpointStore](CheckpointStore.md)
+[CheckpointStore](checkpointstore.md)
 
 ***
 
@@ -99,9 +99,9 @@ Provider infrastructure configuration (optional - uses env vars if omitted)
 
 ### execution?
 
-> `optional` **execution**: [`ExecutionStrategy`](ExecutionStrategy.md)
+> `optional` **execution**: [`ExecutionStrategy`](executionstrategy.md)
 
-Defined in: [src/agent/types.ts:72](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L72)
+Defined in: [src/agent/types.ts:72](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L72)
 
 Execution strategy that controls how the agent processes requests.
 
@@ -118,9 +118,9 @@ including how tool calls are handled and when to stop iterating.
 
 ### middleware?
 
-> `optional` **middleware**: [`Middleware`](Middleware.md)[]
+> `optional` **middleware**: [`Middleware`](middleware.md)[]
 
-Defined in: [src/agent/types.ts:84](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L84)
+Defined in: [src/agent/types.ts:84](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L84)
 
 Ordered middleware pipeline for request/response processing.
 
@@ -132,7 +132,7 @@ like logging, context management, and error handling.
 
 #### See
 
-[Middleware](Middleware.md)
+[Middleware](middleware.md)
 
 ***
 
@@ -140,7 +140,7 @@ like logging, context management, and error handling.
 
 > **model**: `ModelReference`
 
-Defined in: [src/agent/types.ts:61](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L61)
+Defined in: [src/agent/types.ts:61](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L61)
 
 Model reference from a UPP provider factory.
 
@@ -176,7 +176,7 @@ Model-specific parameters (temperature, max_tokens, etc.)
 
 > `optional` **sessionId**: `string`
 
-Defined in: [src/agent/types.ts:113](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L113)
+Defined in: [src/agent/types.ts:113](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L113)
 
 Session identifier for checkpointing.
 
@@ -189,9 +189,9 @@ and checkpoints are enabled, a UUIDv4 will be auto-generated.
 
 ### strategy?
 
-> `optional` **strategy**: [`AgentStrategy`](AgentStrategy.md)
+> `optional` **strategy**: [`AgentStrategy`](agentstrategy.md)
 
-Defined in: [src/agent/types.ts:93](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L93)
+Defined in: [src/agent/types.ts:93](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L93)
 
 Agent lifecycle hooks for customizing execution behavior.
 

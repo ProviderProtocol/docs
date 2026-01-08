@@ -2,17 +2,17 @@
 title: "Function: orderToolCalls()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / orderToolCalls
+[@providerprotocol/agents](./index.md) / [index](../index.md) / orderToolCalls
 
 # Function: orderToolCalls()
 
-> **orderToolCalls**(`toolCalls`, `tools`): [`ExecutionGroup`](../interfaces/ExecutionGroup.md)[]
+> **orderToolCalls**(`toolCalls`, `tools`): [`ExecutionGroup`](../interfaces/executiongroup.md)[]
 
-Defined in: [src/execution/tool-ordering.ts:118](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-ordering.ts#L118)
+Defined in: [src/execution/tool-ordering.ts:118](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L118)
 
 Orders tool calls into execution groups respecting all dependency types.
 
@@ -49,7 +49,7 @@ Tool definitions (may include dependency options)
 
 ## Returns
 
-[`ExecutionGroup`](../interfaces/ExecutionGroup.md)[]
+[`ExecutionGroup`](../interfaces/executiongroup.md)[]
 
 Ordered array of execution groups to process in sequence
 
@@ -91,4 +91,4 @@ for (const group of groups) {
 
  - UAP-1.0 Spec Section 8.5 for tool-level dependencies
  - UAP-1.0 Spec Section 8.6 for model-driven dependencies
- - [executeOrderedToolCalls](executeOrderedToolCalls.md) for a higher-level execution function
+ - [executeOrderedToolCalls](executeorderedtoolcalls.md) for a higher-level execution function

@@ -2,15 +2,15 @@
 title: "Interface: OrderedToolCall"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / OrderedToolCall
+[@providerprotocol/agents](./index.md) / [index](../index.md) / OrderedToolCall
 
 # Interface: OrderedToolCall
 
-Defined in: [src/execution/types.ts:552](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L552)
+Defined in: [src/execution/types.ts:552](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L552)
 
 Model-driven tool call with optional execution order hint.
 
@@ -48,7 +48,7 @@ const toolCalls: OrderedToolCall[] = [
 
 > `optional` **after**: `string`[]
 
-Defined in: [src/execution/types.ts:554](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L554)
+Defined in: [src/execution/types.ts:554](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L554)
 
 Tool call IDs that must complete before this call executes
 

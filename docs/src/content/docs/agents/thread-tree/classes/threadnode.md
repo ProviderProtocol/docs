@@ -2,15 +2,15 @@
 title: "Class: ThreadNode"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [thread-tree](../README.md) / ThreadNode
+[@providerprotocol/agents](./index.md) / [thread-tree](../index.md) / ThreadNode
 
 # Class: ThreadNode
 
-Defined in: [src/thread-tree/index.ts:36](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L36)
+Defined in: [src/thread-tree/index.ts:36](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L36)
 
 A node in the thread tree representing a conversation state snapshot.
 
@@ -52,7 +52,7 @@ console.log(node.children);  // Array of child node IDs
 
 > **new ThreadNode**(`id`, `parentId`, `state`, `name?`, `children?`): `ThreadNode`
 
-Defined in: [src/thread-tree/index.ts:74](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L74)
+Defined in: [src/thread-tree/index.ts:74](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L74)
 
 Creates a new ThreadNode instance.
 
@@ -72,7 +72,7 @@ ID of the parent node, or null for root nodes
 
 ##### state
 
-[`AgentState`](../../index/classes/AgentState.md)
+[`AgentState`](../../core/classes/agentstate.md)
 
 The agent state snapshot to store at this node
 
@@ -98,7 +98,7 @@ Array of child node IDs (defaults to empty array)
 
 > `readonly` **children**: `string`[]
 
-Defined in: [src/thread-tree/index.ts:63](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L63)
+Defined in: [src/thread-tree/index.ts:63](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L63)
 
 IDs of all child nodes branching from this node.
 Modified when new branches are created via ThreadTree.branch().
@@ -109,7 +109,7 @@ Modified when new branches are created via ThreadTree.branch().
 
 > `readonly` **id**: `string`
 
-Defined in: [src/thread-tree/index.ts:40](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L40)
+Defined in: [src/thread-tree/index.ts:40](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L40)
 
 Unique identifier for this node (UUIDv4 format).
 
@@ -119,7 +119,7 @@ Unique identifier for this node (UUIDv4 format).
 
 > `optional` **name**: `string`
 
-Defined in: [src/thread-tree/index.ts:57](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L57)
+Defined in: [src/thread-tree/index.ts:57](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L57)
 
 Optional human-readable name for this branch.
 Useful for identifying specific conversation paths.
@@ -130,7 +130,7 @@ Useful for identifying specific conversation paths.
 
 > `readonly` **parentId**: `string` \| `null`
 
-Defined in: [src/thread-tree/index.ts:45](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L45)
+Defined in: [src/thread-tree/index.ts:45](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L45)
 
 ID of the parent node, or null if this is the root node.
 
@@ -138,9 +138,9 @@ ID of the parent node, or null if this is the root node.
 
 ### state
 
-> **state**: [`AgentState`](../../index/classes/AgentState.md)
+> **state**: [`AgentState`](../../core/classes/agentstate.md)
 
-Defined in: [src/thread-tree/index.ts:51](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L51)
+Defined in: [src/thread-tree/index.ts:51](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L51)
 
 Complete agent state snapshot at this point in the conversation.
 This is mutable to allow state updates on the current node.
@@ -149,15 +149,15 @@ This is mutable to allow state updates on the current node.
 
 ### toJSON()
 
-> **toJSON**(): [`ThreadNodeJSON`](../../index/interfaces/ThreadNodeJSON.md)
+> **toJSON**(): [`ThreadNodeJSON`](../../core/interfaces/threadnodejson.md)
 
-Defined in: [src/thread-tree/index.ts:99](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L99)
+Defined in: [src/thread-tree/index.ts:99](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L99)
 
 Serializes this node to a JSON-compatible object.
 
 #### Returns
 
-[`ThreadNodeJSON`](../../index/interfaces/ThreadNodeJSON.md)
+[`ThreadNodeJSON`](../../core/interfaces/threadnodejson.md)
 
 A plain object representation suitable for JSON.stringify()
 
@@ -174,7 +174,7 @@ const serialized = JSON.stringify(json);
 
 > `static` **fromJSON**(`json`): `ThreadNode`
 
-Defined in: [src/thread-tree/index.ts:121](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/index.ts#L121)
+Defined in: [src/thread-tree/index.ts:121](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/index.ts#L121)
 
 Deserializes a ThreadNode from a JSON object.
 
@@ -182,7 +182,7 @@ Deserializes a ThreadNode from a JSON object.
 
 ##### json
 
-[`ThreadNodeJSON`](../../index/interfaces/ThreadNodeJSON.md)
+[`ThreadNodeJSON`](../../core/interfaces/threadnodejson.md)
 
 The serialized node data
 

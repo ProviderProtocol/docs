@@ -2,17 +2,17 @@
 title: "Function: logging()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [middleware](../README.md) / logging
+[@providerprotocol/agents](./index.md) / [middleware](../index.md) / logging
 
 # Function: logging()
 
-> **logging**(`options`): [`Middleware`](../../index/interfaces/Middleware.md)
+> **logging**(`options`): [`Middleware`](../../core/interfaces/middleware.md)
 
-Defined in: [src/middleware/logging.ts:91](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/logging.ts#L91)
+Defined in: [src/middleware/logging.ts:91](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/logging.ts#L91)
 
 Creates a logging middleware that records agent execution activity.
 
@@ -26,15 +26,15 @@ This middleware provides comprehensive logging for agent operations including:
 
 ### options
 
-[`LoggingOptions`](../../index/interfaces/LoggingOptions.md) = `{}`
+[`LoggingOptions`](../../core/interfaces/loggingoptions.md) = `{}`
 
 Configuration options for logging behavior
 
 ## Returns
 
-[`Middleware`](../../index/interfaces/Middleware.md)
+[`Middleware`](../../core/interfaces/middleware.md)
 
-A configured [Middleware](../../index/interfaces/Middleware.md) instance
+A configured [Middleware](../../core/interfaces/middleware.md) instance
 
 ## Examples
 
@@ -82,5 +82,5 @@ const agent = createAgent({
 
 ## See
 
- - [LoggingOptions](../../index/interfaces/LoggingOptions.md) for available configuration options
- - [Middleware](../../index/interfaces/Middleware.md) for the middleware interface
+ - [LoggingOptions](../../core/interfaces/loggingoptions.md) for available configuration options
+ - [Middleware](../../core/interfaces/middleware.md) for the middleware interface

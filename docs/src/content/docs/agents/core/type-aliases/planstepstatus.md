@@ -2,17 +2,17 @@
 title: "Type Alias: PlanStepStatus"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / PlanStepStatus
+[@providerprotocol/agents](./index.md) / [index](../index.md) / PlanStepStatus
 
 # Type Alias: PlanStepStatus
 
 > **PlanStepStatus** = `"pending"` \| `"in_progress"` \| `"completed"` \| `"failed"`
 
-Defined in: [src/state/types.ts:12](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L12)
+Defined in: [src/state/types.ts:12](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L12)
 
 Status of a plan step during agent execution.
 

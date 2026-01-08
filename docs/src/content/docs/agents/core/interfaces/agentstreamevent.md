@@ -2,15 +2,15 @@
 title: "Interface: AgentStreamEvent"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / AgentStreamEvent
+[@providerprotocol/agents](./index.md) / [index](../index.md) / AgentStreamEvent
 
 # Interface: AgentStreamEvent
 
-Defined in: [src/execution/types.ts:240](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L240)
+Defined in: [src/execution/types.ts:240](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L240)
 
 Agent stream event that wraps both UAP and UPP events.
 
@@ -40,7 +40,7 @@ for await (const event of stream) {
 
 > **source**: `"uap"` \| `"upp"`
 
-Defined in: [src/execution/types.ts:242](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L242)
+Defined in: [src/execution/types.ts:242](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L242)
 
 Event source: 'uap' for agent-level, 'upp' for LLM-level
 
@@ -50,7 +50,7 @@ Event source: 'uap' for agent-level, 'upp' for LLM-level
 
 > `optional` **uap**: `object`
 
-Defined in: [src/execution/types.ts:245](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L245)
+Defined in: [src/execution/types.ts:245](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L245)
 
 Present when source === 'uap' - contains agent lifecycle event data
 
@@ -74,7 +74,7 @@ The current step number (1-indexed)
 
 #### type
 
-> **type**: [`UAPEventType`](../type-aliases/UAPEventType.md)
+> **type**: [`UAPEventType`](../type-aliases/uapeventtype.md)
 
 The type of UAP event
 
@@ -84,6 +84,6 @@ The type of UAP event
 
 > `optional` **upp**: `StreamEvent`
 
-Defined in: [src/execution/types.ts:257](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L257)
+Defined in: [src/execution/types.ts:257](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L257)
 
 Present when source === 'upp' - contains LLM stream event

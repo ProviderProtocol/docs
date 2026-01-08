@@ -2,17 +2,17 @@
 title: "Function: react()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [execution](../README.md) / react
+[@providerprotocol/agents](./index.md) / [execution](../index.md) / react
 
 # Function: react()
 
-> **react**(`options`): [`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+> **react**(`options`): [`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
-Defined in: [src/execution/react.ts:78](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/react.ts#L78)
+Defined in: [src/execution/react.ts:78](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/react.ts#L78)
 
 Creates a ReAct (Reason-Act-Observe) execution strategy for agent execution.
 
@@ -34,13 +34,13 @@ and multi-step reasoning.
 
 ### options
 
-[`ReactOptions`](../../index/interfaces/ReactOptions.md) = `{}`
+[`ReactOptions`](../../core/interfaces/reactoptions.md) = `{}`
 
 Configuration options for the ReAct strategy
 
 ## Returns
 
-[`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+[`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
 An ExecutionStrategy instance implementing the ReAct pattern
 

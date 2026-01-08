@@ -2,15 +2,15 @@
 title: "Interface: ExecutionContext"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ExecutionContext
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ExecutionContext
 
 # Interface: ExecutionContext
 
-Defined in: [src/execution/types.ts:156](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L156)
+Defined in: [src/execution/types.ts:156](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L156)
 
 Context passed to execution strategies containing all resources needed for execution.
 
@@ -44,9 +44,9 @@ const result = await strategy.execute(context);
 
 ### agent
 
-> **agent**: [`AgentRef`](AgentRef.md)
+> **agent**: [`AgentRef`](agentref.md)
 
-Defined in: [src/execution/types.ts:158](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L158)
+Defined in: [src/execution/types.ts:158](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L158)
 
 The agent being executed (minimal reference)
 
@@ -54,9 +54,9 @@ The agent being executed (minimal reference)
 
 ### checkpoints?
 
-> `optional` **checkpoints**: [`CheckpointStore`](CheckpointStore.md)
+> `optional` **checkpoints**: [`CheckpointStore`](checkpointstore.md)
 
-Defined in: [src/execution/types.ts:172](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L172)
+Defined in: [src/execution/types.ts:172](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L172)
 
 Checkpoint store for state persistence (optional)
 
@@ -66,7 +66,7 @@ Checkpoint store for state persistence (optional)
 
 > **input**: `Message`
 
-Defined in: [src/execution/types.ts:162](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L162)
+Defined in: [src/execution/types.ts:162](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L162)
 
 The user input message to process
 
@@ -76,7 +76,7 @@ The user input message to process
 
 > **llm**: `LLMInstance`
 
-Defined in: [src/execution/types.ts:160](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L160)
+Defined in: [src/execution/types.ts:160](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L160)
 
 The bound LLM instance configured for this agent
 
@@ -86,7 +86,7 @@ The bound LLM instance configured for this agent
 
 > `optional` **sessionId**: `string`
 
-Defined in: [src/execution/types.ts:174](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L174)
+Defined in: [src/execution/types.ts:174](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L174)
 
 Session ID for checkpointing continuity
 
@@ -96,7 +96,7 @@ Session ID for checkpointing continuity
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/execution/types.ts:170](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L170)
+Defined in: [src/execution/types.ts:170](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L170)
 
 Abort signal for cancellation support
 
@@ -104,9 +104,9 @@ Abort signal for cancellation support
 
 ### state
 
-> **state**: [`AgentState`](../classes/AgentState.md)
+> **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/execution/types.ts:164](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L164)
+Defined in: [src/execution/types.ts:164](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L164)
 
 Current immutable state snapshot
 
@@ -114,9 +114,9 @@ Current immutable state snapshot
 
 ### strategy
 
-> **strategy**: [`AgentStrategy`](AgentStrategy.md)
+> **strategy**: [`AgentStrategy`](agentstrategy.md)
 
-Defined in: [src/execution/types.ts:168](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L168)
+Defined in: [src/execution/types.ts:168](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L168)
 
 Agent lifecycle hooks for observability and control
 
@@ -126,6 +126,6 @@ Agent lifecycle hooks for observability and control
 
 > **tools**: `Tool`\<`unknown`, `unknown`\>[]
 
-Defined in: [src/execution/types.ts:166](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L166)
+Defined in: [src/execution/types.ts:166](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L166)
 
 Resolved tools available for this execution

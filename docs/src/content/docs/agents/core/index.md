@@ -2,11 +2,11 @@
 title: "index"
 ---
 
-[**@providerprotocol/agents**](../README.md)
+[**@providerprotocol/agents**](../index.md)
 
 ***
 
-[@providerprotocol/agents](../modules.md) / index
+[@providerprotocol/agents](./index.md) / index
 
 # index
 
@@ -44,83 +44,83 @@ console.log(turn.response.text);
 
 ## Classes
 
-- [AgentState](classes/AgentState.md)
+- [AgentState](classes/agentstate.md)
 
 ## Interfaces
 
-- [Agent](interfaces/Agent.md)
-- [AgentOptions](interfaces/AgentOptions.md)
-- [AgentRef](interfaces/AgentRef.md)
-- [AgentStateInterface](interfaces/AgentStateInterface.md)
-- [AgentStateJSON](interfaces/AgentStateJSON.md)
-- [AgentStrategy](interfaces/AgentStrategy.md)
-- [AgentStreamEvent](interfaces/AgentStreamEvent.md)
-- [AgentStreamResult](interfaces/AgentStreamResult.md)
-- [CheckpointData](interfaces/CheckpointData.md)
-- [CheckpointMetadata](interfaces/CheckpointMetadata.md)
-- [CheckpointStore](interfaces/CheckpointStore.md)
-- [CreateSubAgentToolOptions](interfaces/CreateSubAgentToolOptions.md)
-- [ExecutionContext](interfaces/ExecutionContext.md)
-- [ExecutionGroup](interfaces/ExecutionGroup.md)
-- [ExecutionPlan](interfaces/ExecutionPlan.md)
-- [ExecutionResult](interfaces/ExecutionResult.md)
-- [ExecutionStrategy](interfaces/ExecutionStrategy.md)
-- [FileCheckpointOptions](interfaces/FileCheckpointOptions.md)
-- [GenerateResult](interfaces/GenerateResult.md)
-- [InjectToolContextOptions](interfaces/InjectToolContextOptions.md)
-- [LoggingOptions](interfaces/LoggingOptions.md)
-- [LoopOptions](interfaces/LoopOptions.md)
-- [Middleware](interfaces/Middleware.md)
-- [MiddlewareContext](interfaces/MiddlewareContext.md)
-- [OrderedToolCall](interfaces/OrderedToolCall.md)
-- [PlanOptions](interfaces/PlanOptions.md)
-- [PlanStep](interfaces/PlanStep.md)
-- [ReactOptions](interfaces/ReactOptions.md)
-- [SubagentEndEvent](interfaces/SubagentEndEvent.md)
-- [SubagentEventBase](interfaces/SubagentEventBase.md)
-- [SubagentExecutionTrace](interfaces/SubagentExecutionTrace.md)
-- [SubagentExecutionTraceJSON](interfaces/SubagentExecutionTraceJSON.md)
-- [SubagentInnerEvent](interfaces/SubagentInnerEvent.md)
-- [SubagentStartEvent](interfaces/SubagentStartEvent.md)
-- [ThreadNodeJSON](interfaces/ThreadNodeJSON.md)
-- [ThreadTreeJSON](interfaces/ThreadTreeJSON.md)
-- [ToolDependencyOptions](interfaces/ToolDependencyOptions.md)
-- [ToolExecutionContext](interfaces/ToolExecutionContext.md)
-- [ToolExecutionResult](interfaces/ToolExecutionResult.md)
-- [ToolExecutionTrace](interfaces/ToolExecutionTrace.md)
-- [ToolWithDependencies](interfaces/ToolWithDependencies.md)
+- [Agent](interfaces/agent.md)
+- [AgentOptions](interfaces/agentoptions.md)
+- [AgentRef](interfaces/agentref.md)
+- [AgentStateInterface](interfaces/agentstateinterface.md)
+- [AgentStateJSON](interfaces/agentstatejson.md)
+- [AgentStrategy](interfaces/agentstrategy.md)
+- [AgentStreamEvent](interfaces/agentstreamevent.md)
+- [AgentStreamResult](interfaces/agentstreamresult.md)
+- [CheckpointData](interfaces/checkpointdata.md)
+- [CheckpointMetadata](interfaces/checkpointmetadata.md)
+- [CheckpointStore](interfaces/checkpointstore.md)
+- [CreateSubAgentToolOptions](interfaces/createsubagenttooloptions.md)
+- [ExecutionContext](interfaces/executioncontext.md)
+- [ExecutionGroup](interfaces/executiongroup.md)
+- [ExecutionPlan](interfaces/executionplan.md)
+- [ExecutionResult](interfaces/executionresult.md)
+- [ExecutionStrategy](interfaces/executionstrategy.md)
+- [FileCheckpointOptions](interfaces/filecheckpointoptions.md)
+- [GenerateResult](interfaces/generateresult.md)
+- [InjectToolContextOptions](interfaces/injecttoolcontextoptions.md)
+- [LoggingOptions](interfaces/loggingoptions.md)
+- [LoopOptions](interfaces/loopoptions.md)
+- [Middleware](interfaces/middleware.md)
+- [MiddlewareContext](interfaces/middlewarecontext.md)
+- [OrderedToolCall](interfaces/orderedtoolcall.md)
+- [PlanOptions](interfaces/planoptions.md)
+- [PlanStep](interfaces/planstep.md)
+- [ReactOptions](interfaces/reactoptions.md)
+- [SubagentEndEvent](interfaces/subagentendevent.md)
+- [SubagentEventBase](interfaces/subagenteventbase.md)
+- [SubagentExecutionTrace](interfaces/subagentexecutiontrace.md)
+- [SubagentExecutionTraceJSON](interfaces/subagentexecutiontracejson.md)
+- [SubagentInnerEvent](interfaces/subagentinnerevent.md)
+- [SubagentStartEvent](interfaces/subagentstartevent.md)
+- [ThreadNodeJSON](interfaces/threadnodejson.md)
+- [ThreadTreeJSON](interfaces/threadtreejson.md)
+- [ToolDependencyOptions](interfaces/tooldependencyoptions.md)
+- [ToolExecutionContext](interfaces/toolexecutioncontext.md)
+- [ToolExecutionResult](interfaces/toolexecutionresult.md)
+- [ToolExecutionTrace](interfaces/toolexecutiontrace.md)
+- [ToolWithDependencies](interfaces/toolwithdependencies.md)
 
 ## Type Aliases
 
-- [ContextAwareToolRun](type-aliases/ContextAwareToolRun.md)
-- [OnSubagentEvent](type-aliases/OnSubagentEvent.md)
-- [PlanStepStatus](type-aliases/PlanStepStatus.md)
-- [SubagentEvent](type-aliases/SubagentEvent.md)
-- [SubagentEventType](type-aliases/SubagentEventType.md)
-- [SubAgentToolRun](type-aliases/SubAgentToolRun.md)
-- [ToolExecutor](type-aliases/ToolExecutor.md)
-- [UAPEventType](type-aliases/UAPEventType.md)
+- [ContextAwareToolRun](type-aliases/contextawaretoolrun.md)
+- [OnSubagentEvent](type-aliases/onsubagentevent.md)
+- [PlanStepStatus](type-aliases/planstepstatus.md)
+- [SubagentEvent](type-aliases/subagentevent.md)
+- [SubagentEventType](type-aliases/subagenteventtype.md)
+- [SubAgentToolRun](type-aliases/subagenttoolrun.md)
+- [ToolExecutor](type-aliases/toolexecutor.md)
+- [UAPEventType](type-aliases/uapeventtype.md)
 
 ## Functions
 
 - [agent](functions/agent.md)
-- [createSubAgentTool](functions/createSubAgentTool.md)
-- [executeOrderedToolCalls](functions/executeOrderedToolCalls.md)
-- [hasCallDependencies](functions/hasCallDependencies.md)
-- [hasToolDependencies](functions/hasToolDependencies.md)
-- [injectToolContext](functions/injectToolContext.md)
-- [isContextAwareTool](functions/isContextAwareTool.md)
-- [orderToolCalls](functions/orderToolCalls.md)
-- [withToolContext](functions/withToolContext.md)
+- [createSubAgentTool](functions/createsubagenttool.md)
+- [executeOrderedToolCalls](functions/executeorderedtoolcalls.md)
+- [hasCallDependencies](functions/hascalldependencies.md)
+- [hasToolDependencies](functions/hastooldependencies.md)
+- [injectToolContext](functions/injecttoolcontext.md)
+- [isContextAwareTool](functions/iscontextawaretool.md)
+- [orderToolCalls](functions/ordertoolcalls.md)
+- [withToolContext](functions/withtoolcontext.md)
 
 ## References
 
 ### ThreadNode
 
-Re-exports [ThreadNode](../thread-tree/classes/ThreadNode.md)
+Re-exports [ThreadNode](../thread-tree/classes/threadnode.md)
 
 ***
 
 ### ThreadTree
 
-Re-exports [ThreadTree](../thread-tree/classes/ThreadTree.md)
+Re-exports [ThreadTree](../thread-tree/classes/threadtree.md)

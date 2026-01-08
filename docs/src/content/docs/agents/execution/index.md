@@ -2,11 +2,11 @@
 title: "execution"
 ---
 
-[**@providerprotocol/agents**](../README.md)
+[**@providerprotocol/agents**](../index.md)
 
 ***
 
-[@providerprotocol/agents](../modules.md) / execution
+[@providerprotocol/agents](./index.md) / execution
 
 # execution
 
@@ -73,202 +73,202 @@ const groups = orderToolCalls(toolCalls, tools);
 
 ### AgentStrategy
 
-Re-exports [AgentStrategy](../index/interfaces/AgentStrategy.md)
+Re-exports [AgentStrategy](../core/interfaces/agentstrategy.md)
 
 ***
 
 ### AgentStreamEvent
 
-Re-exports [AgentStreamEvent](../index/interfaces/AgentStreamEvent.md)
+Re-exports [AgentStreamEvent](../core/interfaces/agentstreamevent.md)
 
 ***
 
 ### AgentStreamResult
 
-Re-exports [AgentStreamResult](../index/interfaces/AgentStreamResult.md)
+Re-exports [AgentStreamResult](../core/interfaces/agentstreamresult.md)
 
 ***
 
 ### ContextAwareToolRun
 
-Re-exports [ContextAwareToolRun](../index/type-aliases/ContextAwareToolRun.md)
+Re-exports [ContextAwareToolRun](../core/type-aliases/contextawaretoolrun.md)
 
 ***
 
 ### executeOrderedToolCalls
 
-Re-exports [executeOrderedToolCalls](../index/functions/executeOrderedToolCalls.md)
+Re-exports [executeOrderedToolCalls](../core/functions/executeorderedtoolcalls.md)
 
 ***
 
 ### ExecutionContext
 
-Re-exports [ExecutionContext](../index/interfaces/ExecutionContext.md)
+Re-exports [ExecutionContext](../core/interfaces/executioncontext.md)
 
 ***
 
 ### ExecutionGroup
 
-Re-exports [ExecutionGroup](../index/interfaces/ExecutionGroup.md)
+Re-exports [ExecutionGroup](../core/interfaces/executiongroup.md)
 
 ***
 
 ### ExecutionResult
 
-Re-exports [ExecutionResult](../index/interfaces/ExecutionResult.md)
+Re-exports [ExecutionResult](../core/interfaces/executionresult.md)
 
 ***
 
 ### ExecutionStrategy
 
-Re-exports [ExecutionStrategy](../index/interfaces/ExecutionStrategy.md)
+Re-exports [ExecutionStrategy](../core/interfaces/executionstrategy.md)
 
 ***
 
 ### GenerateResult
 
-Re-exports [GenerateResult](../index/interfaces/GenerateResult.md)
+Re-exports [GenerateResult](../core/interfaces/generateresult.md)
 
 ***
 
 ### hasCallDependencies
 
-Re-exports [hasCallDependencies](../index/functions/hasCallDependencies.md)
+Re-exports [hasCallDependencies](../core/functions/hascalldependencies.md)
 
 ***
 
 ### hasToolDependencies
 
-Re-exports [hasToolDependencies](../index/functions/hasToolDependencies.md)
+Re-exports [hasToolDependencies](../core/functions/hastooldependencies.md)
 
 ***
 
 ### injectToolContext
 
-Re-exports [injectToolContext](../index/functions/injectToolContext.md)
+Re-exports [injectToolContext](../core/functions/injecttoolcontext.md)
 
 ***
 
 ### InjectToolContextOptions
 
-Re-exports [InjectToolContextOptions](../index/interfaces/InjectToolContextOptions.md)
+Re-exports [InjectToolContextOptions](../core/interfaces/injecttoolcontextoptions.md)
 
 ***
 
 ### isContextAwareTool
 
-Re-exports [isContextAwareTool](../index/functions/isContextAwareTool.md)
+Re-exports [isContextAwareTool](../core/functions/iscontextawaretool.md)
 
 ***
 
 ### LoopOptions
 
-Re-exports [LoopOptions](../index/interfaces/LoopOptions.md)
+Re-exports [LoopOptions](../core/interfaces/loopoptions.md)
 
 ***
 
 ### OnSubagentEvent
 
-Re-exports [OnSubagentEvent](../index/type-aliases/OnSubagentEvent.md)
+Re-exports [OnSubagentEvent](../core/type-aliases/onsubagentevent.md)
 
 ***
 
 ### OrderedToolCall
 
-Re-exports [OrderedToolCall](../index/interfaces/OrderedToolCall.md)
+Re-exports [OrderedToolCall](../core/interfaces/orderedtoolcall.md)
 
 ***
 
 ### orderToolCalls
 
-Re-exports [orderToolCalls](../index/functions/orderToolCalls.md)
+Re-exports [orderToolCalls](../core/functions/ordertoolcalls.md)
 
 ***
 
 ### PlanOptions
 
-Re-exports [PlanOptions](../index/interfaces/PlanOptions.md)
+Re-exports [PlanOptions](../core/interfaces/planoptions.md)
 
 ***
 
 ### ReactOptions
 
-Re-exports [ReactOptions](../index/interfaces/ReactOptions.md)
+Re-exports [ReactOptions](../core/interfaces/reactoptions.md)
 
 ***
 
 ### SubagentEndEvent
 
-Re-exports [SubagentEndEvent](../index/interfaces/SubagentEndEvent.md)
+Re-exports [SubagentEndEvent](../core/interfaces/subagentendevent.md)
 
 ***
 
 ### SubagentEvent
 
-Re-exports [SubagentEvent](../index/type-aliases/SubagentEvent.md)
+Re-exports [SubagentEvent](../core/type-aliases/subagentevent.md)
 
 ***
 
 ### SubagentEventBase
 
-Re-exports [SubagentEventBase](../index/interfaces/SubagentEventBase.md)
+Re-exports [SubagentEventBase](../core/interfaces/subagenteventbase.md)
 
 ***
 
 ### SubagentEventType
 
-Re-exports [SubagentEventType](../index/type-aliases/SubagentEventType.md)
+Re-exports [SubagentEventType](../core/type-aliases/subagenteventtype.md)
 
 ***
 
 ### SubagentInnerEvent
 
-Re-exports [SubagentInnerEvent](../index/interfaces/SubagentInnerEvent.md)
+Re-exports [SubagentInnerEvent](../core/interfaces/subagentinnerevent.md)
 
 ***
 
 ### SubagentStartEvent
 
-Re-exports [SubagentStartEvent](../index/interfaces/SubagentStartEvent.md)
+Re-exports [SubagentStartEvent](../core/interfaces/subagentstartevent.md)
 
 ***
 
 ### ToolDependencyOptions
 
-Re-exports [ToolDependencyOptions](../index/interfaces/ToolDependencyOptions.md)
+Re-exports [ToolDependencyOptions](../core/interfaces/tooldependencyoptions.md)
 
 ***
 
 ### ToolExecutionContext
 
-Re-exports [ToolExecutionContext](../index/interfaces/ToolExecutionContext.md)
+Re-exports [ToolExecutionContext](../core/interfaces/toolexecutioncontext.md)
 
 ***
 
 ### ToolExecutionResult
 
-Re-exports [ToolExecutionResult](../index/interfaces/ToolExecutionResult.md)
+Re-exports [ToolExecutionResult](../core/interfaces/toolexecutionresult.md)
 
 ***
 
 ### ToolExecutor
 
-Re-exports [ToolExecutor](../index/type-aliases/ToolExecutor.md)
+Re-exports [ToolExecutor](../core/type-aliases/toolexecutor.md)
 
 ***
 
 ### ToolWithDependencies
 
-Re-exports [ToolWithDependencies](../index/interfaces/ToolWithDependencies.md)
+Re-exports [ToolWithDependencies](../core/interfaces/toolwithdependencies.md)
 
 ***
 
 ### UAPEventType
 
-Re-exports [UAPEventType](../index/type-aliases/UAPEventType.md)
+Re-exports [UAPEventType](../core/type-aliases/uapeventtype.md)
 
 ***
 
 ### withToolContext
 
-Re-exports [withToolContext](../index/functions/withToolContext.md)
+Re-exports [withToolContext](../core/functions/withtoolcontext.md)

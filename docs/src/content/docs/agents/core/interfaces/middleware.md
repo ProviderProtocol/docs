@@ -2,15 +2,15 @@
 title: "Interface: Middleware"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / Middleware
+[@providerprotocol/agents](./index.md) / [index](../index.md) / Middleware
 
 # Interface: Middleware
 
-Defined in: [src/middleware/types.ts:107](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L107)
+Defined in: [src/middleware/types.ts:107](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L107)
 
 Middleware interface for implementing cross-cutting concerns in agent execution.
 
@@ -58,7 +58,7 @@ const timingMiddleware: Middleware = {
 
 ## See
 
- - [MiddlewareContext](MiddlewareContext.md) for the context object passed to hooks
+ - [MiddlewareContext](middlewarecontext.md) for the context object passed to hooks
  - logging for a built-in logging middleware implementation
 
 ## Properties
@@ -67,7 +67,7 @@ const timingMiddleware: Middleware = {
 
 > **name**: `string`
 
-Defined in: [src/middleware/types.ts:114](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L114)
+Defined in: [src/middleware/types.ts:114](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L114)
 
 Unique name identifying this middleware.
 
@@ -78,9 +78,9 @@ and unique within the middleware chain.
 
 ### after()?
 
-> `optional` **after**(`context`, `result`): `Promise`\<[`GenerateResult`](GenerateResult.md)\>
+> `optional` **after**(`context`, `result`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/middleware/types.ts:161](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L161)
+Defined in: [src/middleware/types.ts:161](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L161)
 
 Hook called after agent execution completes successfully.
 
@@ -94,19 +94,19 @@ Use this to:
 
 ##### context
 
-[`MiddlewareContext`](MiddlewareContext.md)
+[`MiddlewareContext`](middlewarecontext.md)
 
 The execution context (same instance from before hook)
 
 ##### result
 
-[`GenerateResult`](GenerateResult.md)
+[`GenerateResult`](generateresult.md)
 
 The generation result from the agent
 
 #### Returns
 
-`Promise`\<[`GenerateResult`](GenerateResult.md)\>
+`Promise`\<[`GenerateResult`](generateresult.md)\>
 
 The (optionally modified) result
 
@@ -124,9 +124,9 @@ async after(context, result) {
 
 ### before()?
 
-> `optional` **before**(`context`): `Promise`\<`void` \| [`MiddlewareContext`](MiddlewareContext.md)\>
+> `optional` **before**(`context`): `Promise`\<`void` \| [`MiddlewareContext`](middlewarecontext.md)\>
 
-Defined in: [src/middleware/types.ts:137](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L137)
+Defined in: [src/middleware/types.ts:137](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L137)
 
 Hook called before agent execution begins.
 
@@ -140,13 +140,13 @@ Use this to:
 
 ##### context
 
-[`MiddlewareContext`](MiddlewareContext.md)
+[`MiddlewareContext`](middlewarecontext.md)
 
 The execution context containing agent, input, state, and metadata
 
 #### Returns
 
-`Promise`\<`void` \| [`MiddlewareContext`](MiddlewareContext.md)\>
+`Promise`\<`void` \| [`MiddlewareContext`](middlewarecontext.md)\>
 
 The (optionally modified) context, or void to pass through unchanged
 
@@ -164,9 +164,9 @@ async before(context) {
 
 ### onError()?
 
-> `optional` **onError**(`context`, `error`): `Promise`\<`void` \| [`GenerateResult`](GenerateResult.md)\>
+> `optional` **onError**(`context`, `error`): `Promise`\<`void` \| [`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/middleware/types.ts:192](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L192)
+Defined in: [src/middleware/types.ts:192](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L192)
 
 Hook called when an error occurs during agent execution.
 
@@ -178,7 +178,7 @@ This hook can either:
 
 ##### context
 
-[`MiddlewareContext`](MiddlewareContext.md)
+[`MiddlewareContext`](middlewarecontext.md)
 
 The execution context at the time of the error
 
@@ -190,7 +190,7 @@ The error that occurred
 
 #### Returns
 
-`Promise`\<`void` \| [`GenerateResult`](GenerateResult.md)\>
+`Promise`\<`void` \| [`GenerateResult`](generateresult.md)\>
 
 A recovery result, or undefined to propagate the error
 

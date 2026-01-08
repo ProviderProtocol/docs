@@ -2,15 +2,15 @@
 title: "Interface: ExecutionStrategy"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ExecutionStrategy
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ExecutionStrategy
 
 # Interface: ExecutionStrategy
 
-Defined in: [src/execution/types.ts:322](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L322)
+Defined in: [src/execution/types.ts:322](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L322)
 
 Execution strategy interface defining how an agent executes.
 
@@ -48,7 +48,7 @@ const myStrategy: ExecutionStrategy = {
 
 > **name**: `string`
 
-Defined in: [src/execution/types.ts:324](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L324)
+Defined in: [src/execution/types.ts:324](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L324)
 
 Unique name identifying this strategy (e.g., 'loop', 'react', 'plan')
 
@@ -56,9 +56,9 @@ Unique name identifying this strategy (e.g., 'loop', 'react', 'plan')
 
 ### execute()
 
-> **execute**(`context`): `Promise`\<[`ExecutionResult`](ExecutionResult.md)\>
+> **execute**(`context`): `Promise`\<[`ExecutionResult`](executionresult.md)\>
 
-Defined in: [src/execution/types.ts:331](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L331)
+Defined in: [src/execution/types.ts:331](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L331)
 
 Execute the strategy synchronously (non-streaming).
 
@@ -66,13 +66,13 @@ Execute the strategy synchronously (non-streaming).
 
 ##### context
 
-[`ExecutionContext`](ExecutionContext.md)
+[`ExecutionContext`](executioncontext.md)
 
 The execution context with all required resources
 
 #### Returns
 
-`Promise`\<[`ExecutionResult`](ExecutionResult.md)\>
+`Promise`\<[`ExecutionResult`](executionresult.md)\>
 
 Promise resolving to the execution result
 
@@ -80,9 +80,9 @@ Promise resolving to the execution result
 
 ### stream()
 
-> **stream**(`context`): [`AgentStreamResult`](AgentStreamResult.md)
+> **stream**(`context`): [`AgentStreamResult`](agentstreamresult.md)
 
-Defined in: [src/execution/types.ts:338](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L338)
+Defined in: [src/execution/types.ts:338](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L338)
 
 Execute the strategy with streaming support.
 
@@ -90,12 +90,12 @@ Execute the strategy with streaming support.
 
 ##### context
 
-[`ExecutionContext`](ExecutionContext.md)
+[`ExecutionContext`](executioncontext.md)
 
 The execution context with all required resources
 
 #### Returns
 
-[`AgentStreamResult`](AgentStreamResult.md)
+[`AgentStreamResult`](agentstreamresult.md)
 
 AgentStreamResult for async iteration and final result

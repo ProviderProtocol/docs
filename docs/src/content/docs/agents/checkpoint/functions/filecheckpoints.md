@@ -2,21 +2,21 @@
 title: "Function: fileCheckpoints()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [checkpoint](../README.md) / fileCheckpoints
+[@providerprotocol/agents](./index.md) / [checkpoint](../index.md) / fileCheckpoints
 
 # Function: fileCheckpoints()
 
-> **fileCheckpoints**(`options`): [`CheckpointStore`](../../index/interfaces/CheckpointStore.md)
+> **fileCheckpoints**(`options`): [`CheckpointStore`](../../core/interfaces/checkpointstore.md)
 
-Defined in: [src/checkpoint/file.ts:105](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/file.ts#L105)
+Defined in: [src/checkpoint/file.ts:105](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/file.ts#L105)
 
 Creates a file-based checkpoint store for persisting agent state.
 
-This is the reference implementation of [CheckpointStore](../../index/interfaces/CheckpointStore.md) that uses
+This is the reference implementation of [CheckpointStore](../../core/interfaces/checkpointstore.md) that uses
 the local filesystem for storage. Each session gets its own subdirectory
 containing the checkpoint and metadata files.
 
@@ -24,15 +24,15 @@ containing the checkpoint and metadata files.
 
 ### options
 
-[`FileCheckpointOptions`](../../index/interfaces/FileCheckpointOptions.md) = `{}`
+[`FileCheckpointOptions`](../../core/interfaces/filecheckpointoptions.md) = `{}`
 
 Configuration options for the store.
 
 ## Returns
 
-[`CheckpointStore`](../../index/interfaces/CheckpointStore.md)
+[`CheckpointStore`](../../core/interfaces/checkpointstore.md)
 
-A [CheckpointStore](../../index/interfaces/CheckpointStore.md) implementation backed by the filesystem.
+A [CheckpointStore](../../core/interfaces/checkpointstore.md) implementation backed by the filesystem.
 
 ## Remarks
 

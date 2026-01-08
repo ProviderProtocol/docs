@@ -2,17 +2,17 @@
 title: "Interface: SubagentExecutionTraceJSON"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / SubagentExecutionTraceJSON
+[@providerprotocol/agents](./index.md) / [index](../index.md) / SubagentExecutionTraceJSON
 
 # Interface: SubagentExecutionTraceJSON
 
-Defined in: [src/state/types.ts:116](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L116)
+Defined in: [src/state/types.ts:116](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L116)
 
-JSON-serializable form of [SubagentExecutionTrace](SubagentExecutionTrace.md).
+JSON-serializable form of [SubagentExecutionTrace](subagentexecutiontrace.md).
 
 Used for persisting sub-agent traces to storage and transmitting
 them across process boundaries.
@@ -23,7 +23,7 @@ them across process boundaries.
 
 > **endTime**: `number`
 
-Defined in: [src/state/types.ts:122](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L122)
+Defined in: [src/state/types.ts:122](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L122)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [src/state/types.ts:122](https://github.com/ProviderProtocol/agents/
 
 > `optional` **error**: `string`
 
-Defined in: [src/state/types.ts:125](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L125)
+Defined in: [src/state/types.ts:125](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L125)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [src/state/types.ts:125](https://github.com/ProviderProtocol/agents/
 
 > **parentToolCallId**: `string`
 
-Defined in: [src/state/types.ts:119](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L119)
+Defined in: [src/state/types.ts:119](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L119)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [src/state/types.ts:119](https://github.com/ProviderProtocol/agents/
 
 > **prompt**: `string`
 
-Defined in: [src/state/types.ts:120](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L120)
+Defined in: [src/state/types.ts:120](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L120)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/state/types.ts:120](https://github.com/ProviderProtocol/agents/
 
 > `optional` **result**: `string`
 
-Defined in: [src/state/types.ts:124](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L124)
+Defined in: [src/state/types.ts:124](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L124)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [src/state/types.ts:124](https://github.com/ProviderProtocol/agents/
 
 > **startTime**: `number`
 
-Defined in: [src/state/types.ts:121](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L121)
+Defined in: [src/state/types.ts:121](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L121)
 
 ***
 
@@ -71,7 +71,7 @@ Defined in: [src/state/types.ts:121](https://github.com/ProviderProtocol/agents/
 
 > **subagentId**: `string`
 
-Defined in: [src/state/types.ts:117](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L117)
+Defined in: [src/state/types.ts:117](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L117)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: [src/state/types.ts:117](https://github.com/ProviderProtocol/agents/
 
 > **subagentType**: `string`
 
-Defined in: [src/state/types.ts:118](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L118)
+Defined in: [src/state/types.ts:118](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L118)
 
 ***
 
@@ -87,15 +87,15 @@ Defined in: [src/state/types.ts:118](https://github.com/ProviderProtocol/agents/
 
 > **success**: `boolean`
 
-Defined in: [src/state/types.ts:123](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L123)
+Defined in: [src/state/types.ts:123](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L123)
 
 ***
 
 ### toolExecutions?
 
-> `optional` **toolExecutions**: [`ToolExecutionTrace`](ToolExecutionTrace.md)[]
+> `optional` **toolExecutions**: [`ToolExecutionTrace`](toolexecutiontrace.md)[]
 
-Defined in: [src/state/types.ts:126](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L126)
+Defined in: [src/state/types.ts:126](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L126)
 
 ***
 
@@ -103,4 +103,4 @@ Defined in: [src/state/types.ts:126](https://github.com/ProviderProtocol/agents/
 
 > `optional` **usage**: `TokenUsage`
 
-Defined in: [src/state/types.ts:127](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L127)
+Defined in: [src/state/types.ts:127](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L127)

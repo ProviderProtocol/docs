@@ -2,17 +2,17 @@
 title: "Function: loop()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [execution](../README.md) / loop
+[@providerprotocol/agents](./index.md) / [execution](../index.md) / loop
 
 # Function: loop()
 
-> **loop**(`options`): [`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+> **loop**(`options`): [`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
-Defined in: [src/execution/loop.ts:62](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/loop.ts#L62)
+Defined in: [src/execution/loop.ts:62](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/loop.ts#L62)
 
 Creates a loop execution strategy for agent execution.
 
@@ -31,13 +31,13 @@ model naturally knows when to stop calling tools.
 
 ### options
 
-[`LoopOptions`](../../index/interfaces/LoopOptions.md) = `{}`
+[`LoopOptions`](../../core/interfaces/loopoptions.md) = `{}`
 
 Configuration options for the loop strategy
 
 ## Returns
 
-[`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+[`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
 An ExecutionStrategy instance implementing the loop pattern
 

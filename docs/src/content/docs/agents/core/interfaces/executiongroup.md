@@ -2,26 +2,26 @@
 title: "Interface: ExecutionGroup"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ExecutionGroup
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ExecutionGroup
 
 # Interface: ExecutionGroup
 
-Defined in: [src/execution/tool-ordering.ts:14](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-ordering.ts#L14)
+Defined in: [src/execution/tool-ordering.ts:14](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L14)
 
 Represents a group of tool calls that can execute together.
 
-Execution groups are created by [orderToolCalls](../functions/orderToolCalls.md) to organize
+Execution groups are created by [orderToolCalls](../functions/ordertoolcalls.md) to organize
 tool calls for efficient execution while respecting dependencies.
 Groups marked as barriers must execute sequentially (one call at a time),
 while non-barrier groups can execute all calls in parallel.
 
 ## See
 
-[orderToolCalls](../functions/orderToolCalls.md) for the function that creates these groups
+[orderToolCalls](../functions/ordertoolcalls.md) for the function that creates these groups
 
 ## Properties
 
@@ -29,7 +29,7 @@ while non-barrier groups can execute all calls in parallel.
 
 > **calls**: `ToolCall`[]
 
-Defined in: [src/execution/tool-ordering.ts:16](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-ordering.ts#L16)
+Defined in: [src/execution/tool-ordering.ts:16](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L16)
 
 Tool calls in this group that can execute together
 
@@ -39,7 +39,7 @@ Tool calls in this group that can execute together
 
 > **isBarrier**: `boolean`
 
-Defined in: [src/execution/tool-ordering.ts:22](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-ordering.ts#L22)
+Defined in: [src/execution/tool-ordering.ts:22](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-ordering.ts#L22)
 
 Whether this group contains a sequential tool (acts as barrier).
 When true, calls in this group execute one at a time.

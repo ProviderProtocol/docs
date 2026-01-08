@@ -2,15 +2,15 @@
 title: "Interface: ToolWithDependencies"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ToolWithDependencies
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ToolWithDependencies
 
 # Interface: ToolWithDependencies
 
-Defined in: [src/execution/types.ts:526](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L526)
+Defined in: [src/execution/types.ts:526](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L526)
 
 Extended Tool interface with UAP dependency options.
 
@@ -54,7 +54,7 @@ const writeTool: ToolWithDependencies = {
 
 ## Extends
 
-- `Tool`.[`ToolDependencyOptions`](ToolDependencyOptions.md)
+- `Tool`.[`ToolDependencyOptions`](tooldependencyoptions.md)
 
 ## Properties
 
@@ -62,14 +62,14 @@ const writeTool: ToolWithDependencies = {
 
 > `optional` **dependsOn**: `string`[]
 
-Defined in: [src/execution/types.ts:485](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L485)
+Defined in: [src/execution/types.ts:485](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L485)
 
 Tool names that must complete before this tool can execute.
 Used for explicit dependency chains.
 
 #### Inherited from
 
-[`ToolDependencyOptions`](ToolDependencyOptions.md).[`dependsOn`](ToolDependencyOptions.md#dependson)
+[`ToolDependencyOptions`](tooldependencyoptions.md).[`dependsOn`](tooldependencyoptions.md#dependson)
 
 ***
 
@@ -119,14 +119,14 @@ JSON Schema defining parameters
 
 > `optional` **sequential**: `boolean`
 
-Defined in: [src/execution/types.ts:479](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L479)
+Defined in: [src/execution/types.ts:479](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L479)
 
 If true, this tool must complete before other tools start.
 Sequential tools create a barrier in parallel execution.
 
 #### Inherited from
 
-[`ToolDependencyOptions`](ToolDependencyOptions.md).[`sequential`](ToolDependencyOptions.md#sequential)
+[`ToolDependencyOptions`](tooldependencyoptions.md).[`sequential`](tooldependencyoptions.md#sequential)
 
 ## Methods
 

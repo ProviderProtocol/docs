@@ -2,11 +2,11 @@
 title: "checkpoint"
 ---
 
-[**@providerprotocol/agents**](../README.md)
+[**@providerprotocol/agents**](../index.md)
 
 ***
 
-[@providerprotocol/agents](../modules.md) / checkpoint
+[@providerprotocol/agents](./index.md) / checkpoint
 
 # checkpoint
 
@@ -24,10 +24,10 @@ checkpointing after each step, execution can resume from the last successful
 state rather than starting over.
 
 The module provides:
-- [CheckpointStore](../index/interfaces/CheckpointStore.md) - Interface for implementing custom storage backends
-- [fileCheckpoints](functions/fileCheckpoints.md) - Reference implementation using the local filesystem
-- [CheckpointMetadata](../index/interfaces/CheckpointMetadata.md) - Lightweight metadata for session management
-- [CheckpointData](../index/interfaces/CheckpointData.md) - Combined state and metadata type
+- [CheckpointStore](../core/interfaces/checkpointstore.md) - Interface for implementing custom storage backends
+- [fileCheckpoints](functions/filecheckpoints.md) - Reference implementation using the local filesystem
+- [CheckpointMetadata](../core/interfaces/checkpointmetadata.md) - Lightweight metadata for session management
+- [CheckpointData](../core/interfaces/checkpointdata.md) - Combined state and metadata type
 
 ## Examples
 
@@ -79,28 +79,28 @@ UAP-1.0 Spec Section 12.4 for checkpoint protocol specification
 
 ## Functions
 
-- [fileCheckpoints](functions/fileCheckpoints.md)
+- [fileCheckpoints](functions/filecheckpoints.md)
 
 ## References
 
 ### CheckpointData
 
-Re-exports [CheckpointData](../index/interfaces/CheckpointData.md)
+Re-exports [CheckpointData](../core/interfaces/checkpointdata.md)
 
 ***
 
 ### CheckpointMetadata
 
-Re-exports [CheckpointMetadata](../index/interfaces/CheckpointMetadata.md)
+Re-exports [CheckpointMetadata](../core/interfaces/checkpointmetadata.md)
 
 ***
 
 ### CheckpointStore
 
-Re-exports [CheckpointStore](../index/interfaces/CheckpointStore.md)
+Re-exports [CheckpointStore](../core/interfaces/checkpointstore.md)
 
 ***
 
 ### FileCheckpointOptions
 
-Re-exports [FileCheckpointOptions](../index/interfaces/FileCheckpointOptions.md)
+Re-exports [FileCheckpointOptions](../core/interfaces/filecheckpointoptions.md)

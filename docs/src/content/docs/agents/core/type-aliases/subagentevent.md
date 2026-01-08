@@ -2,17 +2,17 @@
 title: "Type Alias: SubagentEvent"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / SubagentEvent
+[@providerprotocol/agents](./index.md) / [index](../index.md) / SubagentEvent
 
 # Type Alias: SubagentEvent
 
-> **SubagentEvent** = [`SubagentStartEvent`](../interfaces/SubagentStartEvent.md) \| [`SubagentInnerEvent`](../interfaces/SubagentInnerEvent.md) \| [`SubagentEndEvent`](../interfaces/SubagentEndEvent.md)
+> **SubagentEvent** = [`SubagentStartEvent`](../interfaces/subagentstartevent.md) \| [`SubagentInnerEvent`](../interfaces/subagentinnerevent.md) \| [`SubagentEndEvent`](../interfaces/subagentendevent.md)
 
-Defined in: [src/execution/types.ts:662](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L662)
+Defined in: [src/execution/types.ts:662](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L662)
 
 Union type for all sub-agent events.
 

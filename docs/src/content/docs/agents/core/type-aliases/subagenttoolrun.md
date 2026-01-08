@@ -2,22 +2,22 @@
 title: "Type Alias: SubAgentToolRun()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / SubAgentToolRun
+[@providerprotocol/agents](./index.md) / [index](../index.md) / SubAgentToolRun
 
 # Type Alias: SubAgentToolRun()
 
 > **SubAgentToolRun** = (`params`, `context?`) => `Promise`\<`string`\>
 
-Defined in: [src/subagent/index.ts:421](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L421)
+Defined in: [src/subagent/index.ts:421](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L421)
 
 Function signature for a sub-agent tool's run method.
 
 This type represents the shape of the `run` function created by
-[createSubAgentTool](../functions/createSubAgentTool.md). It accepts the tool parameters and an optional
+[createSubAgentTool](../functions/createsubagenttool.md). It accepts the tool parameters and an optional
 execution context that provides event propagation capabilities.
 
 ## Parameters
@@ -30,7 +30,7 @@ The tool parameters as defined by the tool's JSON Schema
 
 ### context?
 
-[`ToolExecutionContext`](../interfaces/ToolExecutionContext.md)
+[`ToolExecutionContext`](../interfaces/toolexecutioncontext.md)
 
 Optional execution context for event propagation and tracing
 

@@ -2,15 +2,15 @@
 title: "Interface: Agent"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / Agent
+[@providerprotocol/agents](./index.md) / [index](../index.md) / Agent
 
 # Interface: Agent
 
-Defined in: [src/agent/types.ts:166](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L166)
+Defined in: [src/agent/types.ts:166](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L166)
 
 Core agent interface for AI-powered autonomous execution.
 
@@ -59,7 +59,7 @@ console.log(result2.turn.response.text); // "Alice"
 
 > `readonly` **id**: `string`
 
-Defined in: [src/agent/types.ts:174](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L174)
+Defined in: [src/agent/types.ts:174](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L174)
 
 Unique agent identifier in UUIDv4 format.
 
@@ -74,7 +74,7 @@ tracing, and correlating agent activity across systems.
 
 > `readonly` **model**: `ModelReference`
 
-Defined in: [src/agent/types.ts:183](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L183)
+Defined in: [src/agent/types.ts:183](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L183)
 
 The model reference bound to this agent.
 
@@ -89,7 +89,7 @@ It cannot be changed after the agent is instantiated.
 
 > `readonly` `optional` **system**: `string`
 
-Defined in: [src/agent/types.ts:201](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L201)
+Defined in: [src/agent/types.ts:201](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L201)
 
 System prompt that guides agent behavior.
 
@@ -104,7 +104,7 @@ the agent responds to user inputs.
 
 > `readonly` **tools**: `Tool`\<`unknown`, `unknown`\>[]
 
-Defined in: [src/agent/types.ts:192](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L192)
+Defined in: [src/agent/types.ts:192](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L192)
 
 Tools available to this agent for execution.
 
@@ -117,9 +117,9 @@ during agent execution when the model decides to use them.
 
 ### ask()
 
-> **ask**(`input`, `state`): `Promise`\<[`GenerateResult`](GenerateResult.md)\>
+> **ask**(`input`, `state`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/agent/types.ts:282](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L282)
+Defined in: [src/agent/types.ts:282](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L282)
 
 Multi-turn execution with automatic conversation history management.
 
@@ -137,13 +137,13 @@ User input as a string or Message object
 
 ##### state
 
-[`AgentState`](../classes/AgentState.md)
+[`AgentState`](../classes/agentstate.md)
 
 Current immutable agent state
 
 #### Returns
 
-`Promise`\<[`GenerateResult`](GenerateResult.md)\>
+`Promise`\<[`GenerateResult`](generateresult.md)\>
 
 Promise resolving to the turn result and new state with updated history
 
@@ -172,9 +172,9 @@ state = result2.state;
 
 ### generate()
 
-> **generate**(`input`, `state`): `Promise`\<[`GenerateResult`](GenerateResult.md)\>
+> **generate**(`input`, `state`): `Promise`\<[`GenerateResult`](generateresult.md)\>
 
-Defined in: [src/agent/types.ts:223](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L223)
+Defined in: [src/agent/types.ts:223](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L223)
 
 Execute the agent and return the turn result with updated state.
 
@@ -193,13 +193,13 @@ User input as a string or Message object
 
 ##### state
 
-[`AgentState`](../classes/AgentState.md)
+[`AgentState`](../classes/agentstate.md)
 
 Current immutable agent state
 
 #### Returns
 
-`Promise`\<[`GenerateResult`](GenerateResult.md)\>
+`Promise`\<[`GenerateResult`](generateresult.md)\>
 
 Promise resolving to the turn result and new state
 
@@ -218,7 +218,7 @@ console.log(newState.messages.length);
 
 > **query**(`input`): `Promise`\<`Turn`\<`unknown`\>\>
 
-Defined in: [src/agent/types.ts:301](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L301)
+Defined in: [src/agent/types.ts:301](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L301)
 
 Stateless single-turn execution for one-off queries.
 
@@ -252,9 +252,9 @@ console.log(turn.response.text);
 
 ### stream()
 
-> **stream**(`input`, `state`): [`AgentStreamResult`](AgentStreamResult.md)
+> **stream**(`input`, `state`): [`AgentStreamResult`](agentstreamresult.md)
 
-Defined in: [src/agent/types.ts:250](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/types.ts#L250)
+Defined in: [src/agent/types.ts:250](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/types.ts#L250)
 
 Execute the agent with streaming response.
 
@@ -272,13 +272,13 @@ User input as a string or Message object
 
 ##### state
 
-[`AgentState`](../classes/AgentState.md)
+[`AgentState`](../classes/agentstate.md)
 
 Current immutable agent state
 
 #### Returns
 
-[`AgentStreamResult`](AgentStreamResult.md)
+[`AgentStreamResult`](agentstreamresult.md)
 
 Stream result with async iterator, result promise, and abort method
 

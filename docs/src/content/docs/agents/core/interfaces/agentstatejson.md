@@ -2,17 +2,17 @@
 title: "Interface: AgentStateJSON"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / AgentStateJSON
+[@providerprotocol/agents](./index.md) / [index](../index.md) / AgentStateJSON
 
 # Interface: AgentStateJSON
 
-Defined in: [src/state/types.ts:200](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L200)
+Defined in: [src/state/types.ts:200](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L200)
 
-JSON-serializable form of [AgentState](../classes/AgentState.md) for persistence.
+JSON-serializable form of [AgentState](../classes/agentstate.md) for persistence.
 
 Captures the complete state of an agent at a point in time, enabling
 checkpointing, recovery, and debugging. The version field ensures
@@ -25,7 +25,7 @@ UAP\_VERSION for successful deserialization.
 
 ## See
 
-[AgentStateInterface](AgentStateInterface.md) for the runtime representation
+[AgentStateInterface](agentstateinterface.md) for the runtime representation
 
 ## Properties
 
@@ -33,7 +33,7 @@ UAP\_VERSION for successful deserialization.
 
 > **id**: `string`
 
-Defined in: [src/state/types.ts:205](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L205)
+Defined in: [src/state/types.ts:205](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L205)
 
 Unique identifier for this state snapshot
 
@@ -43,7 +43,7 @@ Unique identifier for this state snapshot
 
 > **messages**: `MessageJSON`[]
 
-Defined in: [src/state/types.ts:208](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L208)
+Defined in: [src/state/types.ts:208](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L208)
 
 Serialized conversation messages
 
@@ -53,7 +53,7 @@ Serialized conversation messages
 
 > **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/state/types.ts:214](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L214)
+Defined in: [src/state/types.ts:214](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L214)
 
 User-defined metadata attached to the state
 
@@ -63,7 +63,7 @@ User-defined metadata attached to the state
 
 > `optional` **plan**: `PlanStepJSON`[]
 
-Defined in: [src/state/types.ts:220](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L220)
+Defined in: [src/state/types.ts:220](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L220)
 
 Execution plan for Plan-strategy agents
 
@@ -73,7 +73,7 @@ Execution plan for Plan-strategy agents
 
 > **reasoning**: `string`[]
 
-Defined in: [src/state/types.ts:217](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L217)
+Defined in: [src/state/types.ts:217](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L217)
 
 Reasoning traces captured during ReAct-style execution
 
@@ -83,7 +83,7 @@ Reasoning traces captured during ReAct-style execution
 
 > **step**: `number`
 
-Defined in: [src/state/types.ts:211](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L211)
+Defined in: [src/state/types.ts:211](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L211)
 
 Current step number in the agent's execution
 
@@ -91,9 +91,9 @@ Current step number in the agent's execution
 
 ### subagentTraces?
 
-> `optional` **subagentTraces**: [`SubagentExecutionTraceJSON`](SubagentExecutionTraceJSON.md)[]
+> `optional` **subagentTraces**: [`SubagentExecutionTraceJSON`](subagentexecutiontracejson.md)[]
 
-Defined in: [src/state/types.ts:223](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L223)
+Defined in: [src/state/types.ts:223](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L223)
 
 Sub-agent execution traces per UAP spec Section 8.8
 
@@ -103,6 +103,6 @@ Sub-agent execution traces per UAP spec Section 8.8
 
 > **version**: `string`
 
-Defined in: [src/state/types.ts:202](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/types.ts#L202)
+Defined in: [src/state/types.ts:202](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/types.ts#L202)
 
 UAP version string for schema compatibility checking

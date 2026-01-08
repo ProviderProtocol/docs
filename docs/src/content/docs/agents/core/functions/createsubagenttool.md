@@ -2,17 +2,17 @@
 title: "Function: createSubAgentTool()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / createSubAgentTool
+[@providerprotocol/agents](./index.md) / [index](../index.md) / createSubAgentTool
 
 # Function: createSubAgentTool()
 
 > **createSubAgentTool**(`options`): `Tool`
 
-Defined in: [src/subagent/index.ts:209](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L209)
+Defined in: [src/subagent/index.ts:209](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L209)
 
 Creates a UPP Tool from a UAP Agent with full event propagation.
 
@@ -33,7 +33,7 @@ parameter, which is injected by `injectToolContext()` during execution.
 
 ### options
 
-[`CreateSubAgentToolOptions`](../interfaces/CreateSubAgentToolOptions.md)
+[`CreateSubAgentToolOptions`](../interfaces/createsubagenttooloptions.md)
 
 Configuration for the sub-agent tool
 
@@ -92,4 +92,4 @@ const tool = createSubAgentTool({
 
 ## See
 
-[CreateSubAgentToolOptions](../interfaces/CreateSubAgentToolOptions.md) for configuration details
+[CreateSubAgentToolOptions](../interfaces/createsubagenttooloptions.md) for configuration details

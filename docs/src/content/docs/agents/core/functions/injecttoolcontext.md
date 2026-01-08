@@ -2,17 +2,17 @@
 title: "Function: injectToolContext()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / injectToolContext
+[@providerprotocol/agents](./index.md) / [index](../index.md) / injectToolContext
 
 # Function: injectToolContext()
 
 > **injectToolContext**(`tools`, `context`, `options`): `Tool`\<`unknown`, `unknown`\>[]
 
-Defined in: [src/execution/tool-context.ts:67](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-context.ts#L67)
+Defined in: [src/execution/tool-context.ts:67](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-context.ts#L67)
 
 Wraps tools to inject execution context when they support it.
 
@@ -39,13 +39,13 @@ Original tool array to wrap
 
 ### context
 
-[`ExecutionContext`](../interfaces/ExecutionContext.md)
+[`ExecutionContext`](../interfaces/executioncontext.md)
 
 Execution context from the agent
 
 ### options
 
-[`InjectToolContextOptions`](../interfaces/InjectToolContextOptions.md) = `{}`
+[`InjectToolContextOptions`](../interfaces/injecttoolcontextoptions.md) = `{}`
 
 Additional options like event callbacks
 
@@ -77,5 +77,5 @@ const llmWithContext = llm({ model, tools: wrappedTools });
 ## See
 
  - UAP-1.0 Spec Section 8.4
- - [ToolExecutionContext](../interfaces/ToolExecutionContext.md) for the context structure
- - [isContextAwareTool](isContextAwareTool.md) to check if a tool accepts context
+ - [ToolExecutionContext](../interfaces/toolexecutioncontext.md) for the context structure
+ - [isContextAwareTool](iscontextawaretool.md) to check if a tool accepts context

@@ -2,15 +2,15 @@
 title: "Interface: GenerateResult"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / GenerateResult
+[@providerprotocol/agents](./index.md) / [index](../index.md) / GenerateResult
 
 # Interface: GenerateResult
 
-Defined in: [src/execution/types.ts:28](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L28)
+Defined in: [src/execution/types.ts:28](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L28)
 
 Result of agent generation containing the conversation turn and updated state.
 
@@ -30,9 +30,9 @@ console.log(result.state.currentStep);  // Execution step count
 
 ### state
 
-> **state**: [`AgentState`](../classes/AgentState.md)
+> **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/execution/types.ts:32](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L32)
+Defined in: [src/execution/types.ts:32](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L32)
 
 New immutable state reflecting all changes from this generation
 
@@ -42,6 +42,6 @@ New immutable state reflecting all changes from this generation
 
 > **turn**: `Turn`
 
-Defined in: [src/execution/types.ts:30](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L30)
+Defined in: [src/execution/types.ts:30](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L30)
 
 Standard UPP Turn containing the model response, messages, and token usage

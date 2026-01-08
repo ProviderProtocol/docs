@@ -2,17 +2,17 @@
 title: "Function: isContextAwareTool()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / isContextAwareTool
+[@providerprotocol/agents](./index.md) / [index](../index.md) / isContextAwareTool
 
 # Function: isContextAwareTool()
 
 > **isContextAwareTool**(`tool`): `boolean`
 
-Defined in: [src/execution/tool-context.ts:146](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/tool-context.ts#L146)
+Defined in: [src/execution/tool-context.ts:146](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/tool-context.ts#L146)
 
 Checks if a tool is context-aware (accepts execution context as second parameter).
 

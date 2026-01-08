@@ -2,15 +2,15 @@
 title: "Interface: MiddlewareContext"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / MiddlewareContext
+[@providerprotocol/agents](./index.md) / [index](../index.md) / MiddlewareContext
 
 # Interface: MiddlewareContext
 
-Defined in: [src/middleware/types.ts:18](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L18)
+Defined in: [src/middleware/types.ts:18](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L18)
 
 Context passed to middleware functions during agent execution.
 
@@ -25,15 +25,15 @@ Use namespaced keys (e.g., `_myMiddleware_key`) to avoid collisions.
 
 ## See
 
-[Middleware](Middleware.md) for the middleware interface that receives this context
+[Middleware](middleware.md) for the middleware interface that receives this context
 
 ## Properties
 
 ### agent
 
-> **agent**: [`AgentRef`](AgentRef.md)
+> **agent**: [`AgentRef`](agentref.md)
 
-Defined in: [src/middleware/types.ts:24](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L24)
+Defined in: [src/middleware/types.ts:24](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L24)
 
 Reference to the agent being executed.
 
@@ -45,7 +45,7 @@ Provides access to agent identity and configuration.
 
 > **input**: `Message`
 
-Defined in: [src/middleware/types.ts:31](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L31)
+Defined in: [src/middleware/types.ts:31](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L31)
 
 The user input message that triggered this execution.
 
@@ -57,7 +57,7 @@ This is the original message passed to the agent's generate method.
 
 > **metadata**: `Map`\<`string`, `unknown`\>
 
-Defined in: [src/middleware/types.ts:58](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L58)
+Defined in: [src/middleware/types.ts:58](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L58)
 
 Mutable metadata map for sharing data between middleware hooks.
 
@@ -80,9 +80,9 @@ const startTime = context.metadata.get('_myMiddleware_startTime') as number;
 
 ### state
 
-> **state**: [`AgentState`](../classes/AgentState.md)
+> **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/middleware/types.ts:40](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/middleware/types.ts#L40)
+Defined in: [src/middleware/types.ts:40](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/middleware/types.ts#L40)
 
 The current agent state, including conversation history.
 

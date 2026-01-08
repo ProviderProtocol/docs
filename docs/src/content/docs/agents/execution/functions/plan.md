@@ -2,17 +2,17 @@
 title: "Function: plan()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [execution](../README.md) / plan
+[@providerprotocol/agents](./index.md) / [execution](../index.md) / plan
 
 # Function: plan()
 
-> **plan**(`options`): [`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+> **plan**(`options`): [`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
-Defined in: [src/execution/plan.ts:102](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/plan.ts#L102)
+Defined in: [src/execution/plan.ts:102](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/plan.ts#L102)
 
 Creates a plan-then-execute strategy for agent execution.
 
@@ -30,13 +30,13 @@ matters and steps may have dependencies on each other.
 
 ### options
 
-[`PlanOptions`](../../index/interfaces/PlanOptions.md) = `{}`
+[`PlanOptions`](../../core/interfaces/planoptions.md) = `{}`
 
 Configuration options for the plan strategy
 
 ## Returns
 
-[`ExecutionStrategy`](../../index/interfaces/ExecutionStrategy.md)
+[`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
 An ExecutionStrategy instance implementing the plan-then-execute pattern
 

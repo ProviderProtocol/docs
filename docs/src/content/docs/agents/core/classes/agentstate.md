@@ -2,15 +2,15 @@
 title: "Class: AgentState"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / AgentState
+[@providerprotocol/agents](./index.md) / [index](../index.md) / AgentState
 
 # Class: AgentState
 
-Defined in: [src/state/index.ts:63](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L63)
+Defined in: [src/state/index.ts:63](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L63)
 
 Immutable agent state container for tracking execution context.
 
@@ -49,12 +49,12 @@ const restored = AgentState.fromJSON(json);
 
 ## See
 
- - [AgentStateInterface](../interfaces/AgentStateInterface.md) for the interface contract
- - [AgentStateJSON](../interfaces/AgentStateJSON.md) for the serialization format
+ - [AgentStateInterface](../interfaces/agentstateinterface.md) for the interface contract
+ - [AgentStateJSON](../interfaces/agentstatejson.md) for the serialization format
 
 ## Implements
 
-- [`AgentStateInterface`](../interfaces/AgentStateInterface.md)
+- [`AgentStateInterface`](../interfaces/agentstateinterface.md)
 
 ## Properties
 
@@ -62,13 +62,13 @@ const restored = AgentState.fromJSON(json);
 
 > `readonly` **id**: `string`
 
-Defined in: [src/state/index.ts:65](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L65)
+Defined in: [src/state/index.ts:65](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L65)
 
 Unique identifier for this state snapshot (UUIDv4)
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`id`](../interfaces/AgentStateInterface.md#id)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`id`](../interfaces/agentstateinterface.md#id)
 
 ***
 
@@ -76,13 +76,13 @@ Unique identifier for this state snapshot (UUIDv4)
 
 > `readonly` **messages**: readonly `Message`[]
 
-Defined in: [src/state/index.ts:68](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L68)
+Defined in: [src/state/index.ts:68](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L68)
 
 Immutable conversation history containing UPP Messages
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`messages`](../interfaces/AgentStateInterface.md#messages)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`messages`](../interfaces/agentstateinterface.md#messages)
 
 ***
 
@@ -90,27 +90,27 @@ Immutable conversation history containing UPP Messages
 
 > `readonly` **metadata**: `Readonly`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/state/index.ts:74](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L74)
+Defined in: [src/state/index.ts:74](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L74)
 
 User-defined metadata for storing arbitrary state
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`metadata`](../interfaces/AgentStateInterface.md#metadata)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`metadata`](../interfaces/agentstateinterface.md#metadata)
 
 ***
 
 ### plan
 
-> `readonly` **plan**: readonly [`PlanStep`](../interfaces/PlanStep.md)[] \| `undefined`
+> `readonly` **plan**: readonly [`PlanStep`](../interfaces/planstep.md)[] \| `undefined`
 
-Defined in: [src/state/index.ts:80](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L80)
+Defined in: [src/state/index.ts:80](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L80)
 
 Execution plan for Plan-strategy agents
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`plan`](../interfaces/AgentStateInterface.md#plan)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`plan`](../interfaces/agentstateinterface.md#plan)
 
 ***
 
@@ -118,13 +118,13 @@ Execution plan for Plan-strategy agents
 
 > `readonly` **reasoning**: readonly `string`[]
 
-Defined in: [src/state/index.ts:77](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L77)
+Defined in: [src/state/index.ts:77](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L77)
 
 Reasoning traces captured during ReAct-style execution
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`reasoning`](../interfaces/AgentStateInterface.md#reasoning)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`reasoning`](../interfaces/agentstateinterface.md#reasoning)
 
 ***
 
@@ -132,35 +132,35 @@ Reasoning traces captured during ReAct-style execution
 
 > `readonly` **step**: `number`
 
-Defined in: [src/state/index.ts:71](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L71)
+Defined in: [src/state/index.ts:71](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L71)
 
 Current step number in the agent's execution lifecycle
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`step`](../interfaces/AgentStateInterface.md#step)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`step`](../interfaces/agentstateinterface.md#step)
 
 ***
 
 ### subagentTraces
 
-> `readonly` **subagentTraces**: readonly [`SubagentExecutionTrace`](../interfaces/SubagentExecutionTrace.md)[]
+> `readonly` **subagentTraces**: readonly [`SubagentExecutionTrace`](../interfaces/subagentexecutiontrace.md)[]
 
-Defined in: [src/state/index.ts:83](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L83)
+Defined in: [src/state/index.ts:83](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L83)
 
 Sub-agent execution traces per UAP spec Section 8.8
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`subagentTraces`](../interfaces/AgentStateInterface.md#subagenttraces)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`subagentTraces`](../interfaces/agentstateinterface.md#subagenttraces)
 
 ## Methods
 
 ### toJSON()
 
-> **toJSON**(): [`AgentStateJSON`](../interfaces/AgentStateJSON.md)
+> **toJSON**(): [`AgentStateJSON`](../interfaces/agentstatejson.md)
 
-Defined in: [src/state/index.ts:415](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L415)
+Defined in: [src/state/index.ts:415](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L415)
 
 Serializes the state to JSON for persistence or transport.
 
@@ -169,7 +169,7 @@ and can be restored using [AgentState.fromJSON](#fromjson).
 
 #### Returns
 
-[`AgentStateJSON`](../interfaces/AgentStateJSON.md)
+[`AgentStateJSON`](../interfaces/agentstatejson.md)
 
 A JSON-serializable representation of the complete state
 
@@ -185,12 +185,12 @@ await Bun.write('checkpoint.json', JSON.stringify(json));
 
 #### See
 
- - [AgentStateJSON](../interfaces/AgentStateJSON.md) for the serialization format
+ - [AgentStateJSON](../interfaces/agentstatejson.md) for the serialization format
  - [AgentState.fromJSON](#fromjson) for deserialization
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`toJSON`](../interfaces/AgentStateInterface.md#tojson)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`toJSON`](../interfaces/agentstateinterface.md#tojson)
 
 ***
 
@@ -198,7 +198,7 @@ await Bun.write('checkpoint.json', JSON.stringify(json));
 
 > **withContext**(`messages`): `AgentState`
 
-Defined in: [src/state/index.ts:218](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L218)
+Defined in: [src/state/index.ts:218](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L218)
 
 Creates a new state with the entire message context replaced.
 
@@ -234,7 +234,7 @@ const summarized = state.withContext([summary, ...recentMessages]);
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withContext`](../interfaces/AgentStateInterface.md#withcontext)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withContext`](../interfaces/agentstateinterface.md#withcontext)
 
 ***
 
@@ -242,7 +242,7 @@ const summarized = state.withContext([summary, ...recentMessages]);
 
 > **withMessage**(`message`): `AgentState`
 
-Defined in: [src/state/index.ts:154](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L154)
+Defined in: [src/state/index.ts:154](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L154)
 
 Creates a new state with a single message appended.
 
@@ -270,7 +270,7 @@ console.log(updated.messages.length); // 1
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withMessage`](../interfaces/AgentStateInterface.md#withmessage)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withMessage`](../interfaces/agentstateinterface.md#withmessage)
 
 ***
 
@@ -278,7 +278,7 @@ console.log(updated.messages.length); // 1
 
 > **withMessages**(`messages`): `AgentState`
 
-Defined in: [src/state/index.ts:185](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L185)
+Defined in: [src/state/index.ts:185](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L185)
 
 Creates a new state with multiple messages appended.
 
@@ -312,7 +312,7 @@ console.log(updated.messages.length); // 2
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withMessages`](../interfaces/AgentStateInterface.md#withmessages)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withMessages`](../interfaces/agentstateinterface.md#withmessages)
 
 ***
 
@@ -320,7 +320,7 @@ console.log(updated.messages.length); // 2
 
 > **withMetadata**(`key`, `value`): `AgentState`
 
-Defined in: [src/state/index.ts:279](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L279)
+Defined in: [src/state/index.ts:279](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L279)
 
 Creates a new state with a metadata entry added or updated.
 
@@ -360,7 +360,7 @@ console.log(state.metadata.userId); // 'user-123'
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withMetadata`](../interfaces/AgentStateInterface.md#withmetadata)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withMetadata`](../interfaces/agentstateinterface.md#withmetadata)
 
 ***
 
@@ -368,7 +368,7 @@ console.log(state.metadata.userId); // 'user-123'
 
 > **withPlan**(`plan`): `AgentState`
 
-Defined in: [src/state/index.ts:342](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L342)
+Defined in: [src/state/index.ts:342](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L342)
 
 Creates a new state with the execution plan set.
 
@@ -379,7 +379,7 @@ The plan is copied to ensure immutability.
 
 ##### plan
 
-[`PlanStep`](../interfaces/PlanStep.md)[]
+[`PlanStep`](../interfaces/planstep.md)[]
 
 Array of plan steps defining the execution strategy
 
@@ -401,11 +401,11 @@ const state = AgentState.initial().withPlan(plan);
 
 #### See
 
-[PlanStep](../interfaces/PlanStep.md) for the plan step structure
+[PlanStep](../interfaces/planstep.md) for the plan step structure
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withPlan`](../interfaces/AgentStateInterface.md#withplan)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withPlan`](../interfaces/agentstateinterface.md#withplan)
 
 ***
 
@@ -413,7 +413,7 @@ const state = AgentState.initial().withPlan(plan);
 
 > **withReasoning**(`reasoning`): `AgentState`
 
-Defined in: [src/state/index.ts:310](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L310)
+Defined in: [src/state/index.ts:310](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L310)
 
 Creates a new state with a reasoning trace appended.
 
@@ -447,7 +447,7 @@ console.log(state.reasoning);
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withReasoning`](../interfaces/AgentStateInterface.md#withreasoning)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withReasoning`](../interfaces/agentstateinterface.md#withreasoning)
 
 ***
 
@@ -455,7 +455,7 @@ console.log(state.reasoning);
 
 > **withStep**(`step`): `AgentState`
 
-Defined in: [src/state/index.ts:247](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L247)
+Defined in: [src/state/index.ts:247](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L247)
 
 Creates a new state with an updated step number.
 
@@ -487,7 +487,7 @@ console.log(afterStep2.step); // 2
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withStep`](../interfaces/AgentStateInterface.md#withstep)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withStep`](../interfaces/agentstateinterface.md#withstep)
 
 ***
 
@@ -495,7 +495,7 @@ console.log(afterStep2.step); // 2
 
 > **withSubagentTrace**(`trace`): `AgentState`
 
-Defined in: [src/state/index.ts:383](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L383)
+Defined in: [src/state/index.ts:383](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L383)
 
 Creates a new state with a sub-agent execution trace appended.
 
@@ -506,7 +506,7 @@ enabling hierarchical debugging and audit trails.
 
 ##### trace
 
-[`SubagentExecutionTrace`](../interfaces/SubagentExecutionTrace.md)
+[`SubagentExecutionTrace`](../interfaces/subagentexecutiontrace.md)
 
 The sub-agent execution trace to record
 
@@ -538,11 +538,11 @@ const updated = state.withSubagentTrace(trace);
 
 #### See
 
-[SubagentExecutionTrace](../interfaces/SubagentExecutionTrace.md) for the trace structure
+[SubagentExecutionTrace](../interfaces/subagentexecutiontrace.md) for the trace structure
 
 #### Implementation of
 
-[`AgentStateInterface`](../interfaces/AgentStateInterface.md).[`withSubagentTrace`](../interfaces/AgentStateInterface.md#withsubagenttrace)
+[`AgentStateInterface`](../interfaces/agentstateinterface.md).[`withSubagentTrace`](../interfaces/agentstateinterface.md#withsubagenttrace)
 
 ***
 
@@ -550,7 +550,7 @@ const updated = state.withSubagentTrace(trace);
 
 > `static` **fromJSON**(`json`): `AgentState`
 
-Defined in: [src/state/index.ts:453](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L453)
+Defined in: [src/state/index.ts:453](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L453)
 
 Restores an AgentState from its JSON representation.
 
@@ -561,7 +561,7 @@ to their proper UPP Message class instances.
 
 ##### json
 
-[`AgentStateJSON`](../interfaces/AgentStateJSON.md)
+[`AgentStateJSON`](../interfaces/agentstatejson.md)
 
 The serialized state from [AgentState.toJSON](#tojson)
 
@@ -588,7 +588,7 @@ console.log(state.messages.length);
 
 #### See
 
- - [AgentStateJSON](../interfaces/AgentStateJSON.md) for the expected format
+ - [AgentStateJSON](../interfaces/agentstatejson.md) for the expected format
  - [AgentState.toJSON](#tojson) for serialization
 
 ***
@@ -597,7 +597,7 @@ console.log(state.messages.length);
 
 > `static` **initial**(): `AgentState`
 
-Defined in: [src/state/index.ts:129](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/state/index.ts#L129)
+Defined in: [src/state/index.ts:129](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/state/index.ts#L129)
 
 Creates a fresh initial state with no history.
 

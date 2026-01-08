@@ -2,17 +2,17 @@
 title: "Type Alias: ContextAwareToolRun()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ContextAwareToolRun
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ContextAwareToolRun
 
 # Type Alias: ContextAwareToolRun()
 
 > **ContextAwareToolRun** = (`params`, `context?`) => `Promise`\<`unknown`\>
 
-Defined in: [src/execution/types.ts:740](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L740)
+Defined in: [src/execution/types.ts:740](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L740)
 
 Type for a tool run function that accepts execution context as a second parameter.
 
@@ -30,7 +30,7 @@ The tool parameters from the model
 
 ### context?
 
-[`ToolExecutionContext`](../interfaces/ToolExecutionContext.md)
+[`ToolExecutionContext`](../interfaces/toolexecutioncontext.md)
 
 Optional execution context for agent features
 

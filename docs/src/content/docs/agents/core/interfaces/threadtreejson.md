@@ -2,15 +2,15 @@
 title: "Interface: ThreadTreeJSON"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ThreadTreeJSON
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ThreadTreeJSON
 
 # Interface: ThreadTreeJSON
 
-Defined in: [src/thread-tree/types.ts:63](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L63)
+Defined in: [src/thread-tree/types.ts:63](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L63)
 
 Serialized representation of a ThreadTree for JSON persistence.
 
@@ -40,7 +40,7 @@ const restored = ThreadTree.fromJSON(data as ThreadTreeJSON);
 
 > **currentId**: `string`
 
-Defined in: [src/thread-tree/types.ts:74](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L74)
+Defined in: [src/thread-tree/types.ts:74](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L74)
 
 ID of the currently active node.
 This tracks which branch/position is currently being used for the conversation.
@@ -49,9 +49,9 @@ This tracks which branch/position is currently being used for the conversation.
 
 ### nodes
 
-> **nodes**: [`ThreadNodeJSON`](ThreadNodeJSON.md)[]
+> **nodes**: [`ThreadNodeJSON`](threadnodejson.md)[]
 
-Defined in: [src/thread-tree/types.ts:80](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L80)
+Defined in: [src/thread-tree/types.ts:80](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L80)
 
 Array of all nodes in the tree.
 Includes the root, all branches, and all leaf nodes.
@@ -62,7 +62,7 @@ Includes the root, all branches, and all leaf nodes.
 
 > **rootId**: `string`
 
-Defined in: [src/thread-tree/types.ts:68](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L68)
+Defined in: [src/thread-tree/types.ts:68](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L68)
 
 ID of the root node in the tree.
 The root represents the initial conversation state.

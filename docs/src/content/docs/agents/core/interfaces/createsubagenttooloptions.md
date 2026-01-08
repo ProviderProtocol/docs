@@ -2,15 +2,15 @@
 title: "Interface: CreateSubAgentToolOptions"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / CreateSubAgentToolOptions
+[@providerprotocol/agents](./index.md) / [index](../index.md) / CreateSubAgentToolOptions
 
 # Interface: CreateSubAgentToolOptions
 
-Defined in: [src/subagent/index.ts:75](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L75)
+Defined in: [src/subagent/index.ts:75](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L75)
 
 Configuration options for creating a sub-agent tool.
 
@@ -19,15 +19,15 @@ its name, parameters, and how to transform tool arguments into prompts.
 
 ## See
 
-[createSubAgentTool](../functions/createSubAgentTool.md) for usage examples
+[createSubAgentTool](../functions/createsubagenttool.md) for usage examples
 
 ## Properties
 
 ### agent
 
-> **agent**: [`Agent`](Agent.md)
+> **agent**: [`Agent`](agent.md)
 
-Defined in: [src/subagent/index.ts:82](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L82)
+Defined in: [src/subagent/index.ts:82](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L82)
 
 The agent instance to expose as a tool.
 
@@ -40,7 +40,7 @@ The sub-agent executes independently with its own tools and system prompt.
 
 > **buildPrompt**: (`params`) => `string`
 
-Defined in: [src/subagent/index.ts:117](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L117)
+Defined in: [src/subagent/index.ts:117](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L117)
 
 Transforms tool parameters into a prompt string for the sub-agent.
 
@@ -67,7 +67,7 @@ A prompt string to send to the sub-agent
 
 > **description**: `string`
 
-Defined in: [src/subagent/index.ts:98](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L98)
+Defined in: [src/subagent/index.ts:98](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L98)
 
 Description of what the tool does.
 
@@ -80,7 +80,7 @@ to use this tool. Be specific about the sub-agent's capabilities.
 
 > **name**: `string`
 
-Defined in: [src/subagent/index.ts:90](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L90)
+Defined in: [src/subagent/index.ts:90](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L90)
 
 Unique name for the tool.
 
@@ -93,7 +93,7 @@ by the parent agent's model to invoke the sub-agent.
 
 > **parameters**: `JSONSchema`
 
-Defined in: [src/subagent/index.ts:106](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L106)
+Defined in: [src/subagent/index.ts:106](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L106)
 
 JSON Schema defining the tool's input parameters.
 
@@ -106,7 +106,7 @@ when invoking the tool. These arguments are passed to `buildPrompt`.
 
 > `optional` **stream**: `boolean`
 
-Defined in: [src/subagent/index.ts:140](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L140)
+Defined in: [src/subagent/index.ts:140](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L140)
 
 Whether to stream the sub-agent execution.
 
@@ -128,7 +128,7 @@ true
 
 > `optional` **subagentType**: `string`
 
-Defined in: [src/subagent/index.ts:127](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/subagent/index.ts#L127)
+Defined in: [src/subagent/index.ts:127](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/subagent/index.ts#L127)
 
 Identifier for the sub-agent type used in event payloads.
 

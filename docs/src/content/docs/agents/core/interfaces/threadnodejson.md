@@ -2,15 +2,15 @@
 title: "Interface: ThreadNodeJSON"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ThreadNodeJSON
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ThreadNodeJSON
 
 # Interface: ThreadNodeJSON
 
-Defined in: [src/thread-tree/types.ts:13](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L13)
+Defined in: [src/thread-tree/types.ts:13](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L13)
 
 Serialized representation of a ThreadNode for JSON persistence.
 
@@ -29,7 +29,7 @@ agent state snapshot at that point in the conversation tree.
 
 > **children**: `string`[]
 
-Defined in: [src/thread-tree/types.ts:40](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L40)
+Defined in: [src/thread-tree/types.ts:40](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L40)
 
 IDs of all child nodes branching from this node.
 An empty array indicates this is a leaf node.
@@ -40,7 +40,7 @@ An empty array indicates this is a leaf node.
 
 > **id**: `string`
 
-Defined in: [src/thread-tree/types.ts:17](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L17)
+Defined in: [src/thread-tree/types.ts:17](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L17)
 
 Unique identifier for this node (UUIDv4 format).
 
@@ -50,7 +50,7 @@ Unique identifier for this node (UUIDv4 format).
 
 > `optional` **name**: `string`
 
-Defined in: [src/thread-tree/types.ts:34](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L34)
+Defined in: [src/thread-tree/types.ts:34](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L34)
 
 Optional human-readable name for this branch.
 Useful for identifying specific conversation paths (e.g., "refactor-attempt", "alternative-solution").
@@ -61,7 +61,7 @@ Useful for identifying specific conversation paths (e.g., "refactor-attempt", "a
 
 > **parentId**: `string` \| `null`
 
-Defined in: [src/thread-tree/types.ts:22](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L22)
+Defined in: [src/thread-tree/types.ts:22](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L22)
 
 ID of the parent node, or null if this is the root node.
 
@@ -69,9 +69,9 @@ ID of the parent node, or null if this is the root node.
 
 ### state
 
-> **state**: [`AgentStateJSON`](AgentStateJSON.md)
+> **state**: [`AgentStateJSON`](agentstatejson.md)
 
-Defined in: [src/thread-tree/types.ts:28](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/thread-tree/types.ts#L28)
+Defined in: [src/thread-tree/types.ts:28](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/thread-tree/types.ts#L28)
 
 Complete agent state snapshot at this point in the conversation.
 Contains messages, metadata, and all other state information.

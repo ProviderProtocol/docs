@@ -2,15 +2,15 @@
 title: "Interface: AgentRef"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / AgentRef
+[@providerprotocol/agents](./index.md) / [index](../index.md) / AgentRef
 
 # Interface: AgentRef
 
-Defined in: [src/execution/types.ts:122](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L122)
+Defined in: [src/execution/types.ts:122](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L122)
 
 Forward declaration of Agent for use in ExecutionContext.
 
@@ -24,7 +24,7 @@ The full Agent interface is defined in agent/types.ts.
 
 > **id**: `string`
 
-Defined in: [src/execution/types.ts:124](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L124)
+Defined in: [src/execution/types.ts:124](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L124)
 
 Unique identifier for the agent instance
 
@@ -34,6 +34,6 @@ Unique identifier for the agent instance
 
 > `optional` **system**: `string`
 
-Defined in: [src/execution/types.ts:126](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L126)
+Defined in: [src/execution/types.ts:126](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L126)
 
 Optional system prompt for the agent

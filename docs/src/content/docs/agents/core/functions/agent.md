@@ -2,17 +2,17 @@
 title: "Function: agent()"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / agent
+[@providerprotocol/agents](./index.md) / [index](../index.md) / agent
 
 # Function: agent()
 
-> **agent**(`options`): [`Agent`](../interfaces/Agent.md)
+> **agent**(`options`): [`Agent`](../interfaces/agent.md)
 
-Defined in: [src/agent/index.ts:86](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/agent/index.ts#L86)
+Defined in: [src/agent/index.ts:86](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/agent/index.ts#L86)
 
 Creates a new agent instance with the specified configuration.
 
@@ -24,14 +24,14 @@ with UAP-specific features like state management, middleware, and execution stra
 
 ### options
 
-[`AgentOptions`](../interfaces/AgentOptions.md)
+[`AgentOptions`](../interfaces/agentoptions.md)
 
 Agent configuration options including model, tools, system prompt,
                  execution strategy, middleware, and checkpointing configuration
 
 ## Returns
 
-[`Agent`](../interfaces/Agent.md)
+[`Agent`](../interfaces/agent.md)
 
 A configured Agent instance ready for execution
 
@@ -78,5 +78,5 @@ const coder = agent({
 
 ## See
 
- - [Agent](../interfaces/Agent.md) for the returned interface
- - [AgentOptions](../interfaces/AgentOptions.md) for all configuration options
+ - [Agent](../interfaces/agent.md) for the returned interface
+ - [AgentOptions](../interfaces/agentoptions.md) for all configuration options

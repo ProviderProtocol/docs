@@ -2,11 +2,11 @@
 title: "middleware"
 ---
 
-[**@providerprotocol/agents**](../README.md)
+[**@providerprotocol/agents**](../index.md)
 
 ***
 
-[@providerprotocol/agents](../modules.md) / middleware
+[@providerprotocol/agents](./index.md) / middleware
 
 # middleware
 
@@ -62,16 +62,16 @@ const metricsMiddleware: Middleware = {
 
 ### LoggingOptions
 
-Re-exports [LoggingOptions](../index/interfaces/LoggingOptions.md)
+Re-exports [LoggingOptions](../core/interfaces/loggingoptions.md)
 
 ***
 
 ### Middleware
 
-Re-exports [Middleware](../index/interfaces/Middleware.md)
+Re-exports [Middleware](../core/interfaces/middleware.md)
 
 ***
 
 ### MiddlewareContext
 
-Re-exports [MiddlewareContext](../index/interfaces/MiddlewareContext.md)
+Re-exports [MiddlewareContext](../core/interfaces/middlewarecontext.md)

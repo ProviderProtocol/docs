@@ -2,15 +2,15 @@
 title: "Interface: CheckpointData"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / CheckpointData
+[@providerprotocol/agents](./index.md) / [index](../index.md) / CheckpointData
 
 # Interface: CheckpointData
 
-Defined in: [src/checkpoint/types.ts:247](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L247)
+Defined in: [src/checkpoint/types.ts:247](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L247)
 
 Complete checkpoint data combining metadata and state.
 
@@ -28,9 +28,9 @@ which returns only the metadata.
 
 ### metadata
 
-> **metadata**: [`CheckpointMetadata`](CheckpointMetadata.md)
+> **metadata**: [`CheckpointMetadata`](checkpointmetadata.md)
 
-Defined in: [src/checkpoint/types.ts:251](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L251)
+Defined in: [src/checkpoint/types.ts:251](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L251)
 
 Checkpoint metadata containing session info and timestamps.
 
@@ -38,9 +38,9 @@ Checkpoint metadata containing session info and timestamps.
 
 ### state
 
-> **state**: [`AgentStateJSON`](AgentStateJSON.md)
+> **state**: [`AgentStateJSON`](agentstatejson.md)
 
-Defined in: [src/checkpoint/types.ts:257](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L257)
+Defined in: [src/checkpoint/types.ts:257](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L257)
 
 The serialized agent state that can be restored via
 `AgentState.fromJSON()`.

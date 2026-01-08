@@ -342,7 +342,7 @@ This framework provides orchestration primitives with sensible defaults but no a
 ## Documentation
 
 - [llms.md](_media/llms.md) - Comprehensive API documentation for LLMs and developers
-- [CLAUDE.md](_media/CLAUDE.md) - Project coding guidelines and @providerprotocol/ai usage
+- [CLAUDE.md](_media/claude.md) - Project coding guidelines and @providerprotocol/ai usage
 
 ## License
 

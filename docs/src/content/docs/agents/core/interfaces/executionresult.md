@@ -2,15 +2,15 @@
 title: "Interface: ExecutionResult"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ExecutionResult
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ExecutionResult
 
 # Interface: ExecutionResult
 
-Defined in: [src/execution/types.ts:184](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L184)
+Defined in: [src/execution/types.ts:184](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L184)
 
 Result from an execution strategy containing the turn and final state.
 
@@ -22,9 +22,9 @@ in the strategy interface.
 
 ### state
 
-> **state**: [`AgentState`](../classes/AgentState.md)
+> **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/execution/types.ts:188](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L188)
+Defined in: [src/execution/types.ts:188](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L188)
 
 New immutable state after execution completes
 
@@ -34,6 +34,6 @@ New immutable state after execution completes
 
 > **turn**: `Turn`
 
-Defined in: [src/execution/types.ts:186](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L186)
+Defined in: [src/execution/types.ts:186](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L186)
 
 The complete UPP Turn from the final LLM response

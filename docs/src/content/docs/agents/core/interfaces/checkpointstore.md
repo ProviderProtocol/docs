@@ -2,15 +2,15 @@
 title: "Interface: CheckpointStore"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / CheckpointStore
+[@providerprotocol/agents](./index.md) / [index](../index.md) / CheckpointStore
 
 # Interface: CheckpointStore
 
-Defined in: [src/checkpoint/types.ts:54](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L54)
+Defined in: [src/checkpoint/types.ts:54](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L54)
 
 Interface for checkpoint storage implementations.
 
@@ -53,7 +53,7 @@ await store.delete('session-123');
 
 > **delete**(`sessionId`): `Promise`\<`void`\>
 
-Defined in: [src/checkpoint/types.ts:136](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L136)
+Defined in: [src/checkpoint/types.ts:136](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L136)
 
 Deletes all checkpoints for a session.
 
@@ -89,7 +89,7 @@ await store.delete('completed-session');
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [src/checkpoint/types.ts:161](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L161)
+Defined in: [src/checkpoint/types.ts:161](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L161)
 
 Lists all session IDs that have checkpoints.
 
@@ -122,9 +122,9 @@ for (const sessionId of sessions) {
 
 ### load()
 
-> **load**(`sessionId`): `Promise`\<[`AgentStateJSON`](AgentStateJSON.md) \| `null`\>
+> **load**(`sessionId`): `Promise`\<[`AgentStateJSON`](agentstatejson.md) \| `null`\>
 
-Defined in: [src/checkpoint/types.ts:97](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L97)
+Defined in: [src/checkpoint/types.ts:97](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L97)
 
 Loads the most recent checkpoint for a session.
 
@@ -141,7 +141,7 @@ The session identifier to load.
 
 #### Returns
 
-`Promise`\<[`AgentStateJSON`](AgentStateJSON.md) \| `null`\>
+`Promise`\<[`AgentStateJSON`](agentstatejson.md) \| `null`\>
 
 Promise resolving to the serialized state, or `null` if
   no checkpoint exists for this session.
@@ -163,9 +163,9 @@ if (saved) {
 
 ### loadMetadata()
 
-> **loadMetadata**(`sessionId`): `Promise`\<[`CheckpointMetadata`](CheckpointMetadata.md) \| `null`\>
+> **loadMetadata**(`sessionId`): `Promise`\<[`CheckpointMetadata`](checkpointmetadata.md) \| `null`\>
 
-Defined in: [src/checkpoint/types.ts:117](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L117)
+Defined in: [src/checkpoint/types.ts:117](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L117)
 
 Loads checkpoint metadata without loading the full state.
 
@@ -182,7 +182,7 @@ The session identifier to query.
 
 #### Returns
 
-`Promise`\<[`CheckpointMetadata`](CheckpointMetadata.md) \| `null`\>
+`Promise`\<[`CheckpointMetadata`](checkpointmetadata.md) \| `null`\>
 
 Promise resolving to checkpoint metadata, or `null` if
   no checkpoint exists for this session.
@@ -202,7 +202,7 @@ if (meta) {
 
 > **save**(`sessionId`, `state`): `Promise`\<`void`\>
 
-Defined in: [src/checkpoint/types.ts:73](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/checkpoint/types.ts#L73)
+Defined in: [src/checkpoint/types.ts:73](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/checkpoint/types.ts#L73)
 
 Saves a checkpoint of the current agent state.
 
@@ -221,7 +221,7 @@ Unique identifier for the session. Used to organize
 
 ##### state
 
-[`AgentStateJSON`](AgentStateJSON.md)
+[`AgentStateJSON`](agentstatejson.md)
 
 The serialized agent state from `AgentState.toJSON()`.
   Contains complete execution history and context.

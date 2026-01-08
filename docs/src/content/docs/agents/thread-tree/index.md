@@ -2,27 +2,27 @@
 title: "thread-tree"
 ---
 
-[**@providerprotocol/agents**](../README.md)
+[**@providerprotocol/agents**](../index.md)
 
 ***
 
-[@providerprotocol/agents](../modules.md) / thread-tree
+[@providerprotocol/agents](./index.md) / thread-tree
 
 # thread-tree
 
 ## Classes
 
-- [ThreadNode](classes/ThreadNode.md)
-- [ThreadTree](classes/ThreadTree.md)
+- [ThreadNode](classes/threadnode.md)
+- [ThreadTree](classes/threadtree.md)
 
 ## References
 
 ### ThreadNodeJSON
 
-Re-exports [ThreadNodeJSON](../index/interfaces/ThreadNodeJSON.md)
+Re-exports [ThreadNodeJSON](../core/interfaces/threadnodejson.md)
 
 ***
 
 ### ThreadTreeJSON
 
-Re-exports [ThreadTreeJSON](../index/interfaces/ThreadTreeJSON.md)
+Re-exports [ThreadTreeJSON](../core/interfaces/threadtreejson.md)

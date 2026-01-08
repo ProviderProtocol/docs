@@ -2,15 +2,15 @@
 title: "Interface: SubagentInnerEvent"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / SubagentInnerEvent
+[@providerprotocol/agents](./index.md) / [index](../index.md) / SubagentInnerEvent
 
 # Interface: SubagentInnerEvent
 
-Defined in: [src/execution/types.ts:603](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L603)
+Defined in: [src/execution/types.ts:603](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L603)
 
 Event emitted for forwarded events from sub-agent execution.
 
@@ -19,15 +19,15 @@ into nested execution while maintaining the parent context.
 
 ## Extends
 
-- [`SubagentEventBase`](SubagentEventBase.md)
+- [`SubagentEventBase`](subagenteventbase.md)
 
 ## Properties
 
 ### innerEvent
 
-> **innerEvent**: [`AgentStreamEvent`](AgentStreamEvent.md)
+> **innerEvent**: [`AgentStreamEvent`](agentstreamevent.md)
 
-Defined in: [src/execution/types.ts:607](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L607)
+Defined in: [src/execution/types.ts:607](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L607)
 
 The actual event from the sub-agent
 
@@ -37,13 +37,13 @@ The actual event from the sub-agent
 
 > **parentToolCallId**: `string`
 
-Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L579)
+Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L579)
 
 The parent tool call ID that spawned this sub-agent
 
 #### Inherited from
 
-[`SubagentEventBase`](SubagentEventBase.md).[`parentToolCallId`](SubagentEventBase.md#parenttoolcallid)
+[`SubagentEventBase`](subagenteventbase.md).[`parentToolCallId`](subagenteventbase.md#parenttoolcallid)
 
 ***
 
@@ -51,13 +51,13 @@ The parent tool call ID that spawned this sub-agent
 
 > **subagentId**: `string`
 
-Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L575)
+Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L575)
 
 Unique ID of the sub-agent instance
 
 #### Inherited from
 
-[`SubagentEventBase`](SubagentEventBase.md).[`subagentId`](SubagentEventBase.md#subagentid)
+[`SubagentEventBase`](subagenteventbase.md).[`subagentId`](subagenteventbase.md#subagentid)
 
 ***
 
@@ -65,13 +65,13 @@ Unique ID of the sub-agent instance
 
 > **subagentType**: `string`
 
-Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L577)
+Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L577)
 
 Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
 #### Inherited from
 
-[`SubagentEventBase`](SubagentEventBase.md).[`subagentType`](SubagentEventBase.md#subagenttype)
+[`SubagentEventBase`](subagenteventbase.md).[`subagentType`](subagenteventbase.md#subagenttype)
 
 ***
 
@@ -79,6 +79,6 @@ Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
 > **type**: `"subagent_event"`
 
-Defined in: [src/execution/types.ts:605](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L605)
+Defined in: [src/execution/types.ts:605](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L605)
 
 Event type discriminator

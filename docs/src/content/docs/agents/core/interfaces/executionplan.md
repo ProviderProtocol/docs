@@ -2,15 +2,15 @@
 title: "Interface: ExecutionPlan"
 ---
 
-[**@providerprotocol/agents**](../../README.md)
+[**@providerprotocol/agents**](../../index.md)
 
 ***
 
-[@providerprotocol/agents](../../modules.md) / [index](../README.md) / ExecutionPlan
+[@providerprotocol/agents](./index.md) / [index](../index.md) / ExecutionPlan
 
 # Interface: ExecutionPlan
 
-Defined in: [src/execution/types.ts:441](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L441)
+Defined in: [src/execution/types.ts:441](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L441)
 
 Internal plan structure used by the plan execution strategy.
 
@@ -22,7 +22,7 @@ Tracks the list of plan steps and the current execution position.
 
 > **currentStepIndex**: `number`
 
-Defined in: [src/execution/types.ts:445](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L445)
+Defined in: [src/execution/types.ts:445](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L445)
 
 Index of the currently executing step (0-indexed)
 
@@ -30,8 +30,8 @@ Index of the currently executing step (0-indexed)
 
 ### steps
 
-> **steps**: [`PlanStep`](PlanStep.md)[]
+> **steps**: [`PlanStep`](planstep.md)[]
 
-Defined in: [src/execution/types.ts:443](https://github.com/ProviderProtocol/agents/blob/6c552a1ce44c20ba911004f801fa7e4bc6c72033/src/execution/types.ts#L443)
+Defined in: [src/execution/types.ts:443](https://github.com/ProviderProtocol/agents/blob/59ff88d2bfea022f5ff17d40d6de9dca12d5662e/src/execution/types.ts#L443)
 
 Array of plan steps with dependencies and status
