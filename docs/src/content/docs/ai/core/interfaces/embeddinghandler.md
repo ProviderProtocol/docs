@@ -10,7 +10,7 @@ title: "Interface: EmbeddingHandler"
 
 # Interface: EmbeddingHandler\<TParams\>
 
-Defined in: [src/types/provider.ts:192](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L192)
+Defined in: [src/types/provider.ts:210](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L210)
 
 **`Internal`**
 
@@ -32,7 +32,7 @@ Provider-specific parameter type
 
 > `readonly` **supportedInputs**: (`"text"` \| `"image"`)[]
 
-Defined in: [src/types/provider.ts:194](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L194)
+Defined in: [src/types/provider.ts:212](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L212)
 
 Supported input types for embeddings
 
@@ -42,7 +42,7 @@ Supported input types for embeddings
 
 > `optional` **\_setProvider**(`provider`): `void`
 
-Defined in: [src/types/provider.ts:210](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L210)
+Defined in: [src/types/provider.ts:228](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L228)
 
 **`Internal`**
 
@@ -66,7 +66,7 @@ The parent provider
 
 > **bind**(`modelId`): [`BoundEmbeddingModel`](boundembeddingmodel.md)\<`TParams`\>
 
-Defined in: [src/types/provider.ts:202](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L202)
+Defined in: [src/types/provider.ts:220](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L220)
 
 Binds a model ID to create an executable embedding model.
 

@@ -12,7 +12,7 @@ title: "Variable: google"
 
 > `const` **google**: [`Provider`](../../core/interfaces/provider.md)\<`unknown`\> & `object`
 
-Defined in: [src/providers/google/index.ts:72](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/google/index.ts#L72)
+Defined in: [src/providers/google/index.ts:72](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/google/index.ts#L72)
 
 Google Gemini provider for the Unified Provider Protocol (UPP).
 
@@ -41,7 +41,7 @@ import { google } from '@anthropic/provider-protocol';
 // Create a cache
 const cache = await google.cache.create({
   apiKey: process.env.GOOGLE_API_KEY,
-  model: 'gemini-1.5-flash-001',
+  model: 'gemini-3-flash-preview',
   systemInstruction: 'You are an expert assistant...',
   contents: [{ role: 'user', parts: [{ text: largeDocument }] }],
   ttl: '3600s',
@@ -91,7 +91,7 @@ import { google } from '@anthropic/provider-protocol';
 // Create a cache with system instruction and large context
 const cache = await google.cache.create({
   apiKey: process.env.GOOGLE_API_KEY,
-  model: 'gemini-1.5-flash-001',
+  model: 'gemini-3-flash-preview',
   displayName: 'Code Review Context',
   systemInstruction: 'You are an expert code reviewer...',
   contents: [
@@ -278,7 +278,7 @@ for await (const event of stream) {
 // Create a cache for repeated context
 const cacheEntry = await google.cache.create({
   apiKey: process.env.GOOGLE_API_KEY,
-  model: 'gemini-1.5-flash-001',
+  model: 'gemini-3-flash-preview',
   systemInstruction: 'You are an expert code reviewer...',
   contents: [{ role: 'user', parts: [{ text: largeCodebase }] }],
   ttl: '3600s',

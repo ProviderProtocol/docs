@@ -12,7 +12,7 @@ title: "Function: messageStop()"
 
 > **messageStop**(): [`StreamEvent`](../interfaces/streamevent.md)
 
-Defined in: [src/types/stream.ts:231](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L231)
+Defined in: [src/types/stream.ts:231](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L231)
 
 Creates a message stop stream event.
 

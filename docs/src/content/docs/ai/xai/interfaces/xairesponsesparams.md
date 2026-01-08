@@ -10,7 +10,7 @@ title: "Interface: XAIResponsesParams"
 
 # Interface: XAIResponsesParams
 
-Defined in: [src/providers/xai/types.ts:105](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L105)
+Defined in: [src/providers/xai/types.ts:105](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L105)
 
 xAI Responses API parameters (OpenAI Responses-compatible).
 
@@ -40,7 +40,7 @@ const params: XAIResponsesParams = {
 
 > `optional` **include**: `string`[]
 
-Defined in: [src/providers/xai/types.ts:129](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L129)
+Defined in: [src/providers/xai/types.ts:129](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L129)
 
 Fields to include in output
 
@@ -50,7 +50,7 @@ Fields to include in output
 
 > `optional` **max\_output\_tokens**: `number`
 
-Defined in: [src/providers/xai/types.ts:107](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L107)
+Defined in: [src/providers/xai/types.ts:107](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L107)
 
 Maximum output tokens
 
@@ -60,7 +60,7 @@ Maximum output tokens
 
 > `optional` **metadata**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/xai/types.ts:141](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L141)
+Defined in: [src/providers/xai/types.ts:141](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L141)
 
 Metadata key-value pairs
 
@@ -70,7 +70,7 @@ Metadata key-value pairs
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:116](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L116)
+Defined in: [src/providers/xai/types.ts:116](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L116)
 
 Whether to enable parallel tool calls
 
@@ -80,7 +80,7 @@ Whether to enable parallel tool calls
 
 > `optional` **previous\_response\_id**: `string`
 
-Defined in: [src/providers/xai/types.ts:132](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L132)
+Defined in: [src/providers/xai/types.ts:132](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L132)
 
 Continue from a previous response
 
@@ -90,7 +90,7 @@ Continue from a previous response
 
 > `optional` **reasoning**: `object`
 
-Defined in: [src/providers/xai/types.ts:119](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L119)
+Defined in: [src/providers/xai/types.ts:119](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L119)
 
 Reasoning configuration
 
@@ -110,7 +110,7 @@ Include encrypted reasoning content for continuation
 
 > `optional` **search\_parameters**: [`XAISearchParameters`](xaisearchparameters.md)
 
-Defined in: [src/providers/xai/types.ts:147](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L147)
+Defined in: [src/providers/xai/types.ts:147](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L147)
 
 Live Search parameters (deprecated, will be removed Dec 15, 2025)
 Use Agent Tools API instead for new implementations
@@ -121,7 +121,7 @@ Use Agent Tools API instead for new implementations
 
 > `optional` **store**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:135](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L135)
+Defined in: [src/providers/xai/types.ts:135](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L135)
 
 Store response for continuation
 
@@ -131,7 +131,7 @@ Store response for continuation
 
 > `optional` **store\_messages**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:138](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L138)
+Defined in: [src/providers/xai/types.ts:138](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L138)
 
 Store messages on xAI servers (default: true)
 
@@ -141,7 +141,7 @@ Store messages on xAI servers (default: true)
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/xai/types.ts:110](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L110)
+Defined in: [src/providers/xai/types.ts:110](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L110)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -151,7 +151,7 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/xai/types.ts:113](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L113)
+Defined in: [src/providers/xai/types.ts:113](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L113)
 
 Top-p (nucleus) sampling (0.0 - 1.0)
 
@@ -161,6 +161,6 @@ Top-p (nucleus) sampling (0.0 - 1.0)
 
 > `optional` **truncation**: `"auto"` \| `"disabled"`
 
-Defined in: [src/providers/xai/types.ts:126](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/providers/xai/types.ts#L126)
+Defined in: [src/providers/xai/types.ts:126](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/providers/xai/types.ts#L126)
 
 Truncation strategy

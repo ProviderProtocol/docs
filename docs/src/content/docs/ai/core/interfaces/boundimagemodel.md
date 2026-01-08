@@ -10,7 +10,7 @@ title: "Interface: BoundImageModel"
 
 # Interface: BoundImageModel\<TParams\>
 
-Defined in: [src/types/provider.ts:290](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L290)
+Defined in: [src/types/provider.ts:308](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L308)
 
 Bound image model interface.
 
@@ -30,7 +30,7 @@ Provider-specific parameter type
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/provider.ts:292](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L292)
+Defined in: [src/types/provider.ts:310](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L310)
 
 The model identifier
 
@@ -40,6 +40,6 @@ The model identifier
 
 > `readonly` **provider**: [`ImageProvider`](../type-aliases/imageprovider.md)\<`TParams`\>
 
-Defined in: [src/types/provider.ts:295](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L295)
+Defined in: [src/types/provider.ts:313](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L313)
 
 Reference to the parent provider

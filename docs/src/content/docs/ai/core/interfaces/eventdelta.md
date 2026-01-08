@@ -10,7 +10,7 @@ title: "Interface: EventDelta"
 
 # Interface: EventDelta
 
-Defined in: [src/types/stream.ts:50](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L50)
+Defined in: [src/types/stream.ts:50](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L50)
 
 Event delta data payload.
 
@@ -23,7 +23,7 @@ Different fields are populated depending on the event type.
 
 > `optional` **argumentsJson**: `string`
 
-Defined in: [src/types/stream.ts:64](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L64)
+Defined in: [src/types/stream.ts:64](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L64)
 
 Incremental JSON arguments string (for tool_call_delta)
 
@@ -33,7 +33,7 @@ Incremental JSON arguments string (for tool_call_delta)
 
 > `optional` **data**: `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [src/types/stream.ts:55](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L55)
+Defined in: [src/types/stream.ts:55](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L55)
 
 Incremental binary data (for image_delta, audio_delta, video_delta)
 
@@ -43,7 +43,7 @@ Incremental binary data (for image_delta, audio_delta, video_delta)
 
 > `optional` **isError**: `boolean`
 
-Defined in: [src/types/stream.ts:70](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L70)
+Defined in: [src/types/stream.ts:70](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L70)
 
 Whether tool execution resulted in an error (for tool_execution_end)
 
@@ -53,7 +53,7 @@ Whether tool execution resulted in an error (for tool_execution_end)
 
 > `optional` **result**: `unknown`
 
-Defined in: [src/types/stream.ts:67](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L67)
+Defined in: [src/types/stream.ts:67](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L67)
 
 Tool execution result (for tool_execution_end)
 
@@ -63,7 +63,7 @@ Tool execution result (for tool_execution_end)
 
 > `optional` **text**: `string`
 
-Defined in: [src/types/stream.ts:52](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L52)
+Defined in: [src/types/stream.ts:52](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L52)
 
 Incremental text content (for text_delta, reasoning_delta)
 
@@ -73,7 +73,7 @@ Incremental text content (for text_delta, reasoning_delta)
 
 > `optional` **timestamp**: `number`
 
-Defined in: [src/types/stream.ts:73](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L73)
+Defined in: [src/types/stream.ts:73](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L73)
 
 Timestamp in milliseconds (for tool_execution_start/end)
 
@@ -83,7 +83,7 @@ Timestamp in milliseconds (for tool_execution_start/end)
 
 > `optional` **toolCallId**: `string`
 
-Defined in: [src/types/stream.ts:58](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L58)
+Defined in: [src/types/stream.ts:58](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L58)
 
 Tool call identifier (for tool_call_delta, tool_execution_start/end)
 
@@ -93,6 +93,6 @@ Tool call identifier (for tool_call_delta, tool_execution_start/end)
 
 > `optional` **toolName**: `string`
 
-Defined in: [src/types/stream.ts:61](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/stream.ts#L61)
+Defined in: [src/types/stream.ts:61](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/stream.ts#L61)
 
 Tool name (for tool_call_delta, tool_execution_start/end)

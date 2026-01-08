@@ -10,7 +10,7 @@ title: "Interface: ToolCall"
 
 # Interface: ToolCall
 
-Defined in: [src/types/tool.ts:45](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/tool.ts#L45)
+Defined in: [src/types/tool.ts:45](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/tool.ts#L45)
 
 Tool call requested by the model.
 
@@ -33,7 +33,7 @@ const toolCall: ToolCall = {
 
 > **arguments**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/tool.ts:53](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/tool.ts#L53)
+Defined in: [src/types/tool.ts:53](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/tool.ts#L53)
 
 Parsed arguments for the tool call
 
@@ -43,7 +43,7 @@ Parsed arguments for the tool call
 
 > **toolCallId**: `string`
 
-Defined in: [src/types/tool.ts:47](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/tool.ts#L47)
+Defined in: [src/types/tool.ts:47](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/tool.ts#L47)
 
 Unique identifier for this tool call, used to match results
 
@@ -53,6 +53,6 @@ Unique identifier for this tool call, used to match results
 
 > **toolName**: `string`
 
-Defined in: [src/types/tool.ts:50](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/tool.ts#L50)
+Defined in: [src/types/tool.ts:50](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/tool.ts#L50)
 
 Name of the tool being called

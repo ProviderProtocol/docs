@@ -83,10 +83,18 @@ interface TokenUsage {
   /** Total tokens */
   totalTokens: number;
 
+  /** Tokens read from cache (cache hits). Returns 0 for providers that don't support cache metrics. */
+  cacheReadTokens: number;
+
+  /** Tokens written to cache. Only Anthropic reports this; returns 0 for other providers. */
+  cacheWriteTokens: number;
+
   /** Per-cycle breakdown (if available) */
   cycles?: Array<{
     inputTokens: number;
     outputTokens: number;
+    cacheReadTokens: number;
+    cacheWriteTokens: number;
   }>;
 }
 ```

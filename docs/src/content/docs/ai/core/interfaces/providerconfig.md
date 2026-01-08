@@ -10,7 +10,7 @@ title: "Interface: ProviderConfig"
 
 # Interface: ProviderConfig
 
-Defined in: [src/types/provider.ts:109](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L109)
+Defined in: [src/types/provider.ts:109](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L109)
 
 Provider configuration for infrastructure and connection settings.
 
@@ -39,7 +39,7 @@ const config: ProviderConfig = {
 
 > `optional` **apiKey**: `string` \| [`KeyStrategy`](keystrategy.md) \| () => `string` \| `Promise`\<`string`\>
 
-Defined in: [src/types/provider.ts:114](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L114)
+Defined in: [src/types/provider.ts:114](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L114)
 
 API key for authentication.
 Can be a string, async function, or KeyStrategy for advanced use cases.
@@ -50,7 +50,7 @@ Can be a string, async function, or KeyStrategy for advanced use cases.
 
 > `optional` **apiVersion**: `string`
 
-Defined in: [src/types/provider.ts:126](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L126)
+Defined in: [src/types/provider.ts:126](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L126)
 
 API version override (provider-specific)
 
@@ -60,7 +60,7 @@ API version override (provider-specific)
 
 > `optional` **baseUrl**: `string`
 
-Defined in: [src/types/provider.ts:117](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L117)
+Defined in: [src/types/provider.ts:117](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L117)
 
 Override the base API URL (for proxies, local models)
 
@@ -70,9 +70,33 @@ Override the base API URL (for proxies, local models)
 
 > `optional` **fetch**: *typeof* `fetch`
 
-Defined in: [src/types/provider.ts:123](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L123)
+Defined in: [src/types/provider.ts:123](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L123)
 
 Custom fetch implementation (for logging, caching, custom TLS)
+
+***
+
+### headers?
+
+> `optional` **headers**: `Record`\<`string`, `string` \| `undefined`\>
+
+Defined in: [src/types/provider.ts:147](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L147)
+
+Custom headers to include in API requests.
+
+Use this to pass provider-specific headers such as:
+- Anthropic: `anthropic-beta` for beta features
+- OpenAI: `OpenAI-Organization`, `OpenAI-Project`
+- OpenRouter: `HTTP-Referer`, `X-Title` for attribution
+- Ollama: Proxy authentication headers
+
+#### Example
+
+```typescript
+const config: ProviderConfig = {
+  headers: { 'anthropic-beta': 'extended-cache-ttl-2025-04-11' }
+};
+```
 
 ***
 
@@ -80,7 +104,7 @@ Custom fetch implementation (for logging, caching, custom TLS)
 
 > `optional` **retryStrategy**: [`RetryStrategy`](retrystrategy.md)
 
-Defined in: [src/types/provider.ts:129](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L129)
+Defined in: [src/types/provider.ts:129](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L129)
 
 Retry strategy for handling failures and rate limits
 
@@ -90,6 +114,6 @@ Retry strategy for handling failures and rate limits
 
 > `optional` **timeout**: `number`
 
-Defined in: [src/types/provider.ts:120](https://github.com/ProviderProtocol/ai/blob/c1fa49d2a211d9e50c9b51e4dc1cbd9d945b925a/src/types/provider.ts#L120)
+Defined in: [src/types/provider.ts:120](https://github.com/ProviderProtocol/ai/blob/ab3f02531d6211bb194c48c34b9c084008d48601/src/types/provider.ts#L120)
 
 Request timeout in milliseconds
