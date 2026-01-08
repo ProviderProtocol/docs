@@ -10,7 +10,7 @@ title: "Interface: ExecutionContext"
 
 # Interface: ExecutionContext
 
-Defined in: [src/execution/types.ts:156](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L156)
+Defined in: [src/execution/types.ts:156](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L156)
 
 Context passed to execution strategies containing all resources needed for execution.
 
@@ -46,7 +46,7 @@ const result = await strategy.execute(context);
 
 > **agent**: [`AgentRef`](agentref.md)
 
-Defined in: [src/execution/types.ts:158](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L158)
+Defined in: [src/execution/types.ts:158](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L158)
 
 The agent being executed (minimal reference)
 
@@ -56,7 +56,7 @@ The agent being executed (minimal reference)
 
 > `optional` **checkpoints**: [`CheckpointStore`](checkpointstore.md)
 
-Defined in: [src/execution/types.ts:172](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L172)
+Defined in: [src/execution/types.ts:172](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L172)
 
 Checkpoint store for state persistence (optional)
 
@@ -66,7 +66,7 @@ Checkpoint store for state persistence (optional)
 
 > **input**: `Message`
 
-Defined in: [src/execution/types.ts:162](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L162)
+Defined in: [src/execution/types.ts:162](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L162)
 
 The user input message to process
 
@@ -76,7 +76,7 @@ The user input message to process
 
 > **llm**: `LLMInstance`
 
-Defined in: [src/execution/types.ts:160](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L160)
+Defined in: [src/execution/types.ts:160](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L160)
 
 The bound LLM instance configured for this agent
 
@@ -86,7 +86,7 @@ The bound LLM instance configured for this agent
 
 > `optional` **sessionId**: `string`
 
-Defined in: [src/execution/types.ts:174](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L174)
+Defined in: [src/execution/types.ts:174](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L174)
 
 Session ID for checkpointing continuity
 
@@ -96,7 +96,7 @@ Session ID for checkpointing continuity
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/execution/types.ts:170](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L170)
+Defined in: [src/execution/types.ts:170](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L170)
 
 Abort signal for cancellation support
 
@@ -106,7 +106,7 @@ Abort signal for cancellation support
 
 > **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/execution/types.ts:164](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L164)
+Defined in: [src/execution/types.ts:164](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L164)
 
 Current immutable state snapshot
 
@@ -116,7 +116,7 @@ Current immutable state snapshot
 
 > **strategy**: [`AgentStrategy`](agentstrategy.md)
 
-Defined in: [src/execution/types.ts:168](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L168)
+Defined in: [src/execution/types.ts:168](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L168)
 
 Agent lifecycle hooks for observability and control
 
@@ -126,6 +126,6 @@ Agent lifecycle hooks for observability and control
 
 > **tools**: `Tool`\<`unknown`, `unknown`\>[]
 
-Defined in: [src/execution/types.ts:166](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L166)
+Defined in: [src/execution/types.ts:166](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L166)
 
 Resolved tools available for this execution

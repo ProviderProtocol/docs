@@ -12,7 +12,7 @@ title: "Function: plan()"
 
 > **plan**(`options`): [`ExecutionStrategy`](../../core/interfaces/executionstrategy.md)
 
-Defined in: [src/execution/plan.ts:102](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/plan.ts#L102)
+Defined in: [src/execution/plan.ts:102](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/plan.ts#L102)
 
 Creates a plan-then-execute strategy for agent execution.
 

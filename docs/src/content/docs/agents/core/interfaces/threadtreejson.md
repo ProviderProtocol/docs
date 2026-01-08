@@ -10,7 +10,7 @@ title: "Interface: ThreadTreeJSON"
 
 # Interface: ThreadTreeJSON
 
-Defined in: [src/thread-tree/types.ts:63](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/types.ts#L63)
+Defined in: [src/thread-tree/types.ts:63](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/thread-tree/types.ts#L63)
 
 Serialized representation of a ThreadTree for JSON persistence.
 
@@ -40,7 +40,7 @@ const restored = ThreadTree.fromJSON(data as ThreadTreeJSON);
 
 > **currentId**: `string`
 
-Defined in: [src/thread-tree/types.ts:74](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/types.ts#L74)
+Defined in: [src/thread-tree/types.ts:74](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/thread-tree/types.ts#L74)
 
 ID of the currently active node.
 This tracks which branch/position is currently being used for the conversation.
@@ -51,7 +51,7 @@ This tracks which branch/position is currently being used for the conversation.
 
 > **nodes**: [`ThreadNodeJSON`](threadnodejson.md)[]
 
-Defined in: [src/thread-tree/types.ts:80](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/types.ts#L80)
+Defined in: [src/thread-tree/types.ts:80](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/thread-tree/types.ts#L80)
 
 Array of all nodes in the tree.
 Includes the root, all branches, and all leaf nodes.
@@ -62,7 +62,7 @@ Includes the root, all branches, and all leaf nodes.
 
 > **rootId**: `string`
 
-Defined in: [src/thread-tree/types.ts:68](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/thread-tree/types.ts#L68)
+Defined in: [src/thread-tree/types.ts:68](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/thread-tree/types.ts#L68)
 
 ID of the root node in the tree.
 The root represents the initial conversation state.

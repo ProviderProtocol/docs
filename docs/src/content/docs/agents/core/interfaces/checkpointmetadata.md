@@ -10,7 +10,7 @@ title: "Interface: CheckpointMetadata"
 
 # Interface: CheckpointMetadata
 
-Defined in: [src/checkpoint/types.ts:202](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L202)
+Defined in: [src/checkpoint/types.ts:202](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L202)
 
 Metadata about a checkpoint, stored separately from the full state.
 
@@ -29,7 +29,7 @@ checkpoint is still valid and can be recovered.
 
 > **agentId**: `string`
 
-Defined in: [src/checkpoint/types.ts:232](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L232)
+Defined in: [src/checkpoint/types.ts:232](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L232)
 
 The agent instance ID that created this checkpoint.
 Useful for tracking which agent configuration was used.
@@ -40,7 +40,7 @@ Useful for tracking which agent configuration was used.
 
 > **checkpointId**: `string`
 
-Defined in: [src/checkpoint/types.ts:214](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L214)
+Defined in: [src/checkpoint/types.ts:214](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L214)
 
 Unique identifier for this specific checkpoint.
 Generated automatically when the checkpoint is created.
@@ -52,7 +52,7 @@ Useful for debugging and audit trails.
 
 > **sessionId**: `string`
 
-Defined in: [src/checkpoint/types.ts:207](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L207)
+Defined in: [src/checkpoint/types.ts:207](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L207)
 
 The session identifier this checkpoint belongs to.
 Matches the `sessionId` parameter passed to `save()`.
@@ -63,7 +63,7 @@ Matches the `sessionId` parameter passed to `save()`.
 
 > **step**: `number`
 
-Defined in: [src/checkpoint/types.ts:226](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L226)
+Defined in: [src/checkpoint/types.ts:226](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L226)
 
 The step number at which this checkpoint was taken.
 Corresponds to `AgentState.step` at save time.
@@ -74,7 +74,7 @@ Corresponds to `AgentState.step` at save time.
 
 > **timestamp**: `string`
 
-Defined in: [src/checkpoint/types.ts:220](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/checkpoint/types.ts#L220)
+Defined in: [src/checkpoint/types.ts:220](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/checkpoint/types.ts#L220)
 
 ISO 8601 timestamp when the checkpoint was created.
 Example: "2025-01-07T14:30:00.000Z"

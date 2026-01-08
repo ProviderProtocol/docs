@@ -10,7 +10,7 @@ title: "Interface: ReactOptions"
 
 # Interface: ReactOptions
 
-Defined in: [src/execution/types.ts:384](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L384)
+Defined in: [src/execution/types.ts:384](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L384)
 
 Configuration options for the ReAct execution strategy.
 
@@ -40,7 +40,7 @@ const agent = createAgent({
 
 > `optional` **maxSteps**: `number`
 
-Defined in: [src/execution/types.ts:389](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L389)
+Defined in: [src/execution/types.ts:389](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L389)
 
 Maximum number of reason-act-observe cycles before stopping.
 
@@ -56,7 +56,7 @@ Infinity (no limit)
 
 > `optional` **reasoningPrompt**: `string`
 
-Defined in: [src/execution/types.ts:395](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L395)
+Defined in: [src/execution/types.ts:395](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L395)
 
 Custom prompt appended to trigger the reasoning phase.
 

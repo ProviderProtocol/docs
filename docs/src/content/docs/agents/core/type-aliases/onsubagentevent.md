@@ -12,7 +12,7 @@ title: "Type Alias: OnSubagentEvent()"
 
 > **OnSubagentEvent** = (`event`) => `void`
 
-Defined in: [src/execution/types.ts:672](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L672)
+Defined in: [src/execution/types.ts:672](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L672)
 
 Callback type for receiving sub-agent events.
 

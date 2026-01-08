@@ -10,7 +10,7 @@ title: "Interface: ExecutionStrategy"
 
 # Interface: ExecutionStrategy
 
-Defined in: [src/execution/types.ts:322](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L322)
+Defined in: [src/execution/types.ts:322](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L322)
 
 Execution strategy interface defining how an agent executes.
 
@@ -48,7 +48,7 @@ const myStrategy: ExecutionStrategy = {
 
 > **name**: `string`
 
-Defined in: [src/execution/types.ts:324](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L324)
+Defined in: [src/execution/types.ts:324](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L324)
 
 Unique name identifying this strategy (e.g., 'loop', 'react', 'plan')
 
@@ -58,7 +58,7 @@ Unique name identifying this strategy (e.g., 'loop', 'react', 'plan')
 
 > **execute**(`context`): `Promise`\<[`ExecutionResult`](executionresult.md)\>
 
-Defined in: [src/execution/types.ts:331](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L331)
+Defined in: [src/execution/types.ts:331](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L331)
 
 Execute the strategy synchronously (non-streaming).
 
@@ -82,7 +82,7 @@ Promise resolving to the execution result
 
 > **stream**(`context`): [`AgentStreamResult`](agentstreamresult.md)
 
-Defined in: [src/execution/types.ts:338](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L338)
+Defined in: [src/execution/types.ts:338](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L338)
 
 Execute the strategy with streaming support.
 

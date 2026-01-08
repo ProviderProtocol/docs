@@ -10,7 +10,7 @@ title: "Interface: LoggingOptions"
 
 # Interface: LoggingOptions
 
-Defined in: [src/middleware/types.ts:216](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L216)
+Defined in: [src/middleware/types.ts:216](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L216)
 
 Configuration options for the logging middleware.
 
@@ -41,7 +41,7 @@ const debugOptions: LoggingOptions = {
 
 > `optional` **includeMessages**: `boolean`
 
-Defined in: [src/middleware/types.ts:254](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L254)
+Defined in: [src/middleware/types.ts:254](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L254)
 
 Whether to include message content in debug logs.
 
@@ -60,7 +60,7 @@ false
 
 > `optional` **includeTiming**: `boolean`
 
-Defined in: [src/middleware/types.ts:263](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L263)
+Defined in: [src/middleware/types.ts:263](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L263)
 
 Whether to include execution timing in log output.
 
@@ -78,7 +78,7 @@ true
 
 > `optional` **level**: `"error"` \| `"info"` \| `"debug"` \| `"warn"`
 
-Defined in: [src/middleware/types.ts:228](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L228)
+Defined in: [src/middleware/types.ts:228](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L228)
 
 Minimum log level to output.
 
@@ -100,7 +100,7 @@ Messages below this level are suppressed. Levels in order of verbosity:
 
 > `optional` **logger**: (`message`) => `void`
 
-Defined in: [src/middleware/types.ts:244](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L244)
+Defined in: [src/middleware/types.ts:244](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L244)
 
 Custom logging function to receive log messages.
 

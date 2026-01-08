@@ -10,7 +10,7 @@ title: "Interface: PlanOptions"
 
 # Interface: PlanOptions
 
-Defined in: [src/execution/types.ts:416](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L416)
+Defined in: [src/execution/types.ts:416](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L416)
 
 Configuration options for the plan execution strategy.
 
@@ -36,7 +36,7 @@ const agent = createAgent({
 
 > `optional` **allowReplan**: `boolean`
 
-Defined in: [src/execution/types.ts:427](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L427)
+Defined in: [src/execution/types.ts:427](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L427)
 
 Whether to allow replanning when a step fails.
 
@@ -52,7 +52,7 @@ true
 
 > `optional` **maxPlanSteps**: `number`
 
-Defined in: [src/execution/types.ts:421](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L421)
+Defined in: [src/execution/types.ts:421](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L421)
 
 Maximum number of steps allowed in the generated plan.
 
@@ -68,7 +68,7 @@ Infinity (no limit)
 
 > `optional` **planSchema**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/execution/types.ts:433](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L433)
+Defined in: [src/execution/types.ts:433](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L433)
 
 JSON Schema for validating the plan structure.
 Override to customize the expected plan format.

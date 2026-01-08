@@ -10,7 +10,7 @@ title: "Interface: InjectToolContextOptions"
 
 # Interface: InjectToolContextOptions
 
-Defined in: [src/execution/tool-context.ts:15](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-context.ts#L15)
+Defined in: [src/execution/tool-context.ts:15](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/tool-context.ts#L15)
 
 Options for configuring tool context injection behavior.
 
@@ -24,7 +24,7 @@ Options for configuring tool context injection behavior.
 
 > `optional` **onSubagentEvent**: [`OnSubagentEvent`](../type-aliases/onsubagentevent.md)
 
-Defined in: [src/execution/tool-context.ts:21](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-context.ts#L21)
+Defined in: [src/execution/tool-context.ts:21](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/tool-context.ts#L21)
 
 Callback for receiving sub-agent events emitted by tools.
 Tools that spawn sub-agents can use this callback to propagate

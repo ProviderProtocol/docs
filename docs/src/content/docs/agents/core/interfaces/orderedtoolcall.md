@@ -10,7 +10,7 @@ title: "Interface: OrderedToolCall"
 
 # Interface: OrderedToolCall
 
-Defined in: [src/execution/types.ts:552](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L552)
+Defined in: [src/execution/types.ts:552](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L552)
 
 Model-driven tool call with optional execution order hint.
 
@@ -48,7 +48,7 @@ const toolCalls: OrderedToolCall[] = [
 
 > `optional` **after**: `string`[]
 
-Defined in: [src/execution/types.ts:554](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L554)
+Defined in: [src/execution/types.ts:554](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L554)
 
 Tool call IDs that must complete before this call executes
 

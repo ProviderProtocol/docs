@@ -10,7 +10,7 @@ title: "Interface: MiddlewareContext"
 
 # Interface: MiddlewareContext
 
-Defined in: [src/middleware/types.ts:18](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L18)
+Defined in: [src/middleware/types.ts:18](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L18)
 
 Context passed to middleware functions during agent execution.
 
@@ -33,7 +33,7 @@ Use namespaced keys (e.g., `_myMiddleware_key`) to avoid collisions.
 
 > **agent**: [`AgentRef`](agentref.md)
 
-Defined in: [src/middleware/types.ts:24](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L24)
+Defined in: [src/middleware/types.ts:24](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L24)
 
 Reference to the agent being executed.
 
@@ -45,7 +45,7 @@ Provides access to agent identity and configuration.
 
 > **input**: `Message`
 
-Defined in: [src/middleware/types.ts:31](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L31)
+Defined in: [src/middleware/types.ts:31](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L31)
 
 The user input message that triggered this execution.
 
@@ -57,7 +57,7 @@ This is the original message passed to the agent's generate method.
 
 > **metadata**: `Map`\<`string`, `unknown`\>
 
-Defined in: [src/middleware/types.ts:58](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L58)
+Defined in: [src/middleware/types.ts:58](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L58)
 
 Mutable metadata map for sharing data between middleware hooks.
 
@@ -82,7 +82,7 @@ const startTime = context.metadata.get('_myMiddleware_startTime') as number;
 
 > **state**: [`AgentState`](../classes/agentstate.md)
 
-Defined in: [src/middleware/types.ts:40](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/middleware/types.ts#L40)
+Defined in: [src/middleware/types.ts:40](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/middleware/types.ts#L40)
 
 The current agent state, including conversation history.
 

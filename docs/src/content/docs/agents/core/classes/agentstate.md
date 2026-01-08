@@ -10,7 +10,7 @@ title: "Class: AgentState"
 
 # Class: AgentState
 
-Defined in: [src/state/index.ts:63](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L63)
+Defined in: [src/state/index.ts:63](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L63)
 
 Immutable agent state container for tracking execution context.
 
@@ -62,7 +62,7 @@ const restored = AgentState.fromJSON(json);
 
 > `readonly` **id**: `string`
 
-Defined in: [src/state/index.ts:65](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L65)
+Defined in: [src/state/index.ts:65](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L65)
 
 Unique identifier for this state snapshot (UUIDv4)
 
@@ -76,7 +76,7 @@ Unique identifier for this state snapshot (UUIDv4)
 
 > `readonly` **messages**: readonly `Message`[]
 
-Defined in: [src/state/index.ts:68](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L68)
+Defined in: [src/state/index.ts:68](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L68)
 
 Immutable conversation history containing UPP Messages
 
@@ -90,7 +90,7 @@ Immutable conversation history containing UPP Messages
 
 > `readonly` **metadata**: `Readonly`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/state/index.ts:74](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L74)
+Defined in: [src/state/index.ts:74](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L74)
 
 User-defined metadata for storing arbitrary state
 
@@ -104,7 +104,7 @@ User-defined metadata for storing arbitrary state
 
 > `readonly` **plan**: readonly [`PlanStep`](../interfaces/planstep.md)[] \| `undefined`
 
-Defined in: [src/state/index.ts:80](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L80)
+Defined in: [src/state/index.ts:80](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L80)
 
 Execution plan for Plan-strategy agents
 
@@ -118,7 +118,7 @@ Execution plan for Plan-strategy agents
 
 > `readonly` **reasoning**: readonly `string`[]
 
-Defined in: [src/state/index.ts:77](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L77)
+Defined in: [src/state/index.ts:77](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L77)
 
 Reasoning traces captured during ReAct-style execution
 
@@ -132,7 +132,7 @@ Reasoning traces captured during ReAct-style execution
 
 > `readonly` **step**: `number`
 
-Defined in: [src/state/index.ts:71](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L71)
+Defined in: [src/state/index.ts:71](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L71)
 
 Current step number in the agent's execution lifecycle
 
@@ -146,7 +146,7 @@ Current step number in the agent's execution lifecycle
 
 > `readonly` **subagentTraces**: readonly [`SubagentExecutionTrace`](../interfaces/subagentexecutiontrace.md)[]
 
-Defined in: [src/state/index.ts:83](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L83)
+Defined in: [src/state/index.ts:83](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L83)
 
 Sub-agent execution traces per UAP spec Section 8.8
 
@@ -160,7 +160,7 @@ Sub-agent execution traces per UAP spec Section 8.8
 
 > **toJSON**(): [`AgentStateJSON`](../interfaces/agentstatejson.md)
 
-Defined in: [src/state/index.ts:415](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L415)
+Defined in: [src/state/index.ts:415](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L415)
 
 Serializes the state to JSON for persistence or transport.
 
@@ -198,7 +198,7 @@ await Bun.write('checkpoint.json', JSON.stringify(json));
 
 > **withContext**(`messages`): `AgentState`
 
-Defined in: [src/state/index.ts:218](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L218)
+Defined in: [src/state/index.ts:218](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L218)
 
 Creates a new state with the entire message context replaced.
 
@@ -242,7 +242,7 @@ const summarized = state.withContext([summary, ...recentMessages]);
 
 > **withMessage**(`message`): `AgentState`
 
-Defined in: [src/state/index.ts:154](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L154)
+Defined in: [src/state/index.ts:154](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L154)
 
 Creates a new state with a single message appended.
 
@@ -278,7 +278,7 @@ console.log(updated.messages.length); // 1
 
 > **withMessages**(`messages`): `AgentState`
 
-Defined in: [src/state/index.ts:185](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L185)
+Defined in: [src/state/index.ts:185](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L185)
 
 Creates a new state with multiple messages appended.
 
@@ -320,7 +320,7 @@ console.log(updated.messages.length); // 2
 
 > **withMetadata**(`key`, `value`): `AgentState`
 
-Defined in: [src/state/index.ts:279](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L279)
+Defined in: [src/state/index.ts:279](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L279)
 
 Creates a new state with a metadata entry added or updated.
 
@@ -368,7 +368,7 @@ console.log(state.metadata.userId); // 'user-123'
 
 > **withPlan**(`plan`): `AgentState`
 
-Defined in: [src/state/index.ts:342](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L342)
+Defined in: [src/state/index.ts:342](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L342)
 
 Creates a new state with the execution plan set.
 
@@ -413,7 +413,7 @@ const state = AgentState.initial().withPlan(plan);
 
 > **withReasoning**(`reasoning`): `AgentState`
 
-Defined in: [src/state/index.ts:310](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L310)
+Defined in: [src/state/index.ts:310](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L310)
 
 Creates a new state with a reasoning trace appended.
 
@@ -455,7 +455,7 @@ console.log(state.reasoning);
 
 > **withStep**(`step`): `AgentState`
 
-Defined in: [src/state/index.ts:247](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L247)
+Defined in: [src/state/index.ts:247](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L247)
 
 Creates a new state with an updated step number.
 
@@ -495,7 +495,7 @@ console.log(afterStep2.step); // 2
 
 > **withSubagentTrace**(`trace`): `AgentState`
 
-Defined in: [src/state/index.ts:383](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L383)
+Defined in: [src/state/index.ts:383](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L383)
 
 Creates a new state with a sub-agent execution trace appended.
 
@@ -550,7 +550,7 @@ const updated = state.withSubagentTrace(trace);
 
 > `static` **fromJSON**(`json`): `AgentState`
 
-Defined in: [src/state/index.ts:453](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L453)
+Defined in: [src/state/index.ts:453](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L453)
 
 Restores an AgentState from its JSON representation.
 
@@ -597,7 +597,7 @@ console.log(state.messages.length);
 
 > `static` **initial**(): `AgentState`
 
-Defined in: [src/state/index.ts:129](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/index.ts#L129)
+Defined in: [src/state/index.ts:129](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/index.ts#L129)
 
 Creates a fresh initial state with no history.
 

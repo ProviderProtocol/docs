@@ -12,7 +12,7 @@ title: "Function: hasCallDependencies()"
 
 > **hasCallDependencies**(`toolCalls`): `boolean`
 
-Defined in: [src/execution/tool-ordering.ts:262](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L262)
+Defined in: [src/execution/tool-ordering.ts:262](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/tool-ordering.ts#L262)
 
 Checks if any tool calls have model-driven dependencies.
 

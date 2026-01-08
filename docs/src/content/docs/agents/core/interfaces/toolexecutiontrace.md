@@ -10,7 +10,7 @@ title: "Interface: ToolExecutionTrace"
 
 # Interface: ToolExecutionTrace
 
-Defined in: [src/state/types.ts:25](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L25)
+Defined in: [src/state/types.ts:25](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L25)
 
 A single tool execution trace from a sub-agent.
 
@@ -31,7 +31,7 @@ Conforms to UAP specification Section 8.8 for sub-agent tracing.
 
 > **arguments**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/state/types.ts:33](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L33)
+Defined in: [src/state/types.ts:33](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L33)
 
 Arguments passed to the tool as key-value pairs
 
@@ -41,7 +41,7 @@ Arguments passed to the tool as key-value pairs
 
 > `optional` **duration**: `number`
 
-Defined in: [src/state/types.ts:42](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L42)
+Defined in: [src/state/types.ts:42](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L42)
 
 Execution duration in milliseconds
 
@@ -51,7 +51,7 @@ Execution duration in milliseconds
 
 > `optional` **isError**: `boolean`
 
-Defined in: [src/state/types.ts:39](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L39)
+Defined in: [src/state/types.ts:39](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L39)
 
 Whether the tool execution resulted in an error
 
@@ -61,7 +61,7 @@ Whether the tool execution resulted in an error
 
 > **result**: `string`
 
-Defined in: [src/state/types.ts:36](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L36)
+Defined in: [src/state/types.ts:36](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L36)
 
 Stringified result returned by the tool
 
@@ -71,7 +71,7 @@ Stringified result returned by the tool
 
 > `optional` **toolCallId**: `string`
 
-Defined in: [src/state/types.ts:30](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L30)
+Defined in: [src/state/types.ts:30](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L30)
 
 Unique identifier for this tool call, used for correlation with tool results
 
@@ -81,6 +81,6 @@ Unique identifier for this tool call, used for correlation with tool results
 
 > **toolName**: `string`
 
-Defined in: [src/state/types.ts:27](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/state/types.ts#L27)
+Defined in: [src/state/types.ts:27](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/state/types.ts#L27)
 
 Name of the tool that was invoked

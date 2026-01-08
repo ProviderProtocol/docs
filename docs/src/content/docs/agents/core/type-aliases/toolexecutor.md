@@ -12,7 +12,7 @@ title: "Type Alias: ToolExecutor()"
 
 > **ToolExecutor** = (`call`, `tool`) => `Promise`\<`unknown`\>
 
-Defined in: [src/execution/tool-ordering.ts:300](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/tool-ordering.ts#L300)
+Defined in: [src/execution/tool-ordering.ts:300](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/tool-ordering.ts#L300)
 
 Function type for executing a single tool call.
 

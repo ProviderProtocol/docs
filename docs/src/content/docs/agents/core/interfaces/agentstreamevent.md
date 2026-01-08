@@ -10,7 +10,7 @@ title: "Interface: AgentStreamEvent"
 
 # Interface: AgentStreamEvent
 
-Defined in: [src/execution/types.ts:240](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L240)
+Defined in: [src/execution/types.ts:240](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L240)
 
 Agent stream event that wraps both UAP and UPP events.
 
@@ -40,7 +40,7 @@ for await (const event of stream) {
 
 > **source**: `"uap"` \| `"upp"`
 
-Defined in: [src/execution/types.ts:242](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L242)
+Defined in: [src/execution/types.ts:242](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L242)
 
 Event source: 'uap' for agent-level, 'upp' for LLM-level
 
@@ -50,7 +50,7 @@ Event source: 'uap' for agent-level, 'upp' for LLM-level
 
 > `optional` **uap**: `object`
 
-Defined in: [src/execution/types.ts:245](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L245)
+Defined in: [src/execution/types.ts:245](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L245)
 
 Present when source === 'uap' - contains agent lifecycle event data
 
@@ -84,6 +84,6 @@ The type of UAP event
 
 > `optional` **upp**: `StreamEvent`
 
-Defined in: [src/execution/types.ts:257](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L257)
+Defined in: [src/execution/types.ts:257](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L257)
 
 Present when source === 'upp' - contains LLM stream event

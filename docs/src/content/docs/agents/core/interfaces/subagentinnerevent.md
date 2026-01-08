@@ -10,7 +10,7 @@ title: "Interface: SubagentInnerEvent"
 
 # Interface: SubagentInnerEvent
 
-Defined in: [src/execution/types.ts:603](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L603)
+Defined in: [src/execution/types.ts:603](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L603)
 
 Event emitted for forwarded events from sub-agent execution.
 
@@ -27,7 +27,7 @@ into nested execution while maintaining the parent context.
 
 > **innerEvent**: [`AgentStreamEvent`](agentstreamevent.md)
 
-Defined in: [src/execution/types.ts:607](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L607)
+Defined in: [src/execution/types.ts:607](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L607)
 
 The actual event from the sub-agent
 
@@ -37,7 +37,7 @@ The actual event from the sub-agent
 
 > **parentToolCallId**: `string`
 
-Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L579)
+Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L579)
 
 The parent tool call ID that spawned this sub-agent
 
@@ -51,7 +51,7 @@ The parent tool call ID that spawned this sub-agent
 
 > **subagentId**: `string`
 
-Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L575)
+Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L575)
 
 Unique ID of the sub-agent instance
 
@@ -65,7 +65,7 @@ Unique ID of the sub-agent instance
 
 > **subagentType**: `string`
 
-Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L577)
+Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L577)
 
 Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
@@ -79,6 +79,6 @@ Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
 > **type**: `"subagent_event"`
 
-Defined in: [src/execution/types.ts:605](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L605)
+Defined in: [src/execution/types.ts:605](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L605)
 
 Event type discriminator

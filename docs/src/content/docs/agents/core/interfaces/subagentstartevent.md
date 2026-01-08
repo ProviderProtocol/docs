@@ -10,7 +10,7 @@ title: "Interface: SubagentStartEvent"
 
 # Interface: SubagentStartEvent
 
-Defined in: [src/execution/types.ts:588](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L588)
+Defined in: [src/execution/types.ts:588](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L588)
 
 Event emitted when a sub-agent starts execution.
 
@@ -27,7 +27,7 @@ for duration tracking.
 
 > **parentToolCallId**: `string`
 
-Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L579)
+Defined in: [src/execution/types.ts:579](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L579)
 
 The parent tool call ID that spawned this sub-agent
 
@@ -41,7 +41,7 @@ The parent tool call ID that spawned this sub-agent
 
 > **prompt**: `string`
 
-Defined in: [src/execution/types.ts:592](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L592)
+Defined in: [src/execution/types.ts:592](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L592)
 
 The task/prompt given to the sub-agent
 
@@ -51,7 +51,7 @@ The task/prompt given to the sub-agent
 
 > **subagentId**: `string`
 
-Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L575)
+Defined in: [src/execution/types.ts:575](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L575)
 
 Unique ID of the sub-agent instance
 
@@ -65,7 +65,7 @@ Unique ID of the sub-agent instance
 
 > **subagentType**: `string`
 
-Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L577)
+Defined in: [src/execution/types.ts:577](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L577)
 
 Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
@@ -79,7 +79,7 @@ Type/name of the sub-agent (e.g., 'explorer', 'planner')
 
 > **timestamp**: `number`
 
-Defined in: [src/execution/types.ts:594](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L594)
+Defined in: [src/execution/types.ts:594](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L594)
 
 Start timestamp in milliseconds since epoch
 
@@ -89,6 +89,6 @@ Start timestamp in milliseconds since epoch
 
 > **type**: `"subagent_start"`
 
-Defined in: [src/execution/types.ts:590](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L590)
+Defined in: [src/execution/types.ts:590](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L590)
 
 Event type discriminator

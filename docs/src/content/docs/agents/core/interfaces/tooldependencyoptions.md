@@ -10,7 +10,7 @@ title: "Interface: ToolDependencyOptions"
 
 # Interface: ToolDependencyOptions
 
-Defined in: [src/execution/types.ts:474](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L474)
+Defined in: [src/execution/types.ts:474](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L474)
 
 Tool dependency options for execution ordering.
 
@@ -50,7 +50,7 @@ const writeTool = {
 
 > `optional` **dependsOn**: `string`[]
 
-Defined in: [src/execution/types.ts:485](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L485)
+Defined in: [src/execution/types.ts:485](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L485)
 
 Tool names that must complete before this tool can execute.
 Used for explicit dependency chains.
@@ -61,7 +61,7 @@ Used for explicit dependency chains.
 
 > `optional` **sequential**: `boolean`
 
-Defined in: [src/execution/types.ts:479](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L479)
+Defined in: [src/execution/types.ts:479](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L479)
 
 If true, this tool must complete before other tools start.
 Sequential tools create a barrier in parallel execution.

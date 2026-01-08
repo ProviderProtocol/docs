@@ -12,7 +12,7 @@ title: "Type Alias: UAPEventType"
 
 > **UAPEventType** = `"step_start"` \| `"step_end"` \| `"reasoning"` \| `"action"` \| `"observation"` \| `"plan_created"` \| `"plan_step_start"` \| `"plan_step_end"` \| `"subagent_start"` \| `"subagent_event"` \| `"subagent_end"`
 
-Defined in: [src/execution/types.ts:205](https://github.com/ProviderProtocol/agents/blob/6ccd56db587110551b2124128a4f22b2f896aa27/src/execution/types.ts#L205)
+Defined in: [src/execution/types.ts:205](https://github.com/ProviderProtocol/agents/blob/5c6a128286d6bfa249e6da183381f66a2be30c64/src/execution/types.ts#L205)
 
 UAP-level event types emitted during agent streaming execution.
 
