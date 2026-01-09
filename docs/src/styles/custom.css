@@ -76,6 +76,7 @@
 	/* Spacing */
 	--sl-nav-height: 4rem;
 	--sl-sidebar-width: 18rem;
+	--sl-content-width: 52rem;
 
 	/* Effects */
 	--scanline-opacity: 0.03;
@@ -120,6 +121,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -235,6 +237,10 @@ nav a:hover, .social-icons a:hover {
 	border-right: 1px solid #1a1a1a;
 }
 
+.sidebar-content {
+	padding: 0 1rem !important;
+}
+
 /* Sidebar section headers */
 .top-level > li > details > summary,
 .top-level > li > a {
@@ -261,11 +267,37 @@ nav a:hover, .social-icons a:hover {
 }
 
 /* Sidebar links */
+.sidebar-content ul {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	list-style: none !important;
+}
+
+.sidebar-content li {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	list-style: none !important;
+}
+
+.sidebar-content li::marker {
+	content: '' !important;
+}
+
+.sidebar-content a::before {
+	display: none;
+}
+
+/* Nested/dropdown items have slight indentation */
+.sidebar-content details > ul a,
+.sidebar-content .sidebar li a {
+	padding-left: 1.5rem !important;
+}
+
 .sidebar-content a {
 	font-family: var(--sl-font-mono) !important;
 	font-size: 0.8rem !important;
 	color: var(--term-text-dim) !important;
-	padding: 0.4rem 1rem 0.4rem 1.5rem !important;
+	padding: 0.4rem 1rem !important;
 	border-left: 2px solid transparent;
 	transition: all 0.15s ease;
 	position: relative;
@@ -274,7 +306,7 @@ nav a:hover, .social-icons a:hover {
 .sidebar-content a::before {
 	content: '';
 	position: absolute;
-	left: 1rem;
+	left: 0.5rem;
 	opacity: 0;
 	transition: opacity 0.15s ease;
 }
@@ -286,10 +318,7 @@ nav a:hover, .social-icons a:hover {
 }
 
 .sidebar-content a:hover::before {
-	content: '>';
-	opacity: 1;
-	left: 0.5rem;
-	color: var(--term-green);
+	display: none;
 }
 
 /* Active link */
@@ -301,9 +330,7 @@ nav a:hover, .social-icons a:hover {
 }
 
 .sidebar-content a[aria-current="page"]::before {
-	content: '>';
-	opacity: 1;
-	left: 0.5rem;
+	display: none;
 }
 
 /* Collapse icons */
@@ -328,7 +355,7 @@ main {
 }
 
 .sl-container {
-	max-width: 52rem;
+	max-width: var(--sl-content-width);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -346,7 +373,8 @@ h1 {
 	font-size: var(--sl-text-h1) !important;
 	border-bottom: 1px solid var(--term-green-dim);
 	padding-bottom: 0.75rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 3.5rem;
+	line-height: 2em;
 	position: relative;
 }
 
@@ -721,6 +749,10 @@ tr:hover td {
    BADGES
    ───────────────────────────────────────────────────────────────────────────── */
 .sl-badge {
+	margin-top: 2rem;
+}
+
+.sl-badge {
 	font-family: var(--sl-font-mono) !important;
 	font-weight: 500 !important;
 	font-size: 0.65rem !important;
@@ -1017,6 +1049,11 @@ starlight-tabs [role="tabpanel"] {
 /* ─────────────────────────────────────────────────────────────────────────────
    TABLE OF CONTENTS
    ───────────────────────────────────────────────────────────────────────────── */
+starlight-toc {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
 starlight-toc nav {
 	font-family: var(--sl-font-mono) !important;
 }
