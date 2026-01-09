@@ -10,7 +10,7 @@ title: "Interface: AudioBlock"
 
 # Interface: AudioBlock
 
-Defined in: [src/types/content.ts:111](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/content.ts#L111)
+Defined in: [src/types/content.ts:111](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/content.ts#L111)
 
 Audio content block.
 
@@ -33,7 +33,7 @@ const audioBlock: AudioBlock = {
 
 > **data**: `Uint8Array`
 
-Defined in: [src/types/content.ts:116](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/content.ts#L116)
+Defined in: [src/types/content.ts:116](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/content.ts#L116)
 
 Raw audio data
 
@@ -43,7 +43,7 @@ Raw audio data
 
 > `optional` **duration**: `number`
 
-Defined in: [src/types/content.ts:122](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/content.ts#L122)
+Defined in: [src/types/content.ts:122](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/content.ts#L122)
 
 Duration in seconds
 
@@ -53,7 +53,7 @@ Duration in seconds
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:119](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/content.ts#L119)
+Defined in: [src/types/content.ts:119](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/content.ts#L119)
 
 MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
@@ -63,6 +63,6 @@ MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
 > **type**: `"audio"`
 
-Defined in: [src/types/content.ts:113](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/content.ts#L113)
+Defined in: [src/types/content.ts:113](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/content.ts#L113)
 
 Discriminator for audio blocks

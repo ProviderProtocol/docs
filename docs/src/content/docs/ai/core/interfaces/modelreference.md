@@ -10,7 +10,7 @@ title: "Interface: ModelReference"
 
 # Interface: ModelReference\<TOptions\>
 
-Defined in: [src/types/provider.ts:165](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/provider.ts#L165)
+Defined in: [src/types/provider.ts:165](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L165)
 
 A reference to a model, created by a provider factory.
 
@@ -39,7 +39,7 @@ Provider-specific options type
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/provider.ts:167](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/provider.ts#L167)
+Defined in: [src/types/provider.ts:167](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L167)
 
 The model identifier (e.g., 'gpt-4', 'claude-3-opus')
 
@@ -49,6 +49,6 @@ The model identifier (e.g., 'gpt-4', 'claude-3-opus')
 
 > `readonly` **provider**: [`Provider`](provider.md)\<`TOptions`\>
 
-Defined in: [src/types/provider.ts:170](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/provider.ts#L170)
+Defined in: [src/types/provider.ts:170](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L170)
 
 The provider that created this reference

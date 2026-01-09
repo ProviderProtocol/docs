@@ -10,7 +10,7 @@ title: "Class: DynamicKey"
 
 # Class: DynamicKey
 
-Defined in: [src/http/keys.ts:166](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/keys.ts#L166)
+Defined in: [src/http/keys.ts:166](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/keys.ts#L166)
 
 Provides dynamic key selection using custom logic.
 
@@ -58,7 +58,7 @@ const timedKey = new DynamicKey(() => {
 
 > **new DynamicKey**(`selector`): `DynamicKey`
 
-Defined in: [src/http/keys.ts:174](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/keys.ts#L174)
+Defined in: [src/http/keys.ts:174](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/keys.ts#L174)
 
 Creates a new DynamicKey instance.
 
@@ -80,7 +80,7 @@ Function that returns an API key (sync or async)
 
 > **getKey**(): `Promise`\<`string`\>
 
-Defined in: [src/http/keys.ts:183](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/keys.ts#L183)
+Defined in: [src/http/keys.ts:183](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/keys.ts#L183)
 
 Invokes the selector function to retrieve the current key.
 

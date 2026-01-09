@@ -10,7 +10,7 @@ title: "Interface: LLMCapabilities"
 
 # Interface: LLMCapabilities
 
-Defined in: [src/types/llm.ts:61](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L61)
+Defined in: [src/types/llm.ts:61](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L61)
 
 LLM capabilities declare what a provider's API supports.
 
@@ -39,7 +39,7 @@ const capabilities: LLMCapabilities = {
 
 > **audioInput**: `boolean`
 
-Defined in: [src/types/llm.ts:78](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L78)
+Defined in: [src/types/llm.ts:78](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L78)
 
 Provider API supports audio input in messages
 
@@ -49,7 +49,7 @@ Provider API supports audio input in messages
 
 > **imageInput**: `boolean`
 
-Defined in: [src/types/llm.ts:72](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L72)
+Defined in: [src/types/llm.ts:72](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L72)
 
 Provider API supports image input in messages
 
@@ -59,7 +59,7 @@ Provider API supports image input in messages
 
 > `optional` **imageOutput**: `boolean`
 
-Defined in: [src/types/llm.ts:81](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L81)
+Defined in: [src/types/llm.ts:81](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L81)
 
 Provider API supports image generation output (via modalities or built-in tools)
 
@@ -69,7 +69,7 @@ Provider API supports image generation output (via modalities or built-in tools)
 
 > **streaming**: `boolean`
 
-Defined in: [src/types/llm.ts:63](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L63)
+Defined in: [src/types/llm.ts:63](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L63)
 
 Provider API supports streaming responses
 
@@ -79,7 +79,7 @@ Provider API supports streaming responses
 
 > **structuredOutput**: `boolean`
 
-Defined in: [src/types/llm.ts:69](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L69)
+Defined in: [src/types/llm.ts:69](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L69)
 
 Provider API supports native structured output (JSON schema)
 
@@ -89,7 +89,7 @@ Provider API supports native structured output (JSON schema)
 
 > **tools**: `boolean`
 
-Defined in: [src/types/llm.ts:66](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L66)
+Defined in: [src/types/llm.ts:66](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L66)
 
 Provider API supports tool/function calling
 
@@ -99,6 +99,6 @@ Provider API supports tool/function calling
 
 > **videoInput**: `boolean`
 
-Defined in: [src/types/llm.ts:75](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/llm.ts#L75)
+Defined in: [src/types/llm.ts:75](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L75)
 
 Provider API supports video input in messages

@@ -12,6 +12,6 @@ title: "Type Alias: OpenAIBuiltInTool"
 
 > **OpenAIBuiltInTool** = [`OpenAIWebSearchTool`](../interfaces/openaiwebsearchtool.md) \| [`OpenAIFileSearchTool`](../interfaces/openaifilesearchtool.md) \| [`OpenAICodeInterpreterTool`](../interfaces/openaicodeinterpretertool.md) \| [`OpenAIComputerTool`](../interfaces/openaicomputertool.md) \| [`OpenAIImageGenerationTool`](../interfaces/openaiimagegenerationtool.md) \| [`OpenAIMcpTool`](../interfaces/openaimcptool.md)
 
-Defined in: [src/providers/openai/types.ts:1236](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/openai/types.ts#L1236)
+Defined in: [src/providers/openai/types.ts:1236](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/openai/types.ts#L1236)
 
 Union type for all Responses API built-in tools

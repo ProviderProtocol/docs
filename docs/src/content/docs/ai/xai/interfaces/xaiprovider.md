@@ -10,7 +10,7 @@ title: "Interface: XAIProvider()"
 
 # Interface: XAIProvider()
 
-Defined in: [src/providers/xai/index.ts:54](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L54)
+Defined in: [src/providers/xai/index.ts:54](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L54)
 
 xAI provider with configurable API mode
 
@@ -44,7 +44,7 @@ const model = xai('grok-4', { api: 'messages' });
 
 > **XAIProvider**(`modelId`, `options?`): [`ModelReference`](../../core/interfaces/modelreference.md)\<[`XAIProviderOptions`](xaiprovideroptions.md)\>
 
-Defined in: [src/providers/xai/index.ts:60](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L60)
+Defined in: [src/providers/xai/index.ts:60](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L60)
 
 Create a model reference
 
@@ -70,7 +70,7 @@ Provider options including API selection
 
 > **XAIProvider**(`modelId`, `options?`): [`ModelReference`](../../core/interfaces/modelreference.md)\<[`XAIProviderOptions`](xaiprovideroptions.md)\>
 
-Defined in: [src/providers/xai/index.ts:54](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L54)
+Defined in: [src/providers/xai/index.ts:54](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L54)
 
 Creates a model reference with optional provider-specific options.
 
@@ -100,7 +100,7 @@ A model reference for use with llm() or other functions
 
 > `readonly` **modalities**: `object`
 
-Defined in: [src/providers/xai/index.ts:69](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L69)
+Defined in: [src/providers/xai/index.ts:69](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L69)
 
 Supported modalities
 
@@ -118,7 +118,7 @@ Supported modalities
 
 > `readonly` **name**: `"xai"`
 
-Defined in: [src/providers/xai/index.ts:63](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L63)
+Defined in: [src/providers/xai/index.ts:63](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L63)
 
 Provider name
 
@@ -132,7 +132,7 @@ Provider name
 
 > `readonly` **version**: `string`
 
-Defined in: [src/providers/xai/index.ts:66](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/index.ts#L66)
+Defined in: [src/providers/xai/index.ts:66](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/index.ts#L66)
 
 Provider version
 

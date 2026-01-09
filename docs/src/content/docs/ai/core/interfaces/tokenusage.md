@@ -10,7 +10,7 @@ title: "Interface: TokenUsage"
 
 # Interface: TokenUsage
 
-Defined in: [src/types/turn.ts:35](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L35)
+Defined in: [src/types/turn.ts:36](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L36)
 
 Token usage information for an inference request.
 
@@ -39,7 +39,7 @@ const usage: TokenUsage = {
 
 > **cacheReadTokens**: `number`
 
-Defined in: [src/types/turn.ts:49](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L49)
+Defined in: [src/types/turn.ts:50](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L50)
 
 Tokens read from cache (cache hits).
 Returns 0 for providers that don't support or report cache metrics.
@@ -50,7 +50,7 @@ Returns 0 for providers that don't support or report cache metrics.
 
 > **cacheWriteTokens**: `number`
 
-Defined in: [src/types/turn.ts:55](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L55)
+Defined in: [src/types/turn.ts:56](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L56)
 
 Tokens written to cache (cache misses that were cached).
 Only Anthropic reports this metric; returns 0 for other providers.
@@ -61,7 +61,7 @@ Only Anthropic reports this metric; returns 0 for other providers.
 
 > `optional` **cycles**: `object`[]
 
-Defined in: [src/types/turn.ts:58](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L58)
+Defined in: [src/types/turn.ts:59](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L59)
 
 Per-cycle token breakdown (if multiple cycles occurred)
 
@@ -87,7 +87,7 @@ Per-cycle token breakdown (if multiple cycles occurred)
 
 > **inputTokens**: `number`
 
-Defined in: [src/types/turn.ts:37](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L37)
+Defined in: [src/types/turn.ts:38](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L38)
 
 Total input tokens across all cycles
 
@@ -97,7 +97,7 @@ Total input tokens across all cycles
 
 > **outputTokens**: `number`
 
-Defined in: [src/types/turn.ts:40](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L40)
+Defined in: [src/types/turn.ts:41](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L41)
 
 Total output tokens across all cycles
 
@@ -107,6 +107,6 @@ Total output tokens across all cycles
 
 > **totalTokens**: `number`
 
-Defined in: [src/types/turn.ts:43](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/turn.ts#L43)
+Defined in: [src/types/turn.ts:44](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L44)
 
 Sum of input and output tokens

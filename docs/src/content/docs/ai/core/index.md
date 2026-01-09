@@ -18,28 +18,6 @@ UPP provides a consistent API for interacting with multiple AI providers includi
 Anthropic, OpenAI, Google, Ollama, OpenRouter, and xAI. The library handles provider-specific
 transformations, streaming, tool execution, and error handling.
 
-## Examples
-
-```typescript
-import { llm, anthropic } from '@providerprotocol/ai';
-
-const model = llm({
-  model: anthropic('claude-sonnet-4-20250514'),
-  params: { max_tokens: 1000 }
-});
-
-const turn = await model.generate('Hello!');
-console.log(turn.response.text);
-```
-
-```typescript
-for await (const event of model.stream('Tell me a story')) {
-  if (event.type === 'text') {
-    process.stdout.write(event.delta.text);
-  }
-}
-```
-
 ## Classes
 
 - [AssistantMessage](classes/assistantmessage.md)
@@ -93,7 +71,6 @@ for await (const event of model.stream('Tell me a story')) {
 - [LLMRequest](interfaces/llmrequest.md)
 - [LLMResponse](interfaces/llmresponse.md)
 - [LLMStreamResult](interfaces/llmstreamresult.md)
-- [MessageJSON](interfaces/messagejson.md)
 - [MessageMetadata](interfaces/messagemetadata.md)
 - [MessageOptions](interfaces/messageoptions.md)
 - [ModelReference](interfaces/modelreference.md)
@@ -103,7 +80,6 @@ for await (const event of model.stream('Tell me a story')) {
 - [StreamEvent](interfaces/streamevent.md)
 - [StreamResult](interfaces/streamresult.md)
 - [TextBlock](interfaces/textblock.md)
-- [ThreadJSON](interfaces/threadjson.md)
 - [TokenUsage](interfaces/tokenusage.md)
 - [Tool](interfaces/tool.md)
 - [ToolCall](interfaces/toolcall.md)
@@ -126,9 +102,11 @@ for await (const event of model.stream('Tell me a story')) {
 - [InferenceInput](type-aliases/inferenceinput.md)
 - [JSONSchemaPropertyType](type-aliases/jsonschemapropertytype.md)
 - [LLMProvider](type-aliases/llmprovider.md)
+- [MessageJSON](type-aliases/messagejson.md)
 - [MessageType](type-aliases/messagetype.md)
 - [Modality](type-aliases/modality.md)
 - [StreamEventType](type-aliases/streameventtype.md)
+- [ThreadJSON](type-aliases/threadjson.md)
 - [UserContent](type-aliases/usercontent.md)
 
 ## Variables

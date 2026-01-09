@@ -10,7 +10,7 @@ title: "Interface: XAICodeExecutionTool"
 
 # Interface: XAICodeExecutionTool
 
-Defined in: [src/providers/xai/types.ts:365](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/types.ts#L365)
+Defined in: [src/providers/xai/types.ts:365](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L365)
 
 Code execution tool for Python in a sandbox.
 
@@ -34,7 +34,7 @@ const tool: XAICodeExecutionTool = {
 
 > `optional` **container**: `object`
 
-Defined in: [src/providers/xai/types.ts:369](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/types.ts#L369)
+Defined in: [src/providers/xai/types.ts:369](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L369)
 
 Container configuration
 
@@ -50,6 +50,6 @@ Additional pip packages to install
 
 > **type**: `"code_interpreter"`
 
-Defined in: [src/providers/xai/types.ts:367](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/providers/xai/types.ts#L367)
+Defined in: [src/providers/xai/types.ts:367](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L367)
 
 Tool type identifier

@@ -10,7 +10,7 @@ title: "Class: RetryAfterStrategy"
 
 # Class: RetryAfterStrategy
 
-Defined in: [src/http/retry.ts:395](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L395)
+Defined in: [src/http/retry.ts:395](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L395)
 
 Respects server-provided Retry-After headers for optimal retry timing.
 
@@ -55,7 +55,7 @@ const provider = createOpenAI({
 
 > **new RetryAfterStrategy**(`options`): `RetryAfterStrategy`
 
-Defined in: [src/http/retry.ts:407](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L407)
+Defined in: [src/http/retry.ts:407](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L407)
 
 Creates a new RetryAfterStrategy instance.
 
@@ -87,7 +87,7 @@ Maximum number of retry attempts (default: 3)
 
 > **onRetry**(`error`, `attempt`): `number` \| `null`
 
-Defined in: [src/http/retry.ts:434](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L434)
+Defined in: [src/http/retry.ts:434](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L434)
 
 Determines retry delay using Retry-After header or fallback.
 
@@ -121,7 +121,7 @@ Delay from Retry-After header or fallback, null to stop
 
 > **setRetryAfter**(`seconds`): `void`
 
-Defined in: [src/http/retry.ts:423](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L423)
+Defined in: [src/http/retry.ts:423](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L423)
 
 Sets the retry delay from a Retry-After header value.
 

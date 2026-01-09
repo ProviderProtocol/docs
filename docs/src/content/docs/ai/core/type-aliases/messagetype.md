@@ -12,7 +12,7 @@ title: "Type Alias: MessageType"
 
 > **MessageType** = `"user"` \| `"assistant"` \| `"tool_result"`
 
-Defined in: [src/types/messages.ts:28](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/messages.ts#L28)
+Defined in: [src/types/messages.ts:39](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/messages.ts#L39)
 
 Message type discriminator.
 

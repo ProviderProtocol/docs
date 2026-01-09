@@ -10,7 +10,7 @@ title: "Interface: EmbeddingInstance"
 
 # Interface: EmbeddingInstance\<TParams\>
 
-Defined in: [src/types/embedding.ts:162](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L162)
+Defined in: [src/types/embedding.ts:162](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L162)
 
 Embedding instance returned by the embedding() function.
 
@@ -46,7 +46,7 @@ Provider-specific parameter type
 
 > `readonly` **model**: [`BoundEmbeddingModel`](boundembeddingmodel.md)\<`TParams`\>
 
-Defined in: [src/types/embedding.ts:184](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L184)
+Defined in: [src/types/embedding.ts:184](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L184)
 
 The bound embedding model
 
@@ -56,7 +56,7 @@ The bound embedding model
 
 > `readonly` **params**: `TParams` \| `undefined`
 
-Defined in: [src/types/embedding.ts:187](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L187)
+Defined in: [src/types/embedding.ts:187](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L187)
 
 Current parameters
 
@@ -68,7 +68,7 @@ Current parameters
 
 > **embed**(`input`, `options?`): `Promise`\<[`EmbeddingResult`](embeddingresult.md)\>
 
-Defined in: [src/types/embedding.ts:170](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L170)
+Defined in: [src/types/embedding.ts:170](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L170)
 
 Generate embeddings for one or more inputs.
 
@@ -96,7 +96,7 @@ Promise<EmbeddingResult> or EmbeddingStream if chunked
 
 > **embed**(`input`, `options`): [`EmbeddingStream`](embeddingstream.md)
 
-Defined in: [src/types/embedding.ts:174](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L174)
+Defined in: [src/types/embedding.ts:174](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L174)
 
 ##### Parameters
 
@@ -116,7 +116,7 @@ Defined in: [src/types/embedding.ts:174](https://github.com/ProviderProtocol/ai/
 
 > **embed**(`input`, `options?`): [`EmbeddingStream`](embeddingstream.md) \| `Promise`\<[`EmbeddingResult`](embeddingresult.md)\>
 
-Defined in: [src/types/embedding.ts:178](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/embedding.ts#L178)
+Defined in: [src/types/embedding.ts:178](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L178)
 
 ##### Parameters
 

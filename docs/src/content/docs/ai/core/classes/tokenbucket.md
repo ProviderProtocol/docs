@@ -10,7 +10,7 @@ title: "Class: TokenBucket"
 
 # Class: TokenBucket
 
-Defined in: [src/http/retry.ts:269](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L269)
+Defined in: [src/http/retry.ts:269](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L269)
 
 Implements token bucket rate limiting with automatic refill.
 
@@ -62,7 +62,7 @@ const provider = createOpenAI({
 
 > **new TokenBucket**(`options`): `TokenBucket`
 
-Defined in: [src/http/retry.ts:284](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L284)
+Defined in: [src/http/retry.ts:284](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L284)
 
 Creates a new TokenBucket instance.
 
@@ -100,7 +100,7 @@ Tokens added per second (default: 1)
 
 > **beforeRequest**(): `number`
 
-Defined in: [src/http/retry.ts:305](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L305)
+Defined in: [src/http/retry.ts:305](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L305)
 
 Called before each request to consume a token or calculate wait time.
 
@@ -124,7 +124,7 @@ Delay in milliseconds before the request can proceed
 
 > **onRetry**(`error`, `attempt`): `number` \| `null`
 
-Defined in: [src/http/retry.ts:326](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L326)
+Defined in: [src/http/retry.ts:326](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L326)
 
 Handles retry logic for rate-limited requests.
 
@@ -160,7 +160,7 @@ Delay in milliseconds (time for 2 tokens), or null to stop
 
 > **reset**(): `void`
 
-Defined in: [src/http/retry.ts:344](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/http/retry.ts#L344)
+Defined in: [src/http/retry.ts:344](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/http/retry.ts#L344)
 
 Resets the bucket to full capacity.
 

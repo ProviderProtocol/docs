@@ -10,7 +10,7 @@ title: "Class: UPPError"
 
 # Class: UPPError
 
-Defined in: [src/types/errors.ts:111](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L111)
+Defined in: [src/types/errors.ts:111](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L111)
 
 Unified Provider Protocol Error.
 
@@ -55,7 +55,7 @@ try {
 
 > **new UPPError**(`message`, `code`, `provider`, `modality`, `statusCode?`, `cause?`): `UPPError`
 
-Defined in: [src/types/errors.ts:140](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L140)
+Defined in: [src/types/errors.ts:140](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L140)
 
 Creates a new UPPError instance.
 
@@ -111,7 +111,7 @@ The original error being wrapped
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: [src/types/errors.ts:125](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L125)
+Defined in: [src/types/errors.ts:125](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L125)
 
 The original error that caused this UPPError, if wrapping another error
 
@@ -125,7 +125,7 @@ The original error that caused this UPPError, if wrapping another error
 
 > `readonly` **code**: [`ErrorCode`](../type-aliases/errorcode.md)
 
-Defined in: [src/types/errors.ts:113](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L113)
+Defined in: [src/types/errors.ts:113](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L113)
 
 Normalized error code for programmatic handling
 
@@ -147,7 +147,7 @@ Defined in: node\_modules/typescript/lib/lib.es5.d.ts:1077
 
 > `readonly` **modality**: [`Modality`](../type-aliases/modality.md)
 
-Defined in: [src/types/errors.ts:119](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L119)
+Defined in: [src/types/errors.ts:119](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L119)
 
 The modality that was being used when the error occurred
 
@@ -157,7 +157,7 @@ The modality that was being used when the error occurred
 
 > `readonly` **name**: `"UPPError"` = `'UPPError'`
 
-Defined in: [src/types/errors.ts:128](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L128)
+Defined in: [src/types/errors.ts:128](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L128)
 
 Error class name, always 'UPPError'
 
@@ -171,7 +171,7 @@ Error class name, always 'UPPError'
 
 > `readonly` **provider**: `string`
 
-Defined in: [src/types/errors.ts:116](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L116)
+Defined in: [src/types/errors.ts:116](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L116)
 
 Name of the provider that generated the error
 
@@ -193,7 +193,7 @@ Defined in: node\_modules/typescript/lib/lib.es5.d.ts:1078
 
 > `readonly` `optional` **statusCode**: `number`
 
-Defined in: [src/types/errors.ts:122](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L122)
+Defined in: [src/types/errors.ts:122](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L122)
 
 HTTP status code from the provider's response, if available
 
@@ -225,7 +225,7 @@ not capture any frames.
 
 > **toJSON**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/errors.ts:180](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L180)
+Defined in: [src/types/errors.ts:180](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L180)
 
 Converts the error to a JSON-serializable object.
 
@@ -241,7 +241,7 @@ Plain object representation suitable for logging or transmission
 
 > **toString**(): `string`
 
-Defined in: [src/types/errors.ts:165](https://github.com/ProviderProtocol/ai/blob/1bc41d9f0bcf65740d187b8dd1dcfde98fae1ee5/src/types/errors.ts#L165)
+Defined in: [src/types/errors.ts:165](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/errors.ts#L165)
 
 Creates a string representation of the error.
 
