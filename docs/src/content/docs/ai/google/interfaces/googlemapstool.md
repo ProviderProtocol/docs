@@ -10,7 +10,7 @@ title: "Interface: GoogleMapsTool"
 
 # Interface: GoogleMapsTool
 
-Defined in: [src/providers/google/types.ts:627](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L627)
+Defined in: [src/providers/google/types.ts:636](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L636)
 
 Google Maps grounding tool for location-based queries.
 
@@ -37,7 +37,7 @@ const tool: GoogleMapsTool = {
 
 > **googleMaps**: `object`
 
-Defined in: [src/providers/google/types.ts:629](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L629)
+Defined in: [src/providers/google/types.ts:638](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L638)
 
 Google Maps configuration
 

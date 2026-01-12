@@ -10,7 +10,7 @@ title: "Interface: OpenAIConfig"
 
 # Interface: OpenAIConfig
 
-Defined in: [src/providers/openai/types.ts:431](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/openai/types.ts#L431)
+Defined in: [src/providers/openai/types.ts:431](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/openai/types.ts#L431)
 
 Configuration options for the OpenAI provider.
 
@@ -20,6 +20,6 @@ Configuration options for the OpenAI provider.
 
 > `optional` **api**: `"responses"` \| `"completions"`
 
-Defined in: [src/providers/openai/types.ts:433](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/openai/types.ts#L433)
+Defined in: [src/providers/openai/types.ts:433](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/openai/types.ts#L433)
 
 Which API to use: 'responses' (modern) or 'completions' (legacy)

@@ -76,17 +76,9 @@ Providers may implement one or more modalities. For each modality, conformance i
 - `edit()` method for inpainting (if `capabilities.edit`)
 - Mask handling
 
-**Level 3: Variations**
-- `vary()` method (if `capabilities.vary`)
-- Strength/count parameters
-
-**Level 4: Streaming**
+**Level 3: Streaming**
 - `stream()` method (if `capabilities.streaming`)
-- Progress and preview events
-
-**Level 5: Advanced**
-- `upscale()` method (if `capabilities.upscale`)
-- Outpainting support (if `capabilities.outpaint`)
+- Preview events
 
 ## Conformance Requirements
 

@@ -342,15 +342,7 @@ Providers SHOULD preserve unknown metadata fields during round-trips to support 
 
 #### 5.10.4 System Prompt Handling
 
-The provider MUST handle system prompts according to vendor requirements:
-
-| Provider | System Prompt Handling |
-|----------|----------------------|
-| Anthropic | Top-level `system` parameter |
-| OpenAI | Message with `role: "system"` |
-| Google | `systemInstruction` field |
-
-`llm()` accepts system prompts at the options level and providers transform accordingly.
+The provider MUST transform the system prompt from `LLMOptions.system` to the vendor-specific format required by the underlying API.
 
 #### 5.10.5 Structured Output Handling
 

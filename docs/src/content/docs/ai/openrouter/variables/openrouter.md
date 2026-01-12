@@ -12,7 +12,7 @@ title: "Variable: openrouter"
 
 > `const` **openrouter**: `OpenRouterProvider`
 
-Defined in: [src/providers/openrouter/index.ts:197](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/openrouter/index.ts#L197)
+Defined in: [src/providers/openrouter/index.ts:117](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/openrouter/index.ts#L117)
 
 OpenRouter provider singleton.
 

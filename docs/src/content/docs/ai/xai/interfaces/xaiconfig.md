@@ -10,7 +10,7 @@ title: "Interface: XAIConfig"
 
 # Interface: XAIConfig
 
-Defined in: [src/providers/xai/types.ts:264](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L264)
+Defined in: [src/providers/xai/types.ts:264](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L264)
 
 Configuration options for the xAI provider.
 
@@ -20,6 +20,6 @@ Configuration options for the xAI provider.
 
 > `optional` **api**: [`XAIAPIMode`](../type-aliases/xaiapimode.md)
 
-Defined in: [src/providers/xai/types.ts:266](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L266)
+Defined in: [src/providers/xai/types.ts:266](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L266)
 
 The API mode to use (defaults to 'completions')

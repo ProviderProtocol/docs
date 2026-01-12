@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/xai/types.ts:648](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L648)
+Defined in: [src/providers/xai/types.ts:630](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L630)
 
 Namespace object containing all xAI tool helper constructors.
 
@@ -23,7 +23,7 @@ Note: These tools are only available via the Responses API (`api: 'responses'`).
 
 ### codeExecution()
 
-> **codeExecution**: (`options?`) => [`XAICodeExecutionTool`](../interfaces/xaicodeexecutiontool.md) = `codeExecutionTool`
+> **codeExecution**: () => [`XAICodeExecutionTool`](../interfaces/xaicodeexecutiontool.md) = `codeExecutionTool`
 
 Creates a code execution tool configuration
 
@@ -31,16 +31,6 @@ Creates a code execution tool configuration.
 
 Enables Grok to write and execute Python code in a sandbox.
 Pricing: $5 per 1,000 successful tool invocations.
-
-#### Parameters
-
-##### options?
-
-Optional configuration for the execution environment
-
-###### pip_packages?
-
-`string`[]
 
 #### Returns
 
@@ -51,13 +41,7 @@ A code execution tool configuration object
 #### Example
 
 ```typescript
-// Basic code execution
 const codeExec = codeExecutionTool();
-
-// With additional packages
-const codeExecWithPackages = codeExecutionTool({
-  pip_packages: ['numpy', 'pandas', 'scipy'],
-});
 ```
 
 ### fileSearch()
@@ -278,7 +262,7 @@ import { xai, tools } from 'provider-protocol/xai';
 const model = llm({
   model: xai('grok-4-1-fast', { api: 'responses' }),
   params: {
-    builtInTools: [
+    tools: [
       tools.webSearch(),
       tools.xSearch({ from_date: '2025-01-01' }),
       tools.codeExecution(),

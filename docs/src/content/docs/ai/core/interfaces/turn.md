@@ -10,7 +10,7 @@ title: "Interface: Turn"
 
 # Interface: Turn\<TData\>
 
-Defined in: [src/types/turn.ts:88](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L88)
+Defined in: [src/types/turn.ts:88](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L88)
 
 A Turn represents the complete result of one inference call.
 
@@ -45,7 +45,7 @@ Type of the structured output data
 
 > `readonly` **cycles**: `number`
 
-Defined in: [src/types/turn.ts:105](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L105)
+Defined in: [src/types/turn.ts:105](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L105)
 
 Total number of inference cycles (1 + number of tool rounds)
 
@@ -55,7 +55,7 @@ Total number of inference cycles (1 + number of tool rounds)
 
 > `readonly` `optional` **data**: `TData`
 
-Defined in: [src/types/turn.ts:111](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L111)
+Defined in: [src/types/turn.ts:111](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L111)
 
 Structured output data (if a structure schema was provided).
 Type is inferred from the schema when using TypeScript.
@@ -66,7 +66,7 @@ Type is inferred from the schema when using TypeScript.
 
 > `readonly` **messages**: [`Message`](../classes/message.md)[]
 
-Defined in: [src/types/turn.ts:93](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L93)
+Defined in: [src/types/turn.ts:93](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L93)
 
 All messages produced during this inference, in chronological order.
 Includes UserMessage, AssistantMessage (may include toolCalls), and ToolResultMessage.
@@ -77,7 +77,7 @@ Includes UserMessage, AssistantMessage (may include toolCalls), and ToolResultMe
 
 > `readonly` **response**: [`AssistantMessage`](../classes/assistantmessage.md)
 
-Defined in: [src/types/turn.ts:96](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L96)
+Defined in: [src/types/turn.ts:96](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L96)
 
 The final assistant response (last AssistantMessage in the turn)
 
@@ -87,7 +87,7 @@ The final assistant response (last AssistantMessage in the turn)
 
 > `readonly` **toolExecutions**: [`ToolExecution`](toolexecution.md)[]
 
-Defined in: [src/types/turn.ts:99](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L99)
+Defined in: [src/types/turn.ts:99](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L99)
 
 Tool executions that occurred during this turn
 
@@ -97,6 +97,6 @@ Tool executions that occurred during this turn
 
 > `readonly` **usage**: [`TokenUsage`](tokenusage.md)
 
-Defined in: [src/types/turn.ts:102](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L102)
+Defined in: [src/types/turn.ts:102](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L102)
 
 Aggregate token usage for the entire turn

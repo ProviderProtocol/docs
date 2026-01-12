@@ -12,7 +12,7 @@ title: "Variable: ai"
 
 > `const` **ai**: `object`
 
-Defined in: [src/index.ts:64](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/index.ts#L64)
+Defined in: [src/index.ts:68](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/index.ts#L68)
 
 UPP namespace object providing alternative import style.
 
@@ -78,6 +78,59 @@ const stream = embedder.embed(documents, { chunked: true });
 for await (const progress of stream) {
   console.log(`${progress.percent}% complete`);
 }
+```
+
+### image()
+
+> **image**: \<`TParams`\>(`options`) => [`ImageInstance`](../interfaces/imageinstance.md)\<`TParams`\>
+
+Image generation instance factory
+
+Creates an image generation instance configured with the specified options.
+
+This is the primary factory function for creating image generation instances.
+It validates provider capabilities, binds the model, and returns an instance
+with `generate`, `stream`, and `edit` methods.
+
+#### Type Parameters
+
+##### TParams
+
+`TParams` = `unknown`
+
+Provider-specific parameter type for model configuration
+
+#### Parameters
+
+##### options
+
+[`ImageOptions`](../interfaces/imageoptions.md)\<`TParams`\>
+
+Configuration options for the image instance
+
+#### Returns
+
+[`ImageInstance`](../interfaces/imageinstance.md)\<`TParams`\>
+
+A configured image instance ready for generation
+
+#### Throws
+
+When the provider does not support the image modality
+
+#### Example
+
+```typescript
+import { image } from 'upp';
+import { openai } from 'upp/providers/openai';
+
+const dalle = image({
+  model: openai('dall-e-3'),
+  params: { size: '1024x1024', quality: 'hd' }
+});
+
+const result = await dalle.generate('A sunset over mountains');
+console.log(result.images.length);
 ```
 
 ### llm()

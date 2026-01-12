@@ -107,7 +107,7 @@ Internally, each provider combines modality handlers:
 // Provider implementation structure
 openai_provider = createProvider({
   name: "openai",
-  modalities: {
+  handlers: {
     llm: createLLMHandler(),
     embedding: createEmbeddingHandler(),
     image: createImageHandler()
@@ -321,7 +321,7 @@ strategy = DynamicKey(() => {
 
 ### Provider and ModelReference
 
-A provider is a factory function that returns a `ModelReference`. The modality functions resolve the appropriate handler based on the modality.
+A provider is a factory function that returns a `ModelReference`. The `llm()`, `embedding()`, and `image()` helpers resolve the appropriate internal handler for the requested capability.
 
 **ModelReference Structure:**
 
@@ -336,7 +336,6 @@ A provider is a factory function that returns a `ModelReference`. The modality f
 |-------|------|-------------|
 | `name` | String | Provider name |
 | `version` | String | Provider version |
-| `modalities` | Map | Supported modality handlers |
 
 The provider is also callable as a function:
 
@@ -347,9 +346,6 @@ modelRef = provider(modelId, options?)
 // Provider properties
 provider.name      // "openai"
 provider.version   // "1.0.0"
-provider.modalities.llm        // LLMHandler or null
-provider.modalities.embedding  // EmbeddingHandler or null
-provider.modalities.image      // ImageHandler or null
 ```
 
 **Handler Interfaces:**

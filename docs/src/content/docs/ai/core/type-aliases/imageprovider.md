@@ -12,7 +12,7 @@ title: "Type Alias: ImageProvider"
 
 > **ImageProvider**\<`TParams`, `TOptions`\> = [`Provider`](../interfaces/provider.md)\<`TOptions`\> & `object`
 
-Defined in: [src/types/provider.ts:461](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L461)
+Defined in: [src/types/provider.ts:472](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L472)
 
 Provider with Image modality support.
 
@@ -20,19 +20,17 @@ Type alias for providers that support image generation.
 
 ## Type Declaration
 
-### modalities
+### \_\_params?
 
-> `readonly` **modalities**: `object`
+> `readonly` `optional` **\_\_params**: `TParams`
 
-#### modalities.image
-
-> **image**: [`ImageHandler`](../interfaces/imagehandler.md)\<`TParams`\>
+**`Internal`**
 
 ## Type Parameters
 
 ### TParams
 
-`TParams` = `any`
+`TParams` = `unknown`
 
 Model-specific parameters type
 

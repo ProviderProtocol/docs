@@ -44,7 +44,6 @@ console.log(turn.response.text);
 - [XAIMessagesParams](interfaces/xaimessagesparams.md)
 - [XAIModelOptions](interfaces/xaimodeloptions.md)
 - [XAIModelReference](interfaces/xaimodelreference.md)
-- [XAIProvider](interfaces/xaiprovider.md)
 - [XAIProviderOptions](interfaces/xaiprovideroptions.md)
 - [XAIResponsesParams](interfaces/xairesponsesparams.md)
 - [~~XAISearchParameters~~](interfaces/xaisearchparameters.md)
@@ -56,6 +55,7 @@ console.log(turn.response.text);
 
 - [XAIAPIMode](type-aliases/xaiapimode.md)
 - [XAIBuiltInTool](type-aliases/xaibuiltintool.md)
+- [XAIProvider](type-aliases/xaiprovider.md)
 
 ## Variables
 

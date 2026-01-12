@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/anthropic/types.ts:1015](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/anthropic/types.ts#L1015)
+Defined in: [src/providers/anthropic/types.ts:1173](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/anthropic/types.ts#L1173)
 
 Namespace object containing all Anthropic tool helper constructors.
 
@@ -292,7 +292,7 @@ import { anthropic, tools } from 'provider-protocol/anthropic';
 const model = llm({
   model: anthropic('claude-sonnet-4-20250514'),
   params: {
-    builtInTools: [
+    tools: [
       tools.webSearch({ max_uses: 5 }),
       tools.codeExecution(),
     ],

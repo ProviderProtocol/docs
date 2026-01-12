@@ -10,7 +10,7 @@ title: "Interface: Provider()"
 
 # Interface: Provider()\<TOptions\>
 
-Defined in: [src/types/provider.ts:402](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L402)
+Defined in: [src/types/provider.ts:421](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L421)
 
 Provider factory function with metadata and modality handlers.
 
@@ -26,14 +26,16 @@ const model = openai('gpt-4', { temperature: 0.7 });
 // Accessing provider metadata
 console.log(openai.name); // 'openai'
 console.log(openai.version); // '1.0.0'
-
-// Accessing modality handlers
-const llmHandler = openai.modalities.llm;
 ```
 
-## Extended by
+## Remarks
 
-- [`XAIProvider`](../../../xai/interfaces/xaiprovider.md)
+Providers are intended to be used with `llm()`, `embedding()`, or `image()`.
+Direct handler access is not part of the public API.
+
+## Extends
+
+- [`ProviderIdentity`](provideridentity.md)
 
 ## Type Parameters
 
@@ -45,7 +47,7 @@ Provider-specific options passed to the factory
 
 > **Provider**(`modelId`, `options?`): [`ModelReference`](modelreference.md)\<`TOptions`\>
 
-Defined in: [src/types/provider.ts:410](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L410)
+Defined in: [src/types/provider.ts:429](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L429)
 
 Creates a model reference with optional provider-specific options.
 
@@ -71,35 +73,17 @@ A model reference for use with llm() or other functions
 
 ## Properties
 
-### modalities
-
-> `readonly` **modalities**: `object`
-
-Defined in: [src/types/provider.ts:419](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L419)
-
-Supported modalities and their handlers
-
-#### embedding?
-
-> `optional` **embedding**: [`EmbeddingHandler`](embeddinghandler.md)\<`any`\>
-
-#### image?
-
-> `optional` **image**: [`ImageHandler`](imagehandler.md)\<`any`\>
-
-#### llm?
-
-> `optional` **llm**: `LLMHandler`\<`any`\>
-
-***
-
 ### name
 
 > `readonly` **name**: `string`
 
-Defined in: [src/types/provider.ts:413](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L413)
+Defined in: [src/types/provider.ts:432](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L432)
 
 Provider name (e.g., 'openai', 'anthropic')
+
+#### Overrides
+
+[`ProviderIdentity`](provideridentity.md).[`name`](provideridentity.md#name)
 
 ***
 
@@ -107,6 +91,10 @@ Provider name (e.g., 'openai', 'anthropic')
 
 > `readonly` **version**: `string`
 
-Defined in: [src/types/provider.ts:416](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L416)
+Defined in: [src/types/provider.ts:435](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L435)
 
 Provider version string
+
+#### Overrides
+
+[`ProviderIdentity`](provideridentity.md).[`version`](provideridentity.md#version)

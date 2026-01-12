@@ -10,7 +10,7 @@ title: "Interface: EmbeddingRequest"
 
 # Interface: EmbeddingRequest\<TParams\>
 
-Defined in: [src/types/provider.ts:313](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L313)
+Defined in: [src/types/provider.ts:340](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L340)
 
 **`Internal`**
 
@@ -20,7 +20,7 @@ Request passed to provider's embed method.
 
 ### TParams
 
-`TParams` = `any`
+`TParams` = `unknown`
 
 ## Properties
 
@@ -28,7 +28,7 @@ Request passed to provider's embed method.
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/provider.ts:319](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L319)
+Defined in: [src/types/provider.ts:346](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L346)
 
 Provider infrastructure config
 
@@ -38,7 +38,7 @@ Provider infrastructure config
 
 > **inputs**: [`EmbeddingInput`](../type-aliases/embeddinginput.md)[]
 
-Defined in: [src/types/provider.ts:315](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L315)
+Defined in: [src/types/provider.ts:342](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L342)
 
 Inputs to embed
 
@@ -48,7 +48,7 @@ Inputs to embed
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/provider.ts:317](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L317)
+Defined in: [src/types/provider.ts:344](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L344)
 
 Provider-specific parameters (passed through unchanged)
 
@@ -58,6 +58,6 @@ Provider-specific parameters (passed through unchanged)
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/provider.ts:321](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L321)
+Defined in: [src/types/provider.ts:348](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L348)
 
 Abort signal for cancellation

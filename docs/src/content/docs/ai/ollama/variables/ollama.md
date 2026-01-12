@@ -12,7 +12,7 @@ title: "Variable: ollama"
 
 > `const` **ollama**: [`Provider`](../../core/interfaces/provider.md)\<`unknown`\>
 
-Defined in: [src/providers/ollama/index.ts:81](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/ollama/index.ts#L81)
+Defined in: [src/providers/ollama/index.ts:79](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/ollama/index.ts#L79)
 
 Ollama provider for local LLM inference.
 
@@ -45,26 +45,24 @@ API endpoint. Use the OpenAI provider with `baseUrl` pointed to Ollama instead.
 import { llm } from 'provider-protocol';
 import { ollama } from 'provider-protocol/ollama';
 
-const model = llm(ollama('llama3.2'));
-const result = await model.complete({
-  messages: [{ role: 'user', content: 'Hello!' }]
-});
+const model = llm({ model: ollama('llama3.2') });
+const turn = await model.generate('Hello!');
+console.log(turn.response.text);
 ```
 
 ```typescript
 import { llm } from 'provider-protocol';
 import { ollama } from 'provider-protocol/ollama';
 
-const model = llm(ollama('llama3.2'), {
-  baseUrl: 'http://my-ollama-server:11434',
+const model = llm({
+  model: ollama('llama3.2'),
+  config: { baseUrl: 'http://my-ollama-server:11434' },
 });
 ```
 
 ```typescript
-const model = llm(ollama('llama3.2'));
-const stream = model.stream({
-  messages: [{ role: 'user', content: 'Write a poem' }]
-});
+const model = llm({ model: ollama('llama3.2') });
+const stream = model.stream('Write a poem');
 
 for await (const event of stream) {
   if (event.type === 'text_delta') {
@@ -74,15 +72,15 @@ for await (const event of stream) {
 ```
 
 ```typescript
-const model = llm(ollama('llama3.2'));
-const result = await model.complete({
-  messages: [{ role: 'user', content: 'Be creative!' }],
+const model = llm({
+  model: ollama('llama3.2'),
   params: {
     temperature: 0.9,
     top_p: 0.95,
-    num_predict: 500
-  }
+    num_predict: 500,
+  },
 });
+const result = await model.generate('Be creative!');
 ```
 
 ## See

@@ -10,7 +10,7 @@ title: "Interface: GoogleLLMParams"
 
 # Interface: GoogleLLMParams
 
-Defined in: [src/providers/google/types.ts:26](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L26)
+Defined in: [src/providers/google/types.ts:26](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L26)
 
 Provider-specific parameters for Google Gemini API requests.
 
@@ -45,17 +45,175 @@ const response = await model.complete({
 
 > `optional` **audioTimestamp**: `boolean`
 
-Defined in: [src/providers/google/types.ts:82](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L82)
+Defined in: [src/providers/google/types.ts:82](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L82)
 
 Whether to include audio timestamps in response
 
 ***
 
-### builtInTools?
+### cachedContent?
 
-> `optional` **builtInTools**: [`GoogleBuiltInTool`](../type-aliases/googlebuiltintool.md)[]
+> `optional` **cachedContent**: `string`
 
-Defined in: [src/providers/google/types.ts:123](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L123)
+Defined in: [src/providers/google/types.ts:94](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L94)
+
+Cached content name to use for this request.
+Format: "cachedContents/{id}" as returned from cache creation.
+When set, the cached content is prepended to the request.
+
+***
+
+### candidateCount?
+
+> `optional` **candidateCount**: `number`
+
+Defined in: [src/providers/google/types.ts:43](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L43)
+
+Number of candidates to generate
+
+***
+
+### frequencyPenalty?
+
+> `optional` **frequencyPenalty**: `number`
+
+Defined in: [src/providers/google/types.ts:61](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L61)
+
+Frequency penalty for repeated tokens
+Positive values discourage repetition
+
+***
+
+### logprobs?
+
+> `optional` **logprobs**: `number`
+
+Defined in: [src/providers/google/types.ts:77](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L77)
+
+Number of log probabilities to return (requires responseLogprobs: true)
+
+***
+
+### maxOutputTokens?
+
+> `optional` **maxOutputTokens**: `number`
+
+Defined in: [src/providers/google/types.ts:28](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L28)
+
+Maximum number of tokens to generate
+
+***
+
+### presencePenalty?
+
+> `optional` **presencePenalty**: `number`
+
+Defined in: [src/providers/google/types.ts:55](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L55)
+
+Presence penalty for new topics
+Positive values encourage discussing new topics
+
+***
+
+### responseLogprobs?
+
+> `optional` **responseLogprobs**: `boolean`
+
+Defined in: [src/providers/google/types.ts:72](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L72)
+
+Whether to return log probabilities in response
+
+***
+
+### responseMimeType?
+
+> `optional` **responseMimeType**: `"application/json"` \| `"text/plain"`
+
+Defined in: [src/providers/google/types.ts:46](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L46)
+
+Response MIME type
+
+***
+
+### responseSchema?
+
+> `optional` **responseSchema**: `Record`\<`string`, `unknown`\>
+
+Defined in: [src/providers/google/types.ts:49](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L49)
+
+Response schema for structured output
+
+***
+
+### seed?
+
+> `optional` **seed**: `number`
+
+Defined in: [src/providers/google/types.ts:67](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L67)
+
+Seed for deterministic sampling
+Same seed with same parameters should produce same results
+
+***
+
+### stopSequences?
+
+> `optional` **stopSequences**: `string`[]
+
+Defined in: [src/providers/google/types.ts:40](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L40)
+
+Stop sequences
+
+***
+
+### temperature?
+
+> `optional` **temperature**: `number`
+
+Defined in: [src/providers/google/types.ts:31](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L31)
+
+Temperature for randomness (0.0 - 2.0)
+
+***
+
+### thinkingConfig?
+
+> `optional` **thinkingConfig**: `GoogleThinkingConfig`
+
+Defined in: [src/providers/google/types.ts:87](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L87)
+
+Thinking/reasoning configuration for Gemini 3+ models
+
+***
+
+### toolConfig?
+
+> `optional` **toolConfig**: [`GoogleToolConfig`](googletoolconfig.md)
+
+Defined in: [src/providers/google/types.ts:140](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L140)
+
+Tool configuration for retrieval (e.g., user location for Maps).
+
+#### Example
+
+```typescript
+const params: GoogleLLMParams = {
+  tools: [tools.googleMaps()],
+  toolConfig: {
+    retrievalConfig: {
+      latLng: { latitude: 40.758896, longitude: -73.985130 },
+    },
+  },
+};
+```
+
+***
+
+### tools?
+
+> `optional` **tools**: [`GoogleBuiltInTool`](../type-aliases/googlebuiltintool.md)[]
+
+Defined in: [src/providers/google/types.ts:123](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L123)
 
 Built-in tools for server-side execution.
 
@@ -76,7 +234,7 @@ import { google, tools } from 'provider-protocol/google';
 const model = llm({
   model: google('gemini-2.5-flash'),
   params: {
-    builtInTools: [
+    tools: [
       tools.googleSearch(),
       tools.codeExecution(),
     ],
@@ -86,169 +244,11 @@ const model = llm({
 
 ***
 
-### cachedContent?
-
-> `optional` **cachedContent**: `string`
-
-Defined in: [src/providers/google/types.ts:94](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L94)
-
-Cached content name to use for this request.
-Format: "cachedContents/{id}" as returned from cache creation.
-When set, the cached content is prepended to the request.
-
-***
-
-### candidateCount?
-
-> `optional` **candidateCount**: `number`
-
-Defined in: [src/providers/google/types.ts:43](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L43)
-
-Number of candidates to generate
-
-***
-
-### frequencyPenalty?
-
-> `optional` **frequencyPenalty**: `number`
-
-Defined in: [src/providers/google/types.ts:61](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L61)
-
-Frequency penalty for repeated tokens
-Positive values discourage repetition
-
-***
-
-### logprobs?
-
-> `optional` **logprobs**: `number`
-
-Defined in: [src/providers/google/types.ts:77](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L77)
-
-Number of log probabilities to return (requires responseLogprobs: true)
-
-***
-
-### maxOutputTokens?
-
-> `optional` **maxOutputTokens**: `number`
-
-Defined in: [src/providers/google/types.ts:28](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L28)
-
-Maximum number of tokens to generate
-
-***
-
-### presencePenalty?
-
-> `optional` **presencePenalty**: `number`
-
-Defined in: [src/providers/google/types.ts:55](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L55)
-
-Presence penalty for new topics
-Positive values encourage discussing new topics
-
-***
-
-### responseLogprobs?
-
-> `optional` **responseLogprobs**: `boolean`
-
-Defined in: [src/providers/google/types.ts:72](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L72)
-
-Whether to return log probabilities in response
-
-***
-
-### responseMimeType?
-
-> `optional` **responseMimeType**: `"application/json"` \| `"text/plain"`
-
-Defined in: [src/providers/google/types.ts:46](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L46)
-
-Response MIME type
-
-***
-
-### responseSchema?
-
-> `optional` **responseSchema**: `Record`\<`string`, `unknown`\>
-
-Defined in: [src/providers/google/types.ts:49](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L49)
-
-Response schema for structured output
-
-***
-
-### seed?
-
-> `optional` **seed**: `number`
-
-Defined in: [src/providers/google/types.ts:67](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L67)
-
-Seed for deterministic sampling
-Same seed with same parameters should produce same results
-
-***
-
-### stopSequences?
-
-> `optional` **stopSequences**: `string`[]
-
-Defined in: [src/providers/google/types.ts:40](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L40)
-
-Stop sequences
-
-***
-
-### temperature?
-
-> `optional` **temperature**: `number`
-
-Defined in: [src/providers/google/types.ts:31](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L31)
-
-Temperature for randomness (0.0 - 2.0)
-
-***
-
-### thinkingConfig?
-
-> `optional` **thinkingConfig**: `GoogleThinkingConfig`
-
-Defined in: [src/providers/google/types.ts:87](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L87)
-
-Thinking/reasoning configuration for Gemini 3+ models
-
-***
-
-### toolConfig?
-
-> `optional` **toolConfig**: [`GoogleToolConfig`](googletoolconfig.md)
-
-Defined in: [src/providers/google/types.ts:140](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L140)
-
-Tool configuration for retrieval (e.g., user location for Maps).
-
-#### Example
-
-```typescript
-const params: GoogleLLMParams = {
-  builtInTools: [tools.googleMaps()],
-  toolConfig: {
-    retrievalConfig: {
-      latLng: { latitude: 40.758896, longitude: -73.985130 },
-    },
-  },
-};
-```
-
-***
-
 ### topK?
 
 > `optional` **topK**: `number`
 
-Defined in: [src/providers/google/types.ts:37](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L37)
+Defined in: [src/providers/google/types.ts:37](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L37)
 
 Top-k sampling
 
@@ -258,6 +258,6 @@ Top-k sampling
 
 > `optional` **topP**: `number`
 
-Defined in: [src/providers/google/types.ts:34](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L34)
+Defined in: [src/providers/google/types.ts:34](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L34)
 
 Top-p (nucleus) sampling

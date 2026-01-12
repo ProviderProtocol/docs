@@ -10,7 +10,7 @@ title: "Interface: XAICodeExecutionTool"
 
 # Interface: XAICodeExecutionTool
 
-Defined in: [src/providers/xai/types.ts:365](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L365)
+Defined in: [src/providers/xai/types.ts:362](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L362)
 
 Code execution tool for Python in a sandbox.
 
@@ -22,34 +22,15 @@ Pricing: $5 per 1,000 successful tool invocations.
 ```typescript
 const tool: XAICodeExecutionTool = {
   type: 'code_interpreter',
-  container: {
-    pip_packages: ['numpy', 'pandas'],
-  },
 };
 ```
 
 ## Properties
 
-### container?
-
-> `optional` **container**: `object`
-
-Defined in: [src/providers/xai/types.ts:369](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L369)
-
-Container configuration
-
-#### pip\_packages?
-
-> `optional` **pip\_packages**: `string`[]
-
-Additional pip packages to install
-
-***
-
 ### type
 
 > **type**: `"code_interpreter"`
 
-Defined in: [src/providers/xai/types.ts:367](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L367)
+Defined in: [src/providers/xai/types.ts:364](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L364)
 
 Tool type identifier

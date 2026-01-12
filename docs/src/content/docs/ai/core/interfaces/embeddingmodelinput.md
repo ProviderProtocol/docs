@@ -10,10 +10,19 @@ title: "Interface: EmbeddingModelInput"
 
 # Interface: EmbeddingModelInput
 
-Defined in: [src/types/embedding.ts:21](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L21)
+Defined in: [src/types/embedding.ts:28](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/embedding.ts#L28)
 
 Structural type for embedding model input.
 Uses structural typing to avoid generic variance issues with Provider generics.
+
+## Remarks
+
+This type mirrors [ModelReference](modelreference.md) while keeping provider options
+structurally compatible across providers.
+
+## See
+
+ModelReference
 
 ## Properties
 
@@ -21,28 +30,12 @@ Uses structural typing to avoid generic variance issues with Provider generics.
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/embedding.ts:22](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L22)
+Defined in: [src/types/embedding.ts:29](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/embedding.ts#L29)
 
 ***
 
 ### provider
 
-> `readonly` **provider**: `object`
+> `readonly` **provider**: [`ProviderIdentity`](provideridentity.md)
 
-Defined in: [src/types/embedding.ts:23](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/embedding.ts#L23)
-
-#### modalities
-
-> `readonly` **modalities**: `object`
-
-##### modalities.embedding?
-
-> `optional` **embedding**: `unknown`
-
-#### name
-
-> `readonly` **name**: `string`
-
-#### version
-
-> `readonly` **version**: `string`
+Defined in: [src/types/embedding.ts:30](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/embedding.ts#L30)

@@ -10,7 +10,7 @@ title: "Interface: LLMHandler"
 
 # Interface: LLMHandler\<TParams\>
 
-Defined in: [src/types/llm.ts:329](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L329)
+Defined in: [src/types/llm.ts:334](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/llm.ts#L334)
 
 LLM Handler interface for providers.
 
@@ -30,7 +30,7 @@ Provider-specific parameter type
 
 > `optional` **\_setProvider**(`provider`): `void`
 
-Defined in: [src/types/llm.ts:345](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L345)
+Defined in: [src/types/llm.ts:350](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/llm.ts#L350)
 
 **`Internal`**
 
@@ -55,7 +55,7 @@ The parent provider
 
 > **bind**(`modelId`): [`BoundLLMModel`](boundllmmodel.md)\<`TParams`\>
 
-Defined in: [src/types/llm.ts:336](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/llm.ts#L336)
+Defined in: [src/types/llm.ts:341](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/llm.ts#L341)
 
 Binds a model ID to create an executable model instance.
 

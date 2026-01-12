@@ -10,7 +10,7 @@ title: "Interface: XAIFileSearchTool"
 
 # Interface: XAIFileSearchTool
 
-Defined in: [src/providers/xai/types.ts:390](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L390)
+Defined in: [src/providers/xai/types.ts:382](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L382)
 
 File/collections search tool for document retrieval.
 
@@ -33,7 +33,7 @@ const tool: XAIFileSearchTool = {
 
 > `optional` **max\_num\_results**: `number`
 
-Defined in: [src/providers/xai/types.ts:396](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L396)
+Defined in: [src/providers/xai/types.ts:388](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L388)
 
 Maximum results to return
 
@@ -43,7 +43,7 @@ Maximum results to return
 
 > `optional` **retrieval\_mode**: `object`
 
-Defined in: [src/providers/xai/types.ts:398](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L398)
+Defined in: [src/providers/xai/types.ts:390](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L390)
 
 Retrieval mode configuration
 
@@ -57,7 +57,7 @@ Retrieval mode configuration
 
 > **type**: `"file_search"`
 
-Defined in: [src/providers/xai/types.ts:392](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L392)
+Defined in: [src/providers/xai/types.ts:384](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L384)
 
 Tool type identifier
 
@@ -67,6 +67,6 @@ Tool type identifier
 
 > **vector\_store\_ids**: `string`[]
 
-Defined in: [src/providers/xai/types.ts:394](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/xai/types.ts#L394)
+Defined in: [src/providers/xai/types.ts:386](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/xai/types.ts#L386)
 
 Collection/vector store IDs to search

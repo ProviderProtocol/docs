@@ -102,13 +102,7 @@ Structured outputs use standard JSON Schema:
 
 Structured output is a capability declared via `LLMCapabilities.structuredOutput`. If a provider's API doesn't support native structured outputs, the provider MUST set this to `false` and `llm()` core MUST throw `INVALID_REQUEST` when `structure` is provided.
 
-Providers with native support handle structured outputs according to vendor APIs:
-
-| Provider | Implementation |
-|----------|----------------|
-| Anthropic | Uses tool_choice with schema |
-| OpenAI | Uses response_format with json_schema |
-| Google | Uses responseSchema |
+Providers with native support MUST transform the JSON Schema to the vendor-specific format and enable structured output mode on the API request.
 
 Note: UPP does not validate responses against the schema—only that valid JSON was returned. Schema validation is the application's responsibility if needed.
 

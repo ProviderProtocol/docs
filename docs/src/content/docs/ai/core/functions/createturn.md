@@ -12,7 +12,7 @@ title: "Function: createTurn()"
 
 > **createTurn**\<`TData`\>(`messages`, `toolExecutions`, `usage`, `cycles`, `data?`): [`Turn`](../interfaces/turn.md)\<`TData`\>
 
-Defined in: [src/types/turn.ts:144](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/turn.ts#L144)
+Defined in: [src/types/turn.ts:144](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/turn.ts#L144)
 
 Creates a Turn from accumulated inference data.
 

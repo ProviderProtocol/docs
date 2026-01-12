@@ -218,53 +218,9 @@ print("Total tokens:", final.usage.totalTokens)
 
 ## Provider-Specific Parameters
 
-Each provider exports its own parameter types. Parameters are passed through unchanged to the provider's API, enabling full access to provider-native features.
+Parameters are passed through unchanged to the provider's API via the `params` field. Each provider exports its own parameter types enabling full access to provider-native features (e.g., output dimensions, encoding formats, task type hints).
 
-**OpenAI Parameters:**
-
-```text
-// OpenAIEmbedParams
-{
-  dimensions: 1536,              // Output dimensions (text-embedding-3 models)
-  encoding_format: "float"       // "float" or "base64"
-}
-```
-
-**Google Parameters:**
-
-```text
-// GoogleEmbedParams
-{
-  taskType: "RETRIEVAL_DOCUMENT",   // Task optimization (see below)
-  title: "Document Title",          // Document title (for RETRIEVAL_DOCUMENT)
-  outputDimensionality: 768         // Output dimensions
-}
-```
-
-**Google Task Types:**
-
-Google embeddings are optimized based on the intended use case. For retrieval systems, documents and queries SHOULD use different task types for optimal performance.
-
-| Value | Description |
-|-------|-------------|
-| `RETRIEVAL_QUERY` | Optimize for search queries |
-| `RETRIEVAL_DOCUMENT` | Optimize for corpus documents (supports `title` param) |
-| `SEMANTIC_SIMILARITY` | Optimize for similarity comparison |
-| `CLASSIFICATION` | Optimize for classification tasks |
-| `CLUSTERING` | Optimize for clustering tasks |
-| `QUESTION_ANSWERING` | Optimize for QA query embeddings |
-| `FACT_VERIFICATION` | Optimize for fact verification retrieval |
-
-**Voyage/Cohere Parameters:**
-
-```text
-// VoyageEmbedParams
-{
-  input_type: "document"   // "document" or "query"
-}
-```
-
-Providers that do not support a parameter MUST ignore it. This enables portable code that includes provider-specific hints without breaking on other providers.
+Providers that do not support a parameter MUST ignore it. This enables portable code that includes provider-specific hints without breaking on other providers. Consult individual provider documentation for available parameters.
 
 ## Metadata Preservation
 
@@ -288,36 +244,4 @@ Metadata applying to the entire response:
 ```text
 // Google may include safety ratings
 print(result.metadata?.safetyRatings)
-```
-
-## Similarity Utilities
-
-UPP implementations SHOULD provide optional utilities for working with embeddings:
-
-**Cosine Similarity:**
-
-```text
-cosineSimilarity(a: List&lt;Float&gt;, b: List&lt;Float&gt;) -> Float
-// Returns value between -1 and 1
-```
-
-**Euclidean Distance:**
-
-```text
-euclideanDistance(a: List&lt;Float&gt;, b: List&lt;Float&gt;) -> Float
-// Returns non-negative value
-```
-
-**Dot Product:**
-
-```text
-dotProduct(a: List&lt;Float&gt;, b: List&lt;Float&gt;) -> Float
-```
-
-Usage:
-
-```text
-import { cosineSimilarity } from "upp/similarity"
-
-similarity = cosineSimilarity(embedding1.vector, embedding2.vector)
 ```

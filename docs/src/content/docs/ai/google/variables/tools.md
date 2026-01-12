@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/google/types.ts:867](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/types.ts#L867)
+Defined in: [src/providers/google/types.ts:876](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/types.ts#L876)
 
 Namespace object containing all Google tool helper constructors.
 
@@ -171,7 +171,7 @@ import { google, tools } from 'provider-protocol/google';
 const model = llm({
   model: google('gemini-2.5-flash'),
   params: {
-    builtInTools: [
+    tools: [
       tools.googleSearch(),
       tools.codeExecution(),
     ],

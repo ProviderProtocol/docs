@@ -12,7 +12,7 @@ title: "Function: serializeMessage()"
 
 > **serializeMessage**(`m`): [`MessageJSON`](../../core/type-aliases/messagejson.md)
 
-Defined in: [src/providers/proxy/serialization.ts:24](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/proxy/serialization.ts#L24)
+Defined in: [src/providers/proxy/serialization.ts:24](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/proxy/serialization.ts#L24)
 
 Convert a Message to MessageJSON format.
 

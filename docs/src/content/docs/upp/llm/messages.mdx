@@ -36,37 +36,15 @@ Messages are represented as a type hierarchy, allowing type-safe handling and pr
 
 **MessageMetadata Structure:**
 
-Provider-namespaced metadata. Each provider defines its own metadata shape, enabling provider-specific features like prompt caching without affecting other providers.
+Provider-namespaced metadata. Each provider defines its own metadata shape, enabling provider-specific features without affecting other providers. The structure is `Map&lt;String, Map&gt;` where the outer key is the provider name.
 
 ```text
 {
-  google: { thought_signature: "abc123..." },
-  openai: { reasoning_encrypted: "..." },
-  anthropic: { cache_control: { type: "ephemeral", ttl: "1h" } }
+  providerName: { key: value, ... }
 }
 ```
 
-| Provider | Namespace | Supported Options |
-|----------|-----------|-------------------|
-| Anthropic | `anthropic` | `cache_control: { type: "ephemeral", ttl?: "5m" \| "1h" }` |
-| Google | `google` | `thought_signature: string` (for multi-turn tool calls) |
-| OpenRouter | `openrouter` | `cache_control: { type: "ephemeral", ttl?: "1h" }` |
-
-**Prompt Caching via Message Metadata:**
-
-Anthropic and OpenRouter support explicit cache breakpoints via message metadata. When set on a message, the `cache_control` is applied to the last content block of that message, marking a cache checkpoint.
-
-```text
-// Cache the system context to reduce costs on repeated requests
-userMessage = UserMessage(
-  "Here is the codebase context: " + largeCodebase,
-  { metadata: { anthropic: { cache_control: { type: "ephemeral" } } } }
-)
-```
-
-<Aside type="note">
-Providers MUST ignore metadata namespaces they don't recognize. Message metadata is passed through to the provider's native format where supported.
-</Aside>
+Providers MUST ignore metadata namespaces they don't recognize. Message metadata is passed through to the provider's native format where supported. Consult individual provider documentation for supported metadata options.
 
 ## Message Types
 

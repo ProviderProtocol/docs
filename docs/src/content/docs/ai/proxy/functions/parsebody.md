@@ -12,7 +12,7 @@ title: "Function: parseBody()"
 
 > **parseBody**(`body`): [`ParsedRequest`](../interfaces/parsedrequest.md)
 
-Defined in: [src/providers/proxy/server/webapi.ts:57](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/proxy/server/webapi.ts#L57)
+Defined in: [src/providers/proxy/server/webapi.ts:57](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/proxy/server/webapi.ts#L57)
 
 Parse an HTTP request body into PP types.
 

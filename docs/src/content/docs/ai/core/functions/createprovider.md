@@ -12,13 +12,12 @@ title: "Function: createProvider()"
 
 > **createProvider**\<`TOptions`\>(`options`): [`Provider`](../interfaces/provider.md)\<`TOptions`\>
 
-Defined in: [src/core/provider.ts:85](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/core/provider.ts#L85)
+Defined in: [src/core/provider.ts:126](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/core/provider.ts#L126)
 
-Creates a provider factory function with attached modality handlers.
+Creates a provider factory function with registered modality handlers.
 
 The returned provider is a callable function that creates model references
-when invoked with a model ID. It also exposes `name`, `version`, and
-`modalities` properties for introspection.
+when invoked with a model ID. It exposes `name` and `version` metadata.
 
 ## Type Parameters
 
@@ -32,7 +31,7 @@ Provider-specific options type (defaults to unknown)
 
 ### options
 
-`CreateProviderOptions`
+`CreateProviderOptions`\<`TOptions`\>
 
 Provider configuration including name, version, and handlers
 
@@ -40,7 +39,7 @@ Provider configuration including name, version, and handlers
 
 [`Provider`](../interfaces/provider.md)\<`TOptions`\>
 
-A callable Provider with modalities attached
+A callable Provider with handlers registered internally
 
 ## Example
 
@@ -49,7 +48,7 @@ A callable Provider with modalities attached
 const anthropic = createProvider({
   name: 'anthropic',
   version: '1.0.0',
-  modalities: { llm: createLLMHandler() },
+  handlers: { llm: createLLMHandler() },
 });
 
 // Use the provider to create a model reference
@@ -60,6 +59,19 @@ interface MyOptions { apiVersion?: 'v1' | 'v2' }
 const myProvider = createProvider<MyOptions>({
   name: 'my-provider',
   version: '1.0.0',
-  modalities: { llm: handler },
+  handlers: { llm: handler },
+});
+
+// Provider with multiple LLM handlers (API modes)
+const openai = createProvider<OpenAIOptions>({
+  name: 'openai',
+  version: '1.0.0',
+  handlers: {
+    llm: {
+      handlers: { responses: responsesHandler, completions: completionsHandler },
+      defaultMode: 'responses',
+      getMode: (opts) => opts?.api ?? 'responses',
+    },
+  },
 });
 ```

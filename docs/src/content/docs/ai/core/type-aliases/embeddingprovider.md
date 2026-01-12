@@ -12,7 +12,7 @@ title: "Type Alias: EmbeddingProvider"
 
 > **EmbeddingProvider**\<`TParams`, `TOptions`\> = [`Provider`](../interfaces/provider.md)\<`TOptions`\> & `object`
 
-Defined in: [src/types/provider.ts:448](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L448)
+Defined in: [src/types/provider.ts:459](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L459)
 
 Provider with Embedding modality support.
 
@@ -20,19 +20,17 @@ Type alias for providers that support embedding generation.
 
 ## Type Declaration
 
-### modalities
+### \_\_params?
 
-> `readonly` **modalities**: `object`
+> `readonly` `optional` **\_\_params**: `TParams`
 
-#### modalities.embedding
-
-> **embedding**: [`EmbeddingHandler`](../interfaces/embeddinghandler.md)\<`TParams`\>
+**`Internal`**
 
 ## Type Parameters
 
 ### TParams
 
-`TParams` = `any`
+`TParams` = `unknown`
 
 Model-specific parameters type
 

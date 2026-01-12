@@ -10,7 +10,7 @@ title: "Interface: ModelReference"
 
 # Interface: ModelReference\<TOptions\>
 
-Defined in: [src/types/provider.ts:165](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L165)
+Defined in: [src/types/provider.ts:180](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L180)
 
 A reference to a model, created by a provider factory.
 
@@ -39,9 +39,22 @@ Provider-specific options type
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/provider.ts:167](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L167)
+Defined in: [src/types/provider.ts:182](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L182)
 
 The model identifier (e.g., 'gpt-4', 'claude-3-opus')
+
+***
+
+### options?
+
+> `readonly` `optional` **options**: `TOptions`
+
+Defined in: [src/types/provider.ts:203](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L203)
+
+The original options passed when creating this model reference.
+
+Used by providers with multiple LLM handlers (e.g., OpenAI with responses/completions APIs)
+to resolve the correct handler at request time, avoiding race conditions from shared state.
 
 ***
 
@@ -49,6 +62,21 @@ The model identifier (e.g., 'gpt-4', 'claude-3-opus')
 
 > `readonly` **provider**: [`Provider`](provider.md)\<`TOptions`\>
 
-Defined in: [src/types/provider.ts:170](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/provider.ts#L170)
+Defined in: [src/types/provider.ts:185](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L185)
 
 The provider that created this reference
+
+***
+
+### providerConfig?
+
+> `readonly` `optional` **providerConfig**: `Partial`\<[`ProviderConfig`](providerconfig.md)\>
+
+Defined in: [src/types/provider.ts:195](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/provider.ts#L195)
+
+Optional provider-specific configuration that gets merged into request config.
+
+This allows providers to store options set at model reference creation time
+(e.g., `anthropic('model', { betas: [...] })`) that should be applied to all requests.
+The `llm()` factory will merge these into the request config, with explicit config
+values taking precedence.

@@ -10,7 +10,7 @@ title: "Interface: AfterCallResult"
 
 # Interface: AfterCallResult
 
-Defined in: [src/types/tool.ts:177](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/tool.ts#L177)
+Defined in: [src/types/tool.ts:177](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/tool.ts#L177)
 
 Result from onAfterCall hook optionally containing a transformed result.
 
@@ -20,6 +20,6 @@ Result from onAfterCall hook optionally containing a transformed result.
 
 > **result**: `unknown`
 
-Defined in: [src/types/tool.ts:179](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/types/tool.ts#L179)
+Defined in: [src/types/tool.ts:179](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/types/tool.ts#L179)
 
 Transformed result to use instead of the original

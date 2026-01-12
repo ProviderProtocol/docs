@@ -12,7 +12,7 @@ title: "Variable: cache"
 
 > `const` **cache**: `object`
 
-Defined in: [src/providers/google/cache.ts:301](https://github.com/ProviderProtocol/ai/blob/0736054a56c72996c59cf16309ea94d3cbc1b951/src/providers/google/cache.ts#L301)
+Defined in: [src/providers/google/cache.ts:301](https://github.com/ProviderProtocol/ai/blob/4c8c9341d87bac66988c6f38db5be70a018d036e/src/providers/google/cache.ts#L301)
 
 Cache utilities namespace.
 

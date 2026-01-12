@@ -24,7 +24,7 @@ import { createImageHandler } from "./image"
 openai = createProvider({
   name: "openai",
   version: "1.0.0",
-  modalities: {
+  handlers: {
     llm: createLLMHandler(),
     embedding: createEmbeddingHandler(),
     image: createImageHandler()
@@ -48,7 +48,7 @@ function createProvider(options: CreateProviderOptions) -> Provider {
 
   provider.name = options.name
   provider.version = options.version
-  provider.modalities = options.modalities
+  registerHandlers(provider, options.handlers)
 
   return provider
 }
@@ -56,7 +56,7 @@ function createProvider(options: CreateProviderOptions) -> Provider {
 CreateProviderOptions = {
   name: String,
   version: String,
-  modalities: {
+  handlers: {
     llm: LLMHandler?,
     embedding: EmbeddingHandler?,
     image: ImageHandler?
@@ -257,7 +257,7 @@ function createGoogleEmbeddingHandler() -> EmbeddingHandler {
 1. **Params pass-through:** Provider-specific parameters (`dimensions`, `taskType`, `encoding_format`, etc.) are passed through unchanged via `...request.params`
 2. **Metadata preservation:** Providers MUST NOT discard provider-specific response data. Include it in `metadata` fields at both the embedding and response level
 3. **Vector encoding:** The `vector` field can be `List&lt;Float&gt;` or a base64-encoded `String`. The `embedding()` core detects the type and normalizes to floats in the public result
-4. **Providers without embeddings:** Providers that do not offer embedding APIs (e.g., Anthropic) simply do not include an embedding handler in their `modalities` object
+4. **Providers without embeddings:** Providers that do not offer embedding APIs (e.g., Anthropic) simply omit the embedding handler when registering provider handlers (e.g., `createProvider({ handlers: { llm: ... } })`)
 
 ## Image Handler Pattern
 
