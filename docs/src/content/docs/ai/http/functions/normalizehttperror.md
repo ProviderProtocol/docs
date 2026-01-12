@@ -12,7 +12,7 @@ title: "Function: normalizeHttpError()"
 
 > **normalizeHttpError**(`response`, `provider`, `modality`): `Promise`\<[`UPPError`](../../core/classes/upperror.md)\>
 
-Defined in: [src/http/errors.ts:96](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/http/errors.ts#L96)
+Defined in: [src/http/errors.ts:100](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/http/errors.ts#L100)
 
 Normalizes HTTP error responses into standardized UPPError objects.
 

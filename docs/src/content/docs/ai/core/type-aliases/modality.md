@@ -10,11 +10,12 @@ title: "Type Alias: Modality"
 
 # Type Alias: Modality
 
-> **Modality** = `"llm"` \| `"embedding"` \| `"image"` \| `"audio"` \| `"video"`
+> **Modality** = *typeof* [`ModalityType`](../variables/modalitytype.md)\[keyof *typeof* [`ModalityType`](../variables/modalitytype.md)\]
 
-Defined in: [src/types/errors.ts:65](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/errors.ts#L65)
+Defined in: [src/types/errors.ts:103](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/errors.ts#L103)
 
-Modality types supported by UPP.
+Modality type discriminator union.
 
-Each modality represents a different type of AI capability that
-can be provided by a UPP-compatible provider.
+This type is derived from [ModalityType](../variables/modalitytype.md) constants. The name `Modality`
+is kept for backward compatibility; `ModalityType` works as both the const
+object and this type.

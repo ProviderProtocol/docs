@@ -109,19 +109,23 @@ transformations, streaming, tool execution, and error handling.
 
 - [AssistantContent](type-aliases/assistantcontent.md)
 - [ContentBlock](type-aliases/contentblock.md)
+- [ContentBlockType](type-aliases/contentblocktype.md)
 - [EmbeddingInput](type-aliases/embeddinginput.md)
 - [EmbeddingProvider](type-aliases/embeddingprovider.md)
 - [ErrorCode](type-aliases/errorcode.md)
 - [ImageInput](type-aliases/imageinput.md)
 - [ImageProvider](type-aliases/imageprovider.md)
 - [ImageSource](type-aliases/imagesource.md)
+- [ImageSourceType](type-aliases/imagesourcetype.md)
 - [ImageStreamEvent](type-aliases/imagestreamevent.md)
 - [InferenceInput](type-aliases/inferenceinput.md)
 - [JSONSchemaPropertyType](type-aliases/jsonschemapropertytype.md)
 - [LLMProvider](type-aliases/llmprovider.md)
 - [MessageJSON](type-aliases/messagejson.md)
+- [MessageRole](type-aliases/messagerole.md)
 - [MessageType](type-aliases/messagetype.md)
 - [Modality](type-aliases/modality.md)
+- [ModalityType](type-aliases/modalitytype.md)
 - [StreamEventType](type-aliases/streameventtype.md)
 - [ThreadJSON](type-aliases/threadjson.md)
 - [UserContent](type-aliases/usercontent.md)
@@ -129,6 +133,12 @@ transformations, streaming, tool execution, and error handling.
 ## Variables
 
 - [ai](variables/ai.md)
+- [ContentBlockType](variables/contentblocktype.md)
+- [ErrorCode](variables/errorcode.md)
+- [ImageSourceType](variables/imagesourcetype.md)
+- [MessageRole](variables/messagerole.md)
+- [ModalityType](variables/modalitytype.md)
+- [StreamEventType](variables/streameventtype.md)
 
 ## Functions
 

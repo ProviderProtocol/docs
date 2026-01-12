@@ -12,7 +12,7 @@ title: "Function: proxy()"
 
 > **proxy**(`options`): [`Provider`](../../core/interfaces/provider.md)\<[`ProxyRequestOptions`](../interfaces/proxyrequestoptions.md)\>
 
-Defined in: [src/providers/proxy/index.ts:30](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/proxy/index.ts#L30)
+Defined in: [src/providers/proxy/index.ts:30](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/index.ts#L30)
 
 Creates a proxy provider that transports PP requests over HTTP to a backend server.
 

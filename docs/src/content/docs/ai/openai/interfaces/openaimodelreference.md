@@ -10,7 +10,7 @@ title: "Interface: OpenAIModelReference"
 
 # Interface: OpenAIModelReference
 
-Defined in: [src/providers/openai/types.ts:421](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openai/types.ts#L421)
+Defined in: [src/providers/openai/types.ts:421](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L421)
 
 Model reference with OpenAI-specific options.
 Used internally to track the selected model and API mode.
@@ -21,7 +21,7 @@ Used internally to track the selected model and API mode.
 
 > **modelId**: `string`
 
-Defined in: [src/providers/openai/types.ts:423](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openai/types.ts#L423)
+Defined in: [src/providers/openai/types.ts:423](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L423)
 
 The OpenAI model identifier (e.g., 'gpt-4o', 'o1-preview')
 
@@ -31,6 +31,6 @@ The OpenAI model identifier (e.g., 'gpt-4o', 'o1-preview')
 
 > `optional` **options**: [`OpenAIModelOptions`](openaimodeloptions.md)
 
-Defined in: [src/providers/openai/types.ts:425](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openai/types.ts#L425)
+Defined in: [src/providers/openai/types.ts:425](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L425)
 
 Optional model-specific options

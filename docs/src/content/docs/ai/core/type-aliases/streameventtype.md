@@ -10,11 +10,11 @@ title: "Type Alias: StreamEventType"
 
 # Type Alias: StreamEventType
 
-> **StreamEventType** = `"text_delta"` \| `"reasoning_delta"` \| `"image_delta"` \| `"audio_delta"` \| `"video_delta"` \| `"tool_call_delta"` \| `"tool_execution_start"` \| `"tool_execution_end"` \| `"message_start"` \| `"message_stop"` \| `"content_block_start"` \| `"content_block_stop"`
+> **StreamEventType** = *typeof* [`StreamEventType`](../variables/streameventtype.md)\[keyof *typeof* [`StreamEventType`](../variables/streameventtype.md)\]
 
-Defined in: [src/types/stream.ts:18](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/stream.ts#L18)
+Defined in: [src/types/stream.ts:28](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L28)
 
-Stream event type discriminators.
+Stream event type discriminator union.
 
-Each event type represents a different kind of streaming update
-from the LLM provider.
+This type is derived from [StreamEventType](../variables/streameventtype.md) constants. Use `StreamEventType.TextDelta`
+for constants or `type MyType = StreamEventType` for type annotations.

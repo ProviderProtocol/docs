@@ -10,7 +10,7 @@ title: "Interface: ImageStreamResult"
 
 # Interface: ImageStreamResult
 
-Defined in: [src/types/image.ts:136](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/image.ts#L136)
+Defined in: [src/types/image.ts:136](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/image.ts#L136)
 
 Async iterable stream with final result accessor.
 Returned when stream() is called.
@@ -25,7 +25,7 @@ Returned when stream() is called.
 
 > `readonly` **result**: `Promise`\<[`ImageResult`](imageresult.md)\>
 
-Defined in: [src/types/image.ts:138](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/image.ts#L138)
+Defined in: [src/types/image.ts:138](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/image.ts#L138)
 
 Promise resolving to complete result after streaming
 
@@ -51,7 +51,7 @@ Defined in: node\_modules/typescript/lib/lib.es2018.asynciterable.d.ts:38
 
 > **abort**(): `void`
 
-Defined in: [src/types/image.ts:141](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/image.ts#L141)
+Defined in: [src/types/image.ts:141](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/image.ts#L141)
 
 Abort the generation
 

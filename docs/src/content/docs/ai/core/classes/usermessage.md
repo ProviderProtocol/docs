@@ -10,7 +10,7 @@ title: "Class: UserMessage"
 
 # Class: UserMessage
 
-Defined in: [src/types/messages.ts:166](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L166)
+Defined in: [src/types/messages.ts:198](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L198)
 
 User input message.
 
@@ -40,7 +40,7 @@ const msg = new UserMessage([
 
 > **new UserMessage**(`content`, `options?`): `UserMessage`
 
-Defined in: [src/types/messages.ts:179](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L179)
+Defined in: [src/types/messages.ts:211](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L211)
 
 Creates a new user message.
 
@@ -72,7 +72,7 @@ Optional message ID and metadata
 
 > `readonly` **content**: [`UserContent`](../type-aliases/usercontent.md)[]
 
-Defined in: [src/types/messages.ts:171](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L171)
+Defined in: [src/types/messages.ts:203](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L203)
 
 Content blocks in this message
 
@@ -82,7 +82,7 @@ Content blocks in this message
 
 > `readonly` **id**: `string`
 
-Defined in: [src/types/messages.ts:87](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L87)
+Defined in: [src/types/messages.ts:119](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L119)
 
 Unique message identifier
 
@@ -96,7 +96,7 @@ Unique message identifier
 
 > `readonly` `optional` **metadata**: [`MessageMetadata`](../interfaces/messagemetadata.md)
 
-Defined in: [src/types/messages.ts:93](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L93)
+Defined in: [src/types/messages.ts:125](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L125)
 
 Provider-specific metadata, namespaced by provider name
 
@@ -110,7 +110,7 @@ Provider-specific metadata, namespaced by provider name
 
 > `readonly` **timestamp**: `Date`
 
-Defined in: [src/types/messages.ts:90](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L90)
+Defined in: [src/types/messages.ts:122](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L122)
 
 Timestamp when the message was created
 
@@ -124,7 +124,7 @@ Timestamp when the message was created
 
 > `readonly` **type**: `"user"`
 
-Defined in: [src/types/messages.ts:168](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L168)
+Defined in: [src/types/messages.ts:200](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L200)
 
 Message type discriminator
 
@@ -140,7 +140,7 @@ Message type discriminator
 
 > **get** **audio**(): [`AudioBlock`](../interfaces/audioblock.md)[]
 
-Defined in: [src/types/messages.ts:136](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L136)
+Defined in: [src/types/messages.ts:168](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L168)
 
 All audio content blocks in this message.
 
@@ -160,7 +160,7 @@ All audio content blocks in this message.
 
 > **get** **images**(): [`ImageBlock`](../interfaces/imageblock.md)[]
 
-Defined in: [src/types/messages.ts:129](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L129)
+Defined in: [src/types/messages.ts:161](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L161)
 
 All image content blocks in this message.
 
@@ -180,7 +180,7 @@ All image content blocks in this message.
 
 > **get** **text**(): `string`
 
-Defined in: [src/types/messages.ts:119](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L119)
+Defined in: [src/types/messages.ts:151](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L151)
 
 Concatenated text content from all text blocks.
 Blocks are joined with double newlines.
@@ -201,7 +201,7 @@ Blocks are joined with double newlines.
 
 > **get** **video**(): [`VideoBlock`](../interfaces/videoblock.md)[]
 
-Defined in: [src/types/messages.ts:143](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L143)
+Defined in: [src/types/messages.ts:175](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L175)
 
 All video content blocks in this message.
 
@@ -219,7 +219,7 @@ All video content blocks in this message.
 
 > `protected` **getContent**(): [`ContentBlock`](../type-aliases/contentblock.md)[]
 
-Defined in: [src/types/messages.ts:188](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L188)
+Defined in: [src/types/messages.ts:220](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L220)
 
 Returns the content blocks for this message.
 Implemented by subclasses to provide type-specific content.

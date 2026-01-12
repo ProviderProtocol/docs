@@ -10,7 +10,7 @@ title: "Interface: AdapterOptions"
 
 # Interface: AdapterOptions
 
-Defined in: [src/providers/proxy/server/types.ts:51](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/proxy/server/types.ts#L51)
+Defined in: [src/providers/proxy/server/types.ts:51](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/types.ts#L51)
 
 Options for adapter middleware.
 
@@ -20,7 +20,7 @@ Options for adapter middleware.
 
 > `optional` **onError**: (`error`) => `object`
 
-Defined in: [src/providers/proxy/server/types.ts:53](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/proxy/server/types.ts#L53)
+Defined in: [src/providers/proxy/server/types.ts:53](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/types.ts#L53)
 
 Custom error handler
 

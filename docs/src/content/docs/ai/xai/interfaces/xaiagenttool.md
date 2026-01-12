@@ -10,7 +10,7 @@ title: "~~Interface: XAIAgentTool~~"
 
 # ~~Interface: XAIAgentTool~~
 
-Defined in: [src/providers/xai/types.ts:647](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/xai/types.ts#L647)
+Defined in: [src/providers/xai/types.ts:647](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/xai/types.ts#L647)
 
 ## Deprecated
 
@@ -23,6 +23,6 @@ This basic type is maintained for backwards compatibility.
 
 > **type**: `"web_search"` \| `"code_execution"` \| `"x_search"`
 
-Defined in: [src/providers/xai/types.ts:649](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/xai/types.ts#L649)
+Defined in: [src/providers/xai/types.ts:649](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/xai/types.ts#L649)
 
 The type of server-side tool to enable

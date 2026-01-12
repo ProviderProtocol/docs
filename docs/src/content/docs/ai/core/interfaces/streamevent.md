@@ -10,7 +10,7 @@ title: "Interface: StreamEvent"
 
 # Interface: StreamEvent
 
-Defined in: [src/types/stream.ts:93](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/stream.ts#L93)
+Defined in: [src/types/stream.ts:114](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L114)
 
 A single streaming event from the LLM.
 
@@ -20,10 +20,12 @@ allowing for real-time display of responses.
 ## Example
 
 ```typescript
+import { StreamEventType } from 'upp';
+
 for await (const event of stream) {
-  if (event.type === 'text_delta') {
+  if (event.type === StreamEventType.TextDelta) {
     process.stdout.write(event.delta.text ?? '');
-  } else if (event.type === 'tool_call_delta') {
+  } else if (event.type === StreamEventType.ToolCallDelta) {
     console.log('Tool:', event.delta.toolName);
   }
 }
@@ -35,7 +37,7 @@ for await (const event of stream) {
 
 > **delta**: [`EventDelta`](eventdelta.md)
 
-Defined in: [src/types/stream.ts:101](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/stream.ts#L101)
+Defined in: [src/types/stream.ts:122](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L122)
 
 Event-specific data payload
 
@@ -45,7 +47,7 @@ Event-specific data payload
 
 > **index**: `number`
 
-Defined in: [src/types/stream.ts:98](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/stream.ts#L98)
+Defined in: [src/types/stream.ts:119](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L119)
 
 Index of the content block this event belongs to
 
@@ -55,6 +57,6 @@ Index of the content block this event belongs to
 
 > **type**: [`StreamEventType`](../type-aliases/streameventtype.md)
 
-Defined in: [src/types/stream.ts:95](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/stream.ts#L95)
+Defined in: [src/types/stream.ts:116](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L116)
 
 Event type discriminator

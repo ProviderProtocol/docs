@@ -10,7 +10,7 @@ title: "Interface: GoogleCodeExecutionResult"
 
 # Interface: GoogleCodeExecutionResult
 
-Defined in: [src/providers/google/types.ts:743](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L743)
+Defined in: [src/providers/google/types.ts:743](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L743)
 
 Code execution result in response.
 
@@ -20,7 +20,7 @@ Code execution result in response.
 
 > **outcome**: `"OUTCOME_OK"` \| `"OUTCOME_FAILED"` \| `"OUTCOME_DEADLINE_EXCEEDED"`
 
-Defined in: [src/providers/google/types.ts:745](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L745)
+Defined in: [src/providers/google/types.ts:745](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L745)
 
 Execution outcome
 
@@ -30,6 +30,6 @@ Execution outcome
 
 > **output**: `string`
 
-Defined in: [src/providers/google/types.ts:747](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L747)
+Defined in: [src/providers/google/types.ts:747](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L747)
 
 Execution output (stdout)

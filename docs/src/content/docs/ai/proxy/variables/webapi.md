@@ -12,7 +12,7 @@ title: "Variable: webapi"
 
 > `const` **webapi**: `object`
 
-Defined in: [src/providers/proxy/server/webapi.ts:284](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/proxy/server/webapi.ts#L284)
+Defined in: [src/providers/proxy/server/webapi.ts:284](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L284)
 
 Web API adapter utilities.
 

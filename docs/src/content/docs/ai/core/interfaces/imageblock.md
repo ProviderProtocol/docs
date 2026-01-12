@@ -10,7 +10,7 @@ title: "Interface: ImageBlock"
 
 # Interface: ImageBlock
 
-Defined in: [src/types/content.ts:79](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L79)
+Defined in: [src/types/content.ts:145](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L145)
 
 Image content block.
 
@@ -34,7 +34,7 @@ const imageBlock: ImageBlock = {
 
 > `optional` **height**: `number`
 
-Defined in: [src/types/content.ts:93](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L93)
+Defined in: [src/types/content.ts:159](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L159)
 
 Image height in pixels
 
@@ -44,7 +44,7 @@ Image height in pixels
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:87](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L87)
+Defined in: [src/types/content.ts:153](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L153)
 
 MIME type of the image (e.g., 'image/png', 'image/jpeg')
 
@@ -54,7 +54,7 @@ MIME type of the image (e.g., 'image/png', 'image/jpeg')
 
 > **source**: [`ImageSource`](../type-aliases/imagesource.md)
 
-Defined in: [src/types/content.ts:84](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L84)
+Defined in: [src/types/content.ts:150](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L150)
 
 The image data source
 
@@ -64,7 +64,7 @@ The image data source
 
 > **type**: `"image"`
 
-Defined in: [src/types/content.ts:81](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L81)
+Defined in: [src/types/content.ts:147](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L147)
 
 Discriminator for image blocks
 
@@ -74,6 +74,6 @@ Discriminator for image blocks
 
 > `optional` **width**: `number`
 
-Defined in: [src/types/content.ts:90](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/content.ts#L90)
+Defined in: [src/types/content.ts:156](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L156)
 
 Image width in pixels

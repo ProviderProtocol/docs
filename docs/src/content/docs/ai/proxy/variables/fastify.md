@@ -12,7 +12,7 @@ title: "Variable: fastify"
 
 > `const` **fastify**: `object`
 
-Defined in: [src/providers/proxy/server/fastify.ts:168](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/proxy/server/fastify.ts#L168)
+Defined in: [src/providers/proxy/server/fastify.ts:168](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/fastify.ts#L168)
 
 Fastify adapter utilities.
 

@@ -10,7 +10,7 @@ title: "Interface: AnthropicWebSearchTool"
 
 # Interface: AnthropicWebSearchTool
 
-Defined in: [src/providers/anthropic/types.ts:788](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L788)
+Defined in: [src/providers/anthropic/types.ts:788](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L788)
 
 Web search tool for real-time web information retrieval.
 
@@ -34,7 +34,7 @@ const tool: AnthropicWebSearchTool = {
 
 > `optional` **allowed\_domains**: `string`[]
 
-Defined in: [src/providers/anthropic/types.ts:796](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L796)
+Defined in: [src/providers/anthropic/types.ts:796](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L796)
 
 Whitelist domains (mutually exclusive with blocked_domains)
 
@@ -44,7 +44,7 @@ Whitelist domains (mutually exclusive with blocked_domains)
 
 > `optional` **blocked\_domains**: `string`[]
 
-Defined in: [src/providers/anthropic/types.ts:798](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L798)
+Defined in: [src/providers/anthropic/types.ts:798](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L798)
 
 Blacklist domains (mutually exclusive with allowed_domains)
 
@@ -54,7 +54,7 @@ Blacklist domains (mutually exclusive with allowed_domains)
 
 > `optional` **max\_uses**: `number`
 
-Defined in: [src/providers/anthropic/types.ts:794](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L794)
+Defined in: [src/providers/anthropic/types.ts:794](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L794)
 
 Maximum searches per request (default: unlimited)
 
@@ -64,7 +64,7 @@ Maximum searches per request (default: unlimited)
 
 > **name**: `"web_search"`
 
-Defined in: [src/providers/anthropic/types.ts:792](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L792)
+Defined in: [src/providers/anthropic/types.ts:792](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L792)
 
 Tool name - must be 'web_search'
 
@@ -74,7 +74,7 @@ Tool name - must be 'web_search'
 
 > **type**: `"web_search_20250305"`
 
-Defined in: [src/providers/anthropic/types.ts:790](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L790)
+Defined in: [src/providers/anthropic/types.ts:790](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L790)
 
 Tool type identifier
 
@@ -84,6 +84,6 @@ Tool type identifier
 
 > `optional` **user\_location**: [`AnthropicUserLocation`](anthropicuserlocation.md)
 
-Defined in: [src/providers/anthropic/types.ts:800](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/anthropic/types.ts#L800)
+Defined in: [src/providers/anthropic/types.ts:800](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L800)
 
 User location for localized results

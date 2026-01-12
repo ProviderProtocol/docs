@@ -10,7 +10,7 @@ title: "Interface: GoogleCacheListResponse"
 
 # Interface: GoogleCacheListResponse
 
-Defined in: [src/providers/google/types.ts:524](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L524)
+Defined in: [src/providers/google/types.ts:524](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L524)
 
 Response from listing cached content entries.
 
@@ -20,7 +20,7 @@ Response from listing cached content entries.
 
 > `optional` **cachedContents**: [`GoogleCacheResponse`](googlecacheresponse.md)[]
 
-Defined in: [src/providers/google/types.ts:526](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L526)
+Defined in: [src/providers/google/types.ts:526](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L526)
 
 Array of cached content entries
 
@@ -30,6 +30,6 @@ Array of cached content entries
 
 > `optional` **nextPageToken**: `string`
 
-Defined in: [src/providers/google/types.ts:528](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L528)
+Defined in: [src/providers/google/types.ts:528](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L528)
 
 Token for fetching the next page of results

@@ -12,7 +12,7 @@ title: "Type Alias: MessageJSON"
 
 > **MessageJSON** = `Pick`\<[`Message`](../classes/message.md), `"id"` \| `"type"` \| `"metadata"`\> & `object`
 
-Defined in: [src/types/messages.ts:27](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L27)
+Defined in: [src/types/messages.ts:27](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L27)
 
 Message serialized to JSON format.
 Picks common fields from Message, converts timestamp to string.

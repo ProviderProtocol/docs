@@ -10,7 +10,7 @@ title: "Interface: OpenRouterModelOptions"
 
 # Interface: OpenRouterModelOptions
 
-Defined in: [src/providers/openrouter/types.ts:204](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/types.ts#L204)
+Defined in: [src/providers/openrouter/types.ts:204](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/types.ts#L204)
 
 Options for creating an OpenRouter model reference.
 
@@ -20,6 +20,6 @@ Options for creating an OpenRouter model reference.
 
 > `optional` **api**: [`OpenRouterAPIMode`](../type-aliases/openrouterapimode.md)
 
-Defined in: [src/providers/openrouter/types.ts:206](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/types.ts#L206)
+Defined in: [src/providers/openrouter/types.ts:206](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/types.ts#L206)
 
 Which API to use for this model.

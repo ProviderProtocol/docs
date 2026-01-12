@@ -12,7 +12,7 @@ title: "Function: webSearchTool()"
 
 > **webSearchTool**(`options?`): [`OpenAIWebSearchTool`](../interfaces/openaiwebsearchtool.md)
 
-Defined in: [src/providers/openai/types.ts:1278](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openai/types.ts#L1278)
+Defined in: [src/providers/openai/types.ts:1278](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1278)
 
 Creates a web search tool configuration for the Responses API.
 

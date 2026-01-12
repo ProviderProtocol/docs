@@ -10,10 +10,12 @@ title: "Type Alias: MessageType"
 
 # Type Alias: MessageType
 
-> **MessageType** = `"user"` \| `"assistant"` \| `"tool_result"`
+> **MessageType** = *typeof* [`MessageRole`](../variables/messagerole.md)\[keyof *typeof* [`MessageRole`](../variables/messagerole.md)\]
 
-Defined in: [src/types/messages.ts:39](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/messages.ts#L39)
+Defined in: [src/types/messages.ts:66](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L66)
 
-Message type discriminator.
+Message type discriminator union.
 
-Used to distinguish between different message types in a conversation.
+This type is derived from [MessageRole](../variables/messagerole.md) constants. The name `MessageType`
+is kept for backward compatibility; `MessageRole` works as both the const
+object and this type.

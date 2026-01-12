@@ -10,7 +10,7 @@ title: "Interface: GoogleCacheCreateRequest"
 
 # Interface: GoogleCacheCreateRequest
 
-Defined in: [src/providers/google/types.ts:460](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L460)
+Defined in: [src/providers/google/types.ts:460](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L460)
 
 Request body for creating a cached content entry.
 
@@ -24,7 +24,7 @@ Request body for creating a cached content entry.
 
 > `optional` **contents**: `GoogleContent`[]
 
-Defined in: [src/providers/google/types.ts:466](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L466)
+Defined in: [src/providers/google/types.ts:466](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L466)
 
 Content to cache (immutable after creation)
 
@@ -34,7 +34,7 @@ Content to cache (immutable after creation)
 
 > `optional` **displayName**: `string`
 
-Defined in: [src/providers/google/types.ts:464](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L464)
+Defined in: [src/providers/google/types.ts:464](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L464)
 
 Optional display name for the cache (max 128 chars)
 
@@ -44,7 +44,7 @@ Optional display name for the cache (max 128 chars)
 
 > `optional` **expireTime**: `string`
 
-Defined in: [src/providers/google/types.ts:482](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L482)
+Defined in: [src/providers/google/types.ts:482](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L482)
 
 Absolute expiration time (RFC 3339 format, mutually exclusive with ttl)
 
@@ -54,7 +54,7 @@ Absolute expiration time (RFC 3339 format, mutually exclusive with ttl)
 
 > **model**: `string`
 
-Defined in: [src/providers/google/types.ts:462](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L462)
+Defined in: [src/providers/google/types.ts:462](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L462)
 
 Model to use with this cache (format: models/{model})
 
@@ -64,7 +64,7 @@ Model to use with this cache (format: models/{model})
 
 > `optional` **systemInstruction**: `object`
 
-Defined in: [src/providers/google/types.ts:468](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L468)
+Defined in: [src/providers/google/types.ts:468](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L468)
 
 System instruction to cache (text-only, immutable after creation)
 
@@ -82,7 +82,7 @@ System instruction to cache (text-only, immutable after creation)
 
 > `optional` **toolConfig**: `object`
 
-Defined in: [src/providers/google/types.ts:475](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L475)
+Defined in: [src/providers/google/types.ts:475](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L475)
 
 Tool configuration to cache (immutable after creation)
 
@@ -104,7 +104,7 @@ Tool configuration to cache (immutable after creation)
 
 > `optional` **tools**: `GoogleTool`[]
 
-Defined in: [src/providers/google/types.ts:473](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L473)
+Defined in: [src/providers/google/types.ts:473](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L473)
 
 Tool declarations to cache (immutable after creation)
 
@@ -114,6 +114,6 @@ Tool declarations to cache (immutable after creation)
 
 > `optional` **ttl**: `string`
 
-Defined in: [src/providers/google/types.ts:484](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/types.ts#L484)
+Defined in: [src/providers/google/types.ts:484](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/types.ts#L484)
 
 Time-to-live duration (e.g., "300s", "3600s", mutually exclusive with expireTime)

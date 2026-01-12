@@ -10,7 +10,7 @@ title: "Interface: OpenRouterEmbedParams"
 
 # Interface: OpenRouterEmbedParams
 
-Defined in: [src/providers/openrouter/embed.ts:30](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/embed.ts#L30)
+Defined in: [src/providers/openrouter/embed.ts:30](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/embed.ts#L30)
 
 OpenRouter embedding parameters.
 Passed through unchanged to the API.
@@ -21,7 +21,7 @@ Passed through unchanged to the API.
 
 > `optional` **dimensions**: `number`
 
-Defined in: [src/providers/openrouter/embed.ts:32](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/embed.ts#L32)
+Defined in: [src/providers/openrouter/embed.ts:32](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/embed.ts#L32)
 
 Output dimensions (model-dependent)
 
@@ -31,7 +31,7 @@ Output dimensions (model-dependent)
 
 > `optional` **encoding\_format**: `"base64"` \| `"float"`
 
-Defined in: [src/providers/openrouter/embed.ts:34](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/embed.ts#L34)
+Defined in: [src/providers/openrouter/embed.ts:34](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/embed.ts#L34)
 
 Encoding format: 'float' or 'base64'
 
@@ -41,7 +41,7 @@ Encoding format: 'float' or 'base64'
 
 > `optional` **input\_type**: `string`
 
-Defined in: [src/providers/openrouter/embed.ts:38](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/embed.ts#L38)
+Defined in: [src/providers/openrouter/embed.ts:38](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/embed.ts#L38)
 
 Input type hint for some models
 
@@ -51,6 +51,6 @@ Input type hint for some models
 
 > `optional` **user**: `string`
 
-Defined in: [src/providers/openrouter/embed.ts:36](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/openrouter/embed.ts#L36)
+Defined in: [src/providers/openrouter/embed.ts:36](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/embed.ts#L36)
 
 A unique identifier representing your end-user

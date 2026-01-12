@@ -12,7 +12,7 @@ title: "Variable: ollama"
 
 > `const` **ollama**: [`Provider`](../../core/interfaces/provider.md)\<`unknown`\>
 
-Defined in: [src/providers/ollama/index.ts:79](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/index.ts#L79)
+Defined in: [src/providers/ollama/index.ts:82](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/index.ts#L82)
 
 Ollama provider for local LLM inference.
 
@@ -61,11 +61,14 @@ const model = llm({
 ```
 
 ```typescript
+import { llm, StreamEventType } from 'provider-protocol';
+import { ollama } from 'provider-protocol/ollama';
+
 const model = llm({ model: ollama('llama3.2') });
 const stream = model.stream('Write a poem');
 
 for await (const event of stream) {
-  if (event.type === 'text_delta') {
+  if (event.type === StreamEventType.TextDelta) {
     process.stdout.write(event.delta.text);
   }
 }

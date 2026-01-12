@@ -10,7 +10,7 @@ title: "Interface: OllamaLLMParams"
 
 # Interface: OllamaLLMParams
 
-Defined in: [src/providers/ollama/types.ts:32](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L32)
+Defined in: [src/providers/ollama/types.ts:32](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L32)
 
 Ollama-specific LLM parameters for model inference.
 
@@ -41,7 +41,7 @@ const params: OllamaLLMParams = {
 
 > `optional` **f16\_kv**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:103](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L103)
+Defined in: [src/providers/ollama/types.ts:103](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L103)
 
 Enable f16 KV cache
 
@@ -51,7 +51,7 @@ Enable f16 KV cache
 
 > `optional` **frequency\_penalty**: `number`
 
-Defined in: [src/providers/ollama/types.ts:61](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L61)
+Defined in: [src/providers/ollama/types.ts:61](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L61)
 
 Frequency penalty (default: 0.0)
 
@@ -61,7 +61,7 @@ Frequency penalty (default: 0.0)
 
 > `optional` **keep\_alive**: `string` \| `number`
 
-Defined in: [src/providers/ollama/types.ts:124](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L124)
+Defined in: [src/providers/ollama/types.ts:124](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L124)
 
 Keep model loaded in memory (string duration like "5m" or number of seconds)
 
@@ -71,7 +71,7 @@ Keep model loaded in memory (string duration like "5m" or number of seconds)
 
 > `optional` **logprobs**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:127](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L127)
+Defined in: [src/providers/ollama/types.ts:127](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L127)
 
 Return log probabilities
 
@@ -81,7 +81,7 @@ Return log probabilities
 
 > `optional` **low\_vram**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:100](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L100)
+Defined in: [src/providers/ollama/types.ts:100](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L100)
 
 Enable low VRAM mode
 
@@ -91,7 +91,7 @@ Enable low VRAM mode
 
 > `optional` **main\_gpu**: `number`
 
-Defined in: [src/providers/ollama/types.ts:97](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L97)
+Defined in: [src/providers/ollama/types.ts:97](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L97)
 
 Main GPU to use (default: 0)
 
@@ -101,7 +101,7 @@ Main GPU to use (default: 0)
 
 > `optional` **min\_p**: `number`
 
-Defined in: [src/providers/ollama/types.ts:46](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L46)
+Defined in: [src/providers/ollama/types.ts:46](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L46)
 
 Minimum probability for a token to be considered (default: 0.0)
 
@@ -111,7 +111,7 @@ Minimum probability for a token to be considered (default: 0.0)
 
 > `optional` **mirostat**: `0` \| `1` \| `2`
 
-Defined in: [src/providers/ollama/types.ts:64](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L64)
+Defined in: [src/providers/ollama/types.ts:64](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L64)
 
 Mirostat sampling mode (0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
 
@@ -121,7 +121,7 @@ Mirostat sampling mode (0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
 
 > `optional` **mirostat\_eta**: `number`
 
-Defined in: [src/providers/ollama/types.ts:67](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L67)
+Defined in: [src/providers/ollama/types.ts:67](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L67)
 
 Mirostat learning rate (default: 0.1)
 
@@ -131,7 +131,7 @@ Mirostat learning rate (default: 0.1)
 
 > `optional` **mirostat\_tau**: `number`
 
-Defined in: [src/providers/ollama/types.ts:70](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L70)
+Defined in: [src/providers/ollama/types.ts:70](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L70)
 
 Mirostat target entropy (default: 5.0)
 
@@ -141,7 +141,7 @@ Mirostat target entropy (default: 5.0)
 
 > `optional` **num\_batch**: `number`
 
-Defined in: [src/providers/ollama/types.ts:88](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L88)
+Defined in: [src/providers/ollama/types.ts:88](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L88)
 
 Number of batches (default: 512)
 
@@ -151,7 +151,7 @@ Number of batches (default: 512)
 
 > `optional` **num\_ctx**: `number`
 
-Defined in: [src/providers/ollama/types.ts:85](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L85)
+Defined in: [src/providers/ollama/types.ts:85](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L85)
 
 Context window size (default: model-dependent)
 
@@ -161,7 +161,7 @@ Context window size (default: model-dependent)
 
 > `optional` **num\_gpu**: `number`
 
-Defined in: [src/providers/ollama/types.ts:94](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L94)
+Defined in: [src/providers/ollama/types.ts:94](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L94)
 
 Number of layers to offload to GPU (default: auto)
 
@@ -171,7 +171,7 @@ Number of layers to offload to GPU (default: auto)
 
 > `optional` **num\_keep**: `number`
 
-Defined in: [src/providers/ollama/types.ts:82](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L82)
+Defined in: [src/providers/ollama/types.ts:82](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L82)
 
 Number of tokens to keep from initial prompt (default: 4)
 
@@ -181,7 +181,7 @@ Number of tokens to keep from initial prompt (default: 4)
 
 > `optional` **num\_predict**: `number`
 
-Defined in: [src/providers/ollama/types.ts:34](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L34)
+Defined in: [src/providers/ollama/types.ts:34](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L34)
 
 Maximum number of tokens to predict (default: -1 = infinite)
 
@@ -191,7 +191,7 @@ Maximum number of tokens to predict (default: -1 = infinite)
 
 > `optional` **num\_thread**: `number`
 
-Defined in: [src/providers/ollama/types.ts:91](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L91)
+Defined in: [src/providers/ollama/types.ts:91](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L91)
 
 Number of threads (default: auto)
 
@@ -201,7 +201,7 @@ Number of threads (default: auto)
 
 > `optional` **numa**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:115](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L115)
+Defined in: [src/providers/ollama/types.ts:115](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L115)
 
 NUMA support
 
@@ -211,7 +211,7 @@ NUMA support
 
 > `optional` **penalize\_newline**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:73](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L73)
+Defined in: [src/providers/ollama/types.ts:73](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L73)
 
 Penalize newlines (default: true)
 
@@ -221,7 +221,7 @@ Penalize newlines (default: true)
 
 > `optional` **presence\_penalty**: `number`
 
-Defined in: [src/providers/ollama/types.ts:58](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L58)
+Defined in: [src/providers/ollama/types.ts:58](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L58)
 
 Presence penalty (default: 0.0)
 
@@ -231,7 +231,7 @@ Presence penalty (default: 0.0)
 
 > `optional` **repeat\_last\_n**: `number`
 
-Defined in: [src/providers/ollama/types.ts:55](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L55)
+Defined in: [src/providers/ollama/types.ts:55](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L55)
 
 Number of tokens to look back for repeat penalty (default: 64)
 
@@ -241,7 +241,7 @@ Number of tokens to look back for repeat penalty (default: 64)
 
 > `optional` **repeat\_penalty**: `number`
 
-Defined in: [src/providers/ollama/types.ts:52](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L52)
+Defined in: [src/providers/ollama/types.ts:52](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L52)
 
 Repeat penalty (default: 1.1)
 
@@ -251,7 +251,7 @@ Repeat penalty (default: 1.1)
 
 > `optional` **seed**: `number`
 
-Defined in: [src/providers/ollama/types.ts:79](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L79)
+Defined in: [src/providers/ollama/types.ts:79](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L79)
 
 Seed for deterministic sampling (default: random)
 
@@ -261,7 +261,7 @@ Seed for deterministic sampling (default: random)
 
 > `optional` **stop**: `string`[]
 
-Defined in: [src/providers/ollama/types.ts:76](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L76)
+Defined in: [src/providers/ollama/types.ts:76](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L76)
 
 Stop sequences
 
@@ -271,7 +271,7 @@ Stop sequences
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/ollama/types.ts:37](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L37)
+Defined in: [src/providers/ollama/types.ts:37](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L37)
 
 Temperature for randomness (default: 0.8)
 
@@ -281,7 +281,7 @@ Temperature for randomness (default: 0.8)
 
 > `optional` **tfs\_z**: `number`
 
-Defined in: [src/providers/ollama/types.ts:118](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L118)
+Defined in: [src/providers/ollama/types.ts:118](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L118)
 
 TFS-Z sampling (default: 1.0 = disabled)
 
@@ -291,7 +291,7 @@ TFS-Z sampling (default: 1.0 = disabled)
 
 > `optional` **think**: `boolean` \| `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/providers/ollama/types.ts:121](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L121)
+Defined in: [src/providers/ollama/types.ts:121](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L121)
 
 Enable thinking mode (for models that support it)
 
@@ -301,7 +301,7 @@ Enable thinking mode (for models that support it)
 
 > `optional` **top\_k**: `number`
 
-Defined in: [src/providers/ollama/types.ts:43](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L43)
+Defined in: [src/providers/ollama/types.ts:43](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L43)
 
 Top-k sampling (default: 40)
 
@@ -311,7 +311,7 @@ Top-k sampling (default: 40)
 
 > `optional` **top\_logprobs**: `number`
 
-Defined in: [src/providers/ollama/types.ts:130](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L130)
+Defined in: [src/providers/ollama/types.ts:130](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L130)
 
 Number of top log probabilities to return
 
@@ -321,7 +321,7 @@ Number of top log probabilities to return
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/ollama/types.ts:40](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L40)
+Defined in: [src/providers/ollama/types.ts:40](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L40)
 
 Top-p (nucleus) sampling (default: 0.9)
 
@@ -331,7 +331,7 @@ Top-p (nucleus) sampling (default: 0.9)
 
 > `optional` **typical\_p**: `number`
 
-Defined in: [src/providers/ollama/types.ts:49](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L49)
+Defined in: [src/providers/ollama/types.ts:49](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L49)
 
 Typical p sampling (default: 1.0 = disabled)
 
@@ -341,7 +341,7 @@ Typical p sampling (default: 1.0 = disabled)
 
 > `optional` **use\_mlock**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:109](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L109)
+Defined in: [src/providers/ollama/types.ts:109](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L109)
 
 Use mlock for memory locking
 
@@ -351,7 +351,7 @@ Use mlock for memory locking
 
 > `optional` **use\_mmap**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:106](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L106)
+Defined in: [src/providers/ollama/types.ts:106](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L106)
 
 Use mmap for model loading
 
@@ -361,6 +361,6 @@ Use mmap for model loading
 
 > `optional` **vocab\_only**: `boolean`
 
-Defined in: [src/providers/ollama/types.ts:112](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/ollama/types.ts#L112)
+Defined in: [src/providers/ollama/types.ts:112](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/ollama/types.ts#L112)
 
 Vocabulary only mode

@@ -12,7 +12,7 @@ title: "Variable: google"
 
 > `const` **google**: [`Provider`](../../core/interfaces/provider.md)\<`unknown`\> & `object`
 
-Defined in: [src/providers/google/index.ts:73](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/providers/google/index.ts#L73)
+Defined in: [src/providers/google/index.ts:74](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/google/index.ts#L74)
 
 Google Gemini provider for the Unified Provider Protocol (UPP).
 
@@ -288,6 +288,7 @@ const updated = await google.cache.update(
 ```typescript
 import { google } from './providers/google';
 import { llm } from './core/llm';
+import { StreamEventType } from './types/stream';
 
 const gemini = llm({
   model: google('gemini-1.5-pro'),
@@ -299,7 +300,7 @@ console.log(turn.response.text);
 
 const stream = gemini.stream('Tell me a story');
 for await (const event of stream) {
-  if (event.type === 'text_delta') {
+  if (event.type === StreamEventType.TextDelta) {
     process.stdout.write(event.delta.text ?? '');
   }
 }

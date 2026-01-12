@@ -10,29 +10,11 @@ title: "Type Alias: ErrorCode"
 
 # Type Alias: ErrorCode
 
-> **ErrorCode** = `"AUTHENTICATION_FAILED"` \| `"RATE_LIMITED"` \| `"CONTEXT_LENGTH_EXCEEDED"` \| `"MODEL_NOT_FOUND"` \| `"INVALID_REQUEST"` \| `"INVALID_RESPONSE"` \| `"CONTENT_FILTERED"` \| `"QUOTA_EXCEEDED"` \| `"PROVIDER_ERROR"` \| `"NETWORK_ERROR"` \| `"TIMEOUT"` \| `"CANCELLED"`
+> **ErrorCode** = *typeof* [`ErrorCode`](../variables/errorcode.md)\[keyof *typeof* [`ErrorCode`](../variables/errorcode.md)\]
 
-Defined in: [src/types/errors.ts:33](https://github.com/ProviderProtocol/ai/blob/ad6923294c4b613e141878e1142aaea0e84551ed/src/types/errors.ts#L33)
+Defined in: [src/types/errors.ts:34](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/errors.ts#L34)
 
-Normalized error codes for cross-provider error handling.
+Error code discriminator union.
 
-These codes provide a consistent way to identify and handle errors
-regardless of which AI provider generated them.
-
-## Example
-
-```typescript
-try {
-  await llm.generate('Hello');
-} catch (error) {
-  if (error instanceof UPPError) {
-    switch (error.code) {
-      case 'RATE_LIMITED':
-        await delay(error.retryAfter);
-        break;
-      case 'AUTHENTICATION_FAILED':
-        throw new Error('Invalid API key');
-    }
-  }
-}
-```
+This type is derived from [ErrorCode](../variables/errorcode.md) constants. Use `ErrorCode.RateLimited`
+for constants or `type MyCode = ErrorCode` for type annotations.
