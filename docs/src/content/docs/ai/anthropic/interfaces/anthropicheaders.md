@@ -10,7 +10,7 @@ title: "Interface: AnthropicHeaders"
 
 # Interface: AnthropicHeaders
 
-Defined in: [src/providers/anthropic/types.ts:734](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L734)
+Defined in: [src/providers/anthropic/types.ts:735](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L735)
 
 Anthropic-specific HTTP headers for API requests.
 
@@ -32,7 +32,7 @@ const headers: AnthropicHeaders = {
 
 > `optional` **anthropic-beta**: `string`
 
-Defined in: [src/providers/anthropic/types.ts:746](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L746)
+Defined in: [src/providers/anthropic/types.ts:747](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L747)
 
 Beta features header.
 

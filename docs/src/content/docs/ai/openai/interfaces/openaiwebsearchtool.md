@@ -10,7 +10,7 @@ title: "Interface: OpenAIWebSearchTool"
 
 # Interface: OpenAIWebSearchTool
 
-Defined in: [src/providers/openai/types.ts:1090](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1090)
+Defined in: [src/providers/openai/types.ts:1136](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1136)
 
 Web search tool for Responses API
 Enables the model to search the web for up-to-date information
@@ -19,9 +19,9 @@ Enables the model to search the web for up-to-date information
 
 ### search\_context\_size?
 
-> `optional` **search\_context\_size**: `"high"` \| `"medium"` \| `"low"`
+> `optional` **search\_context\_size**: `"low"` \| `"medium"` \| `"high"`
 
-Defined in: [src/providers/openai/types.ts:1096](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1096)
+Defined in: [src/providers/openai/types.ts:1142](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1142)
 
 Context size for search results
 Controls how much context from web results to include
@@ -32,7 +32,7 @@ Controls how much context from web results to include
 
 > **type**: `"web_search"`
 
-Defined in: [src/providers/openai/types.ts:1091](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1091)
+Defined in: [src/providers/openai/types.ts:1137](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1137)
 
 ***
 
@@ -40,6 +40,6 @@ Defined in: [src/providers/openai/types.ts:1091](https://github.com/ProviderProt
 
 > `optional` **user\_location**: [`OpenAIWebSearchUserLocation`](openaiwebsearchuserlocation.md) \| `null`
 
-Defined in: [src/providers/openai/types.ts:1098](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1098)
+Defined in: [src/providers/openai/types.ts:1144](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1144)
 
 User location for localizing search results

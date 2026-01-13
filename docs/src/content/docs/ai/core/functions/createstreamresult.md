@@ -12,7 +12,7 @@ title: "Function: createStreamResult()"
 
 > **createStreamResult**\<`TData`\>(`generator`, `turnPromiseOrFactory`, `abortController`): [`StreamResult`](../interfaces/streamresult.md)\<`TData`\>
 
-Defined in: [src/types/stream.ts:185](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/stream.ts#L185)
+Defined in: [src/types/stream.ts:185](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/stream.ts#L185)
 
 Creates a StreamResult from an async generator and completion promise.
 

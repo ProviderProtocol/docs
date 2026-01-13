@@ -10,7 +10,7 @@ title: "Interface: ImageGenerateOptions"
 
 # Interface: ImageGenerateOptions
 
-Defined in: [src/types/image.ts:58](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/image.ts#L58)
+Defined in: [src/types/image.ts:58](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L58)
 
 Options for image generation.
 
@@ -20,6 +20,6 @@ Options for image generation.
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/image.ts:60](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/image.ts#L60)
+Defined in: [src/types/image.ts:60](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L60)
 
 Abort signal for cancellation

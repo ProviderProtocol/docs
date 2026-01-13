@@ -10,7 +10,7 @@ title: "Interface: TextBlock"
 
 # Interface: TextBlock
 
-Defined in: [src/types/content.ts:121](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L121)
+Defined in: [src/types/content.ts:123](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L123)
 
 Text content block.
 
@@ -31,7 +31,7 @@ const textBlock: TextBlock = {
 
 > **text**: `string`
 
-Defined in: [src/types/content.ts:126](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L126)
+Defined in: [src/types/content.ts:128](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L128)
 
 The text content
 
@@ -41,6 +41,6 @@ The text content
 
 > **type**: `"text"`
 
-Defined in: [src/types/content.ts:123](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L123)
+Defined in: [src/types/content.ts:125](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L125)
 
 Discriminator for text blocks

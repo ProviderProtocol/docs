@@ -10,7 +10,7 @@ title: "Interface: EmbeddingProgress"
 
 # Interface: EmbeddingProgress
 
-Defined in: [src/types/embedding.ts:117](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/embedding.ts#L117)
+Defined in: [src/types/embedding.ts:117](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/embedding.ts#L117)
 
 Progress update when using chunked mode.
 
@@ -20,7 +20,7 @@ Progress update when using chunked mode.
 
 > **completed**: `number`
 
-Defined in: [src/types/embedding.ts:122](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/embedding.ts#L122)
+Defined in: [src/types/embedding.ts:122](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/embedding.ts#L122)
 
 Total embeddings completed so far
 
@@ -30,7 +30,7 @@ Total embeddings completed so far
 
 > **embeddings**: [`Embedding`](embedding.md)[]
 
-Defined in: [src/types/embedding.ts:119](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/embedding.ts#L119)
+Defined in: [src/types/embedding.ts:119](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/embedding.ts#L119)
 
 Embeddings from the latest batch
 
@@ -40,7 +40,7 @@ Embeddings from the latest batch
 
 > **percent**: `number`
 
-Defined in: [src/types/embedding.ts:128](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/embedding.ts#L128)
+Defined in: [src/types/embedding.ts:128](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/embedding.ts#L128)
 
 Percentage complete (0-100)
 
@@ -50,6 +50,6 @@ Percentage complete (0-100)
 
 > **total**: `number`
 
-Defined in: [src/types/embedding.ts:125](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/embedding.ts#L125)
+Defined in: [src/types/embedding.ts:125](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/embedding.ts#L125)
 
 Total number of inputs

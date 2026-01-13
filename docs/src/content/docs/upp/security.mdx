@@ -63,6 +63,15 @@ Tools execute arbitrary code based on LLM-provided arguments:
         "text": { "type": "string" }
       }
     },
+    "ReasoningBlock": {
+      "type": "object",
+      "required": ["type", "text"],
+      "properties": {
+        "type": { "const": "reasoning" },
+        "text": { "type": "string" }
+      },
+      "description": "Model reasoning/thinking content from extended thinking models"
+    },
     "ImageSource": {
       "oneOf": [
         {
@@ -137,6 +146,7 @@ Tools execute arbitrary code based on LLM-provided arguments:
     "ContentBlock": {
       "oneOf": [
         { "$ref": "#/definitions/TextBlock" },
+        { "$ref": "#/definitions/ReasoningBlock" },
         { "$ref": "#/definitions/ImageBlock" },
         { "$ref": "#/definitions/AudioBlock" },
         { "$ref": "#/definitions/VideoBlock" },

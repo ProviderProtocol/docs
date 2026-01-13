@@ -10,7 +10,7 @@ title: "Interface: MessageOptions"
 
 # Interface: MessageOptions
 
-Defined in: [src/types/messages.ts:94](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L94)
+Defined in: [src/types/messages.ts:95](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L95)
 
 Options for constructing messages.
 
@@ -20,7 +20,7 @@ Options for constructing messages.
 
 > `optional` **id**: `string`
 
-Defined in: [src/types/messages.ts:96](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L96)
+Defined in: [src/types/messages.ts:97](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L97)
 
 Custom message ID (auto-generated if not provided)
 
@@ -30,6 +30,6 @@ Custom message ID (auto-generated if not provided)
 
 > `optional` **metadata**: [`MessageMetadata`](messagemetadata.md)
 
-Defined in: [src/types/messages.ts:99](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L99)
+Defined in: [src/types/messages.ts:100](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L100)
 
 Provider-specific metadata

@@ -10,7 +10,7 @@ title: "Interface: AnthropicComputerTool"
 
 # Interface: AnthropicComputerTool
 
-Defined in: [src/providers/anthropic/types.ts:823](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L823)
+Defined in: [src/providers/anthropic/types.ts:824](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L824)
 
 Computer use tool for desktop automation.
 
@@ -38,7 +38,7 @@ const tool: AnthropicComputerTool = {
 
 > **display\_height\_px**: `number`
 
-Defined in: [src/providers/anthropic/types.ts:831](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L831)
+Defined in: [src/providers/anthropic/types.ts:832](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L832)
 
 Display height in pixels
 
@@ -48,7 +48,7 @@ Display height in pixels
 
 > `optional` **display\_number**: `number`
 
-Defined in: [src/providers/anthropic/types.ts:833](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L833)
+Defined in: [src/providers/anthropic/types.ts:834](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L834)
 
 X11 display number (optional)
 
@@ -58,7 +58,7 @@ X11 display number (optional)
 
 > **display\_width\_px**: `number`
 
-Defined in: [src/providers/anthropic/types.ts:829](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L829)
+Defined in: [src/providers/anthropic/types.ts:830](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L830)
 
 Display width in pixels
 
@@ -68,7 +68,7 @@ Display width in pixels
 
 > `optional` **enable\_zoom**: `boolean`
 
-Defined in: [src/providers/anthropic/types.ts:835](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L835)
+Defined in: [src/providers/anthropic/types.ts:836](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L836)
 
 Enable zoom action (Opus 4.5 only with 20251124 version)
 
@@ -78,7 +78,7 @@ Enable zoom action (Opus 4.5 only with 20251124 version)
 
 > **name**: `"computer"`
 
-Defined in: [src/providers/anthropic/types.ts:827](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L827)
+Defined in: [src/providers/anthropic/types.ts:828](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L828)
 
 Tool name - must be 'computer'
 
@@ -88,6 +88,6 @@ Tool name - must be 'computer'
 
 > **type**: `"computer_20251124"` \| `"computer_20250124"`
 
-Defined in: [src/providers/anthropic/types.ts:825](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/anthropic/types.ts#L825)
+Defined in: [src/providers/anthropic/types.ts:826](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/anthropic/types.ts#L826)
 
 Tool type identifier (version-specific)

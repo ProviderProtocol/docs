@@ -10,7 +10,7 @@ title: "Interface: OpenAIWebSearchUserLocation"
 
 # Interface: OpenAIWebSearchUserLocation
 
-Defined in: [src/providers/openai/types.ts:57](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L57)
+Defined in: [src/providers/openai/types.ts:57](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L57)
 
 User location for web search context in the Responses API.
 
@@ -27,7 +27,7 @@ In the Responses API, location fields are at the same level as the type field.
 
 > `optional` **city**: `string`
 
-Defined in: [src/providers/openai/types.ts:61](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L61)
+Defined in: [src/providers/openai/types.ts:61](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L61)
 
 City name
 
@@ -37,7 +37,7 @@ City name
 
 > `optional` **country**: `string`
 
-Defined in: [src/providers/openai/types.ts:63](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L63)
+Defined in: [src/providers/openai/types.ts:63](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L63)
 
 ISO 3166-1 country code (e.g., "US")
 
@@ -47,7 +47,7 @@ ISO 3166-1 country code (e.g., "US")
 
 > `optional` **region**: `string`
 
-Defined in: [src/providers/openai/types.ts:65](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L65)
+Defined in: [src/providers/openai/types.ts:65](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L65)
 
 Region/state name
 
@@ -57,7 +57,7 @@ Region/state name
 
 > `optional` **timezone**: `string`
 
-Defined in: [src/providers/openai/types.ts:67](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L67)
+Defined in: [src/providers/openai/types.ts:67](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L67)
 
 IANA timezone (e.g., "America/New_York")
 
@@ -67,6 +67,6 @@ IANA timezone (e.g., "America/New_York")
 
 > **type**: `"approximate"`
 
-Defined in: [src/providers/openai/types.ts:59](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L59)
+Defined in: [src/providers/openai/types.ts:59](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L59)
 
 Location type - must be 'approximate'

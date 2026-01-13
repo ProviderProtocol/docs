@@ -12,7 +12,7 @@ title: "Variable: ContentBlockType"
 
 > `const` **ContentBlockType**: `object`
 
-Defined in: [src/types/content.ts:27](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L27)
+Defined in: [src/types/content.ts:27](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L27)
 
 Content block type constants.
 
@@ -37,6 +37,12 @@ Binary/arbitrary data content
 > `readonly` **Image**: `"image"` = `'image'`
 
 Image content
+
+### Reasoning
+
+> `readonly` **Reasoning**: `"reasoning"` = `'reasoning'`
+
+Reasoning/thinking content from extended thinking models
 
 ### Text
 

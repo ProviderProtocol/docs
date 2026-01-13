@@ -10,7 +10,7 @@ title: "Interface: ToolUseStrategy"
 
 # Interface: ToolUseStrategy
 
-Defined in: [src/types/tool.ts:214](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L214)
+Defined in: [src/types/tool.ts:214](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L214)
 
 Strategy for controlling tool execution behavior.
 
@@ -50,7 +50,7 @@ const strategy: ToolUseStrategy = {
 
 > `optional` **maxIterations**: `number`
 
-Defined in: [src/types/tool.ts:216](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L216)
+Defined in: [src/types/tool.ts:216](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L216)
 
 Maximum number of tool execution rounds (default: 10)
 
@@ -60,7 +60,7 @@ Maximum number of tool execution rounds (default: 10)
 
 > `optional` **onAfterCall**(`tool`, `params`, `result`): `void` \| [`AfterCallResult`](aftercallresult.md) \| `Promise`\<`void` \| [`AfterCallResult`](aftercallresult.md)\>
 
-Defined in: [src/types/tool.ts:246](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L246)
+Defined in: [src/types/tool.ts:246](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L246)
 
 Called after tool execution completes. Can transform the result.
 
@@ -96,7 +96,7 @@ Void to use original result, or `AfterCallResult` to transform it
 
 > `optional` **onBeforeCall**(`tool`, `params`): `boolean` \| [`BeforeCallResult`](beforecallresult.md) \| `Promise`\<`boolean` \| [`BeforeCallResult`](beforecallresult.md)\>
 
-Defined in: [src/types/tool.ts:236](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L236)
+Defined in: [src/types/tool.ts:236](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L236)
 
 Called before tool execution. Can skip execution or transform parameters.
 
@@ -129,7 +129,7 @@ One of:
 
 > `optional` **onError**(`tool`, `params`, `error`): `void` \| `Promise`\<`void`\>
 
-Defined in: [src/types/tool.ts:255](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L255)
+Defined in: [src/types/tool.ts:255](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L255)
 
 Called when a tool execution throws an error.
 
@@ -163,7 +163,7 @@ The error that was thrown
 
 > `optional` **onMaxIterations**(`iterations`): `void` \| `Promise`\<`void`\>
 
-Defined in: [src/types/tool.ts:262](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L262)
+Defined in: [src/types/tool.ts:262](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L262)
 
 Called when the maximum iteration limit is reached.
 
@@ -185,7 +185,7 @@ The number of iterations that were performed
 
 > `optional` **onToolCall**(`tool`, `params`): `void` \| `Promise`\<`void`\>
 
-Defined in: [src/types/tool.ts:224](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L224)
+Defined in: [src/types/tool.ts:224](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L224)
 
 Called when the model requests a tool call.
 

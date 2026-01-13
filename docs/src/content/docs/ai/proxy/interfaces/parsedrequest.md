@@ -10,7 +10,7 @@ title: "Interface: ParsedRequest"
 
 # Interface: ParsedRequest
 
-Defined in: [src/providers/proxy/server/webapi.ts:29](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L29)
+Defined in: [src/providers/proxy/server/webapi.ts:29](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L29)
 
 Parsed request body from a proxy HTTP request.
 This is just the deserialized PP data from the request body.
@@ -21,7 +21,7 @@ This is just the deserialized PP data from the request body.
 
 > **messages**: [`Message`](../../core/classes/message.md)[]
 
-Defined in: [src/providers/proxy/server/webapi.ts:30](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L30)
+Defined in: [src/providers/proxy/server/webapi.ts:30](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L30)
 
 ***
 
@@ -29,7 +29,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:30](https://github.com/Provide
 
 > `optional` **params**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/providers/proxy/server/webapi.ts:32](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L32)
+Defined in: [src/providers/proxy/server/webapi.ts:32](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L32)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:32](https://github.com/Provide
 
 > `optional` **structure**: [`JSONSchema`](../../core/interfaces/jsonschema.md)
 
-Defined in: [src/providers/proxy/server/webapi.ts:39](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L39)
+Defined in: [src/providers/proxy/server/webapi.ts:39](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L39)
 
 ***
 
@@ -45,7 +45,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:39](https://github.com/Provide
 
 > `optional` **system**: `string` \| `unknown`[]
 
-Defined in: [src/providers/proxy/server/webapi.ts:31](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L31)
+Defined in: [src/providers/proxy/server/webapi.ts:31](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L31)
 
 ***
 
@@ -53,7 +53,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:31](https://github.com/Provide
 
 > `optional` **tools**: `object`[]
 
-Defined in: [src/providers/proxy/server/webapi.ts:33](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L33)
+Defined in: [src/providers/proxy/server/webapi.ts:33](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L33)
 
 #### description
 

@@ -10,7 +10,7 @@ title: "Class: Thread"
 
 # Class: Thread
 
-Defined in: [src/types/thread.ts:61](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L61)
+Defined in: [src/types/thread.ts:61](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L61)
 
 Thread - A utility class for managing conversation history.
 
@@ -44,7 +44,7 @@ const restored = Thread.fromJSON(JSON.parse(localStorage.getItem('chat')));
 
 > **new Thread**(`messages?`): `Thread`
 
-Defined in: [src/types/thread.ts:79](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L79)
+Defined in: [src/types/thread.ts:79](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L79)
 
 Creates a new thread instance.
 
@@ -66,7 +66,7 @@ Optional initial messages to populate the thread
 
 > `readonly` **id**: `string`
 
-Defined in: [src/types/thread.ts:63](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L63)
+Defined in: [src/types/thread.ts:63](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L63)
 
 Unique thread identifier
 
@@ -78,7 +78,7 @@ Unique thread identifier
 
 > **get** **length**(): `number`
 
-Defined in: [src/types/thread.ts:96](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L96)
+Defined in: [src/types/thread.ts:96](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L96)
 
 Number of messages in the thread.
 
@@ -94,7 +94,7 @@ Number of messages in the thread.
 
 > **get** **messages**(): readonly [`Message`](message.md)[]
 
-Defined in: [src/types/thread.ts:89](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L89)
+Defined in: [src/types/thread.ts:89](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L89)
 
 All messages in the thread (readonly).
 
@@ -108,7 +108,7 @@ readonly [`Message`](message.md)[]
 
 > **\[iterator\]**(): `Iterator`\<[`Message`](message.md)\>
 
-Defined in: [src/types/thread.ts:282](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L282)
+Defined in: [src/types/thread.ts:282](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L282)
 
 Enables iteration over messages with for...of loops.
 
@@ -132,7 +132,7 @@ for (const message of thread) {
 
 > **append**(`turn`): `this`
 
-Defined in: [src/types/thread.ts:106](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L106)
+Defined in: [src/types/thread.ts:106](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L106)
 
 Appends all messages from a Turn to the thread.
 
@@ -156,7 +156,7 @@ This thread instance for chaining
 
 > **assistant**(`content`): `this`
 
-Defined in: [src/types/thread.ts:156](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L156)
+Defined in: [src/types/thread.ts:156](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L156)
 
 Adds an assistant message to the thread.
 
@@ -186,7 +186,7 @@ thread.assistant('I can help with that!');
 
 > **clear**(): `this`
 
-Defined in: [src/types/thread.ts:214](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L214)
+Defined in: [src/types/thread.ts:214](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L214)
 
 Removes all messages from the thread.
 
@@ -202,7 +202,7 @@ This thread instance for chaining
 
 > **filter**(`type`): [`Message`](message.md)[]
 
-Defined in: [src/types/thread.ts:174](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L174)
+Defined in: [src/types/thread.ts:174](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L174)
 
 Filters messages by type.
 
@@ -233,7 +233,7 @@ const assistantMessages = thread.filter('assistant');
 
 > **push**(...`messages`): `this`
 
-Defined in: [src/types/thread.ts:118](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L118)
+Defined in: [src/types/thread.ts:118](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L118)
 
 Adds raw messages to the thread.
 
@@ -257,7 +257,7 @@ This thread instance for chaining
 
 > **slice**(`start?`, `end?`): `Thread`
 
-Defined in: [src/types/thread.ts:205](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L205)
+Defined in: [src/types/thread.ts:205](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L205)
 
 Creates a new thread with a subset of messages.
 
@@ -293,7 +293,7 @@ const subset = thread.slice(0, 10);
 
 > **tail**(`count`): [`Message`](message.md)[]
 
-Defined in: [src/types/thread.ts:189](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L189)
+Defined in: [src/types/thread.ts:189](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L189)
 
 Returns the last N messages from the thread.
 
@@ -323,7 +323,7 @@ const recent = thread.tail(5);
 
 > **toJSON**(): [`ThreadJSON`](../type-aliases/threadjson.md)
 
-Defined in: [src/types/thread.ts:240](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L240)
+Defined in: [src/types/thread.ts:240](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L240)
 
 Serializes the thread to JSON format.
 
@@ -346,7 +346,7 @@ localStorage.setItem('thread', JSON.stringify(json));
 
 > **toMessages**(): [`Message`](message.md)[]
 
-Defined in: [src/types/thread.ts:225](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L225)
+Defined in: [src/types/thread.ts:225](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L225)
 
 Converts the thread to a plain message array.
 
@@ -362,7 +362,7 @@ Copy of the internal message array
 
 > **user**(`content`): `this`
 
-Defined in: [src/types/thread.ts:139](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L139)
+Defined in: [src/types/thread.ts:139](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L139)
 
 Adds a user message to the thread.
 
@@ -396,7 +396,7 @@ thread.user([
 
 > `static` **fromJSON**(`json`): `Thread`
 
-Defined in: [src/types/thread.ts:261](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/thread.ts#L261)
+Defined in: [src/types/thread.ts:261](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/thread.ts#L261)
 
 Deserializes a thread from JSON format.
 

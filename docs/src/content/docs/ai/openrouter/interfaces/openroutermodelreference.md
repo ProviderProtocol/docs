@@ -10,7 +10,7 @@ title: "Interface: OpenRouterModelReference"
 
 # Interface: OpenRouterModelReference
 
-Defined in: [src/providers/openrouter/types.ts:212](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/types.ts#L212)
+Defined in: [src/providers/openrouter/types.ts:212](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openrouter/types.ts#L212)
 
 Model reference with OpenRouter-specific options.
 
@@ -20,7 +20,7 @@ Model reference with OpenRouter-specific options.
 
 > **modelId**: `string`
 
-Defined in: [src/providers/openrouter/types.ts:214](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/types.ts#L214)
+Defined in: [src/providers/openrouter/types.ts:214](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openrouter/types.ts#L214)
 
 The model identifier in `provider/model` format.
 
@@ -30,6 +30,6 @@ The model identifier in `provider/model` format.
 
 > `optional` **options**: [`OpenRouterModelOptions`](openroutermodeloptions.md)
 
-Defined in: [src/providers/openrouter/types.ts:216](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openrouter/types.ts#L216)
+Defined in: [src/providers/openrouter/types.ts:216](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openrouter/types.ts#L216)
 
 Optional API selection.

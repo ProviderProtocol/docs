@@ -12,7 +12,7 @@ title: "Function: cancelledError()"
 
 > **cancelledError**(`provider`, `modality`): [`UPPError`](../../core/classes/upperror.md)
 
-Defined in: [src/http/errors.ts:196](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/http/errors.ts#L196)
+Defined in: [src/http/errors.ts:196](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/http/errors.ts#L196)
 
 Creates a UPPError for user-initiated request cancellation.
 

@@ -10,7 +10,7 @@ title: "Class: ToolResultMessage"
 
 # Class: ToolResultMessage
 
-Defined in: [src/types/messages.ts:300](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L300)
+Defined in: [src/types/messages.ts:309](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L309)
 
 Tool execution result message.
 
@@ -36,7 +36,7 @@ const msg = new ToolResultMessage([
 
 > **new ToolResultMessage**(`results`, `options?`): `ToolResultMessage`
 
-Defined in: [src/types/messages.ts:313](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L313)
+Defined in: [src/types/messages.ts:322](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L322)
 
 Creates a new tool result message.
 
@@ -68,7 +68,7 @@ Optional message ID and metadata
 
 > `readonly` **id**: `string`
 
-Defined in: [src/types/messages.ts:119](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L119)
+Defined in: [src/types/messages.ts:120](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L120)
 
 Unique message identifier
 
@@ -82,7 +82,7 @@ Unique message identifier
 
 > `readonly` `optional` **metadata**: [`MessageMetadata`](../interfaces/messagemetadata.md)
 
-Defined in: [src/types/messages.ts:125](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L125)
+Defined in: [src/types/messages.ts:126](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L126)
 
 Provider-specific metadata, namespaced by provider name
 
@@ -96,7 +96,7 @@ Provider-specific metadata, namespaced by provider name
 
 > `readonly` **results**: [`ToolResult`](../interfaces/toolresult.md)[]
 
-Defined in: [src/types/messages.ts:305](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L305)
+Defined in: [src/types/messages.ts:314](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L314)
 
 Results from tool executions
 
@@ -106,7 +106,7 @@ Results from tool executions
 
 > `readonly` **timestamp**: `Date`
 
-Defined in: [src/types/messages.ts:122](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L122)
+Defined in: [src/types/messages.ts:123](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L123)
 
 Timestamp when the message was created
 
@@ -120,7 +120,7 @@ Timestamp when the message was created
 
 > `readonly` **type**: `"tool_result"`
 
-Defined in: [src/types/messages.ts:302](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L302)
+Defined in: [src/types/messages.ts:311](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L311)
 
 Message type discriminator
 
@@ -136,7 +136,7 @@ Message type discriminator
 
 > **get** **audio**(): [`AudioBlock`](../interfaces/audioblock.md)[]
 
-Defined in: [src/types/messages.ts:168](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L168)
+Defined in: [src/types/messages.ts:169](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L169)
 
 All audio content blocks in this message.
 
@@ -156,7 +156,7 @@ All audio content blocks in this message.
 
 > **get** **images**(): [`ImageBlock`](../interfaces/imageblock.md)[]
 
-Defined in: [src/types/messages.ts:161](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L161)
+Defined in: [src/types/messages.ts:162](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L162)
 
 All image content blocks in this message.
 
@@ -170,13 +170,34 @@ All image content blocks in this message.
 
 ***
 
+### reasoning
+
+#### Get Signature
+
+> **get** **reasoning**(): [`ReasoningBlock`](../interfaces/reasoningblock.md)[]
+
+Defined in: [src/types/messages.ts:184](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L184)
+
+All reasoning/thinking content blocks in this message.
+Available when using extended thinking models.
+
+##### Returns
+
+[`ReasoningBlock`](../interfaces/reasoningblock.md)[]
+
+#### Inherited from
+
+[`Message`](message.md).[`reasoning`](message.md#reasoning)
+
+***
+
 ### text
 
 #### Get Signature
 
 > **get** **text**(): `string`
 
-Defined in: [src/types/messages.ts:151](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L151)
+Defined in: [src/types/messages.ts:152](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L152)
 
 Concatenated text content from all text blocks.
 Blocks are joined with double newlines.
@@ -197,7 +218,7 @@ Blocks are joined with double newlines.
 
 > **get** **video**(): [`VideoBlock`](../interfaces/videoblock.md)[]
 
-Defined in: [src/types/messages.ts:175](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L175)
+Defined in: [src/types/messages.ts:176](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L176)
 
 All video content blocks in this message.
 
@@ -215,7 +236,7 @@ All video content blocks in this message.
 
 > `protected` **getContent**(): [`ContentBlock`](../type-aliases/contentblock.md)[]
 
-Defined in: [src/types/messages.ts:318](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/messages.ts#L318)
+Defined in: [src/types/messages.ts:327](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/messages.ts#L327)
 
 Returns the content blocks for this message.
 Implemented by subclasses to provide type-specific content.

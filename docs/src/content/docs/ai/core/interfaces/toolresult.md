@@ -10,7 +10,7 @@ title: "Interface: ToolResult"
 
 # Interface: ToolResult
 
-Defined in: [src/types/tool.ts:77](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L77)
+Defined in: [src/types/tool.ts:77](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L77)
 
 Result of tool execution.
 
@@ -39,7 +39,7 @@ const errorResult: ToolResult = {
 
 > `optional` **isError**: `boolean`
 
-Defined in: [src/types/tool.ts:85](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L85)
+Defined in: [src/types/tool.ts:85](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L85)
 
 Whether the tool execution resulted in an error
 
@@ -49,7 +49,7 @@ Whether the tool execution resulted in an error
 
 > **result**: `unknown`
 
-Defined in: [src/types/tool.ts:82](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L82)
+Defined in: [src/types/tool.ts:82](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L82)
 
 The result data (can be any serializable value)
 
@@ -59,6 +59,6 @@ The result data (can be any serializable value)
 
 > **toolCallId**: `string`
 
-Defined in: [src/types/tool.ts:79](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L79)
+Defined in: [src/types/tool.ts:79](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L79)
 
 The tool call ID this result corresponds to

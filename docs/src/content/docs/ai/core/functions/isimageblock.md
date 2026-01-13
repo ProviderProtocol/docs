@@ -12,7 +12,7 @@ title: "Function: isImageBlock()"
 
 > **isImageBlock**(`block`): `block is ImageBlock`
 
-Defined in: [src/types/content.ts:338](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/content.ts#L338)
+Defined in: [src/types/content.ts:397](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L397)
 
 Type guard for ImageBlock.
 

@@ -68,7 +68,7 @@ Constructor accepts either a string (converted to TextBlock) or array of content
 | `toolCalls` | List&lt;ToolCall&gt;? | Tool calls requested by the model |
 | `hasToolCalls` | Boolean | Convenience: true if toolCalls is non-empty |
 
-`AssistantContent` can be: `TextBlock`, `ImageBlock`, `AudioBlock`, `VideoBlock`
+`AssistantContent` can be: `TextBlock`, `ReasoningBlock`, `ImageBlock`, `AudioBlock`, `VideoBlock`
 
 <Aside type="note">
 Models can return both text AND tool calls in a single response (e.g., "I'll check the weather for you." + tool call). `AssistantMessage` handles both cases.
@@ -133,6 +133,22 @@ Content blocks represent discrete pieces of content within messages.
   text: "Hello, world!"
 }
 ```
+
+**ReasoningBlock:**
+
+Contains model reasoning/thinking content from extended thinking or chain-of-thought models.
+This content represents the model's internal reasoning process before generating the final response.
+
+```text
+{
+  type: "reasoning",
+  text: "Let me think about this step by step..."
+}
+```
+
+<Aside type="note">
+Reasoning blocks are always placed before text blocks in assistant message content. Multi-turn context preservation for reasoning (signatures, encrypted content) is handled via provider-specific metadata fields.
+</Aside>
 
 **ImageBlock:**
 

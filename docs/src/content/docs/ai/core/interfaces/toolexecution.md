@@ -10,7 +10,7 @@ title: "Interface: ToolExecution"
 
 # Interface: ToolExecution
 
-Defined in: [src/types/tool.ts:284](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L284)
+Defined in: [src/types/tool.ts:284](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L284)
 
 Record of a completed tool execution.
 
@@ -37,7 +37,7 @@ const execution: ToolExecution = {
 
 > `optional` **approved**: `boolean`
 
-Defined in: [src/types/tool.ts:304](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L304)
+Defined in: [src/types/tool.ts:304](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L304)
 
 Whether approval was required and granted (undefined if no approval handler)
 
@@ -47,7 +47,7 @@ Whether approval was required and granted (undefined if no approval handler)
 
 > **arguments**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/tool.ts:292](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L292)
+Defined in: [src/types/tool.ts:292](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L292)
 
 Arguments that were passed to the tool
 
@@ -57,7 +57,7 @@ Arguments that were passed to the tool
 
 > **duration**: `number`
 
-Defined in: [src/types/tool.ts:301](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L301)
+Defined in: [src/types/tool.ts:301](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L301)
 
 Execution duration in milliseconds
 
@@ -67,7 +67,7 @@ Execution duration in milliseconds
 
 > **isError**: `boolean`
 
-Defined in: [src/types/tool.ts:298](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L298)
+Defined in: [src/types/tool.ts:298](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L298)
 
 Whether the tool execution resulted in an error
 
@@ -77,7 +77,7 @@ Whether the tool execution resulted in an error
 
 > **result**: `unknown`
 
-Defined in: [src/types/tool.ts:295](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L295)
+Defined in: [src/types/tool.ts:295](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L295)
 
 Result returned by the tool
 
@@ -87,7 +87,7 @@ Result returned by the tool
 
 > **toolCallId**: `string`
 
-Defined in: [src/types/tool.ts:289](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L289)
+Defined in: [src/types/tool.ts:289](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L289)
 
 Unique identifier for this tool call
 
@@ -97,6 +97,6 @@ Unique identifier for this tool call
 
 > **toolName**: `string`
 
-Defined in: [src/types/tool.ts:286](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/tool.ts#L286)
+Defined in: [src/types/tool.ts:286](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/tool.ts#L286)
 
 Name of the tool that was called

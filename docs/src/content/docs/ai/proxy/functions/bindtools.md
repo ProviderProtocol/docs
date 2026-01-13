@@ -12,7 +12,7 @@ title: "Function: bindTools()"
 
 > **bindTools**(`schemas`, `implementations`): [`Tool`](../../core/interfaces/tool.md)\<`unknown`, `unknown`\>[]
 
-Defined in: [src/providers/proxy/server/webapi.ts:199](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/proxy/server/webapi.ts#L199)
+Defined in: [src/providers/proxy/server/webapi.ts:199](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/server/webapi.ts#L199)
 
 Bind tool schemas to implementation functions.
 

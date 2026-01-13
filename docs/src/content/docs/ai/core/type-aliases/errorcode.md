@@ -12,7 +12,7 @@ title: "Type Alias: ErrorCode"
 
 > **ErrorCode** = *typeof* [`ErrorCode`](../variables/errorcode.md)\[keyof *typeof* [`ErrorCode`](../variables/errorcode.md)\]
 
-Defined in: [src/types/errors.ts:34](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/errors.ts#L34)
+Defined in: [src/types/errors.ts:34](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/errors.ts#L34)
 
 Error code discriminator union.
 

@@ -10,7 +10,7 @@ title: "Interface: OpenAIFileSearchTool"
 
 # Interface: OpenAIFileSearchTool
 
-Defined in: [src/providers/openai/types.ts:1105](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1105)
+Defined in: [src/providers/openai/types.ts:1151](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1151)
 
 File search tool for Responses API
 Enables the model to search through uploaded files
@@ -21,7 +21,7 @@ Enables the model to search through uploaded files
 
 > `optional` **file\_search**: `object`
 
-Defined in: [src/providers/openai/types.ts:1108](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1108)
+Defined in: [src/providers/openai/types.ts:1154](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1154)
 
 File search configuration
 
@@ -67,4 +67,4 @@ Vector store IDs to search
 
 > **type**: `"file_search"`
 
-Defined in: [src/providers/openai/types.ts:1106](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1106)
+Defined in: [src/providers/openai/types.ts:1152](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1152)

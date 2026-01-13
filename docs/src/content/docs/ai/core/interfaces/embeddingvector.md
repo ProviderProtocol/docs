@@ -10,7 +10,7 @@ title: "Interface: EmbeddingVector"
 
 # Interface: EmbeddingVector
 
-Defined in: [src/types/provider.ts:377](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/provider.ts#L377)
+Defined in: [src/types/provider.ts:377](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L377)
 
 **`Internal`**
 
@@ -22,7 +22,7 @@ Single vector from provider response.
 
 > **index**: `number`
 
-Defined in: [src/types/provider.ts:381](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/provider.ts#L381)
+Defined in: [src/types/provider.ts:381](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L381)
 
 Index in input array
 
@@ -32,7 +32,7 @@ Index in input array
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/provider.ts:385](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/provider.ts#L385)
+Defined in: [src/types/provider.ts:385](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L385)
 
 Provider-specific per-embedding metadata
 
@@ -42,7 +42,7 @@ Provider-specific per-embedding metadata
 
 > `optional` **tokens**: `number`
 
-Defined in: [src/types/provider.ts:383](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/provider.ts#L383)
+Defined in: [src/types/provider.ts:383](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L383)
 
 Token count for this input
 
@@ -52,6 +52,6 @@ Token count for this input
 
 > **vector**: `string` \| `number`[]
 
-Defined in: [src/types/provider.ts:379](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/types/provider.ts#L379)
+Defined in: [src/types/provider.ts:379](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L379)
 
 The embedding vector (floats or base64 string)

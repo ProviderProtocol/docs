@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/openai/types.ts:1481](https://github.com/ProviderProtocol/ai/blob/614741d3e657e2226392006c7d3d94c1280bb181/src/providers/openai/types.ts#L1481)
+Defined in: [src/providers/openai/types.ts:1527](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L1527)
 
 Namespace object containing all tool helper constructors.
 
@@ -198,7 +198,7 @@ Optional image generation settings
 
 ###### quality?
 
-`"auto"` \| `"high"` \| `"medium"` \| `"low"`
+`"auto"` \| `"low"` \| `"medium"` \| `"high"`
 
 ###### size?
 
@@ -295,7 +295,7 @@ Optional configuration for search behavior and user location
 
 ###### search_context_size?
 
-`"high"` \| `"medium"` \| `"low"`
+`"low"` \| `"medium"` \| `"high"`
 
 ###### user_location?
 
