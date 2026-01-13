@@ -12,7 +12,7 @@ title: "Type Alias: TurnJSON"
 
 > **TurnJSON** = `Omit`\<[`Turn`](../../core/interfaces/turn.md), `"messages"` \| `"response"`\> & `object`
 
-Defined in: [src/types/turn.ts:126](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/turn.ts#L126)
+Defined in: [src/types/turn.ts:126](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/turn.ts#L126)
 
 Turn serialized to JSON format.
 Messages are converted to MessageJSON, response is omitted (computed from messages).

@@ -10,7 +10,7 @@ title: "Interface: AudioBlock"
 
 # Interface: AudioBlock
 
-Defined in: [src/types/content.ts:201](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L201)
+Defined in: [src/types/content.ts:201](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/content.ts#L201)
 
 Audio content block.
 
@@ -33,7 +33,7 @@ const audioBlock: AudioBlock = {
 
 > **data**: `Uint8Array`
 
-Defined in: [src/types/content.ts:206](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L206)
+Defined in: [src/types/content.ts:206](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/content.ts#L206)
 
 Raw audio data
 
@@ -43,7 +43,7 @@ Raw audio data
 
 > `optional` **duration**: `number`
 
-Defined in: [src/types/content.ts:212](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L212)
+Defined in: [src/types/content.ts:212](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/content.ts#L212)
 
 Duration in seconds
 
@@ -53,7 +53,7 @@ Duration in seconds
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:209](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L209)
+Defined in: [src/types/content.ts:209](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/content.ts#L209)
 
 MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
@@ -63,6 +63,6 @@ MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
 > **type**: `"audio"`
 
-Defined in: [src/types/content.ts:203](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/content.ts#L203)
+Defined in: [src/types/content.ts:203](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/content.ts#L203)
 
 Discriminator for audio blocks

@@ -10,7 +10,7 @@ title: "Interface: Provider()"
 
 # Interface: Provider()\<TOptions\>
 
-Defined in: [src/types/provider.ts:430](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L430)
+Defined in: [src/types/provider.ts:430](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L430)
 
 Provider factory function with metadata and modality handlers.
 
@@ -47,7 +47,7 @@ Provider-specific options passed to the factory
 
 > **Provider**(`modelId`, `options?`): [`ModelReference`](modelreference.md)\<`TOptions`\>
 
-Defined in: [src/types/provider.ts:438](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L438)
+Defined in: [src/types/provider.ts:438](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L438)
 
 Creates a model reference with optional provider-specific options.
 
@@ -77,7 +77,7 @@ A model reference for use with llm() or other functions
 
 > `readonly` **name**: `string`
 
-Defined in: [src/types/provider.ts:441](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L441)
+Defined in: [src/types/provider.ts:441](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L441)
 
 Provider name (e.g., 'openai', 'anthropic')
 
@@ -91,7 +91,7 @@ Provider name (e.g., 'openai', 'anthropic')
 
 > `readonly` **version**: `string`
 
-Defined in: [src/types/provider.ts:444](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L444)
+Defined in: [src/types/provider.ts:444](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L444)
 
 Provider version string
 

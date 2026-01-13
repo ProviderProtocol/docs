@@ -10,7 +10,7 @@ title: "Interface: EmbeddingRequest"
 
 # Interface: EmbeddingRequest\<TParams\>
 
-Defined in: [src/types/provider.ts:349](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L349)
+Defined in: [src/types/provider.ts:349](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L349)
 
 **`Internal`**
 
@@ -28,7 +28,7 @@ Request passed to provider's embed method.
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/provider.ts:355](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L355)
+Defined in: [src/types/provider.ts:355](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L355)
 
 Provider infrastructure config
 
@@ -38,7 +38,7 @@ Provider infrastructure config
 
 > **inputs**: [`EmbeddingInput`](../type-aliases/embeddinginput.md)[]
 
-Defined in: [src/types/provider.ts:351](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L351)
+Defined in: [src/types/provider.ts:351](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L351)
 
 Inputs to embed
 
@@ -48,7 +48,7 @@ Inputs to embed
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/provider.ts:353](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L353)
+Defined in: [src/types/provider.ts:353](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L353)
 
 Provider-specific parameters (passed through unchanged)
 
@@ -58,6 +58,6 @@ Provider-specific parameters (passed through unchanged)
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/provider.ts:357](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L357)
+Defined in: [src/types/provider.ts:357](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L357)
 
 Abort signal for cancellation

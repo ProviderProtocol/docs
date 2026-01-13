@@ -10,7 +10,7 @@ title: "Interface: LLMRequest"
 
 # Interface: LLMRequest\<TParams\>
 
-Defined in: [src/types/llm.ts:231](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L231)
+Defined in: [src/types/llm.ts:231](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L231)
 
 **`Internal`**
 
@@ -34,7 +34,7 @@ Provider-specific parameter type
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/llm.ts:251](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L251)
+Defined in: [src/types/llm.ts:251](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L251)
 
 Provider infrastructure config (resolved by llm() core)
 
@@ -44,7 +44,7 @@ Provider infrastructure config (resolved by llm() core)
 
 > **messages**: [`Message`](../classes/message.md)[]
 
-Defined in: [src/types/llm.ts:233](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L233)
+Defined in: [src/types/llm.ts:233](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L233)
 
 All messages for this request (history + new input)
 
@@ -54,7 +54,7 @@ All messages for this request (history + new input)
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/llm.ts:242](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L242)
+Defined in: [src/types/llm.ts:242](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L242)
 
 Model-specific parameters (passed through unchanged)
 
@@ -64,7 +64,7 @@ Model-specific parameters (passed through unchanged)
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/llm.ts:254](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L254)
+Defined in: [src/types/llm.ts:254](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L254)
 
 Abort signal for cancellation
 
@@ -74,7 +74,7 @@ Abort signal for cancellation
 
 > `optional` **structure**: [`JSONSchema`](jsonschema.md)
 
-Defined in: [src/types/llm.ts:248](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L248)
+Defined in: [src/types/llm.ts:248](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L248)
 
 Structured output schema (if requested)
 
@@ -84,7 +84,7 @@ Structured output schema (if requested)
 
 > `optional` **system**: `string` \| `unknown`[]
 
-Defined in: [src/types/llm.ts:239](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L239)
+Defined in: [src/types/llm.ts:239](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L239)
 
 System prompt - string or provider-specific array format.
 Arrays are passed through directly to the provider.
@@ -95,6 +95,6 @@ Arrays are passed through directly to the provider.
 
 > `optional` **tools**: [`Tool`](tool.md)\<`unknown`, `unknown`\>[]
 
-Defined in: [src/types/llm.ts:245](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/llm.ts#L245)
+Defined in: [src/types/llm.ts:245](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/llm.ts#L245)
 
 Tools available for this request

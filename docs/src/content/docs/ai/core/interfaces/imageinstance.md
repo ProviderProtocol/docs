@@ -10,7 +10,7 @@ title: "Interface: ImageInstance"
 
 # Interface: ImageInstance\<TParams\>
 
-Defined in: [src/types/image.ts:182](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L182)
+Defined in: [src/types/image.ts:182](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L182)
 
 Image instance returned by the image() function.
 
@@ -45,7 +45,7 @@ Provider-specific parameter type
 
 > `readonly` **capabilities**: [`ImageCapabilities`](imagecapabilities.md)
 
-Defined in: [src/types/image.ts:217](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L217)
+Defined in: [src/types/image.ts:217](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L217)
 
 Model capabilities
 
@@ -55,7 +55,7 @@ Model capabilities
 
 > `readonly` **model**: [`BoundImageModel`](boundimagemodel.md)\<`TParams`\>
 
-Defined in: [src/types/image.ts:211](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L211)
+Defined in: [src/types/image.ts:211](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L211)
 
 The bound image model
 
@@ -65,7 +65,7 @@ The bound image model
 
 > `readonly` **params**: `TParams` \| `undefined`
 
-Defined in: [src/types/image.ts:214](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L214)
+Defined in: [src/types/image.ts:214](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L214)
 
 Current parameters
 
@@ -75,7 +75,7 @@ Current parameters
 
 > `optional` **edit**(`input`): `Promise`\<[`ImageResult`](imageresult.md)\>
 
-Defined in: [src/types/image.ts:208](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L208)
+Defined in: [src/types/image.ts:208](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L208)
 
 Edit an existing image (if supported).
 Only available when capabilities.edit is true.
@@ -100,7 +100,7 @@ Promise resolving to the edited images
 
 > **generate**(`input`, `options?`): `Promise`\<[`ImageResult`](imageresult.md)\>
 
-Defined in: [src/types/image.ts:190](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L190)
+Defined in: [src/types/image.ts:190](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L190)
 
 Generate images from a text prompt.
 
@@ -130,7 +130,7 @@ Promise resolving to the generated images
 
 > `optional` **stream**(`input`): [`ImageStreamResult`](imagestreamresult.md)
 
-Defined in: [src/types/image.ts:199](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L199)
+Defined in: [src/types/image.ts:199](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L199)
 
 Generate with streaming progress (if supported).
 Only available when capabilities.streaming is true.

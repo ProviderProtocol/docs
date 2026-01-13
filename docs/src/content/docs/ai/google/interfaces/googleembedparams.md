@@ -10,7 +10,7 @@ title: "Interface: GoogleEmbedParams"
 
 # Interface: GoogleEmbedParams
 
-Defined in: [src/providers/google/embed.ts:44](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/embed.ts#L44)
+Defined in: [src/providers/google/embed.ts:44](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/embed.ts#L44)
 
 Google embedding parameters.
 Passed through unchanged to the API.
@@ -21,7 +21,7 @@ Passed through unchanged to the API.
 
 > `optional` **autoTruncate**: `boolean`
 
-Defined in: [src/providers/google/embed.ts:52](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/embed.ts#L52)
+Defined in: [src/providers/google/embed.ts:52](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/embed.ts#L52)
 
 Whether to automatically truncate inputs exceeding token limits (default: true)
 
@@ -31,7 +31,7 @@ Whether to automatically truncate inputs exceeding token limits (default: true)
 
 > `optional` **outputDimensionality**: `number`
 
-Defined in: [src/providers/google/embed.ts:50](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/embed.ts#L50)
+Defined in: [src/providers/google/embed.ts:50](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/embed.ts#L50)
 
 Output dimensionality
 
@@ -41,7 +41,7 @@ Output dimensionality
 
 > `optional` **taskType**: [`GoogleTaskType`](../type-aliases/googletasktype.md)
 
-Defined in: [src/providers/google/embed.ts:46](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/embed.ts#L46)
+Defined in: [src/providers/google/embed.ts:46](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/embed.ts#L46)
 
 Task type for optimization
 
@@ -51,6 +51,6 @@ Task type for optimization
 
 > `optional` **title**: `string`
 
-Defined in: [src/providers/google/embed.ts:48](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/embed.ts#L48)
+Defined in: [src/providers/google/embed.ts:48](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/embed.ts#L48)
 
 Document title (for RETRIEVAL_DOCUMENT taskType)

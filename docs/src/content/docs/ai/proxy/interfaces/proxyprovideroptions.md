@@ -10,7 +10,7 @@ title: "Interface: ProxyProviderOptions"
 
 # Interface: ProxyProviderOptions
 
-Defined in: [src/providers/proxy/types.ts:24](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/types.ts#L24)
+Defined in: [src/providers/proxy/types.ts:24](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/proxy/types.ts#L24)
 
 Configuration options for creating a proxy provider.
 
@@ -20,7 +20,7 @@ Configuration options for creating a proxy provider.
 
 > **endpoint**: `string`
 
-Defined in: [src/providers/proxy/types.ts:26](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/types.ts#L26)
+Defined in: [src/providers/proxy/types.ts:26](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/proxy/types.ts#L26)
 
 The endpoint URL to proxy requests to
 
@@ -30,7 +30,7 @@ The endpoint URL to proxy requests to
 
 > `optional` **fetch**: *typeof* `fetch`
 
-Defined in: [src/providers/proxy/types.ts:32](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/types.ts#L32)
+Defined in: [src/providers/proxy/types.ts:32](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/proxy/types.ts#L32)
 
 Custom fetch implementation
 
@@ -40,7 +40,7 @@ Custom fetch implementation
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/proxy/types.ts:29](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/types.ts#L29)
+Defined in: [src/providers/proxy/types.ts:29](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/proxy/types.ts#L29)
 
 Default headers to include in all requests
 
@@ -50,6 +50,6 @@ Default headers to include in all requests
 
 > `optional` **timeout**: `number`
 
-Defined in: [src/providers/proxy/types.ts:35](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/proxy/types.ts#L35)
+Defined in: [src/providers/proxy/types.ts:35](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/proxy/types.ts#L35)
 
 Request timeout in milliseconds (default: 120000)

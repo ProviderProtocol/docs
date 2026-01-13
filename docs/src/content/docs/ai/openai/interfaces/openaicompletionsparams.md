@@ -10,7 +10,7 @@ title: "Interface: OpenAICompletionsParams"
 
 # Interface: OpenAICompletionsParams
 
-Defined in: [src/providers/openai/types.ts:128](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L128)
+Defined in: [src/providers/openai/types.ts:128](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L128)
 
 Parameters for the OpenAI Chat Completions API.
 
@@ -38,7 +38,7 @@ const params: OpenAICompletionsParams = {
 
 > `optional` **audio**: [`OpenAIAudioConfig`](openaiaudioconfig.md) \| `null`
 
-Defined in: [src/providers/openai/types.ts:226](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L226)
+Defined in: [src/providers/openai/types.ts:226](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L226)
 
 Audio output configuration
 Required when modalities includes "audio"
@@ -49,7 +49,7 @@ Required when modalities includes "audio"
 
 > `optional` **frequency\_penalty**: `number`
 
-Defined in: [src/providers/openai/types.ts:142](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L142)
+Defined in: [src/providers/openai/types.ts:142](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L142)
 
 Frequency penalty (-2.0 - 2.0)
 
@@ -59,7 +59,7 @@ Frequency penalty (-2.0 - 2.0)
 
 > `optional` **logit\_bias**: `Record`\<`string`, `number`\>
 
-Defined in: [src/providers/openai/types.ts:166](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L166)
+Defined in: [src/providers/openai/types.ts:166](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L166)
 
 Logit bias map
 
@@ -69,7 +69,7 @@ Logit bias map
 
 > `optional` **logprobs**: `boolean`
 
-Defined in: [src/providers/openai/types.ts:154](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L154)
+Defined in: [src/providers/openai/types.ts:154](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L154)
 
 Enable logprobs
 
@@ -79,7 +79,7 @@ Enable logprobs
 
 > `optional` **max\_completion\_tokens**: `number`
 
-Defined in: [src/providers/openai/types.ts:133](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L133)
+Defined in: [src/providers/openai/types.ts:133](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L133)
 
 Maximum completion tokens (preferred for newer models)
 
@@ -89,7 +89,7 @@ Maximum completion tokens (preferred for newer models)
 
 > `optional` **max\_tokens**: `number`
 
-Defined in: [src/providers/openai/types.ts:130](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L130)
+Defined in: [src/providers/openai/types.ts:130](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L130)
 
 Maximum number of tokens to generate (legacy, prefer max_completion_tokens)
 
@@ -99,7 +99,7 @@ Maximum number of tokens to generate (legacy, prefer max_completion_tokens)
 
 > `optional` **metadata**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/openai/types.ts:184](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L184)
+Defined in: [src/providers/openai/types.ts:184](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L184)
 
 Metadata key-value pairs (max 16, keys max 64 chars, values max 512 chars)
 
@@ -109,7 +109,7 @@ Metadata key-value pairs (max 16, keys max 64 chars, values max 512 chars)
 
 > `optional` **modalities**: (`"text"` \| `"audio"`)[]
 
-Defined in: [src/providers/openai/types.ts:220](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L220)
+Defined in: [src/providers/openai/types.ts:220](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L220)
 
 Output modalities to generate
 Default: ["text"]. Use ["text", "audio"] for audio-capable models
@@ -120,7 +120,7 @@ Default: ["text"]. Use ["text", "audio"] for audio-capable models
 
 > `optional` **n**: `number`
 
-Defined in: [src/providers/openai/types.ts:151](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L151)
+Defined in: [src/providers/openai/types.ts:151](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L151)
 
 Number of completions to generate
 
@@ -130,7 +130,7 @@ Number of completions to generate
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/openai/types.ts:172](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L172)
+Defined in: [src/providers/openai/types.ts:172](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L172)
 
 Whether to enable parallel tool calls
 
@@ -140,7 +140,7 @@ Whether to enable parallel tool calls
 
 > `optional` **prediction**: `object`
 
-Defined in: [src/providers/openai/types.ts:193](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L193)
+Defined in: [src/providers/openai/types.ts:193](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L193)
 
 Predicted Output configuration for faster regeneration
 Improves response times when large parts of the response are known ahead of time
@@ -159,7 +159,7 @@ Improves response times when large parts of the response are known ahead of time
 
 > `optional` **presence\_penalty**: `number`
 
-Defined in: [src/providers/openai/types.ts:145](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L145)
+Defined in: [src/providers/openai/types.ts:145](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L145)
 
 Presence penalty (-2.0 - 2.0)
 
@@ -169,7 +169,7 @@ Presence penalty (-2.0 - 2.0)
 
 > `optional` **prompt\_cache\_key**: `string`
 
-Defined in: [src/providers/openai/types.ts:202](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L202)
+Defined in: [src/providers/openai/types.ts:202](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L202)
 
 Stable identifier for caching similar requests
 Used to optimize cache hit rates (replaces user field)
@@ -180,7 +180,7 @@ Used to optimize cache hit rates (replaces user field)
 
 > `optional` **prompt\_cache\_retention**: `"in-memory"` \| `"24h"`
 
-Defined in: [src/providers/openai/types.ts:208](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L208)
+Defined in: [src/providers/openai/types.ts:208](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L208)
 
 Retention policy for prompt cache
 Set to "24h" to enable extended prompt caching up to 24 hours
@@ -191,7 +191,7 @@ Set to "24h" to enable extended prompt caching up to 24 hours
 
 > `optional` **reasoning\_effort**: `"minimal"` \| `"low"` \| `"medium"` \| `"high"` \| `"none"` \| `"xhigh"`
 
-Defined in: [src/providers/openai/types.ts:175](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L175)
+Defined in: [src/providers/openai/types.ts:175](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L175)
 
 Reasoning effort for reasoning models
 
@@ -201,7 +201,7 @@ Reasoning effort for reasoning models
 
 > `optional` **response\_format**: `OpenAIResponseFormat`
 
-Defined in: [src/providers/openai/types.ts:187](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L187)
+Defined in: [src/providers/openai/types.ts:187](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L187)
 
 Response format for structured output
 
@@ -211,7 +211,7 @@ Response format for structured output
 
 > `optional` **safety\_identifier**: `string`
 
-Defined in: [src/providers/openai/types.ts:214](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L214)
+Defined in: [src/providers/openai/types.ts:214](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L214)
 
 Stable identifier for abuse detection
 Recommend hashing username or email address
@@ -222,7 +222,7 @@ Recommend hashing username or email address
 
 > `optional` **seed**: `number`
 
-Defined in: [src/providers/openai/types.ts:160](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L160)
+Defined in: [src/providers/openai/types.ts:160](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L160)
 
 Seed for deterministic sampling (beta, deprecated)
 
@@ -232,7 +232,7 @@ Seed for deterministic sampling (beta, deprecated)
 
 > `optional` **service\_tier**: `"default"` \| `"auto"` \| `"priority"` \| `"flex"` \| `"scale"`
 
-Defined in: [src/providers/openai/types.ts:178](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L178)
+Defined in: [src/providers/openai/types.ts:178](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L178)
 
 Service tier
 
@@ -242,7 +242,7 @@ Service tier
 
 > `optional` **stop**: `string` \| `string`[]
 
-Defined in: [src/providers/openai/types.ts:148](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L148)
+Defined in: [src/providers/openai/types.ts:148](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L148)
 
 Custom stop sequences
 
@@ -252,7 +252,7 @@ Custom stop sequences
 
 > `optional` **store**: `boolean`
 
-Defined in: [src/providers/openai/types.ts:181](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L181)
+Defined in: [src/providers/openai/types.ts:181](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L181)
 
 Store completion for distillation
 
@@ -262,7 +262,7 @@ Store completion for distillation
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/openai/types.ts:136](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L136)
+Defined in: [src/providers/openai/types.ts:136](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L136)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -272,7 +272,7 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_logprobs**: `number`
 
-Defined in: [src/providers/openai/types.ts:157](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L157)
+Defined in: [src/providers/openai/types.ts:157](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L157)
 
 Number of top logprobs to return (0-20)
 
@@ -282,7 +282,7 @@ Number of top logprobs to return (0-20)
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/openai/types.ts:139](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L139)
+Defined in: [src/providers/openai/types.ts:139](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L139)
 
 Top-p (nucleus) sampling (0.0 - 1.0)
 
@@ -292,7 +292,7 @@ Top-p (nucleus) sampling (0.0 - 1.0)
 
 > `optional` **user**: `string`
 
-Defined in: [src/providers/openai/types.ts:163](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L163)
+Defined in: [src/providers/openai/types.ts:163](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L163)
 
 User identifier (deprecated, use safety_identifier or prompt_cache_key)
 
@@ -302,7 +302,7 @@ User identifier (deprecated, use safety_identifier or prompt_cache_key)
 
 > `optional` **verbosity**: `"low"` \| `"medium"` \| `"high"`
 
-Defined in: [src/providers/openai/types.ts:169](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L169)
+Defined in: [src/providers/openai/types.ts:169](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L169)
 
 Verbosity control
 
@@ -312,7 +312,7 @@ Verbosity control
 
 > `optional` **web\_search\_options**: [`OpenAIWebSearchOptions`](openaiwebsearchoptions.md)
 
-Defined in: [src/providers/openai/types.ts:232](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/openai/types.ts#L232)
+Defined in: [src/providers/openai/types.ts:232](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/openai/types.ts#L232)
 
 Web search configuration
 Enables the model to search the web for up-to-date information

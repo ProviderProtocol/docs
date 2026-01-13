@@ -10,7 +10,7 @@ title: "Interface: GoogleCodeExecutionTool"
 
 # Interface: GoogleCodeExecutionTool
 
-Defined in: [src/providers/google/types.ts:623](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/types.ts#L623)
+Defined in: [src/providers/google/types.ts:623](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/types.ts#L623)
 
 Code execution tool for running Python in a sandbox.
 
@@ -33,6 +33,6 @@ const tool: GoogleCodeExecutionTool = {
 
 > **codeExecution**: `Record`\<`string`, `never`\>
 
-Defined in: [src/providers/google/types.ts:625](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/types.ts#L625)
+Defined in: [src/providers/google/types.ts:625](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/types.ts#L625)
 
 Empty object to enable code execution

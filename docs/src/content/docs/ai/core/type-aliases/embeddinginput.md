@@ -12,6 +12,6 @@ title: "Type Alias: EmbeddingInput"
 
 > **EmbeddingInput** = `string` \| \{ `text`: `string`; `type`: `"text"`; \} \| \{ `mimeType`: `string`; `source`: `unknown`; `type`: `"image"`; \}
 
-Defined in: [src/types/provider.ts:399](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/provider.ts#L399)
+Defined in: [src/types/provider.ts:399](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/provider.ts#L399)
 
 Valid input types for embedding.

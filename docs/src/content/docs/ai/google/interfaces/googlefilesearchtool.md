@@ -10,7 +10,7 @@ title: "Interface: GoogleFileSearchTool"
 
 # Interface: GoogleFileSearchTool
 
-Defined in: [src/providers/google/types.ts:698](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/types.ts#L698)
+Defined in: [src/providers/google/types.ts:698](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/types.ts#L698)
 
 File search (RAG) tool for document retrieval.
 
@@ -39,7 +39,7 @@ const tool: GoogleFileSearchTool = {
 
 > **fileSearch**: `object`
 
-Defined in: [src/providers/google/types.ts:700](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/providers/google/types.ts#L700)
+Defined in: [src/providers/google/types.ts:700](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/providers/google/types.ts#L700)
 
 File search configuration
 

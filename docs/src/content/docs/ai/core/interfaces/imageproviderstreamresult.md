@@ -10,7 +10,7 @@ title: "Interface: ImageProviderStreamResult"
 
 # Interface: ImageProviderStreamResult
 
-Defined in: [src/types/image.ts:282](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L282)
+Defined in: [src/types/image.ts:282](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L282)
 
 **`Internal`**
 
@@ -27,7 +27,7 @@ An async iterable of ImageStreamEvent with a response promise.
 
 > `readonly` **response**: `Promise`\<[`ImageResponse`](imageresponse.md)\>
 
-Defined in: [src/types/image.ts:284](https://github.com/ProviderProtocol/ai/blob/d0a0f358c6b8c58fc9a8cd28150905af4f932d7a/src/types/image.ts#L284)
+Defined in: [src/types/image.ts:284](https://github.com/ProviderProtocol/ai/blob/94111b2134ab64c6a897065c214032fc433bd2e7/src/types/image.ts#L284)
 
 Promise resolving to the complete response
 
