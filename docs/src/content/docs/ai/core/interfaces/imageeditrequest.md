@@ -10,7 +10,7 @@ title: "Interface: ImageEditRequest"
 
 # Interface: ImageEditRequest\<TParams\>
 
-Defined in: [src/types/image.ts:242](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L242)
+Defined in: [src/types/image.ts:242](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L242)
 
 **`Internal`**
 
@@ -28,7 +28,7 @@ Request passed to providers for edit operations.
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/image.ts:256](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L256)
+Defined in: [src/types/image.ts:256](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L256)
 
 Provider infrastructure config
 
@@ -38,7 +38,7 @@ Provider infrastructure config
 
 > **image**: [`Image`](../classes/image.md)
 
-Defined in: [src/types/image.ts:244](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L244)
+Defined in: [src/types/image.ts:244](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L244)
 
 Base image to edit
 
@@ -48,7 +48,7 @@ Base image to edit
 
 > `optional` **mask**: [`Image`](../classes/image.md)
 
-Defined in: [src/types/image.ts:247](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L247)
+Defined in: [src/types/image.ts:247](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L247)
 
 Edit mask
 
@@ -58,7 +58,7 @@ Edit mask
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/image.ts:253](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L253)
+Defined in: [src/types/image.ts:253](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L253)
 
 Provider-specific parameters
 
@@ -68,7 +68,7 @@ Provider-specific parameters
 
 > **prompt**: `string`
 
-Defined in: [src/types/image.ts:250](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L250)
+Defined in: [src/types/image.ts:250](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L250)
 
 Edit instruction prompt
 
@@ -78,6 +78,6 @@ Edit instruction prompt
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/image.ts:259](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L259)
+Defined in: [src/types/image.ts:259](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L259)
 
 Abort signal for cancellation

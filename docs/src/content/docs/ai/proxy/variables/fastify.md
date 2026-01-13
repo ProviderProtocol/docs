@@ -12,11 +12,35 @@ title: "Variable: fastify"
 
 > `const` **fastify**: `object`
 
-Defined in: [src/providers/proxy/server/fastify.ts:168](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/fastify.ts#L168)
+Defined in: [src/providers/proxy/server/fastify.ts:231](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/fastify.ts#L231)
 
 Fastify adapter utilities.
 
 ## Type Declaration
+
+### sendEmbeddingJSON()
+
+> **sendEmbeddingJSON**: (`result`, `reply`) => `FastifyReply`
+
+Send an EmbeddingResult as JSON response.
+
+#### Parameters
+
+##### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+##### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+#### Returns
+
+`FastifyReply`
 
 ### sendError()
 
@@ -37,6 +61,30 @@ Error message
 `number`
 
 HTTP status code
+
+##### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+#### Returns
+
+`FastifyReply`
+
+### sendImageJSON()
+
+> **sendImageJSON**: (`result`, `reply`) => `FastifyReply`
+
+Send an ImageResult as JSON response.
+
+#### Parameters
+
+##### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
 
 ##### reply
 
@@ -78,6 +126,30 @@ Fastify reply object
 const turn = await instance.generate(messages);
 return fastifyAdapter.sendJSON(turn, reply);
 ```
+
+### streamImageSSE()
+
+> **streamImageSSE**: (`stream`, `reply`) => `FastifyReply`
+
+Stream an ImageStreamResult as Server-Sent Events.
+
+#### Parameters
+
+##### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+##### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+#### Returns
+
+`FastifyReply`
 
 ### streamSSE()
 

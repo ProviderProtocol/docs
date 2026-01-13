@@ -10,7 +10,7 @@ title: "Interface: ImageUsage"
 
 # Interface: ImageUsage
 
-Defined in: [src/types/image.ts:97](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L97)
+Defined in: [src/types/image.ts:97](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L97)
 
 Usage statistics for image generation.
 Fields are optional because providers report usage differently.
@@ -21,7 +21,7 @@ Fields are optional because providers report usage differently.
 
 > `optional` **cost**: `number`
 
-Defined in: [src/types/image.ts:108](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L108)
+Defined in: [src/types/image.ts:108](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L108)
 
 Provider-reported cost (credits, dollars, etc.)
 
@@ -31,7 +31,7 @@ Provider-reported cost (credits, dollars, etc.)
 
 > `optional` **imagesGenerated**: `number`
 
-Defined in: [src/types/image.ts:99](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L99)
+Defined in: [src/types/image.ts:99](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L99)
 
 Number of images generated
 
@@ -41,7 +41,7 @@ Number of images generated
 
 > `optional` **inputTokens**: `number`
 
-Defined in: [src/types/image.ts:102](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L102)
+Defined in: [src/types/image.ts:102](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L102)
 
 Input tokens consumed (token-based pricing)
 
@@ -51,6 +51,6 @@ Input tokens consumed (token-based pricing)
 
 > `optional` **outputTokens**: `number`
 
-Defined in: [src/types/image.ts:105](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/image.ts#L105)
+Defined in: [src/types/image.ts:105](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L105)
 
 Output tokens consumed (token-based pricing)

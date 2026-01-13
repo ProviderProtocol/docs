@@ -12,11 +12,35 @@ title: "Variable: express"
 
 > `const` **express**: `object`
 
-Defined in: [src/providers/proxy/server/express.ts:161](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/express.ts#L161)
+Defined in: [src/providers/proxy/server/express.ts:217](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/express.ts#L217)
 
 Express adapter utilities.
 
 ## Type Declaration
+
+### sendEmbeddingJSON()
+
+> **sendEmbeddingJSON**: (`result`, `res`) => `void`
+
+Send an EmbeddingResult as JSON response.
+
+#### Parameters
+
+##### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+##### res
+
+`ExpressResponse`
+
+Express response object
+
+#### Returns
+
+`void`
 
 ### sendError()
 
@@ -37,6 +61,30 @@ Error message
 `number`
 
 HTTP status code
+
+##### res
+
+`ExpressResponse`
+
+Express response object
+
+#### Returns
+
+`void`
+
+### sendImageJSON()
+
+> **sendImageJSON**: (`result`, `res`) => `void`
+
+Send an ImageResult as JSON response.
+
+#### Parameters
+
+##### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
 
 ##### res
 
@@ -78,6 +126,30 @@ Express response object
 const turn = await instance.generate(messages);
 expressAdapter.sendJSON(turn, res);
 ```
+
+### streamImageSSE()
+
+> **streamImageSSE**: (`stream`, `res`) => `void`
+
+Stream an ImageStreamResult as Server-Sent Events.
+
+#### Parameters
+
+##### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+##### res
+
+`ExpressResponse`
+
+Express response object
+
+#### Returns
+
+`void`
 
 ### streamSSE()
 

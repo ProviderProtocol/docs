@@ -10,7 +10,7 @@ title: "Interface: GoogleUrlContextTool"
 
 # Interface: GoogleUrlContextTool
 
-Defined in: [src/providers/google/types.ts:692](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/google/types.ts#L692)
+Defined in: [src/providers/google/types.ts:692](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L692)
 
 URL context tool for fetching and processing URLs.
 
@@ -35,6 +35,6 @@ const tool: GoogleUrlContextTool = {
 
 > **urlContext**: `Record`\<`string`, `never`\>
 
-Defined in: [src/providers/google/types.ts:694](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/google/types.ts#L694)
+Defined in: [src/providers/google/types.ts:694](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L694)
 
 Empty object to enable URL context

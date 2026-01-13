@@ -12,7 +12,7 @@ title: "Function: isAudioBlock()"
 
 > **isAudioBlock**(`block`): `block is AudioBlock`
 
-Defined in: [src/types/content.ts:414](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/content.ts#L414)
+Defined in: [src/types/content.ts:414](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L414)
 
 Type guard for AudioBlock.
 

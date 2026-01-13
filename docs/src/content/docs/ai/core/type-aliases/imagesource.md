@@ -12,7 +12,7 @@ title: "Type Alias: ImageSource"
 
 > **ImageSource** = \{ `data`: `string`; `type`: `"base64"`; \} \| \{ `type`: `"url"`; `url`: `string`; \} \| \{ `data`: `Uint8Array`; `type`: `"bytes"`; \}
 
-Defined in: [src/types/content.ts:105](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/content.ts#L105)
+Defined in: [src/types/content.ts:105](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L105)
 
 Image source variants for ImageBlock.
 

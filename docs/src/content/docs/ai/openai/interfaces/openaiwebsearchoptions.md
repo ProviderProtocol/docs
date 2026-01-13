@@ -10,7 +10,7 @@ title: "Interface: OpenAIWebSearchOptions"
 
 # Interface: OpenAIWebSearchOptions
 
-Defined in: [src/providers/openai/types.ts:100](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/openai/types.ts#L100)
+Defined in: [src/providers/openai/types.ts:100](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L100)
 
 Web search configuration options for the Chat Completions API.
 
@@ -23,7 +23,7 @@ Use with models that support web search (e.g., gpt-4o-search-preview).
 
 > `optional` **search\_context\_size**: `"low"` \| `"medium"` \| `"high"`
 
-Defined in: [src/providers/openai/types.ts:105](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/openai/types.ts#L105)
+Defined in: [src/providers/openai/types.ts:105](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L105)
 
 Context size for search results
 Controls how much context from web results to include
@@ -34,6 +34,6 @@ Controls how much context from web results to include
 
 > `optional` **user\_location**: [`OpenAICompletionsWebSearchUserLocation`](openaicompletionswebsearchuserlocation.md) \| `null`
 
-Defined in: [src/providers/openai/types.ts:107](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/openai/types.ts#L107)
+Defined in: [src/providers/openai/types.ts:107](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L107)
 
 User location for localizing search results

@@ -10,7 +10,7 @@ title: "Interface: ProxyRequestOptions"
 
 # Interface: ProxyRequestOptions
 
-Defined in: [src/providers/proxy/types.ts:41](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/types.ts#L41)
+Defined in: [src/providers/proxy/types.ts:63](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/types.ts#L63)
 
 Per-request options for proxy calls.
 
@@ -20,6 +20,6 @@ Per-request options for proxy calls.
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/proxy/types.ts:43](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/types.ts#L43)
+Defined in: [src/providers/proxy/types.ts:65](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/types.ts#L65)
 
 Additional headers for this request

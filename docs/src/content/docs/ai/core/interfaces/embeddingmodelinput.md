@@ -10,7 +10,7 @@ title: "Interface: EmbeddingModelInput"
 
 # Interface: EmbeddingModelInput
 
-Defined in: [src/types/embedding.ts:28](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L28)
+Defined in: [src/types/embedding.ts:28](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L28)
 
 Structural type for embedding model input.
 Uses structural typing to avoid generic variance issues with Provider generics.
@@ -30,7 +30,7 @@ ModelReference
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/embedding.ts:29](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L29)
+Defined in: [src/types/embedding.ts:29](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L29)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/embedding.ts:29](https://github.com/ProviderProtocol/ai/b
 
 > `readonly` **provider**: [`ProviderIdentity`](provideridentity.md)
 
-Defined in: [src/types/embedding.ts:30](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L30)
+Defined in: [src/types/embedding.ts:30](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L30)
 
 ***
 
@@ -46,6 +46,6 @@ Defined in: [src/types/embedding.ts:30](https://github.com/ProviderProtocol/ai/b
 
 > `readonly` `optional` **providerConfig**: `Partial`\<[`ProviderConfig`](providerconfig.md)\>
 
-Defined in: [src/types/embedding.ts:32](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L32)
+Defined in: [src/types/embedding.ts:32](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L32)
 
 Optional provider configuration merged into requests

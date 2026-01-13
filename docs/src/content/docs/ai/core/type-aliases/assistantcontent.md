@@ -12,7 +12,7 @@ title: "Type Alias: AssistantContent"
 
 > **AssistantContent** = [`TextBlock`](../interfaces/textblock.md) \| [`ReasoningBlock`](../interfaces/reasoningblock.md) \| [`ImageBlock`](../interfaces/imageblock.md) \| [`AudioBlock`](../interfaces/audioblock.md) \| [`VideoBlock`](../interfaces/videoblock.md)
 
-Defined in: [src/types/content.ts:311](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/content.ts#L311)
+Defined in: [src/types/content.ts:311](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L311)
 
 Content types allowed in assistant messages.
 

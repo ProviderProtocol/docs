@@ -12,7 +12,7 @@ title: "Function: parseSimpleTextStream()"
 
 > **parseSimpleTextStream**(`body`): `AsyncGenerator`\<`string`, `void`, `unknown`\>
 
-Defined in: [src/http/sse.ts:173](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/http/sse.ts#L173)
+Defined in: [src/http/sse.ts:173](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/http/sse.ts#L173)
 
 Parses a simple text stream without SSE formatting.
 

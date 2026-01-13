@@ -12,7 +12,7 @@ title: "Function: toJSON()"
 
 > **toJSON**(`turn`): `Response`
 
-Defined in: [src/providers/proxy/server/webapi.ts:108](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/webapi.ts#L108)
+Defined in: [src/providers/proxy/server/webapi.ts:210](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L210)
 
 Create a JSON Response from a Turn.
 

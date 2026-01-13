@@ -10,7 +10,7 @@ title: "Interface: EmbeddingOptions"
 
 # Interface: EmbeddingOptions\<TParams\>
 
-Defined in: [src/types/embedding.ts:49](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L49)
+Defined in: [src/types/embedding.ts:49](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L49)
 
 Options for creating an embedding instance with the embedding() function.
 
@@ -38,7 +38,7 @@ Provider-specific parameter type
 
 > `optional` **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/embedding.ts:54](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L54)
+Defined in: [src/types/embedding.ts:54](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L54)
 
 Provider infrastructure configuration
 
@@ -48,7 +48,7 @@ Provider infrastructure configuration
 
 > **model**: [`EmbeddingModelInput`](embeddingmodelinput.md)
 
-Defined in: [src/types/embedding.ts:51](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L51)
+Defined in: [src/types/embedding.ts:51](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L51)
 
 A model reference from a provider factory
 
@@ -58,6 +58,6 @@ A model reference from a provider factory
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/embedding.ts:57](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/embedding.ts#L57)
+Defined in: [src/types/embedding.ts:57](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/embedding.ts#L57)
 
 Provider-specific parameters (passed through unchanged)

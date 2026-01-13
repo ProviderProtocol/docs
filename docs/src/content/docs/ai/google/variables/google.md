@@ -12,7 +12,7 @@ title: "Variable: google"
 
 > `const` **google**: [`Provider`](../../core/interfaces/provider.md)\<`unknown`\> & `object`
 
-Defined in: [src/providers/google/index.ts:74](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/google/index.ts#L74)
+Defined in: [src/providers/google/index.ts:74](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/index.ts#L74)
 
 Google Gemini provider for the Unified Provider Protocol (UPP).
 

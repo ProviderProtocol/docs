@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/anthropic/types.ts:1174](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/anthropic/types.ts#L1174)
+Defined in: [src/providers/anthropic/types.ts:1174](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/anthropic/types.ts#L1174)
 
 Namespace object containing all Anthropic tool helper constructors.
 

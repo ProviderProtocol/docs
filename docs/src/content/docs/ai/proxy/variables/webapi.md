@@ -12,7 +12,7 @@ title: "Variable: webapi"
 
 > `const` **webapi**: `object`
 
-Defined in: [src/providers/proxy/server/webapi.ts:284](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/webapi.ts#L284)
+Defined in: [src/providers/proxy/server/webapi.ts:452](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L452)
 
 Web API adapter utilities.
 
@@ -96,6 +96,66 @@ const instance = llm({ model: anthropic('...'), system, params });
 const turn = await instance.generate(messages);
 ```
 
+### parseEmbeddingBody()
+
+> **parseEmbeddingBody**: (`body`) => [`ParsedEmbeddingRequest`](../interfaces/parsedembeddingrequest.md)
+
+Parse an HTTP request body into embedding inputs.
+
+#### Parameters
+
+##### body
+
+`unknown`
+
+The JSON-parsed request body
+
+#### Returns
+
+[`ParsedEmbeddingRequest`](../interfaces/parsedembeddingrequest.md)
+
+Parsed embedding request data
+
+### parseImageBody()
+
+> **parseImageBody**: (`body`) => [`ParsedImageRequest`](../interfaces/parsedimagerequest.md)
+
+Parse an HTTP request body into image request data.
+
+#### Parameters
+
+##### body
+
+`unknown`
+
+The JSON-parsed request body
+
+#### Returns
+
+[`ParsedImageRequest`](../interfaces/parsedimagerequest.md)
+
+Parsed image request data
+
+### toEmbeddingJSON()
+
+> **toEmbeddingJSON**: (`result`) => `Response`
+
+Create a JSON Response from an embedding result.
+
+#### Parameters
+
+##### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+#### Returns
+
+`Response`
+
+HTTP Response with JSON body
+
 ### toError()
 
 > **toError**: (`message`, `status`) => `Response`
@@ -121,6 +181,48 @@ HTTP status code (default: 500)
 `Response`
 
 HTTP Response with error body
+
+### toImageJSON()
+
+> **toImageJSON**: (`result`) => `Response`
+
+Create a JSON Response from an image result.
+
+#### Parameters
+
+##### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
+
+#### Returns
+
+`Response`
+
+HTTP Response with JSON body
+
+### toImageSSE()
+
+> **toImageSSE**: (`stream`) => `Response`
+
+Create an SSE Response from an ImageStreamResult.
+
+Streams image events as SSE, then sends the final image result.
+
+#### Parameters
+
+##### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+#### Returns
+
+`Response`
+
+HTTP Response with SSE body
 
 ### toJSON()
 

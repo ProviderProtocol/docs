@@ -10,7 +10,7 @@ title: "Interface: LLMInstance"
 
 # Interface: LLMInstance\<TParams\>
 
-Defined in: [src/types/llm.ts:174](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L174)
+Defined in: [src/types/llm.ts:174](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L174)
 
 LLM instance returned by the llm() function.
 
@@ -52,7 +52,7 @@ Provider-specific parameter type
 
 > `readonly` **capabilities**: [`LLMCapabilities`](llmcapabilities.md)
 
-Defined in: [src/types/llm.ts:218](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L218)
+Defined in: [src/types/llm.ts:218](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L218)
 
 Provider API capabilities
 
@@ -62,7 +62,7 @@ Provider API capabilities
 
 > `readonly` **model**: [`BoundLLMModel`](boundllmmodel.md)\<`TParams`\>
 
-Defined in: [src/types/llm.ts:209](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L209)
+Defined in: [src/types/llm.ts:209](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L209)
 
 The bound model instance
 
@@ -72,7 +72,7 @@ The bound model instance
 
 > `readonly` **params**: `TParams` \| `undefined`
 
-Defined in: [src/types/llm.ts:215](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L215)
+Defined in: [src/types/llm.ts:215](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L215)
 
 Current model parameters
 
@@ -82,7 +82,7 @@ Current model parameters
 
 > `readonly` **system**: `string` \| `unknown`[] \| `undefined`
 
-Defined in: [src/types/llm.ts:212](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L212)
+Defined in: [src/types/llm.ts:212](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L212)
 
 Current system prompt (string or provider-specific array format)
 
@@ -92,7 +92,7 @@ Current system prompt (string or provider-specific array format)
 
 > **generate**(`historyOrInput`, ...`input`): `Promise`\<[`Turn`](turn.md)\<`unknown`\>\>
 
-Defined in: [src/types/llm.ts:188](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L188)
+Defined in: [src/types/llm.ts:188](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L188)
 
 Executes inference and returns the complete Turn.
 
@@ -128,7 +128,7 @@ Promise resolving to the complete Turn
 
 > **stream**(`historyOrInput`, ...`input`): [`StreamResult`](streamresult.md)
 
-Defined in: [src/types/llm.ts:203](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/llm.ts#L203)
+Defined in: [src/types/llm.ts:203](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/llm.ts#L203)
 
 Executes streaming inference.
 

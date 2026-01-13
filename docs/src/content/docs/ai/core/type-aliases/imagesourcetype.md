@@ -12,7 +12,7 @@ title: "Type Alias: ImageSourceType"
 
 > **ImageSourceType** = *typeof* [`ImageSourceType`](../variables/imagesourcetype.md)\[keyof *typeof* [`ImageSourceType`](../variables/imagesourcetype.md)\]
 
-Defined in: [src/types/content.ts:63](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/content.ts#L63)
+Defined in: [src/types/content.ts:63](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L63)
 
 Image source type discriminator union.
 

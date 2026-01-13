@@ -12,7 +12,7 @@ title: "Variable: server"
 
 > `const` **server**: `object`
 
-Defined in: [src/providers/proxy/server/index.ts:73](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/index.ts#L73)
+Defined in: [src/providers/proxy/server/index.ts:96](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/index.ts#L96)
 
 Server adapters namespace.
 
@@ -25,6 +25,30 @@ Contains framework-specific adapters for Web API, Express, Fastify, and H3.
 > **express**: `object`
 
 Express/Connect adapter
+
+#### express.sendEmbeddingJSON()
+
+> **sendEmbeddingJSON**: (`result`, `res`) => `void`
+
+Send an EmbeddingResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+###### res
+
+`ExpressResponse`
+
+Express response object
+
+##### Returns
+
+`void`
 
 #### express.sendError()
 
@@ -45,6 +69,30 @@ Error message
 `number`
 
 HTTP status code
+
+###### res
+
+`ExpressResponse`
+
+Express response object
+
+##### Returns
+
+`void`
+
+#### express.sendImageJSON()
+
+> **sendImageJSON**: (`result`, `res`) => `void`
+
+Send an ImageResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
 
 ###### res
 
@@ -87,6 +135,30 @@ const turn = await instance.generate(messages);
 expressAdapter.sendJSON(turn, res);
 ```
 
+#### express.streamImageSSE()
+
+> **streamImageSSE**: (`stream`, `res`) => `void`
+
+Stream an ImageStreamResult as Server-Sent Events.
+
+##### Parameters
+
+###### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+###### res
+
+`ExpressResponse`
+
+Express response object
+
+##### Returns
+
+`void`
+
 #### express.streamSSE()
 
 > **streamSSE**: (`stream`, `res`) => `void`
@@ -124,6 +196,30 @@ expressAdapter.streamSSE(stream, res);
 
 Fastify adapter
 
+#### fastify.sendEmbeddingJSON()
+
+> **sendEmbeddingJSON**: (`result`, `reply`) => `FastifyReply`
+
+Send an EmbeddingResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+###### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+##### Returns
+
+`FastifyReply`
+
 #### fastify.sendError()
 
 > **sendError**: (`message`, `status`, `reply`) => `FastifyReply`
@@ -143,6 +239,30 @@ Error message
 `number`
 
 HTTP status code
+
+###### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+##### Returns
+
+`FastifyReply`
+
+#### fastify.sendImageJSON()
+
+> **sendImageJSON**: (`result`, `reply`) => `FastifyReply`
+
+Send an ImageResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
 
 ###### reply
 
@@ -185,6 +305,30 @@ const turn = await instance.generate(messages);
 return fastifyAdapter.sendJSON(turn, reply);
 ```
 
+#### fastify.streamImageSSE()
+
+> **streamImageSSE**: (`stream`, `reply`) => `FastifyReply`
+
+Stream an ImageStreamResult as Server-Sent Events.
+
+##### Parameters
+
+###### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+###### reply
+
+`FastifyReply`
+
+Fastify reply object
+
+##### Returns
+
+`FastifyReply`
+
 #### fastify.streamSSE()
 
 > **streamSSE**: (`stream`, `reply`) => `FastifyReply`
@@ -222,6 +366,26 @@ return fastifyAdapter.streamSSE(stream, reply);
 
 H3/Nitro/Nuxt adapter
 
+#### h3.createImageSSEStream()
+
+> **createImageSSEStream**: (`stream`) => `ReadableStream`\<`Uint8Array`\<`ArrayBufferLike`\>\>
+
+Create a ReadableStream for image SSE data.
+
+##### Parameters
+
+###### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+##### Returns
+
+`ReadableStream`\<`Uint8Array`\<`ArrayBufferLike`\>\>
+
+A ReadableStream of SSE data
+
 #### h3.createSSEStream()
 
 > **createSSEStream**: (`stream`) => `ReadableStream`\<`Uint8Array`\<`ArrayBufferLike`\>\>
@@ -247,6 +411,32 @@ The StreamResult from instance.stream()
 `ReadableStream`\<`Uint8Array`\<`ArrayBufferLike`\>\>
 
 A ReadableStream of SSE data
+
+#### h3.sendEmbeddingJSON()
+
+> **sendEmbeddingJSON**: (`result`, `event`) => `unknown`
+
+Send an EmbeddingResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+###### event
+
+`H3Event`
+
+H3 event object
+
+##### Returns
+
+`unknown`
+
+Serialized result data
 
 #### h3.sendError()
 
@@ -288,6 +478,32 @@ Error object for H3 to serialize
 
 > **statusCode**: `number`
 
+#### h3.sendImageJSON()
+
+> **sendImageJSON**: (`result`, `event`) => `unknown`
+
+Send an ImageResult as JSON response.
+
+##### Parameters
+
+###### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
+
+###### event
+
+`H3Event`
+
+H3 event object
+
+##### Returns
+
+`unknown`
+
+Serialized image result data
+
 #### h3.sendJSON()
 
 > **sendJSON**: (`turn`, `event`) => `unknown`
@@ -320,6 +536,30 @@ Serialized turn data
 const turn = await instance.generate(messages);
 return h3Adapter.sendJSON(turn, event);
 ```
+
+#### h3.streamImageSSE()
+
+> **streamImageSSE**: (`stream`, `event`) => `void`
+
+Stream an ImageStreamResult as Server-Sent Events.
+
+##### Parameters
+
+###### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+###### event
+
+`H3Event`
+
+H3 event object
+
+##### Returns
+
+`void`
 
 #### h3.streamSSE()
 
@@ -430,6 +670,66 @@ const instance = llm({ model: anthropic('...'), system, params });
 const turn = await instance.generate(messages);
 ```
 
+#### webapi.parseEmbeddingBody()
+
+> **parseEmbeddingBody**: (`body`) => [`ParsedEmbeddingRequest`](../interfaces/parsedembeddingrequest.md)
+
+Parse an HTTP request body into embedding inputs.
+
+##### Parameters
+
+###### body
+
+`unknown`
+
+The JSON-parsed request body
+
+##### Returns
+
+[`ParsedEmbeddingRequest`](../interfaces/parsedembeddingrequest.md)
+
+Parsed embedding request data
+
+#### webapi.parseImageBody()
+
+> **parseImageBody**: (`body`) => [`ParsedImageRequest`](../interfaces/parsedimagerequest.md)
+
+Parse an HTTP request body into image request data.
+
+##### Parameters
+
+###### body
+
+`unknown`
+
+The JSON-parsed request body
+
+##### Returns
+
+[`ParsedImageRequest`](../interfaces/parsedimagerequest.md)
+
+Parsed image request data
+
+#### webapi.toEmbeddingJSON()
+
+> **toEmbeddingJSON**: (`result`) => `Response`
+
+Create a JSON Response from an embedding result.
+
+##### Parameters
+
+###### result
+
+[`EmbeddingResult`](../../core/interfaces/embeddingresult.md)
+
+The embedding result
+
+##### Returns
+
+`Response`
+
+HTTP Response with JSON body
+
 #### webapi.toError()
 
 > **toError**: (`message`, `status`) => `Response`
@@ -455,6 +755,48 @@ HTTP status code (default: 500)
 `Response`
 
 HTTP Response with error body
+
+#### webapi.toImageJSON()
+
+> **toImageJSON**: (`result`) => `Response`
+
+Create a JSON Response from an image result.
+
+##### Parameters
+
+###### result
+
+[`ImageResult`](../../core/interfaces/imageresult.md)
+
+The image result
+
+##### Returns
+
+`Response`
+
+HTTP Response with JSON body
+
+#### webapi.toImageSSE()
+
+> **toImageSSE**: (`stream`) => `Response`
+
+Create an SSE Response from an ImageStreamResult.
+
+Streams image events as SSE, then sends the final image result.
+
+##### Parameters
+
+###### stream
+
+`ImageStreamLike`
+
+The ImageStreamResult or ImageProviderStreamResult from image().stream()
+
+##### Returns
+
+`Response`
+
+HTTP Response with SSE body
 
 #### webapi.toJSON()
 

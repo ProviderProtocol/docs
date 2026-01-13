@@ -10,7 +10,7 @@ title: "~~Interface: XAISearchParameters~~"
 
 # ~~Interface: XAISearchParameters~~
 
-Defined in: [src/providers/xai/types.ts:275](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L275)
+Defined in: [src/providers/xai/types.ts:275](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L275)
 
 Live Search parameters for real-time web search integration.
 
@@ -25,7 +25,7 @@ Use the Agent Tools API with `web_search` tool instead.
 
 > `optional` **from\_date**: `string`
 
-Defined in: [src/providers/xai/types.ts:279](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L279)
+Defined in: [src/providers/xai/types.ts:279](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L279)
 
 Limit search to specific date range
 
@@ -35,7 +35,7 @@ Limit search to specific date range
 
 > `optional` **max\_search\_results**: `number`
 
-Defined in: [src/providers/xai/types.ts:285](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L285)
+Defined in: [src/providers/xai/types.ts:285](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L285)
 
 Maximum number of search results
 
@@ -45,7 +45,7 @@ Maximum number of search results
 
 > `optional` **mode**: `"auto"` \| `"on"` \| `"off"`
 
-Defined in: [src/providers/xai/types.ts:277](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L277)
+Defined in: [src/providers/xai/types.ts:277](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L277)
 
 Search mode
 
@@ -55,7 +55,7 @@ Search mode
 
 > `optional` **sources**: (`"x"` \| `"web"` \| `"news"` \| `"rss"`)[]
 
-Defined in: [src/providers/xai/types.ts:283](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L283)
+Defined in: [src/providers/xai/types.ts:283](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L283)
 
 Sources to search
 
@@ -65,6 +65,6 @@ Sources to search
 
 > `optional` **to\_date**: `string`
 
-Defined in: [src/providers/xai/types.ts:281](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L281)
+Defined in: [src/providers/xai/types.ts:281](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L281)
 
 End date for search range

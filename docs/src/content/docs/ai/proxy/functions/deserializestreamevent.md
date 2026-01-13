@@ -12,7 +12,7 @@ title: "Function: deserializeStreamEvent()"
 
 > **deserializeStreamEvent**(`event`): [`StreamEvent`](../../core/interfaces/streamevent.md)
 
-Defined in: [src/providers/proxy/serialization.ts:111](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/serialization.ts#L111)
+Defined in: [src/providers/proxy/serialization.ts:111](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/serialization.ts#L111)
 
 Deserialize a StreamEvent from JSON transport.
 Converts base64 string data back to Uint8Array.

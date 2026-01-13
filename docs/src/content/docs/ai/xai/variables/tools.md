@@ -12,7 +12,7 @@ title: "Variable: tools"
 
 > `const` **tools**: `object`
 
-Defined in: [src/providers/xai/types.ts:630](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L630)
+Defined in: [src/providers/xai/types.ts:630](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L630)
 
 Namespace object containing all xAI tool helper constructors.
 

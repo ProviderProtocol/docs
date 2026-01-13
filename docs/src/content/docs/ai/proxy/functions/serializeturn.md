@@ -12,7 +12,7 @@ title: "Function: serializeTurn()"
 
 > **serializeTurn**(`turn`): [`TurnJSON`](../type-aliases/turnjson.md)
 
-Defined in: [src/providers/proxy/serialization.ts:79](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/serialization.ts#L79)
+Defined in: [src/providers/proxy/serialization.ts:79](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/serialization.ts#L79)
 
 Serialize a Turn to JSON-transportable format.
 

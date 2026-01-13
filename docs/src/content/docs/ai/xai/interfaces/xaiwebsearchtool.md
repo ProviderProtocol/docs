@@ -10,7 +10,7 @@ title: "Interface: XAIWebSearchTool"
 
 # Interface: XAIWebSearchTool
 
-Defined in: [src/providers/xai/types.ts:306](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L306)
+Defined in: [src/providers/xai/types.ts:306](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L306)
 
 Web search tool for real-time web information retrieval.
 
@@ -32,7 +32,7 @@ const tool: XAIWebSearchTool = {
 
 > `optional` **allowed\_domains**: `string`[]
 
-Defined in: [src/providers/xai/types.ts:310](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L310)
+Defined in: [src/providers/xai/types.ts:310](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L310)
 
 Restrict to specific domains (max 5, mutually exclusive with excluded_domains)
 
@@ -42,7 +42,7 @@ Restrict to specific domains (max 5, mutually exclusive with excluded_domains)
 
 > `optional` **enable\_image\_understanding**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:314](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L314)
+Defined in: [src/providers/xai/types.ts:314](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L314)
 
 Enable image analysis from search results
 
@@ -52,7 +52,7 @@ Enable image analysis from search results
 
 > `optional` **excluded\_domains**: `string`[]
 
-Defined in: [src/providers/xai/types.ts:312](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L312)
+Defined in: [src/providers/xai/types.ts:312](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L312)
 
 Exclude specific domains (max 5, mutually exclusive with allowed_domains)
 
@@ -62,6 +62,6 @@ Exclude specific domains (max 5, mutually exclusive with allowed_domains)
 
 > **type**: `"web_search"`
 
-Defined in: [src/providers/xai/types.ts:308](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/xai/types.ts#L308)
+Defined in: [src/providers/xai/types.ts:308](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L308)
 
 Tool type identifier

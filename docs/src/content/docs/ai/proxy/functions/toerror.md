@@ -12,7 +12,7 @@ title: "Function: toError()"
 
 > **toError**(`message`, `status`): `Response`
 
-Defined in: [src/providers/proxy/server/webapi.ts:170](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/providers/proxy/server/webapi.ts#L170)
+Defined in: [src/providers/proxy/server/webapi.ts:338](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L338)
 
 Create an error Response.
 

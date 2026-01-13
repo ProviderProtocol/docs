@@ -10,7 +10,7 @@ title: "Interface: Tool"
 
 # Interface: Tool\<TParams, TResult\>
 
-Defined in: [src/types/tool.ts:115](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L115)
+Defined in: [src/types/tool.ts:115](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L115)
 
 Tool definition for LLM function calling.
 
@@ -56,7 +56,7 @@ The type of result the tool returns
 
 > **description**: `string`
 
-Defined in: [src/types/tool.ts:120](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L120)
+Defined in: [src/types/tool.ts:120](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L120)
 
 Human-readable description for the model to understand when to use this tool
 
@@ -66,7 +66,7 @@ Human-readable description for the model to understand when to use this tool
 
 > `optional` **metadata**: [`ToolMetadata`](toolmetadata.md)
 
-Defined in: [src/types/tool.ts:142](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L142)
+Defined in: [src/types/tool.ts:142](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L142)
 
 Provider-specific metadata, namespaced by provider name.
 
@@ -92,7 +92,7 @@ const tool: Tool = {
 
 > **name**: `string`
 
-Defined in: [src/types/tool.ts:117](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L117)
+Defined in: [src/types/tool.ts:117](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L117)
 
 Tool name (must be unique within an llm() instance)
 
@@ -102,7 +102,7 @@ Tool name (must be unique within an llm() instance)
 
 > **parameters**: [`JSONSchema`](jsonschema.md)
 
-Defined in: [src/types/tool.ts:123](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L123)
+Defined in: [src/types/tool.ts:123](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L123)
 
 JSON Schema defining the tool's parameters
 
@@ -112,7 +112,7 @@ JSON Schema defining the tool's parameters
 
 > `optional` **approval**(`params`): `boolean` \| `Promise`\<`boolean`\>
 
-Defined in: [src/types/tool.ts:161](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L161)
+Defined in: [src/types/tool.ts:161](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L161)
 
 Optional approval handler for sensitive operations.
 
@@ -139,7 +139,7 @@ Whether to approve the execution
 
 > **run**(`params`): `TResult` \| `Promise`\<`TResult`\>
 
-Defined in: [src/types/tool.ts:150](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/tool.ts#L150)
+Defined in: [src/types/tool.ts:150](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/tool.ts#L150)
 
 Executes the tool with the provided parameters.
 

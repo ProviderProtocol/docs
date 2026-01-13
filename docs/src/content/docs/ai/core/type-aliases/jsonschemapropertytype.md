@@ -12,7 +12,7 @@ title: "Type Alias: JSONSchemaPropertyType"
 
 > **JSONSchemaPropertyType** = `"string"` \| `"number"` \| `"integer"` \| `"boolean"` \| `"array"` \| `"object"` \| `"null"`
 
-Defined in: [src/types/schema.ts:15](https://github.com/ProviderProtocol/ai/blob/bc1a2ea6935894ca3de99156bbd00bacf469006e/src/types/schema.ts#L15)
+Defined in: [src/types/schema.ts:15](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L15)
 
 Primitive and composite JSON Schema property types.
 
