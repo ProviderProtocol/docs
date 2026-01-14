@@ -12,7 +12,7 @@ title: "Function: networkError()"
 
 > **networkError**(`error`, `provider`, `modality`): [`UPPError`](../../core/classes/upperror.md)
 
-Defined in: [src/http/errors.ts:147](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/http/errors.ts#L147)
+Defined in: [src/http/errors.ts:147](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/http/errors.ts#L147)
 
 Creates a UPPError for network failures (DNS, connection, etc.).
 

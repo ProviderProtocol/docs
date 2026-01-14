@@ -12,7 +12,7 @@ title: "Type Alias: ThreadJSON"
 
 > **ThreadJSON** = `Pick`\<[`Thread`](../classes/thread.md), `"id"`\> & `object`
 
-Defined in: [src/types/thread.ts:29](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/thread.ts#L29)
+Defined in: [src/types/thread.ts:26](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/thread.ts#L26)
 
 Thread serialized to JSON format.
 Picks id from Thread, converts dates to strings.

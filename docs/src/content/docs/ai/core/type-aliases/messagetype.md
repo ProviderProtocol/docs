@@ -12,7 +12,7 @@ title: "Type Alias: MessageType"
 
 > **MessageType** = *typeof* [`MessageRole`](../variables/messagerole.md)\[keyof *typeof* [`MessageRole`](../variables/messagerole.md)\]
 
-Defined in: [src/types/messages.ts:67](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/messages.ts#L67)
+Defined in: [src/types/messages.ts:68](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/messages.ts#L68)
 
 Message type discriminator union.
 

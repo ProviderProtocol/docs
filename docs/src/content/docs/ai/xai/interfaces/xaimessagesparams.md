@@ -10,7 +10,7 @@ title: "Interface: XAIMessagesParams"
 
 # Interface: XAIMessagesParams
 
-Defined in: [src/providers/xai/types.ts:205](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L205)
+Defined in: [src/providers/xai/types.ts:205](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L205)
 
 xAI Messages API parameters (Anthropic-compatible).
 
@@ -39,7 +39,7 @@ const params: XAIMessagesParams = {
 
 > `optional` **max\_tokens**: `number`
 
-Defined in: [src/providers/xai/types.ts:207](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L207)
+Defined in: [src/providers/xai/types.ts:207](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L207)
 
 Maximum number of tokens to generate
 
@@ -49,7 +49,7 @@ Maximum number of tokens to generate
 
 > `optional` **metadata**: `object`
 
-Defined in: [src/providers/xai/types.ts:222](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L222)
+Defined in: [src/providers/xai/types.ts:222](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L222)
 
 Metadata for the request
 
@@ -63,7 +63,7 @@ Metadata for the request
 
 > `optional` **stop\_sequences**: `string`[]
 
-Defined in: [src/providers/xai/types.ts:219](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L219)
+Defined in: [src/providers/xai/types.ts:219](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L219)
 
 Custom stop sequences
 
@@ -73,7 +73,7 @@ Custom stop sequences
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/xai/types.ts:210](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L210)
+Defined in: [src/providers/xai/types.ts:210](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L210)
 
 Temperature for randomness (0.0 - 1.0)
 
@@ -83,7 +83,7 @@ Temperature for randomness (0.0 - 1.0)
 
 > `optional` **thinking**: `object`
 
-Defined in: [src/providers/xai/types.ts:227](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L227)
+Defined in: [src/providers/xai/types.ts:227](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L227)
 
 Extended thinking configuration
 
@@ -101,7 +101,7 @@ Extended thinking configuration
 
 > `optional` **top\_k**: `number`
 
-Defined in: [src/providers/xai/types.ts:216](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L216)
+Defined in: [src/providers/xai/types.ts:216](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L216)
 
 Top-k sampling
 
@@ -111,6 +111,6 @@ Top-k sampling
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/xai/types.ts:213](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/xai/types.ts#L213)
+Defined in: [src/providers/xai/types.ts:213](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/xai/types.ts#L213)
 
 Top-p (nucleus) sampling (0.0 - 1.0)

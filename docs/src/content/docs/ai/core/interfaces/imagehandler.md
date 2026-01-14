@@ -10,9 +10,11 @@ title: "Interface: ImageHandler"
 
 # Interface: ImageHandler\<TParams\>
 
-Defined in: [src/types/image.ts:337](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L337)
+Defined in: [src/types/provider.ts:280](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L280)
 
-Image Handler interface for providers.
+**`Internal`**
+
+Image handler interface for providers.
 
 Implemented by providers to enable image generation capabilities.
 
@@ -30,12 +32,11 @@ Provider-specific parameter type
 
 > `optional` **\_setProvider**(`provider`): `void`
 
-Defined in: [src/types/image.ts:353](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L353)
+Defined in: [src/types/provider.ts:295](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L295)
 
 **`Internal`**
 
 Sets the parent provider reference.
-Called by createProvider() after the provider is constructed.
 
 #### Parameters
 
@@ -55,7 +56,7 @@ The parent provider
 
 > **bind**(`modelId`): [`BoundImageModel`](boundimagemodel.md)\<`TParams`\>
 
-Defined in: [src/types/image.ts:344](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/image.ts#L344)
+Defined in: [src/types/provider.ts:287](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L287)
 
 Binds a model ID to create an executable image model.
 

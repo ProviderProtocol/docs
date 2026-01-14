@@ -12,7 +12,7 @@ title: "Function: parseEmbeddingBody()"
 
 > **parseEmbeddingBody**(`body`): [`ParsedEmbeddingRequest`](../interfaces/parsedembeddingrequest.md)
 
-Defined in: [src/providers/proxy/server/webapi.ts:136](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L136)
+Defined in: [src/providers/proxy/server/webapi.ts:136](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L136)
 
 Parse an HTTP request body into embedding inputs.
 

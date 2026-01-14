@@ -10,7 +10,7 @@ title: "Interface: VideoBlock"
 
 # Interface: VideoBlock
 
-Defined in: [src/types/content.ts:232](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L232)
+Defined in: [src/types/content.ts:335](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L335)
 
 Video content block.
 
@@ -35,7 +35,7 @@ const videoBlock: VideoBlock = {
 
 > **data**: `Uint8Array`
 
-Defined in: [src/types/content.ts:237](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L237)
+Defined in: [src/types/content.ts:340](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L340)
 
 Raw video data
 
@@ -45,7 +45,7 @@ Raw video data
 
 > `optional` **duration**: `number`
 
-Defined in: [src/types/content.ts:243](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L243)
+Defined in: [src/types/content.ts:346](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L346)
 
 Duration in seconds
 
@@ -55,7 +55,7 @@ Duration in seconds
 
 > `optional` **height**: `number`
 
-Defined in: [src/types/content.ts:249](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L249)
+Defined in: [src/types/content.ts:352](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L352)
 
 Video height in pixels
 
@@ -65,7 +65,7 @@ Video height in pixels
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:240](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L240)
+Defined in: [src/types/content.ts:343](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L343)
 
 MIME type of the video (e.g., 'video/mp4', 'video/webm')
 
@@ -75,7 +75,7 @@ MIME type of the video (e.g., 'video/mp4', 'video/webm')
 
 > **type**: `"video"`
 
-Defined in: [src/types/content.ts:234](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L234)
+Defined in: [src/types/content.ts:337](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L337)
 
 Discriminator for video blocks
 
@@ -85,6 +85,6 @@ Discriminator for video blocks
 
 > `optional` **width**: `number`
 
-Defined in: [src/types/content.ts:246](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L246)
+Defined in: [src/types/content.ts:349](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L349)
 
 Video width in pixels

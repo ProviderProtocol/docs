@@ -10,7 +10,7 @@ title: "Interface: AudioBlock"
 
 # Interface: AudioBlock
 
-Defined in: [src/types/content.ts:201](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L201)
+Defined in: [src/types/content.ts:304](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L304)
 
 Audio content block.
 
@@ -33,7 +33,7 @@ const audioBlock: AudioBlock = {
 
 > **data**: `Uint8Array`
 
-Defined in: [src/types/content.ts:206](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L206)
+Defined in: [src/types/content.ts:309](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L309)
 
 Raw audio data
 
@@ -43,7 +43,7 @@ Raw audio data
 
 > `optional` **duration**: `number`
 
-Defined in: [src/types/content.ts:212](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L212)
+Defined in: [src/types/content.ts:315](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L315)
 
 Duration in seconds
 
@@ -53,7 +53,7 @@ Duration in seconds
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:209](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L209)
+Defined in: [src/types/content.ts:312](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L312)
 
 MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
@@ -63,6 +63,6 @@ MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
 > **type**: `"audio"`
 
-Defined in: [src/types/content.ts:203](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L203)
+Defined in: [src/types/content.ts:306](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L306)
 
 Discriminator for audio blocks

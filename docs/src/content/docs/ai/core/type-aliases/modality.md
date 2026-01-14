@@ -12,7 +12,7 @@ title: "Type Alias: Modality"
 
 > **Modality** = *typeof* [`ModalityType`](../variables/modalitytype.md)\[keyof *typeof* [`ModalityType`](../variables/modalitytype.md)\]
 
-Defined in: [src/types/errors.ts:103](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/errors.ts#L103)
+Defined in: [src/types/errors.ts:103](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/errors.ts#L103)
 
 Modality type discriminator union.
 

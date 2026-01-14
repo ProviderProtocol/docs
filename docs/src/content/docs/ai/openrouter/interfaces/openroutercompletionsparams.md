@@ -10,7 +10,7 @@ title: "Interface: OpenRouterCompletionsParams"
 
 # Interface: OpenRouterCompletionsParams
 
-Defined in: [src/providers/openrouter/types.ts:65](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L65)
+Defined in: [src/providers/openrouter/types.ts:65](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L65)
 
 Parameters for OpenRouter's Chat Completions API.
 
@@ -28,7 +28,7 @@ like model routing and provider preferences.
 
 > `optional` **debug**: `object`
 
-Defined in: [src/providers/openrouter/types.ts:165](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L165)
+Defined in: [src/providers/openrouter/types.ts:165](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L165)
 
 Debug options (streaming only)
 
@@ -44,7 +44,7 @@ If true, returns the transformed request body sent to the provider
 
 > `optional` **frequency\_penalty**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:79](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L79)
+Defined in: [src/providers/openrouter/types.ts:79](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L79)
 
 Frequency penalty (-2.0 - 2.0)
 
@@ -52,9 +52,9 @@ Frequency penalty (-2.0 - 2.0)
 
 ### image\_config?
 
-> `optional` **image\_config**: `OpenRouterImageConfig`
+> `optional` **image\_config**: [`OpenRouterImageConfig`](openrouterimageconfig.md)
 
-Defined in: [src/providers/openrouter/types.ts:129](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L129)
+Defined in: [src/providers/openrouter/types.ts:129](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L129)
 
 Image generation configuration for Gemini models.
 Only applies when `modalities` includes 'image'.
@@ -69,7 +69,7 @@ Only applies when `modalities` includes 'image'.
 
 > `optional` **include\_reasoning**: `boolean`
 
-Defined in: [src/providers/openrouter/types.ts:188](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L188)
+Defined in: [src/providers/openrouter/types.ts:188](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L188)
 
 Legacy reasoning toggle (use `reasoning` instead).
 
@@ -86,7 +86,7 @@ Use `reasoning` parameter instead
 
 > `optional` **logit\_bias**: `Record`\<`number`, `number`\>
 
-Defined in: [src/providers/openrouter/types.ts:103](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L103)
+Defined in: [src/providers/openrouter/types.ts:103](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L103)
 
 Logit bias map
 
@@ -96,7 +96,7 @@ Logit bias map
 
 > `optional` **logprobs**: `boolean`
 
-Defined in: [src/providers/openrouter/types.ts:97](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L97)
+Defined in: [src/providers/openrouter/types.ts:97](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L97)
 
 Enable logprobs
 
@@ -106,7 +106,7 @@ Enable logprobs
 
 > `optional` **max\_tokens**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:67](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L67)
+Defined in: [src/providers/openrouter/types.ts:67](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L67)
 
 Maximum number of tokens to generate
 
@@ -116,7 +116,7 @@ Maximum number of tokens to generate
 
 > `optional` **min\_p**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:106](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L106)
+Defined in: [src/providers/openrouter/types.ts:106](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L106)
 
 Minimum probability threshold (0.0 - 1.0)
 
@@ -126,7 +126,7 @@ Minimum probability threshold (0.0 - 1.0)
 
 > `optional` **modalities**: (`"text"` \| `"image"`)[]
 
-Defined in: [src/providers/openrouter/types.ts:122](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L122)
+Defined in: [src/providers/openrouter/types.ts:122](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L122)
 
 Output modalities for multimodal generation.
 Set to `['text', 'image']` to enable image generation with compatible models.
@@ -141,7 +141,7 @@ Set to `['text', 'image']` to enable image generation with compatible models.
 
 > `optional` **models**: `string`[]
 
-Defined in: [src/providers/openrouter/types.ts:141](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L141)
+Defined in: [src/providers/openrouter/types.ts:141](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L141)
 
 Multiple models for routing
 See: https://openrouter.ai/docs/guides/features/model-routing
@@ -152,7 +152,7 @@ See: https://openrouter.ai/docs/guides/features/model-routing
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/openrouter/types.ts:112](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L112)
+Defined in: [src/providers/openrouter/types.ts:112](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L112)
 
 Whether to enable parallel tool calls
 
@@ -162,7 +162,7 @@ Whether to enable parallel tool calls
 
 > `optional` **prediction**: `object`
 
-Defined in: [src/providers/openrouter/types.ts:157](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L157)
+Defined in: [src/providers/openrouter/types.ts:157](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L157)
 
 Predicted output for latency optimization
 
@@ -180,7 +180,7 @@ Predicted output for latency optimization
 
 > `optional` **presence\_penalty**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:82](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L82)
+Defined in: [src/providers/openrouter/types.ts:82](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L82)
 
 Presence penalty (-2.0 - 2.0)
 
@@ -190,7 +190,7 @@ Presence penalty (-2.0 - 2.0)
 
 > `optional` **provider**: [`OpenRouterProviderPreferences`](openrouterproviderpreferences.md)
 
-Defined in: [src/providers/openrouter/types.ts:152](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L152)
+Defined in: [src/providers/openrouter/types.ts:152](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L152)
 
 Provider routing preferences
 See: https://openrouter.ai/docs/guides/routing/provider-selection
@@ -201,7 +201,7 @@ See: https://openrouter.ai/docs/guides/routing/provider-selection
 
 > `optional` **reasoning**: `OpenRouterReasoningConfig`
 
-Defined in: [src/providers/openrouter/types.ts:178](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L178)
+Defined in: [src/providers/openrouter/types.ts:178](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L178)
 
 Reasoning configuration for thinking models.
 
@@ -218,7 +218,7 @@ reasoning tokens in the response.
 
 > `optional` **repetition\_penalty**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:85](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L85)
+Defined in: [src/providers/openrouter/types.ts:85](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L85)
 
 Repetition penalty (0.0 - 2.0)
 
@@ -228,7 +228,7 @@ Repetition penalty (0.0 - 2.0)
 
 > `optional` **response\_format**: `OpenRouterResponseFormat`
 
-Defined in: [src/providers/openrouter/types.ts:115](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L115)
+Defined in: [src/providers/openrouter/types.ts:115](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L115)
 
 Response format for structured output
 
@@ -238,7 +238,7 @@ Response format for structured output
 
 > `optional` **route**: `"fallback"`
 
-Defined in: [src/providers/openrouter/types.ts:146](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L146)
+Defined in: [src/providers/openrouter/types.ts:146](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L146)
 
 Routing strategy (e.g., 'fallback')
 
@@ -248,7 +248,7 @@ Routing strategy (e.g., 'fallback')
 
 > `optional` **seed**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:91](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L91)
+Defined in: [src/providers/openrouter/types.ts:91](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L91)
 
 Seed for deterministic sampling
 
@@ -258,7 +258,7 @@ Seed for deterministic sampling
 
 > `optional` **stop**: `string` \| `string`[]
 
-Defined in: [src/providers/openrouter/types.ts:88](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L88)
+Defined in: [src/providers/openrouter/types.ts:88](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L88)
 
 Custom stop sequences
 
@@ -268,7 +268,7 @@ Custom stop sequences
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:70](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L70)
+Defined in: [src/providers/openrouter/types.ts:70](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L70)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -278,7 +278,7 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_a**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:109](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L109)
+Defined in: [src/providers/openrouter/types.ts:109](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L109)
 
 Top-a sampling threshold (0.0 - 1.0)
 
@@ -288,7 +288,7 @@ Top-a sampling threshold (0.0 - 1.0)
 
 > `optional` **top\_k**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:76](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L76)
+Defined in: [src/providers/openrouter/types.ts:76](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L76)
 
 Top-k sampling (not available for OpenAI models)
 
@@ -298,7 +298,7 @@ Top-k sampling (not available for OpenAI models)
 
 > `optional` **top\_logprobs**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:100](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L100)
+Defined in: [src/providers/openrouter/types.ts:100](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L100)
 
 Number of top logprobs to return
 
@@ -308,7 +308,7 @@ Number of top logprobs to return
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:73](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L73)
+Defined in: [src/providers/openrouter/types.ts:73](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L73)
 
 Top-p (nucleus) sampling (0.0 - 1.0)
 
@@ -318,7 +318,7 @@ Top-p (nucleus) sampling (0.0 - 1.0)
 
 > `optional` **transforms**: `string`[]
 
-Defined in: [src/providers/openrouter/types.ts:135](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L135)
+Defined in: [src/providers/openrouter/types.ts:135](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L135)
 
 Prompt transforms to apply
 See: https://openrouter.ai/docs/guides/features/message-transforms
@@ -329,6 +329,6 @@ See: https://openrouter.ai/docs/guides/features/message-transforms
 
 > `optional` **user**: `string`
 
-Defined in: [src/providers/openrouter/types.ts:94](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openrouter/types.ts#L94)
+Defined in: [src/providers/openrouter/types.ts:94](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openrouter/types.ts#L94)
 
 User identifier for abuse detection

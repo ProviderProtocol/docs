@@ -10,7 +10,7 @@ title: "Interface: OpenAIEmbedParams"
 
 # Interface: OpenAIEmbedParams
 
-Defined in: [src/providers/openai/embed.ts:30](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/embed.ts#L30)
+Defined in: [src/providers/openai/embed.ts:30](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/embed.ts#L30)
 
 OpenAI embedding parameters.
 Passed through unchanged to the API.
@@ -21,7 +21,7 @@ Passed through unchanged to the API.
 
 > `optional` **dimensions**: `number`
 
-Defined in: [src/providers/openai/embed.ts:32](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/embed.ts#L32)
+Defined in: [src/providers/openai/embed.ts:32](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/embed.ts#L32)
 
 Output dimensions (text-embedding-3 models only)
 
@@ -31,7 +31,7 @@ Output dimensions (text-embedding-3 models only)
 
 > `optional` **encoding\_format**: `"base64"` \| `"float"`
 
-Defined in: [src/providers/openai/embed.ts:34](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/embed.ts#L34)
+Defined in: [src/providers/openai/embed.ts:34](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/embed.ts#L34)
 
 Encoding format: 'float' or 'base64'
 
@@ -41,6 +41,6 @@ Encoding format: 'float' or 'base64'
 
 > `optional` **user**: `string`
 
-Defined in: [src/providers/openai/embed.ts:36](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/embed.ts#L36)
+Defined in: [src/providers/openai/embed.ts:36](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/embed.ts#L36)
 
 A unique identifier representing your end-user

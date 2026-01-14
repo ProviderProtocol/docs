@@ -10,7 +10,7 @@ title: "Interface: GoogleCacheResponse"
 
 # Interface: GoogleCacheResponse
 
-Defined in: [src/providers/google/types.ts:570](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L570)
+Defined in: [src/providers/google/types.ts:570](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L570)
 
 Response from creating or retrieving a cached content entry.
 
@@ -20,7 +20,7 @@ Response from creating or retrieving a cached content entry.
 
 > **createTime**: `string`
 
-Defined in: [src/providers/google/types.ts:578](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L578)
+Defined in: [src/providers/google/types.ts:578](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L578)
 
 When the cache was created (RFC 3339 format)
 
@@ -30,7 +30,7 @@ When the cache was created (RFC 3339 format)
 
 > `optional` **displayName**: `string`
 
-Defined in: [src/providers/google/types.ts:576](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L576)
+Defined in: [src/providers/google/types.ts:576](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L576)
 
 Display name for the cache
 
@@ -40,7 +40,7 @@ Display name for the cache
 
 > **expireTime**: `string`
 
-Defined in: [src/providers/google/types.ts:582](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L582)
+Defined in: [src/providers/google/types.ts:582](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L582)
 
 When the cache expires (RFC 3339 format)
 
@@ -50,7 +50,7 @@ When the cache expires (RFC 3339 format)
 
 > **model**: `string`
 
-Defined in: [src/providers/google/types.ts:574](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L574)
+Defined in: [src/providers/google/types.ts:574](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L574)
 
 Model this cache is associated with
 
@@ -60,7 +60,7 @@ Model this cache is associated with
 
 > **name**: `string`
 
-Defined in: [src/providers/google/types.ts:572](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L572)
+Defined in: [src/providers/google/types.ts:572](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L572)
 
 Cache identifier in format "cachedContents/{id}" - use this in requests
 
@@ -70,7 +70,7 @@ Cache identifier in format "cachedContents/{id}" - use this in requests
 
 > **updateTime**: `string`
 
-Defined in: [src/providers/google/types.ts:580](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L580)
+Defined in: [src/providers/google/types.ts:580](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L580)
 
 When the cache was last updated (RFC 3339 format)
 
@@ -80,7 +80,7 @@ When the cache was last updated (RFC 3339 format)
 
 > `optional` **usageMetadata**: `object`
 
-Defined in: [src/providers/google/types.ts:584](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L584)
+Defined in: [src/providers/google/types.ts:584](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L584)
 
 Token usage metadata
 

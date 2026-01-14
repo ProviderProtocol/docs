@@ -10,7 +10,7 @@ title: "Interface: OpenAIImageGenerationTool"
 
 # Interface: OpenAIImageGenerationTool
 
-Defined in: [src/providers/openai/types.ts:1224](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1224)
+Defined in: [src/providers/openai/types.ts:1249](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1249)
 
 Image generation tool for Responses API
 
@@ -20,7 +20,7 @@ Image generation tool for Responses API
 
 > `optional` **background**: `"auto"` \| `"transparent"` \| `"opaque"`
 
-Defined in: [src/providers/openai/types.ts:1227](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1227)
+Defined in: [src/providers/openai/types.ts:1252](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1252)
 
 Background transparency
 
@@ -30,7 +30,7 @@ Background transparency
 
 > `optional` **input\_image\_mask**: `boolean`
 
-Defined in: [src/providers/openai/types.ts:1229](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1229)
+Defined in: [src/providers/openai/types.ts:1254](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1254)
 
 Input image formats supported
 
@@ -40,7 +40,7 @@ Input image formats supported
 
 > `optional` **model**: `string`
 
-Defined in: [src/providers/openai/types.ts:1231](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1231)
+Defined in: [src/providers/openai/types.ts:1256](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1256)
 
 Model to use for generation
 
@@ -50,7 +50,7 @@ Model to use for generation
 
 > `optional` **moderation**: `"auto"` \| `"low"`
 
-Defined in: [src/providers/openai/types.ts:1233](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1233)
+Defined in: [src/providers/openai/types.ts:1258](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1258)
 
 Moderation level
 
@@ -60,7 +60,7 @@ Moderation level
 
 > `optional` **output\_compression**: `number`
 
-Defined in: [src/providers/openai/types.ts:1235](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1235)
+Defined in: [src/providers/openai/types.ts:1260](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1260)
 
 Output compression
 
@@ -70,7 +70,7 @@ Output compression
 
 > `optional` **output\_format**: `"jpeg"` \| `"png"` \| `"webp"`
 
-Defined in: [src/providers/openai/types.ts:1237](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1237)
+Defined in: [src/providers/openai/types.ts:1262](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1262)
 
 Output format
 
@@ -80,7 +80,7 @@ Output format
 
 > `optional` **partial\_images**: `number`
 
-Defined in: [src/providers/openai/types.ts:1239](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1239)
+Defined in: [src/providers/openai/types.ts:1264](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1264)
 
 Partial images during streaming
 
@@ -90,7 +90,7 @@ Partial images during streaming
 
 > `optional` **quality**: `"auto"` \| `"low"` \| `"medium"` \| `"high"`
 
-Defined in: [src/providers/openai/types.ts:1241](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1241)
+Defined in: [src/providers/openai/types.ts:1266](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1266)
 
 Image quality
 
@@ -100,7 +100,7 @@ Image quality
 
 > `optional` **size**: `"auto"` \| `"1024x1024"` \| `"1024x1536"` \| `"1536x1024"`
 
-Defined in: [src/providers/openai/types.ts:1243](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1243)
+Defined in: [src/providers/openai/types.ts:1268](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1268)
 
 Image size
 
@@ -110,4 +110,4 @@ Image size
 
 > **type**: `"image_generation"`
 
-Defined in: [src/providers/openai/types.ts:1225](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1225)
+Defined in: [src/providers/openai/types.ts:1250](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1250)

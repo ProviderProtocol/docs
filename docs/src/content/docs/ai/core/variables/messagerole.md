@@ -12,7 +12,7 @@ title: "Variable: MessageRole"
 
 > `const` **MessageRole**: `object`
 
-Defined in: [src/types/messages.ts:51](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/messages.ts#L51)
+Defined in: [src/types/messages.ts:52](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/messages.ts#L52)
 
 Message role/type constants.
 

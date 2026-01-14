@@ -10,7 +10,7 @@ title: "Interface: ProviderConfig"
 
 # Interface: ProviderConfig
 
-Defined in: [src/types/provider.ts:124](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L124)
+Defined in: [src/types/provider.ts:125](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L125)
 
 Provider configuration for infrastructure and connection settings.
 
@@ -39,7 +39,7 @@ const config: ProviderConfig = {
 
 > `optional` **apiKey**: `string` \| [`KeyStrategy`](keystrategy.md) \| () => `string` \| `Promise`\<`string`\>
 
-Defined in: [src/types/provider.ts:129](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L129)
+Defined in: [src/types/provider.ts:130](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L130)
 
 API key for authentication.
 Can be a string, async function, or KeyStrategy for advanced use cases.
@@ -50,7 +50,7 @@ Can be a string, async function, or KeyStrategy for advanced use cases.
 
 > `optional` **apiVersion**: `string`
 
-Defined in: [src/types/provider.ts:144](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L144)
+Defined in: [src/types/provider.ts:145](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L145)
 
 API version override (provider-specific)
 
@@ -60,7 +60,7 @@ API version override (provider-specific)
 
 > `optional` **baseUrl**: `string`
 
-Defined in: [src/types/provider.ts:132](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L132)
+Defined in: [src/types/provider.ts:133](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L133)
 
 Override the base API URL (for proxies, local models)
 
@@ -70,7 +70,7 @@ Override the base API URL (for proxies, local models)
 
 > `optional` **fetch**: *typeof* `fetch`
 
-Defined in: [src/types/provider.ts:141](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L141)
+Defined in: [src/types/provider.ts:142](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L142)
 
 Custom fetch implementation (for logging, caching, custom TLS)
 
@@ -80,7 +80,7 @@ Custom fetch implementation (for logging, caching, custom TLS)
 
 > `optional` **headers**: `Record`\<`string`, `string` \| `undefined`\>
 
-Defined in: [src/types/provider.ts:165](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L165)
+Defined in: [src/types/provider.ts:166](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L166)
 
 Custom headers to include in API requests.
 
@@ -104,7 +104,7 @@ const config: ProviderConfig = {
 
 > `optional` **retryAfterMaxSeconds**: `number`
 
-Defined in: [src/types/provider.ts:171](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L171)
+Defined in: [src/types/provider.ts:172](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L172)
 
 Maximum Retry-After delay in seconds when honoring server headers.
 Defaults to 3600 seconds (1 hour).
@@ -115,7 +115,7 @@ Defaults to 3600 seconds (1 hour).
 
 > `optional` **retryStrategy**: [`RetryStrategy`](retrystrategy.md)
 
-Defined in: [src/types/provider.ts:147](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L147)
+Defined in: [src/types/provider.ts:148](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L148)
 
 Retry strategy for handling failures and rate limits
 
@@ -125,7 +125,7 @@ Retry strategy for handling failures and rate limits
 
 > `optional` **timeout**: `number`
 
-Defined in: [src/types/provider.ts:138](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/provider.ts#L138)
+Defined in: [src/types/provider.ts:139](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/provider.ts#L139)
 
 Request timeout in milliseconds.
 Applied per attempt; total wall time can exceed this when retries are enabled.

@@ -10,7 +10,7 @@ title: "Interface: ParsedImageRequest"
 
 # Interface: ParsedImageRequest
 
-Defined in: [src/providers/proxy/server/webapi.ts:67](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L67)
+Defined in: [src/providers/proxy/server/webapi.ts:67](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L67)
 
 Parsed request body for image endpoints.
 
@@ -20,7 +20,7 @@ Parsed request body for image endpoints.
 
 > `optional` **image**: [`Image`](../../core/classes/image.md)
 
-Defined in: [src/providers/proxy/server/webapi.ts:71](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L71)
+Defined in: [src/providers/proxy/server/webapi.ts:71](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L71)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:71](https://github.com/Provide
 
 > `optional` **mask**: [`Image`](../../core/classes/image.md)
 
-Defined in: [src/providers/proxy/server/webapi.ts:72](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L72)
+Defined in: [src/providers/proxy/server/webapi.ts:72](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L72)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:72](https://github.com/Provide
 
 > `optional` **model**: `string`
 
-Defined in: [src/providers/proxy/server/webapi.ts:70](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L70)
+Defined in: [src/providers/proxy/server/webapi.ts:70](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L70)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/providers/proxy/server/webapi.ts:70](https://github.com/Provide
 
 > `optional` **params**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/providers/proxy/server/webapi.ts:69](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L69)
+Defined in: [src/providers/proxy/server/webapi.ts:69](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L69)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [src/providers/proxy/server/webapi.ts:69](https://github.com/Provide
 
 > **prompt**: `string`
 
-Defined in: [src/providers/proxy/server/webapi.ts:68](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/server/webapi.ts#L68)
+Defined in: [src/providers/proxy/server/webapi.ts:68](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/server/webapi.ts#L68)

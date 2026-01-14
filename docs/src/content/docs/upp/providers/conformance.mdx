@@ -40,8 +40,9 @@ Providers may implement one or more modalities. For each modality, conformance i
 - Enable vendor's structured output mode
 - Parse and return structured data as JSON
 
-**Level 5: Multimodal Input** (`capabilities.imageInput`, `videoInput`, `audioInput`)
+**Level 5: Multimodal Input** (`capabilities.imageInput`, `documentInput`, `videoInput`, `audioInput`)
 - Image input handling (base64, URL conversion) if `imageInput: true`
+- Document input handling (PDF base64, PDF URL, plain text) if `documentInput: true`
 - Video input handling if `videoInput: true`
 - Audio input handling if `audioInput: true`
 

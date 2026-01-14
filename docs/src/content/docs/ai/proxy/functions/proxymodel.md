@@ -12,7 +12,7 @@ title: "Function: proxyModel()"
 
 > **proxyModel**(`endpoint`): [`ModelReference`](../../core/interfaces/modelreference.md)\<[`ProxyRequestOptions`](../interfaces/proxyrequestoptions.md)\>
 
-Defined in: [src/providers/proxy/index.ts:65](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/proxy/index.ts#L65)
+Defined in: [src/providers/proxy/index.ts:65](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/proxy/index.ts#L65)
 
 Shorthand for creating a proxy model reference with default model ID.
 

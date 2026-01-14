@@ -12,7 +12,7 @@ title: "Type Alias: ContentBlockType"
 
 > **ContentBlockType** = *typeof* [`ContentBlockType`](../variables/contentblocktype.md)\[keyof *typeof* [`ContentBlockType`](../variables/contentblocktype.md)\]
 
-Defined in: [src/types/content.ts:27](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L27)
+Defined in: [src/types/content.ts:27](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L27)
 
 Content block type discriminator union.
 

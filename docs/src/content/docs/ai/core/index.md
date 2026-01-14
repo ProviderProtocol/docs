@@ -21,6 +21,8 @@ transformations, streaming, tool execution, and error handling.
 ## Classes
 
 - [AssistantMessage](classes/assistantmessage.md)
+- [Audio](classes/audio.md)
+- [Document](classes/document.md)
 - [DynamicKey](classes/dynamickey.md)
 - [ExponentialBackoff](classes/exponentialbackoff.md)
 - [Image](classes/image.md)
@@ -34,6 +36,7 @@ transformations, streaming, tool execution, and error handling.
 - [ToolResultMessage](classes/toolresultmessage.md)
 - [UPPError](classes/upperror.md)
 - [UserMessage](classes/usermessage.md)
+- [Video](classes/video.md)
 - [WeightedKeys](classes/weightedkeys.md)
 
 ## Interfaces
@@ -45,6 +48,7 @@ transformations, streaming, tool execution, and error handling.
 - [BoundEmbeddingModel](interfaces/boundembeddingmodel.md)
 - [BoundImageModel](interfaces/boundimagemodel.md)
 - [BoundLLMModel](interfaces/boundllmmodel.md)
+- [DocumentBlock](interfaces/documentblock.md)
 - [Embedding](interfaces/embedding.md)
 - [EmbeddingHandler](interfaces/embeddinghandler.md)
 - [EmbeddingInstance](interfaces/embeddinginstance.md)
@@ -111,6 +115,8 @@ transformations, streaming, tool execution, and error handling.
 - [AssistantContent](type-aliases/assistantcontent.md)
 - [ContentBlock](type-aliases/contentblock.md)
 - [ContentBlockType](type-aliases/contentblocktype.md)
+- [DocumentSource](type-aliases/documentsource.md)
+- [DocumentSourceType](type-aliases/documentsourcetype.md)
 - [EmbeddingInput](type-aliases/embeddinginput.md)
 - [EmbeddingProvider](type-aliases/embeddingprovider.md)
 - [ErrorCode](type-aliases/errorcode.md)
@@ -135,6 +141,7 @@ transformations, streaming, tool execution, and error handling.
 
 - [ai](variables/ai.md)
 - [ContentBlockType](variables/contentblocktype.md)
+- [DocumentSourceType](variables/documentsourcetype.md)
 - [ErrorCode](variables/errorcode.md)
 - [ImageSourceType](variables/imagesourcetype.md)
 - [MessageRole](variables/messagerole.md)
@@ -155,6 +162,7 @@ transformations, streaming, tool execution, and error handling.
 - [isAssistantMessage](functions/isassistantmessage.md)
 - [isAudioBlock](functions/isaudioblock.md)
 - [isBinaryBlock](functions/isbinaryblock.md)
+- [isDocumentBlock](functions/isdocumentblock.md)
 - [isImageBlock](functions/isimageblock.md)
 - [isReasoningBlock](functions/isreasoningblock.md)
 - [isTextBlock](functions/istextblock.md)

@@ -12,7 +12,7 @@ title: "Function: codeInterpreterTool()"
 
 > **codeInterpreterTool**(`options?`): [`OpenAICodeInterpreterTool`](../interfaces/openaicodeinterpretertool.md)
 
-Defined in: [src/providers/openai/types.ts:1392](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/openai/types.ts#L1392)
+Defined in: [src/providers/openai/types.ts:1417](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/openai/types.ts#L1417)
 
 Creates a code interpreter tool configuration for the Responses API.
 

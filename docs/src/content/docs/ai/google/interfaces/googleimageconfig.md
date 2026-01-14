@@ -10,7 +10,7 @@ title: "Interface: GoogleImageConfig"
 
 # Interface: GoogleImageConfig
 
-Defined in: [src/providers/google/types.ts:173](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L173)
+Defined in: [src/providers/google/types.ts:173](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L173)
 
 Image generation configuration for Gemini response modalities.
 
@@ -20,7 +20,7 @@ Image generation configuration for Gemini response modalities.
 
 > `optional` **aspectRatio**: `string`
 
-Defined in: [src/providers/google/types.ts:178](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L178)
+Defined in: [src/providers/google/types.ts:178](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L178)
 
 Preferred aspect ratio for generated images.
 Example: "1:1", "9:16", "16:9".
@@ -31,7 +31,7 @@ Example: "1:1", "9:16", "16:9".
 
 > `optional` **imageSize**: `string`
 
-Defined in: [src/providers/google/types.ts:184](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/google/types.ts#L184)
+Defined in: [src/providers/google/types.ts:184](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/google/types.ts#L184)
 
 Preferred output size for generated images.
 Example: "1024x1024".

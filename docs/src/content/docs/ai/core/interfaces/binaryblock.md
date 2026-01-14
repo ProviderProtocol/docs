@@ -10,7 +10,7 @@ title: "Interface: BinaryBlock"
 
 # Interface: BinaryBlock
 
-Defined in: [src/types/content.ts:267](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L267)
+Defined in: [src/types/content.ts:370](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L370)
 
 Binary content block for arbitrary data.
 
@@ -33,7 +33,7 @@ const binaryBlock: BinaryBlock = {
 
 > **data**: `Uint8Array`
 
-Defined in: [src/types/content.ts:272](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L272)
+Defined in: [src/types/content.ts:375](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L375)
 
 Raw binary data
 
@@ -43,7 +43,7 @@ Raw binary data
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/content.ts:278](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L278)
+Defined in: [src/types/content.ts:381](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L381)
 
 Additional metadata about the binary content
 
@@ -53,7 +53,7 @@ Additional metadata about the binary content
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:275](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L275)
+Defined in: [src/types/content.ts:378](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L378)
 
 MIME type of the data
 
@@ -63,6 +63,6 @@ MIME type of the data
 
 > **type**: `"binary"`
 
-Defined in: [src/types/content.ts:269](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/content.ts#L269)
+Defined in: [src/types/content.ts:372](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/content.ts#L372)
 
 Discriminator for binary blocks

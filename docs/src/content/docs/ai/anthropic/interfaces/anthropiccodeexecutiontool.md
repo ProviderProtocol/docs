@@ -10,7 +10,7 @@ title: "Interface: AnthropicCodeExecutionTool"
 
 # Interface: AnthropicCodeExecutionTool
 
-Defined in: [src/providers/anthropic/types.ts:904](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/anthropic/types.ts#L904)
+Defined in: [src/providers/anthropic/types.ts:975](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/anthropic/types.ts#L975)
 
 Code execution tool for sandboxed Python/Bash execution.
 
@@ -34,7 +34,7 @@ const tool: AnthropicCodeExecutionTool = {
 
 > **name**: `"code_execution"`
 
-Defined in: [src/providers/anthropic/types.ts:908](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/anthropic/types.ts#L908)
+Defined in: [src/providers/anthropic/types.ts:979](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/anthropic/types.ts#L979)
 
 Tool name - must be 'code_execution'
 
@@ -44,6 +44,6 @@ Tool name - must be 'code_execution'
 
 > **type**: `"code_execution_20250825"`
 
-Defined in: [src/providers/anthropic/types.ts:906](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/providers/anthropic/types.ts#L906)
+Defined in: [src/providers/anthropic/types.ts:977](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/providers/anthropic/types.ts#L977)
 
 Tool type identifier

@@ -104,6 +104,7 @@ await claude.generate(thread, "Continue the conversation")
 | `tools` | Boolean | Provider API supports tool/function calling |
 | `structuredOutput` | Boolean | Provider API supports native structured output |
 | `imageInput` | Boolean | Provider API supports image input |
+| `documentInput` | Boolean | Provider API supports document input (PDFs, text files) |
 | `videoInput` | Boolean | Provider API supports video input |
 | `audioInput` | Boolean | Provider API supports audio input |
 
@@ -360,6 +361,7 @@ UPP does NOT validate the response against the schema. Modern LLMs with structur
 Similarly, `llm()` core checks capabilities before using other features:
 - `tools` provided but `capabilities.tools` is `false` → MUST throw `INVALID_REQUEST`
 - Image content provided but `capabilities.imageInput` is `false` → MUST throw `INVALID_REQUEST`
+- Document content provided but `capabilities.documentInput` is `false` → MUST throw `INVALID_REQUEST`
 - `stream()` called but `capabilities.streaming` is `false` → MUST throw `INVALID_REQUEST`
 
 #### 5.10.6 Error Handling

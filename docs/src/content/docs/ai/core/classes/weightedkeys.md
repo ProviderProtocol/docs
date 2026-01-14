@@ -10,7 +10,7 @@ title: "Class: WeightedKeys"
 
 # Class: WeightedKeys
 
-Defined in: [src/http/keys.ts:92](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/http/keys.ts#L92)
+Defined in: [src/http/keys.ts:92](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/http/keys.ts#L92)
 
 Selects API keys using weighted random probability.
 
@@ -50,7 +50,7 @@ const provider = createOpenAI({
 
 > **new WeightedKeys**(`keys`): `WeightedKeys`
 
-Defined in: [src/http/keys.ts:102](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/http/keys.ts#L102)
+Defined in: [src/http/keys.ts:102](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/http/keys.ts#L102)
 
 Creates a new WeightedKeys instance.
 
@@ -76,7 +76,7 @@ When the keys array is empty
 
 > **getKey**(): `string`
 
-Defined in: [src/http/keys.ts:115](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/http/keys.ts#L115)
+Defined in: [src/http/keys.ts:115](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/http/keys.ts#L115)
 
 Returns a randomly selected key based on configured weights.
 

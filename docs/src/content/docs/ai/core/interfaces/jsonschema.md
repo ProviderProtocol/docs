@@ -10,7 +10,7 @@ title: "Interface: JSONSchema"
 
 # Interface: JSONSchema
 
-Defined in: [src/types/schema.ts:149](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L149)
+Defined in: [src/types/schema.ts:149](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L149)
 
 Root JSON Schema for tool parameters or structured outputs.
 
@@ -44,7 +44,7 @@ const weatherToolSchema: JSONSchema = {
 
 > `optional` **additionalProperties**: `boolean`
 
-Defined in: [src/types/schema.ts:160](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L160)
+Defined in: [src/types/schema.ts:160](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L160)
 
 Whether additional properties are allowed beyond those defined
 
@@ -54,7 +54,7 @@ Whether additional properties are allowed beyond those defined
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/schema.ts:163](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L163)
+Defined in: [src/types/schema.ts:163](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L163)
 
 Human-readable description of the schema's purpose
 
@@ -64,7 +64,7 @@ Human-readable description of the schema's purpose
 
 > **properties**: `Record`\<`string`, [`JSONSchemaProperty`](jsonschemaproperty.md)\>
 
-Defined in: [src/types/schema.ts:154](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L154)
+Defined in: [src/types/schema.ts:154](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L154)
 
 Property definitions for the object
 
@@ -74,7 +74,7 @@ Property definitions for the object
 
 > `optional` **required**: `string`[]
 
-Defined in: [src/types/schema.ts:157](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L157)
+Defined in: [src/types/schema.ts:157](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L157)
 
 List of required property names
 
@@ -84,6 +84,6 @@ List of required property names
 
 > **type**: `"object"`
 
-Defined in: [src/types/schema.ts:151](https://github.com/ProviderProtocol/ai/blob/b3206c8fb7e61c5e2e0dbfa901643df90e877a3d/src/types/schema.ts#L151)
+Defined in: [src/types/schema.ts:151](https://github.com/ProviderProtocol/ai/blob/6119c5b59e26af41fa847efb47d9abf792ee3fb5/src/types/schema.ts#L151)
 
 Root schemas are always objects

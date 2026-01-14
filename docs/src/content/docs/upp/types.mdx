@@ -84,10 +84,12 @@ UPP implementations SHOULD export the following types through their language's s
 - `ContentBlock`
 - `TextBlock`
 - `ImageBlock`
+- `DocumentBlock`
 - `AudioBlock`
 - `VideoBlock`
 - `BinaryBlock`
 - `ImageSource`
+- `DocumentSource`
 
 **Tool Types:**
 - `ToolCall`
@@ -172,6 +174,9 @@ UPP implementations SHOULD export the following types through their language's s
 
 **Utilities:**
 - `Image`
+- `Document`
+- `Audio`
+- `Video`
 - `isUserMessage`
 - `isAssistantMessage`
 - `isToolResultMessage`
@@ -212,6 +217,7 @@ UPP exports named constant objects for all discriminated union types. These cons
 | `ContentBlockType.Text` | `'text'` |
 | `ContentBlockType.Reasoning` | `'reasoning'` |
 | `ContentBlockType.Image` | `'image'` |
+| `ContentBlockType.Document` | `'document'` |
 | `ContentBlockType.Audio` | `'audio'` |
 | `ContentBlockType.Video` | `'video'` |
 | `ContentBlockType.Binary` | `'binary'` |
@@ -223,6 +229,14 @@ UPP exports named constant objects for all discriminated union types. These cons
 | `ImageSourceType.Base64` | `'base64'` |
 | `ImageSourceType.Url` | `'url'` |
 | `ImageSourceType.Bytes` | `'bytes'` |
+
+**DocumentSourceType Constants:**
+
+| Constant | Value |
+|----------|-------|
+| `DocumentSourceType.Base64` | `'base64'` |
+| `DocumentSourceType.Url` | `'url'` |
+| `DocumentSourceType.Text` | `'text'` |
 
 **MessageRole Constants:**
 
