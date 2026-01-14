@@ -783,6 +783,7 @@ await claude.generate(thread, "Continue the conversation")
 | `tools` | Boolean | Provider API supports tool/function calling |
 | `structuredOutput` | Boolean | Provider API supports native structured output |
 | `imageInput` | Boolean | Provider API supports image input |
+| `documentInput` | Boolean | Provider API supports document input (PDFs, text files) |
 | `videoInput` | Boolean | Provider API supports video input |
 | `audioInput` | Boolean | Provider API supports audio input |
 
@@ -1037,6 +1038,7 @@ UPP does NOT validate the response against the schema. Modern LLMs with structur
 Similarly, `llm()` core checks capabilities before using other features:
 - `tools` provided but `capabilities.tools` is `false` → MUST throw `INVALID_REQUEST`
 - Image content provided but `capabilities.imageInput` is `false` → MUST throw `INVALID_REQUEST`
+- Document content provided but `capabilities.documentInput` is `false` → MUST throw `INVALID_REQUEST`
 - `stream()` called but `capabilities.streaming` is `false` → MUST throw `INVALID_REQUEST`
 
 #### 5.10.6 Error Handling
@@ -1080,6 +1082,7 @@ Messages are represented as a type hierarchy, allowing type-safe handling and pr
 | `type` | MessageType | Message type discriminator |
 | `text` | String | Convenience accessor - concatenates all text blocks with "\n\n" |
 | `images` | List<ImageBlock> | Convenience accessor - returns all image blocks |
+| `documents` | List<DocumentBlock> | Convenience accessor - returns all document blocks |
 | `audio` | List<AudioBlock> | Convenience accessor - returns all audio blocks |
 | `video` | List<VideoBlock> | Convenience accessor - returns all video blocks |
 
@@ -1112,7 +1115,7 @@ Providers MUST ignore metadata namespaces they don't recognize. Message metadata
 | `type` | "user" | Always "user" |
 | `content` | List<UserContent> | Content blocks |
 
-`UserContent` can be: `TextBlock`, `ImageBlock`, `AudioBlock`, `VideoBlock`, `BinaryBlock`
+`UserContent` can be: `TextBlock`, `ImageBlock`, `DocumentBlock`, `AudioBlock`, `VideoBlock`, `BinaryBlock`
 
 Constructor accepts either a string (converted to TextBlock) or array of content blocks.
 
@@ -1228,6 +1231,30 @@ This content represents the model's internal reasoning process before generating
 { type: "bytes", data: <binary data> }
 ```
 
+**DocumentBlock:**
+
+```pseudocode
+{
+  type: "document",
+  source: DocumentSource,
+  mimeType: "application/pdf",  // or "text/plain"
+  title: "Annual Report"        // optional, used for citations
+}
+```
+
+**DocumentSource Variants:**
+
+```pseudocode
+// Base64 encoded PDF
+{ type: "base64", data: "JVBERi0xLjQK..." }
+
+// URL reference to PDF
+{ type: "url", url: "https://example.com/document.pdf" }
+
+// Plain text content
+{ type: "text", data: "This is the document content..." }
+```
+
 **AudioBlock:**
 
 ```pseudocode
@@ -1328,8 +1355,109 @@ Implementations SHOULD provide an `Image` type with factory methods:
 | `Image.fromUrl(url, mimeType?)` | Create from URL reference (does not fetch) |
 | `Image.fromBytes(data, mimeType)` | Create from raw bytes |
 | `Image.fromBase64(base64, mimeType)` | Create from base64 string |
+| `Image.fromBlock(block)` | Create from an existing ImageBlock |
 
-### 6.6 Type Guards
+### 6.6 Document Type
+
+Implementations SHOULD provide a `Document` type with factory methods for PDF and text documents:
+
+**Document Properties:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `source` | DocumentSource | The document source |
+| `mimeType` | String | MIME type (`application/pdf` or `text/plain`) |
+| `title` | String? | Optional document title (for citations) |
+| `hasData` | Boolean | True if data is loaded (false for URL sources) |
+| `isPdf` | Boolean | True if document is PDF |
+| `isText` | Boolean | True if document is plain text |
+
+**Document Methods:**
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `toBase64()` | String | Convert to base64 string (throws if not base64 source) |
+| `toText()` | String | Get text content (throws if not text source) |
+| `toUrl()` | String | Get URL (throws if not URL source) |
+| `toBlock()` | DocumentBlock | Convert to content block for messages |
+
+**Document Factory Methods:**
+
+| Method | Description |
+|--------|-------------|
+| `Document.fromPath(path, title?)` | Create from file path (reads and base64-encodes) |
+| `Document.fromUrl(url, title?)` | Create from URL reference (PDF only, does not fetch) |
+| `Document.fromBase64(base64, mimeType, title?)` | Create from base64 string |
+| `Document.fromText(text, title?)` | Create from plain text content |
+| `Document.fromBlock(block)` | Create from an existing DocumentBlock |
+
+### 6.7 Audio Type
+
+Implementations SHOULD provide an `Audio` type with factory methods:
+
+**Audio Properties:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `data` | Bytes | The audio data as raw bytes |
+| `mimeType` | String | MIME type (e.g., `audio/mp3`, `audio/wav`) |
+| `duration` | Number? | Duration in seconds |
+| `size` | Integer | Size in bytes |
+
+**Audio Methods:**
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `toBase64()` | String | Convert to base64 string |
+| `toDataUrl()` | String | Convert to data URL |
+| `toBytes()` | Bytes | Get raw bytes |
+| `toBlock()` | AudioBlock | Convert to content block for messages |
+
+**Audio Factory Methods:**
+
+| Method | Description |
+|--------|-------------|
+| `Audio.fromPath(path, duration?)` | Create from file path (reads file into memory) |
+| `Audio.fromBytes(data, mimeType, duration?)` | Create from raw bytes |
+| `Audio.fromBase64(base64, mimeType, duration?)` | Create from base64 string |
+| `Audio.fromBlock(block)` | Create from an existing AudioBlock |
+
+### 6.8 Video Type
+
+Implementations SHOULD provide a `Video` type with factory methods:
+
+**Video Properties:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `data` | Bytes | The video data as raw bytes |
+| `mimeType` | String | MIME type (e.g., `video/mp4`, `video/webm`) |
+| `duration` | Number? | Duration in seconds |
+| `width` | Integer? | Width in pixels |
+| `height` | Integer? | Height in pixels |
+| `size` | Integer | Size in bytes |
+
+**Video Methods:**
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `toBase64()` | String | Convert to base64 string |
+| `toDataUrl()` | String | Convert to data URL |
+| `toBytes()` | Bytes | Get raw bytes |
+| `toBlock()` | VideoBlock | Convert to content block for messages |
+
+**Video Factory Methods:**
+
+| Method | Description |
+|--------|-------------|
+| `Video.fromPath(path, options?)` | Create from file path (reads file into memory) |
+| `Video.fromBytes(data, mimeType, options?)` | Create from raw bytes |
+| `Video.fromBase64(base64, mimeType, options?)` | Create from base64 string |
+| `Video.fromBlock(block)` | Create from an existing VideoBlock |
+
+Options for Video factory methods may include `duration`, `width`, and `height`.
+
+### 6.9 Type Guards
 
 UPP implementations SHOULD provide type guard functions for message handling:
 
@@ -3052,10 +3180,12 @@ UPP implementations SHOULD export the following types through their language's s
 - `ContentBlock`
 - `TextBlock`
 - `ImageBlock`
+- `DocumentBlock`
 - `AudioBlock`
 - `VideoBlock`
 - `BinaryBlock`
 - `ImageSource`
+- `DocumentSource`
 
 **Tool Types:**
 - `ToolCall`
@@ -3140,6 +3270,9 @@ UPP implementations SHOULD export the following types through their language's s
 
 **Utilities:**
 - `Image`
+- `Document`
+- `Audio`
+- `Video`
 - `isUserMessage`
 - `isAssistantMessage`
 - `isToolResultMessage`
@@ -3180,6 +3313,7 @@ UPP exports named constant objects for all discriminated union types. These cons
 | `ContentBlockType.Text` | `'text'` |
 | `ContentBlockType.Reasoning` | `'reasoning'` |
 | `ContentBlockType.Image` | `'image'` |
+| `ContentBlockType.Document` | `'document'` |
 | `ContentBlockType.Audio` | `'audio'` |
 | `ContentBlockType.Video` | `'video'` |
 | `ContentBlockType.Binary` | `'binary'` |
@@ -3191,6 +3325,14 @@ UPP exports named constant objects for all discriminated union types. These cons
 | `ImageSourceType.Base64` | `'base64'` |
 | `ImageSourceType.Url` | `'url'` |
 | `ImageSourceType.Bytes` | `'bytes'` |
+
+**DocumentSourceType Constants:**
+
+| Constant | Value |
+|----------|-------|
+| `DocumentSourceType.Base64` | `'base64'` |
+| `DocumentSourceType.Url` | `'url'` |
+| `DocumentSourceType.Text` | `'text'` |
 
 **MessageRole Constants:**
 
@@ -3662,8 +3804,9 @@ Providers may implement one or more modalities. For each modality, conformance i
 - Enable vendor's structured output mode
 - Parse and return structured data as JSON
 
-**Level 5: Multimodal Input** (`capabilities.imageInput`, `videoInput`, `audioInput`)
+**Level 5: Multimodal Input** (`capabilities.imageInput`, `documentInput`, `videoInput`, `audioInput`)
 - Image input handling (base64, URL conversion) if `imageInput: true`
+- Document input handling (PDF base64, PDF URL, plain text) if `documentInput: true`
 - Video input handling if `videoInput: true`
 - Audio input handling if `audioInput: true`
 
@@ -3871,6 +4014,44 @@ Tools execute arbitrary code based on LLM-provided arguments:
         "height": { "type": "integer" }
       }
     },
+    "DocumentSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "data"],
+          "properties": {
+            "type": { "const": "base64" },
+            "data": { "type": "string" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "url"],
+          "properties": {
+            "type": { "const": "url" },
+            "url": { "type": "string", "format": "uri" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "data"],
+          "properties": {
+            "type": { "const": "text" },
+            "data": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "DocumentBlock": {
+      "type": "object",
+      "required": ["type", "source", "mimeType"],
+      "properties": {
+        "type": { "const": "document" },
+        "source": { "$ref": "#/definitions/DocumentSource" },
+        "mimeType": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
     "AudioBlock": {
       "type": "object",
       "required": ["type", "data", "mimeType"],
@@ -3908,6 +4089,7 @@ Tools execute arbitrary code based on LLM-provided arguments:
         { "$ref": "#/definitions/TextBlock" },
         { "$ref": "#/definitions/ReasoningBlock" },
         { "$ref": "#/definitions/ImageBlock" },
+        { "$ref": "#/definitions/DocumentBlock" },
         { "$ref": "#/definitions/AudioBlock" },
         { "$ref": "#/definitions/VideoBlock" },
         { "$ref": "#/definitions/BinaryBlock" }
@@ -4089,6 +4271,10 @@ Tools execute arbitrary code based on LLM-provided arguments:
 
 ### 1.2.0-draft
 
+- **Added** `Document` helper type (Section 6.6) with factory methods for PDF and text documents
+- **Added** `Audio` helper type (Section 6.7) with factory methods for audio content
+- **Added** `Video` helper type (Section 6.8) with factory methods for video content
+- **Added** `Image.fromBlock()` factory method to create Image from existing ImageBlock
 - **Simplified** specification to pure protocol architecture; removed all vendor-specific implementation details including: metadata option tables (6.1, 10.1), system prompt mappings (5.10.4), structured output wiring (11.3), mask conventions (13.6), provider tool reference (10.9.5), embedding params (12.10), image params (13.14), capability matrix (13.14.9), and example model names (1.5)
 - **Removed** Image conformance levels for vary/upscale/outpaint (16.1.3) to match interface; renumbered Streaming to Level 3
 - **Added** Section 10.9 Provider-Native Tools documenting server-side built-in tools (web search, image generation, code interpreter, etc.)
