@@ -81,16 +81,8 @@ export default defineConfig({
 					collapsed: false,
 					autogenerate: { directory: 'agents' },
 				},
-				{
-					label: 'UPP Specification',
-					collapsed: true,
-					autogenerate: { directory: 'upp' },
-				},
-				{
-					label: 'UAP Specification',
-					collapsed: true,
-					autogenerate: { directory: 'uap' },
-				},
+				{ label: 'UPP Specification', slug: 'upp/full' },
+				{ label: 'UAP Specification', slug: 'uap/full' },
 			],
 		}),
 	],

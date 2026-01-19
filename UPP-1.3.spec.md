@@ -1,3 +1,8 @@
+---
+title: "UPP Specification"
+description: "Complete UPP-1.3 specification document."
+---
+
 # UPP-1.3: Unified Provider Protocol Specification
 
 **Version:** 1.3.1

@@ -1,3 +1,8 @@
+---
+title: "UAP Specification"
+description: "Complete UAP-1.1 specification document."
+---
+
 # UAP-1.1: Unified Agent Protocol Specification
 
 **Version:** 1.1.0
