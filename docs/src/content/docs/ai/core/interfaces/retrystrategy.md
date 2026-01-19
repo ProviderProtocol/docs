@@ -10,7 +10,7 @@ title: "Interface: RetryStrategy"
 
 # Interface: RetryStrategy
 
-Defined in: [src/types/provider.ts:67](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L67)
+Defined in: [src/types/provider.ts:67](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L67)
 
 Retry strategy interface for handling request failures.
 
@@ -38,7 +38,7 @@ class ExponentialBackoff implements RetryStrategy {
 
 > `optional` **beforeRequest**(): `number` \| `Promise`\<`number`\>
 
-Defined in: [src/types/provider.ts:82](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L82)
+Defined in: [src/types/provider.ts:82](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L82)
 
 Called before each request. Can be used to implement pre-emptive rate limiting.
 
@@ -54,7 +54,7 @@ Delay in ms to wait before making the request, or 0 to proceed immediately
 
 > **onRetry**(`error`, `attempt`): `number` \| `Promise`\<`number` \| `null`\> \| `null`
 
-Defined in: [src/types/provider.ts:75](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L75)
+Defined in: [src/types/provider.ts:75](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L75)
 
 Called when a request fails with a retryable error.
 
@@ -84,7 +84,7 @@ Delay in ms before retrying, or null to stop retrying
 
 > `optional` **reset**(): `void`
 
-Defined in: [src/types/provider.ts:87](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L87)
+Defined in: [src/types/provider.ts:87](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L87)
 
 Reset the strategy state (e.g., after a successful request).
 

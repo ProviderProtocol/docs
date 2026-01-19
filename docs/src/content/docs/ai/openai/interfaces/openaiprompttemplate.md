@@ -10,7 +10,7 @@ title: "Interface: OpenAIPromptTemplate"
 
 # Interface: OpenAIPromptTemplate
 
-Defined in: [src/providers/openai/types.ts:240](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L240)
+Defined in: [src/providers/openai/types.ts:240](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L240)
 
 Reference to a prompt template stored in OpenAI's system.
 
@@ -22,7 +22,7 @@ Allows using pre-defined prompt templates with variable substitution.
 
 > **id**: `string`
 
-Defined in: [src/providers/openai/types.ts:242](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L242)
+Defined in: [src/providers/openai/types.ts:242](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L242)
 
 Prompt template ID
 
@@ -32,6 +32,6 @@ Prompt template ID
 
 > `optional` **variables**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/openai/types.ts:244](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L244)
+Defined in: [src/providers/openai/types.ts:244](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L244)
 
 Variables to fill into the template

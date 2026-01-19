@@ -10,7 +10,7 @@ title: "Interface: OpenAIAudioConfig"
 
 # Interface: OpenAIAudioConfig
 
-Defined in: [src/providers/openai/types.ts:28](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L28)
+Defined in: [src/providers/openai/types.ts:28](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L28)
 
 Audio output configuration for Chat Completions API.
 
@@ -23,7 +23,7 @@ the audio modality. Requires `modalities: ['text', 'audio']`.
 
 > **format**: `"mp3"` \| `"wav"` \| `"flac"` \| `"aac"` \| `"opus"` \| `"pcm16"`
 
-Defined in: [src/providers/openai/types.ts:30](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L30)
+Defined in: [src/providers/openai/types.ts:30](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L30)
 
 Audio format for the generated output
 
@@ -33,6 +33,6 @@ Audio format for the generated output
 
 > **voice**: `"alloy"` \| `"ash"` \| `"ballad"` \| `"coral"` \| `"echo"` \| `"sage"` \| `"shimmer"` \| `"verse"` \| `"marin"` \| `"cedar"`
 
-Defined in: [src/providers/openai/types.ts:32](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openai/types.ts#L32)
+Defined in: [src/providers/openai/types.ts:32](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openai/types.ts#L32)
 
 Voice model to use for audio generation

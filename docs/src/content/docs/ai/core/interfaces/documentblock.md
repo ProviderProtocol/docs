@@ -10,7 +10,7 @@ title: "Interface: DocumentBlock"
 
 # Interface: DocumentBlock
 
-Defined in: [src/types/content.ts:275](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/content.ts#L275)
+Defined in: [src/types/content.ts:275](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/content.ts#L275)
 
 Document content block.
 
@@ -42,7 +42,7 @@ const textDoc: DocumentBlock = {
 
 > **mimeType**: `string`
 
-Defined in: [src/types/content.ts:283](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/content.ts#L283)
+Defined in: [src/types/content.ts:283](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/content.ts#L283)
 
 MIME type of the document ('application/pdf' or 'text/plain')
 
@@ -52,7 +52,7 @@ MIME type of the document ('application/pdf' or 'text/plain')
 
 > **source**: [`DocumentSource`](../type-aliases/documentsource.md)
 
-Defined in: [src/types/content.ts:280](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/content.ts#L280)
+Defined in: [src/types/content.ts:280](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/content.ts#L280)
 
 The document data source
 
@@ -62,7 +62,7 @@ The document data source
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/content.ts:286](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/content.ts#L286)
+Defined in: [src/types/content.ts:286](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/content.ts#L286)
 
 Optional document title (used for citations)
 
@@ -72,6 +72,6 @@ Optional document title (used for citations)
 
 > **type**: `"document"`
 
-Defined in: [src/types/content.ts:277](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/content.ts#L277)
+Defined in: [src/types/content.ts:277](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/content.ts#L277)
 
 Discriminator for document blocks

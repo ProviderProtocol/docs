@@ -12,7 +12,7 @@ title: "Variable: EmbeddingInputType"
 
 > `const` **EmbeddingInputType**: `object`
 
-Defined in: [src/types/embedding.ts:22](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/embedding.ts#L22)
+Defined in: [src/types/embedding.ts:23](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/embedding.ts#L23)
 
 Input type hints for provider-specific embedding optimization.
 Some providers optimize embeddings differently for queries vs documents.

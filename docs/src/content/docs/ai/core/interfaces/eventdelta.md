@@ -10,12 +10,32 @@ title: "Interface: EventDelta"
 
 # Interface: EventDelta
 
-Defined in: [src/types/stream.ts:69](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L69)
+Defined in: [src/types/stream.ts:87](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L87)
 
 Event delta data payload.
 
 Contains the type-specific data for a streaming event.
-Different fields are populated depending on the event type.
+Different fields are populated depending on the event type:
+
+| Event Type | Fields |
+|------------|--------|
+| `text_delta` | `text` |
+| `reasoning_delta` | `text` |
+| `object_delta` | `text` |
+| `image_delta` | `data` |
+| `audio_delta` | `data` |
+| `video_delta` | `data` |
+| `tool_call_delta` | `toolCallId`, `toolName`, `argumentsJson` |
+| `tool_execution_start` | `toolCallId`, `toolName`, `timestamp` |
+| `tool_execution_end` | `toolCallId`, `toolName`, `result`, `isError`, `timestamp` |
+| `message_start` | (none) |
+| `message_stop` | (none) |
+| `content_block_start` | (none) |
+| `content_block_stop` | (none) |
+
+## Extended by
+
+- [`ParsedEventDelta`](parsedeventdelta.md)
 
 ## Properties
 
@@ -23,9 +43,9 @@ Different fields are populated depending on the event type.
 
 > `optional` **argumentsJson**: `string`
 
-Defined in: [src/types/stream.ts:83](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L83)
+Defined in: [src/types/stream.ts:101](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L101)
 
-Incremental JSON arguments string (for tool_call_delta)
+Incremental JSON arguments string (tool_call_delta)
 
 ***
 
@@ -33,9 +53,9 @@ Incremental JSON arguments string (for tool_call_delta)
 
 > `optional` **data**: `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [src/types/stream.ts:74](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L74)
+Defined in: [src/types/stream.ts:92](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L92)
 
-Incremental binary data (for image_delta, audio_delta, video_delta)
+Incremental binary data (image_delta, audio_delta, video_delta)
 
 ***
 
@@ -43,9 +63,9 @@ Incremental binary data (for image_delta, audio_delta, video_delta)
 
 > `optional` **isError**: `boolean`
 
-Defined in: [src/types/stream.ts:89](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L89)
+Defined in: [src/types/stream.ts:107](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L107)
 
-Whether tool execution resulted in an error (for tool_execution_end)
+Whether tool execution resulted in an error (tool_execution_end)
 
 ***
 
@@ -53,9 +73,9 @@ Whether tool execution resulted in an error (for tool_execution_end)
 
 > `optional` **result**: `unknown`
 
-Defined in: [src/types/stream.ts:86](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L86)
+Defined in: [src/types/stream.ts:104](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L104)
 
-Tool execution result (for tool_execution_end)
+Tool execution result (tool_execution_end)
 
 ***
 
@@ -63,9 +83,9 @@ Tool execution result (for tool_execution_end)
 
 > `optional` **text**: `string`
 
-Defined in: [src/types/stream.ts:71](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L71)
+Defined in: [src/types/stream.ts:89](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L89)
 
-Incremental text content (for text_delta, reasoning_delta)
+Incremental text content (text_delta, reasoning_delta, object_delta)
 
 ***
 
@@ -73,9 +93,9 @@ Incremental text content (for text_delta, reasoning_delta)
 
 > `optional` **timestamp**: `number`
 
-Defined in: [src/types/stream.ts:92](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L92)
+Defined in: [src/types/stream.ts:110](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L110)
 
-Timestamp in milliseconds (for tool_execution_start/end)
+Timestamp in milliseconds (tool_execution_start/end)
 
 ***
 
@@ -83,9 +103,9 @@ Timestamp in milliseconds (for tool_execution_start/end)
 
 > `optional` **toolCallId**: `string`
 
-Defined in: [src/types/stream.ts:77](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L77)
+Defined in: [src/types/stream.ts:95](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L95)
 
-Tool call identifier (for tool_call_delta, tool_execution_start/end)
+Tool call identifier (tool_call_delta, tool_execution_start/end)
 
 ***
 
@@ -93,6 +113,6 @@ Tool call identifier (for tool_call_delta, tool_execution_start/end)
 
 > `optional` **toolName**: `string`
 
-Defined in: [src/types/stream.ts:80](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L80)
+Defined in: [src/types/stream.ts:98](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L98)
 
-Tool name (for tool_call_delta, tool_execution_start/end)
+Tool name (tool_call_delta, tool_execution_start/end)

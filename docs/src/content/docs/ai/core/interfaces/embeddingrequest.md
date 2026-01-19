@@ -10,7 +10,7 @@ title: "Interface: EmbeddingRequest"
 
 # Interface: EmbeddingRequest\<TParams\>
 
-Defined in: [src/types/provider.ts:335](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L335)
+Defined in: [src/types/provider.ts:335](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L335)
 
 **`Internal`**
 
@@ -28,7 +28,7 @@ Request passed to provider's embed method.
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/provider.ts:341](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L341)
+Defined in: [src/types/provider.ts:341](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L341)
 
 Provider infrastructure config
 
@@ -38,9 +38,19 @@ Provider infrastructure config
 
 > **inputs**: [`EmbeddingInput`](../type-aliases/embeddinginput.md)[]
 
-Defined in: [src/types/provider.ts:337](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L337)
+Defined in: [src/types/provider.ts:337](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L337)
 
 Inputs to embed
+
+***
+
+### inputType?
+
+> `optional` **inputType**: `"document"` \| `"query"`
+
+Defined in: [src/types/provider.ts:345](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L345)
+
+Input type hint for provider-specific optimization
 
 ***
 
@@ -48,7 +58,7 @@ Inputs to embed
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/provider.ts:339](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L339)
+Defined in: [src/types/provider.ts:339](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L339)
 
 Provider-specific parameters (passed through unchanged)
 
@@ -58,6 +68,6 @@ Provider-specific parameters (passed through unchanged)
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/provider.ts:343](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L343)
+Defined in: [src/types/provider.ts:343](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L343)
 
 Abort signal for cancellation

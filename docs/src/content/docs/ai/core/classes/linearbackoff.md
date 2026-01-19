@@ -10,7 +10,7 @@ title: "Class: LinearBackoff"
 
 # Class: LinearBackoff
 
-Defined in: [src/http/retry.ts:145](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/http/retry.ts#L145)
+Defined in: [src/http/retry.ts:145](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/http/retry.ts#L145)
 
 Implements linear backoff where delays increase proportionally with each attempt.
 
@@ -55,7 +55,7 @@ const provider = createAnthropic({
 
 > **new LinearBackoff**(`options`): `LinearBackoff`
 
-Defined in: [src/http/retry.ts:156](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/http/retry.ts#L156)
+Defined in: [src/http/retry.ts:156](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/http/retry.ts#L156)
 
 Creates a new LinearBackoff instance.
 
@@ -87,7 +87,7 @@ Maximum number of retry attempts (default: 3)
 
 > **onRetry**(`error`, `attempt`): `number` \| `null`
 
-Defined in: [src/http/retry.ts:171](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/http/retry.ts#L171)
+Defined in: [src/http/retry.ts:171](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/http/retry.ts#L171)
 
 Determines whether to retry and calculates the linear delay.
 

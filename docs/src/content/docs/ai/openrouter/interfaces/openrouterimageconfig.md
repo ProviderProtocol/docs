@@ -10,7 +10,7 @@ title: "Interface: OpenRouterImageConfig"
 
 # Interface: OpenRouterImageConfig
 
-Defined in: [src/providers/openrouter/types.ts:198](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L198)
+Defined in: [src/providers/openrouter/types.ts:198](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L198)
 
 Image generation configuration for OpenRouter.
 
@@ -26,7 +26,7 @@ Used with Gemini image generation models to control output dimensions.
 
 > `optional` **aspect\_ratio**: `string`
 
-Defined in: [src/providers/openrouter/types.ts:203](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L203)
+Defined in: [src/providers/openrouter/types.ts:203](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L203)
 
 Aspect ratio for generated images.
 Supported values range from '1:1' (1024×1024) to '21:9' (1536×672).
@@ -37,7 +37,7 @@ Supported values range from '1:1' (1024×1024) to '21:9' (1536×672).
 
 > `optional` **image\_size**: `"1K"` \| `"2K"` \| `"4K"`
 
-Defined in: [src/providers/openrouter/types.ts:211](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L211)
+Defined in: [src/providers/openrouter/types.ts:211](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L211)
 
 Resolution level for generated images.
 - '1K': Standard resolution

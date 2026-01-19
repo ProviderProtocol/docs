@@ -10,7 +10,7 @@ title: "Interface: XAIServerSideToolUsage"
 
 # Interface: XAIServerSideToolUsage
 
-Defined in: [src/providers/xai/types.ts:421](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L421)
+Defined in: [src/providers/xai/types.ts:421](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L421)
 
 Server-side tool usage tracking returned in responses.
 
@@ -20,7 +20,7 @@ Server-side tool usage tracking returned in responses.
 
 > `optional` **code\_execution**: `number`
 
-Defined in: [src/providers/xai/types.ts:427](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L427)
+Defined in: [src/providers/xai/types.ts:427](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L427)
 
 Number of successful code executions
 
@@ -30,7 +30,7 @@ Number of successful code executions
 
 > `optional` **file\_search**: `number`
 
-Defined in: [src/providers/xai/types.ts:429](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L429)
+Defined in: [src/providers/xai/types.ts:429](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L429)
 
 Number of successful file searches
 
@@ -40,7 +40,7 @@ Number of successful file searches
 
 > `optional` **web\_search**: `number`
 
-Defined in: [src/providers/xai/types.ts:423](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L423)
+Defined in: [src/providers/xai/types.ts:423](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L423)
 
 Number of successful web searches
 
@@ -50,6 +50,6 @@ Number of successful web searches
 
 > `optional` **x\_search**: `number`
 
-Defined in: [src/providers/xai/types.ts:425](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L425)
+Defined in: [src/providers/xai/types.ts:425](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L425)
 
 Number of successful X searches

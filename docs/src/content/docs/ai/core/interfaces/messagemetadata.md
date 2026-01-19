@@ -10,7 +10,7 @@ title: "Interface: MessageMetadata"
 
 # Interface: MessageMetadata
 
-Defined in: [src/types/messages.ts:89](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/messages.ts#L89)
+Defined in: [src/types/messages.ts:89](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/messages.ts#L89)
 
 Provider-namespaced metadata for messages.
 

@@ -10,7 +10,7 @@ title: "Class: Audio"
 
 # Class: Audio
 
-Defined in: [src/core/media/Audio.ts:36](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L36)
+Defined in: [src/core/media/Audio.ts:36](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L36)
 
 Represents an audio file that can be used in UPP messages.
 
@@ -41,7 +41,7 @@ const message = new UserMessage([audio.toBlock()]);
 
 > `readonly` **data**: `Uint8Array`
 
-Defined in: [src/core/media/Audio.ts:38](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L38)
+Defined in: [src/core/media/Audio.ts:38](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L38)
 
 The audio data as raw bytes
 
@@ -51,7 +51,7 @@ The audio data as raw bytes
 
 > `readonly` `optional` **duration**: `number`
 
-Defined in: [src/core/media/Audio.ts:42](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L42)
+Defined in: [src/core/media/Audio.ts:42](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L42)
 
 Duration in seconds, if known
 
@@ -61,7 +61,7 @@ Duration in seconds, if known
 
 > `readonly` **mimeType**: `string`
 
-Defined in: [src/core/media/Audio.ts:40](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L40)
+Defined in: [src/core/media/Audio.ts:40](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L40)
 
 MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
@@ -73,7 +73,7 @@ MIME type of the audio (e.g., 'audio/mp3', 'audio/wav')
 
 > **get** **size**(): `number`
 
-Defined in: [src/core/media/Audio.ts:57](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L57)
+Defined in: [src/core/media/Audio.ts:57](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L57)
 
 Gets the size of the audio data in bytes.
 
@@ -87,7 +87,7 @@ Gets the size of the audio data in bytes.
 
 > **toBase64**(): `string`
 
-Defined in: [src/core/media/Audio.ts:66](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L66)
+Defined in: [src/core/media/Audio.ts:66](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L66)
 
 Converts the audio to a base64-encoded string.
 
@@ -103,7 +103,7 @@ The audio data as a base64 string
 
 > **toBlock**(): [`AudioBlock`](../interfaces/audioblock.md)
 
-Defined in: [src/core/media/Audio.ts:98](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L98)
+Defined in: [src/core/media/Audio.ts:98](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L98)
 
 Converts this Audio to an AudioBlock for use in UPP messages.
 
@@ -119,7 +119,7 @@ An AudioBlock that can be included in message content arrays
 
 > **toBytes**(): `Uint8Array`
 
-Defined in: [src/core/media/Audio.ts:89](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L89)
+Defined in: [src/core/media/Audio.ts:89](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L89)
 
 Gets the audio data as raw bytes.
 
@@ -135,7 +135,7 @@ The audio data as a Uint8Array
 
 > **toDataUrl**(): `string`
 
-Defined in: [src/core/media/Audio.ts:79](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L79)
+Defined in: [src/core/media/Audio.ts:79](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L79)
 
 Converts the audio to a data URL suitable for embedding.
 
@@ -151,7 +151,7 @@ A data URL in the format `data:{mimeType};base64,{data}`
 
 > `static` **fromBase64**(`base64`, `mimeType`, `duration?`): `Audio`
 
-Defined in: [src/core/media/Audio.ts:180](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L180)
+Defined in: [src/core/media/Audio.ts:180](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L180)
 
 Creates an Audio from a base64-encoded string.
 
@@ -193,7 +193,7 @@ const audio = Audio.fromBase64(base64String, 'audio/mp3');
 
 > `static` **fromBlock**(`block`): `Audio`
 
-Defined in: [src/core/media/Audio.ts:198](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L198)
+Defined in: [src/core/media/Audio.ts:198](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L198)
 
 Creates an Audio from an existing AudioBlock.
 
@@ -220,7 +220,7 @@ An Audio with the block's data and metadata
 
 > `static` **fromBytes**(`data`, `mimeType`, `duration?`): `Audio`
 
-Defined in: [src/core/media/Audio.ts:163](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L163)
+Defined in: [src/core/media/Audio.ts:163](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L163)
 
 Creates an Audio from raw byte data.
 
@@ -262,7 +262,7 @@ const audio = Audio.fromBytes(wavData, 'audio/wav');
 
 > `static` **fromPath**(`path`, `duration?`): `Promise`\<`Audio`\>
 
-Defined in: [src/core/media/Audio.ts:122](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Audio.ts#L122)
+Defined in: [src/core/media/Audio.ts:122](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Audio.ts#L122)
 
 Creates an Audio by reading a file from disk.
 

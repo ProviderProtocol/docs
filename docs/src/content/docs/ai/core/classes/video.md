@@ -10,7 +10,7 @@ title: "Class: Video"
 
 # Class: Video
 
-Defined in: [src/core/media/Video.ts:36](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L36)
+Defined in: [src/core/media/Video.ts:36](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L36)
 
 Represents a video file that can be used in UPP messages.
 
@@ -41,7 +41,7 @@ const message = new UserMessage([video.toBlock()]);
 
 > `readonly` **data**: `Uint8Array`
 
-Defined in: [src/core/media/Video.ts:38](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L38)
+Defined in: [src/core/media/Video.ts:38](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L38)
 
 The video data as raw bytes
 
@@ -51,7 +51,7 @@ The video data as raw bytes
 
 > `readonly` `optional` **duration**: `number`
 
-Defined in: [src/core/media/Video.ts:42](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L42)
+Defined in: [src/core/media/Video.ts:42](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L42)
 
 Duration in seconds, if known
 
@@ -61,7 +61,7 @@ Duration in seconds, if known
 
 > `readonly` `optional` **height**: `number`
 
-Defined in: [src/core/media/Video.ts:46](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L46)
+Defined in: [src/core/media/Video.ts:46](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L46)
 
 Video height in pixels, if known
 
@@ -71,7 +71,7 @@ Video height in pixels, if known
 
 > `readonly` **mimeType**: `string`
 
-Defined in: [src/core/media/Video.ts:40](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L40)
+Defined in: [src/core/media/Video.ts:40](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L40)
 
 MIME type of the video (e.g., 'video/mp4', 'video/webm')
 
@@ -81,7 +81,7 @@ MIME type of the video (e.g., 'video/mp4', 'video/webm')
 
 > `readonly` `optional` **width**: `number`
 
-Defined in: [src/core/media/Video.ts:44](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L44)
+Defined in: [src/core/media/Video.ts:44](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L44)
 
 Video width in pixels, if known
 
@@ -93,7 +93,7 @@ Video width in pixels, if known
 
 > **get** **size**(): `number`
 
-Defined in: [src/core/media/Video.ts:63](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L63)
+Defined in: [src/core/media/Video.ts:63](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L63)
 
 Gets the size of the video data in bytes.
 
@@ -107,7 +107,7 @@ Gets the size of the video data in bytes.
 
 > **toBase64**(): `string`
 
-Defined in: [src/core/media/Video.ts:72](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L72)
+Defined in: [src/core/media/Video.ts:72](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L72)
 
 Converts the video to a base64-encoded string.
 
@@ -123,7 +123,7 @@ The video data as a base64 string
 
 > **toBlock**(): [`VideoBlock`](../interfaces/videoblock.md)
 
-Defined in: [src/core/media/Video.ts:104](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L104)
+Defined in: [src/core/media/Video.ts:104](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L104)
 
 Converts this Video to a VideoBlock for use in UPP messages.
 
@@ -139,7 +139,7 @@ A VideoBlock that can be included in message content arrays
 
 > **toBytes**(): `Uint8Array`
 
-Defined in: [src/core/media/Video.ts:95](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L95)
+Defined in: [src/core/media/Video.ts:95](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L95)
 
 Gets the video data as raw bytes.
 
@@ -155,7 +155,7 @@ The video data as a Uint8Array
 
 > **toDataUrl**(): `string`
 
-Defined in: [src/core/media/Video.ts:85](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L85)
+Defined in: [src/core/media/Video.ts:85](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L85)
 
 Converts the video to a data URL suitable for embedding.
 
@@ -171,7 +171,7 @@ A data URL in the format `data:{mimeType};base64,{data}`
 
 > `static` **fromBase64**(`base64`, `mimeType`, `options?`): `Video`
 
-Defined in: [src/core/media/Video.ts:197](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L197)
+Defined in: [src/core/media/Video.ts:197](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L197)
 
 Creates a Video from a base64-encoded string.
 
@@ -223,7 +223,7 @@ const video = Video.fromBase64(base64String, 'video/mp4');
 
 > `static` **fromBlock**(`block`): `Video`
 
-Defined in: [src/core/media/Video.ts:219](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L219)
+Defined in: [src/core/media/Video.ts:219](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L219)
 
 Creates a Video from an existing VideoBlock.
 
@@ -250,7 +250,7 @@ A Video with the block's data and metadata
 
 > `static` **fromBytes**(`data`, `mimeType`, `options?`): `Video`
 
-Defined in: [src/core/media/Video.ts:176](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L176)
+Defined in: [src/core/media/Video.ts:176](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L176)
 
 Creates a Video from raw byte data.
 
@@ -303,7 +303,7 @@ const videoWithMeta = Video.fromBytes(data, 'video/mp4', { duration: 60 });
 
 > `static` **fromPath**(`path`, `options?`): `Promise`\<`Video`\>
 
-Defined in: [src/core/media/Video.ts:131](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/Video.ts#L131)
+Defined in: [src/core/media/Video.ts:131](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/Video.ts#L131)
 
 Creates a Video by reading a file from disk.
 

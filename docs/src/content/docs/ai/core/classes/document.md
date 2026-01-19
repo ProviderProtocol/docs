@@ -10,7 +10,7 @@ title: "Class: Document"
 
 # Class: Document
 
-Defined in: [src/core/media/document.ts:35](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L35)
+Defined in: [src/core/media/document.ts:35](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L35)
 
 Represents a document that can be used in UPP messages.
 
@@ -40,7 +40,7 @@ const message = new UserMessage([document.toBlock()]);
 
 > `readonly` **mimeType**: `string`
 
-Defined in: [src/core/media/document.ts:39](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L39)
+Defined in: [src/core/media/document.ts:39](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L39)
 
 MIME type of the document ('application/pdf' or 'text/plain')
 
@@ -50,7 +50,7 @@ MIME type of the document ('application/pdf' or 'text/plain')
 
 > `readonly` **source**: [`DocumentSource`](../type-aliases/documentsource.md)
 
-Defined in: [src/core/media/document.ts:37](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L37)
+Defined in: [src/core/media/document.ts:37](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L37)
 
 The underlying document source (base64, url, or text)
 
@@ -60,7 +60,7 @@ The underlying document source (base64, url, or text)
 
 > `readonly` `optional` **title**: `string`
 
-Defined in: [src/core/media/document.ts:41](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L41)
+Defined in: [src/core/media/document.ts:41](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L41)
 
 Optional document title (used for citations)
 
@@ -72,7 +72,7 @@ Optional document title (used for citations)
 
 > **get** **hasData**(): `boolean`
 
-Defined in: [src/core/media/document.ts:58](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L58)
+Defined in: [src/core/media/document.ts:58](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L58)
 
 Whether this document has data loaded in memory.
 
@@ -90,7 +90,7 @@ Returns `false` for URL-sourced documents that reference external resources.
 
 > **get** **isPdf**(): `boolean`
 
-Defined in: [src/core/media/document.ts:65](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L65)
+Defined in: [src/core/media/document.ts:65](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L65)
 
 Whether this document is a PDF.
 
@@ -106,7 +106,7 @@ Whether this document is a PDF.
 
 > **get** **isText**(): `boolean`
 
-Defined in: [src/core/media/document.ts:72](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L72)
+Defined in: [src/core/media/document.ts:72](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L72)
 
 Whether this document is plain text.
 
@@ -120,7 +120,7 @@ Whether this document is plain text.
 
 > **toBase64**(): `string`
 
-Defined in: [src/core/media/document.ts:82](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L82)
+Defined in: [src/core/media/document.ts:82](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L82)
 
 Converts the document to a base64-encoded string.
 
@@ -140,7 +140,7 @@ When the source is a URL or plain text
 
 > **toBlock**(): [`DocumentBlock`](../interfaces/documentblock.md)
 
-Defined in: [src/core/media/document.ts:123](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L123)
+Defined in: [src/core/media/document.ts:123](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L123)
 
 Converts this Document to a DocumentBlock for use in UPP messages.
 
@@ -156,7 +156,7 @@ A DocumentBlock that can be included in message content arrays
 
 > **toText**(): `string`
 
-Defined in: [src/core/media/document.ts:96](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L96)
+Defined in: [src/core/media/document.ts:96](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L96)
 
 Gets the plain text content for text documents.
 
@@ -176,7 +176,7 @@ When the source is not plain text
 
 > **toUrl**(): `string`
 
-Defined in: [src/core/media/document.ts:110](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L110)
+Defined in: [src/core/media/document.ts:110](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L110)
 
 Gets the URL for URL-sourced documents.
 
@@ -196,7 +196,7 @@ When the source is not a URL
 
 > `static` **fromBase64**(`base64`, `mimeType`, `title?`): `Document`
 
-Defined in: [src/core/media/document.ts:225](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L225)
+Defined in: [src/core/media/document.ts:225](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L225)
 
 Creates a Document from base64-encoded data.
 
@@ -238,7 +238,7 @@ const doc = Document.fromBase64(pdfBase64, 'application/pdf', 'Contract');
 
 > `static` **fromBlock**(`block`): `Document`
 
-Defined in: [src/core/media/document.ts:262](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L262)
+Defined in: [src/core/media/document.ts:262](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L262)
 
 Creates a Document from an existing DocumentBlock.
 
@@ -265,7 +265,7 @@ A Document with the block's source and metadata
 
 > `static` **fromPath**(`path`, `title?`): `Promise`\<`Document`\>
 
-Defined in: [src/core/media/document.ts:148](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L148)
+Defined in: [src/core/media/document.ts:148](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L148)
 
 Creates a Document by reading a file from disk.
 
@@ -305,7 +305,7 @@ const docWithTitle = await Document.fromPath('./report.pdf', 'Annual Report 2024
 
 > `static` **fromText**(`text`, `title?`): `Document`
 
-Defined in: [src/core/media/document.ts:245](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L245)
+Defined in: [src/core/media/document.ts:245](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L245)
 
 Creates a Document from plain text content.
 
@@ -341,7 +341,7 @@ const doc = Document.fromText('This is the document content.', 'Notes');
 
 > `static` **fromUrl**(`url`, `title?`): `Document`
 
-Defined in: [src/core/media/document.ts:192](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/core/media/document.ts#L192)
+Defined in: [src/core/media/document.ts:192](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/core/media/document.ts#L192)
 
 Creates a Document from a URL reference.
 

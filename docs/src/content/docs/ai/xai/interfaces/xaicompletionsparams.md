@@ -10,7 +10,7 @@ title: "Interface: XAICompletionsParams"
 
 # Interface: XAICompletionsParams
 
-Defined in: [src/providers/xai/types.ts:20](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L20)
+Defined in: [src/providers/xai/types.ts:20](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L20)
 
 xAI Chat Completions API parameters (OpenAI-compatible).
 
@@ -39,7 +39,7 @@ const params: XAICompletionsParams = {
 
 > `optional` **frequency\_penalty**: `number`
 
-Defined in: [src/providers/xai/types.ts:34](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L34)
+Defined in: [src/providers/xai/types.ts:34](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L34)
 
 Frequency penalty (-2.0 - 2.0)
 
@@ -49,7 +49,7 @@ Frequency penalty (-2.0 - 2.0)
 
 > `optional` **logit\_bias**: `Record`\<`string`, `number`\>
 
-Defined in: [src/providers/xai/types.ts:58](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L58)
+Defined in: [src/providers/xai/types.ts:58](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L58)
 
 Logit bias map
 
@@ -59,7 +59,7 @@ Logit bias map
 
 > `optional` **logprobs**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:46](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L46)
+Defined in: [src/providers/xai/types.ts:46](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L46)
 
 Enable logprobs
 
@@ -69,7 +69,7 @@ Enable logprobs
 
 > `optional` **max\_completion\_tokens**: `number`
 
-Defined in: [src/providers/xai/types.ts:25](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L25)
+Defined in: [src/providers/xai/types.ts:25](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L25)
 
 Maximum completion tokens
 
@@ -79,7 +79,7 @@ Maximum completion tokens
 
 > `optional` **max\_tokens**: `number`
 
-Defined in: [src/providers/xai/types.ts:22](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L22)
+Defined in: [src/providers/xai/types.ts:22](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L22)
 
 Maximum number of tokens to generate
 
@@ -89,7 +89,7 @@ Maximum number of tokens to generate
 
 > `optional` **metadata**: `Record`\<`string`, `string`\>
 
-Defined in: [src/providers/xai/types.ts:73](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L73)
+Defined in: [src/providers/xai/types.ts:73](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L73)
 
 Metadata key-value pairs
 
@@ -99,7 +99,7 @@ Metadata key-value pairs
 
 > `optional` **n**: `number`
 
-Defined in: [src/providers/xai/types.ts:43](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L43)
+Defined in: [src/providers/xai/types.ts:43](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L43)
 
 Number of completions to generate
 
@@ -109,7 +109,7 @@ Number of completions to generate
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:61](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L61)
+Defined in: [src/providers/xai/types.ts:61](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L61)
 
 Whether to enable parallel tool calls
 
@@ -119,7 +119,7 @@ Whether to enable parallel tool calls
 
 > `optional` **presence\_penalty**: `number`
 
-Defined in: [src/providers/xai/types.ts:37](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L37)
+Defined in: [src/providers/xai/types.ts:37](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L37)
 
 Presence penalty (-2.0 - 2.0)
 
@@ -129,7 +129,7 @@ Presence penalty (-2.0 - 2.0)
 
 > `optional` **reasoning\_effort**: `"low"` \| `"high"`
 
-Defined in: [src/providers/xai/types.ts:67](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L67)
+Defined in: [src/providers/xai/types.ts:67](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L67)
 
 Reasoning effort for Grok 3 Mini models
 Note: Only 'low' and 'high' are supported by xAI
@@ -140,7 +140,7 @@ Note: Only 'low' and 'high' are supported by xAI
 
 > `optional` **response\_format**: `XAIResponseFormat`
 
-Defined in: [src/providers/xai/types.ts:76](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L76)
+Defined in: [src/providers/xai/types.ts:76](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L76)
 
 Response format for structured output
 
@@ -150,7 +150,7 @@ Response format for structured output
 
 > `optional` **seed**: `number`
 
-Defined in: [src/providers/xai/types.ts:52](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L52)
+Defined in: [src/providers/xai/types.ts:52](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L52)
 
 Seed for deterministic sampling
 
@@ -160,7 +160,7 @@ Seed for deterministic sampling
 
 > `optional` **stop**: `string` \| `string`[]
 
-Defined in: [src/providers/xai/types.ts:40](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L40)
+Defined in: [src/providers/xai/types.ts:40](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L40)
 
 Custom stop sequences
 
@@ -170,7 +170,7 @@ Custom stop sequences
 
 > `optional` **store**: `boolean`
 
-Defined in: [src/providers/xai/types.ts:70](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L70)
+Defined in: [src/providers/xai/types.ts:70](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L70)
 
 Store completion
 
@@ -180,7 +180,7 @@ Store completion
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/xai/types.ts:28](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L28)
+Defined in: [src/providers/xai/types.ts:28](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L28)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -190,7 +190,7 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_logprobs**: `number`
 
-Defined in: [src/providers/xai/types.ts:49](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L49)
+Defined in: [src/providers/xai/types.ts:49](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L49)
 
 Number of top logprobs to return (0-20)
 
@@ -200,7 +200,7 @@ Number of top logprobs to return (0-20)
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/xai/types.ts:31](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L31)
+Defined in: [src/providers/xai/types.ts:31](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L31)
 
 Top-p (nucleus) sampling (0.0 - 1.0)
 
@@ -210,6 +210,6 @@ Top-p (nucleus) sampling (0.0 - 1.0)
 
 > `optional` **user**: `string`
 
-Defined in: [src/providers/xai/types.ts:55](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/xai/types.ts#L55)
+Defined in: [src/providers/xai/types.ts:55](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/xai/types.ts#L55)
 
 User identifier for abuse detection

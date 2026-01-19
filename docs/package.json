@@ -11,11 +11,7 @@
     "astro": "astro",
     "clean": "rm -rf .astro node_modules/.astro dist",
     "clean:ai": "rm -rf src/content/docs/ai && mkdir -p src/content/docs/ai",
-    "clean:agents": "rm -rf src/content/docs/agents && mkdir -p src/content/docs/agents",
-    "spec:generate": "bun run ../scripts/generate-spec-docs.ts",
-    "spec:generate:upp": "bun run ../scripts/generate-spec-docs.ts upp",
-    "spec:generate:uap": "bun run ../scripts/generate-spec-docs.ts uap",
-    "spec:deploy": "bun run spec:generate && rm -rf .astro node_modules/.astro"
+    "clean:agents": "rm -rf src/content/docs/agents && mkdir -p src/content/docs/agents"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.1",

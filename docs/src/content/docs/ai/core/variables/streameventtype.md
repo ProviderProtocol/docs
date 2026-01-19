@@ -12,7 +12,7 @@ title: "Variable: StreamEventType"
 
 > `const` **StreamEventType**: `object`
 
-Defined in: [src/types/stream.ts:28](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/stream.ts#L28)
+Defined in: [src/types/stream.ts:28](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/stream.ts#L28)
 
 Stream event type constants.
 
@@ -55,6 +55,12 @@ Beginning of a message
 > `readonly` **MessageStop**: `"message_stop"` = `'message_stop'`
 
 End of a message
+
+### ObjectDelta
+
+> `readonly` **ObjectDelta**: `"object_delta"` = `'object_delta'`
+
+Incremental structured object data (for structured output responses)
 
 ### ReasoningDelta
 

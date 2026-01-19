@@ -10,7 +10,7 @@ title: "Interface: ImageRequest"
 
 # Interface: ImageRequest\<TParams\>
 
-Defined in: [src/types/image.ts:224](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L224)
+Defined in: [src/types/image.ts:233](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L233)
 
 **`Internal`**
 
@@ -28,7 +28,7 @@ Request passed from image() core to providers for generation.
 
 > **config**: [`ProviderConfig`](providerconfig.md)
 
-Defined in: [src/types/image.ts:232](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L232)
+Defined in: [src/types/image.ts:241](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L241)
 
 Provider infrastructure config
 
@@ -38,7 +38,7 @@ Provider infrastructure config
 
 > `optional` **params**: `TParams`
 
-Defined in: [src/types/image.ts:229](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L229)
+Defined in: [src/types/image.ts:238](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L238)
 
 Provider-specific parameters (passed through unchanged)
 
@@ -48,7 +48,7 @@ Provider-specific parameters (passed through unchanged)
 
 > **prompt**: `string`
 
-Defined in: [src/types/image.ts:226](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L226)
+Defined in: [src/types/image.ts:235](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L235)
 
 Generation prompt
 
@@ -58,6 +58,6 @@ Generation prompt
 
 > `optional` **signal**: `AbortSignal`
 
-Defined in: [src/types/image.ts:235](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L235)
+Defined in: [src/types/image.ts:244](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L244)
 
 Abort signal for cancellation

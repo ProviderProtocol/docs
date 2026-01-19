@@ -10,7 +10,7 @@ title: "Interface: ImageCapabilities"
 
 # Interface: ImageCapabilities
 
-Defined in: [src/types/image.ts:147](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L147)
+Defined in: [src/types/image.ts:156](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L156)
 
 Image generation capabilities.
 
@@ -20,7 +20,7 @@ Image generation capabilities.
 
 > **edit**: `boolean`
 
-Defined in: [src/types/image.ts:155](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L155)
+Defined in: [src/types/image.ts:164](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L164)
 
 Supports image editing/inpainting
 
@@ -30,7 +30,7 @@ Supports image editing/inpainting
 
 > **generate**: `boolean`
 
-Defined in: [src/types/image.ts:149](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L149)
+Defined in: [src/types/image.ts:158](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L158)
 
 Supports text-to-image generation
 
@@ -40,7 +40,7 @@ Supports text-to-image generation
 
 > `optional` **maxImages**: `number`
 
-Defined in: [src/types/image.ts:158](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L158)
+Defined in: [src/types/image.ts:167](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L167)
 
 Maximum images per request (if known)
 
@@ -50,6 +50,6 @@ Maximum images per request (if known)
 
 > **streaming**: `boolean`
 
-Defined in: [src/types/image.ts:152](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/image.ts#L152)
+Defined in: [src/types/image.ts:161](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/image.ts#L161)
 
 Supports streaming with partial previews

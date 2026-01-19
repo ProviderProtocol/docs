@@ -10,7 +10,7 @@ title: "Interface: OpenRouterResponsesParams"
 
 # Interface: OpenRouterResponsesParams
 
-Defined in: [src/providers/openrouter/types.ts:223](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L223)
+Defined in: [src/providers/openrouter/types.ts:223](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L223)
 
 Parameters for OpenRouter's Responses API (beta).
 
@@ -28,7 +28,7 @@ supports features like reasoning configuration.
 
 > `optional` **image\_config**: [`OpenRouterImageConfig`](openrouterimageconfig.md)
 
-Defined in: [src/providers/openrouter/types.ts:255](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L255)
+Defined in: [src/providers/openrouter/types.ts:255](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L255)
 
 Image generation configuration.
 Only applies when `modalities` includes 'image'.
@@ -43,7 +43,7 @@ Only applies when `modalities` includes 'image'.
 
 > `optional` **max\_output\_tokens**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:225](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L225)
+Defined in: [src/providers/openrouter/types.ts:225](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L225)
 
 Maximum output tokens
 
@@ -53,7 +53,7 @@ Maximum output tokens
 
 > `optional` **modalities**: (`"text"` \| `"image"`)[]
 
-Defined in: [src/providers/openrouter/types.ts:248](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L248)
+Defined in: [src/providers/openrouter/types.ts:248](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L248)
 
 Output modalities for multimodal generation.
 Set to `['text', 'image']` to enable image generation with compatible models.
@@ -68,7 +68,7 @@ Set to `['text', 'image']` to enable image generation with compatible models.
 
 > `optional` **parallel\_tool\_calls**: `boolean`
 
-Defined in: [src/providers/openrouter/types.ts:234](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L234)
+Defined in: [src/providers/openrouter/types.ts:234](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L234)
 
 Whether to enable parallel tool calls
 
@@ -78,7 +78,7 @@ Whether to enable parallel tool calls
 
 > `optional` **reasoning**: `object`
 
-Defined in: [src/providers/openrouter/types.ts:239](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L239)
+Defined in: [src/providers/openrouter/types.ts:239](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L239)
 
 Reasoning configuration
 
@@ -92,7 +92,7 @@ Reasoning configuration
 
 > `optional` **temperature**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:228](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L228)
+Defined in: [src/providers/openrouter/types.ts:228](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L228)
 
 Temperature for randomness (0.0 - 2.0)
 
@@ -102,6 +102,6 @@ Temperature for randomness (0.0 - 2.0)
 
 > `optional` **top\_p**: `number`
 
-Defined in: [src/providers/openrouter/types.ts:231](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/openrouter/types.ts#L231)
+Defined in: [src/providers/openrouter/types.ts:231](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/openrouter/types.ts#L231)
 
 Top-p (nucleus) sampling (0.0 - 1.0)

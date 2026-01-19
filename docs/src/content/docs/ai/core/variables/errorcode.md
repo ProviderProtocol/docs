@@ -12,7 +12,7 @@ title: "Variable: ErrorCode"
 
 > `const` **ErrorCode**: `object`
 
-Defined in: [src/types/errors.ts:34](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/errors.ts#L34)
+Defined in: [src/types/errors.ts:34](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/errors.ts#L34)
 
 Error code constants for cross-provider error handling.
 

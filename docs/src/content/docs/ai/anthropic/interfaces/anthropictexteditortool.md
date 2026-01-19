@@ -10,7 +10,7 @@ title: "Interface: AnthropicTextEditorTool"
 
 # Interface: AnthropicTextEditorTool
 
-Defined in: [src/providers/anthropic/types.ts:936](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/anthropic/types.ts#L936)
+Defined in: [src/providers/anthropic/types.ts:936](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/anthropic/types.ts#L936)
 
 Text editor tool for file viewing and editing.
 
@@ -35,7 +35,7 @@ const tool: AnthropicTextEditorTool = {
 
 > `optional` **max\_characters**: `number`
 
-Defined in: [src/providers/anthropic/types.ts:942](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/anthropic/types.ts#L942)
+Defined in: [src/providers/anthropic/types.ts:942](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/anthropic/types.ts#L942)
 
 Max characters for view truncation (20250728+ only)
 
@@ -45,7 +45,7 @@ Max characters for view truncation (20250728+ only)
 
 > **name**: `"str_replace_based_edit_tool"` \| `"str_replace_editor"`
 
-Defined in: [src/providers/anthropic/types.ts:940](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/anthropic/types.ts#L940)
+Defined in: [src/providers/anthropic/types.ts:940](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/anthropic/types.ts#L940)
 
 Tool name (version-specific)
 
@@ -55,6 +55,6 @@ Tool name (version-specific)
 
 > **type**: `"text_editor_20250728"` \| `"text_editor_20250124"`
 
-Defined in: [src/providers/anthropic/types.ts:938](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/providers/anthropic/types.ts#L938)
+Defined in: [src/providers/anthropic/types.ts:938](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/providers/anthropic/types.ts#L938)
 
 Tool type identifier (version-specific)

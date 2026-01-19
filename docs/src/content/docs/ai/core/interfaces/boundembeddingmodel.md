@@ -10,7 +10,7 @@ title: "Interface: BoundEmbeddingModel"
 
 # Interface: BoundEmbeddingModel\<TParams\>
 
-Defined in: [src/types/provider.ts:306](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L306)
+Defined in: [src/types/provider.ts:306](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L306)
 
 Bound embedding model interface.
 
@@ -31,7 +31,7 @@ Provider-specific parameter type
 
 > `readonly` **dimensions**: `number`
 
-Defined in: [src/types/provider.ts:320](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L320)
+Defined in: [src/types/provider.ts:320](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L320)
 
 Output embedding dimensions
 
@@ -41,7 +41,7 @@ Output embedding dimensions
 
 > `readonly` **maxBatchSize**: `number`
 
-Defined in: [src/types/provider.ts:314](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L314)
+Defined in: [src/types/provider.ts:314](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L314)
 
 Maximum number of inputs per batch request
 
@@ -51,7 +51,7 @@ Maximum number of inputs per batch request
 
 > `readonly` **maxInputLength**: `number`
 
-Defined in: [src/types/provider.ts:317](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L317)
+Defined in: [src/types/provider.ts:317](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L317)
 
 Maximum length of input text in tokens
 
@@ -61,7 +61,7 @@ Maximum length of input text in tokens
 
 > `readonly` **modelId**: `string`
 
-Defined in: [src/types/provider.ts:308](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L308)
+Defined in: [src/types/provider.ts:308](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L308)
 
 The model identifier
 
@@ -71,7 +71,7 @@ The model identifier
 
 > `readonly` **provider**: [`EmbeddingProvider`](../type-aliases/embeddingprovider.md)\<`TParams`\>
 
-Defined in: [src/types/provider.ts:311](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L311)
+Defined in: [src/types/provider.ts:311](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L311)
 
 Reference to the parent provider
 
@@ -81,7 +81,7 @@ Reference to the parent provider
 
 > **embed**(`request`): `Promise`\<[`EmbeddingResponse`](embeddingresponse.md)\>
 
-Defined in: [src/types/provider.ts:328](https://github.com/ProviderProtocol/ai/blob/2772450aa66e4362aca4f33c14d03af66fd20186/src/types/provider.ts#L328)
+Defined in: [src/types/provider.ts:328](https://github.com/ProviderProtocol/ai/blob/978bdaec9d2e6187458e85ae2efbc76e37cdc207/src/types/provider.ts#L328)
 
 Execute embedding request.
 
