@@ -1,0 +1,323 @@
+---
+title: Streaming
+description: Real-time streaming responses from LLMs.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Streaming
+
+Stream LLM responses in real-time instead of waiting for the complete response.
+
+## Basic Streaming
+
+Use `stream()` instead of `generate()`:
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant.',
+});
+
+const stream = claude.stream('Tell me a story about a robot.');
+
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+```
+
+## Stream Events
+
+The stream emits various event types:
+
+```typescript
+for await (const event of stream) {
+  switch (event.type) {
+    case 'text_delta':
+      // Text content being generated
+      process.stdout.write(event.delta.text ?? '');
+      break;
+
+    case 'reasoning_delta':
+      // Extended thinking content (Anthropic)
+      console.log('[thinking]', event.delta.text);
+      break;
+
+    case 'tool_call_delta':
+      // Tool call being constructed
+      console.log('Tool:', event.delta.toolName, event.delta.argumentsJson);
+      break;
+
+    case 'tool_execution_start':
+      // Tool execution beginning
+      console.log(`Executing ${event.delta.toolName}...`);
+      break;
+
+    case 'tool_execution_end':
+      // Tool execution complete
+      console.log(`Result:`, event.delta.result);
+      break;
+
+    case 'message_start':
+      // New message beginning
+      break;
+
+    case 'message_stop':
+      // Message complete
+      break;
+
+    case 'content_block_start':
+      // New content block starting
+      break;
+
+    case 'content_block_stop':
+      // Content block complete
+      break;
+  }
+}
+```
+
+## Getting the Final Turn
+
+After streaming completes, access the full Turn via the `turn` promise:
+
+```typescript
+const stream = claude.stream('Write a poem.');
+
+// Stream the response
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+// Get the complete turn
+const turn = await stream.turn;
+console.log('\n\nTotal tokens:', turn.usage.totalTokens);
+console.log('Response:', turn.response.text);
+```
+
+The Turn contains everything from the inference:
+- All messages produced
+- Token usage
+- Tool executions (if any)
+- Structured data (if schema provided)
+
+## Aborting a Stream
+
+Cancel a stream at any time:
+
+```typescript
+const stream = claude.stream('Write a very long essay...');
+
+// Abort after 5 seconds
+setTimeout(() => {
+  stream.abort();
+}, 5000);
+
+try {
+  for await (const event of stream) {
+    process.stdout.write(event.delta.text ?? '');
+  }
+} catch (error) {
+  if (error.code === 'CANCELLED') {
+    console.log('\nStream was cancelled');
+  }
+}
+```
+
+## Streaming with AbortSignal
+
+Use an AbortController for more control:
+
+```typescript
+const controller = new AbortController();
+
+const stream = claude.stream([], 'Tell me a story', {
+  signal: controller.signal,
+});
+
+// Cancel on user input
+process.stdin.once('data', () => {
+  controller.abort();
+});
+
+for await (const event of stream) {
+  process.stdout.write(event.delta.text ?? '');
+}
+```
+
+## Streaming with Tools
+
+When using tools, the stream includes tool execution events:
+
+```typescript
+const weatherTool = {
+  name: 'get_weather',
+  description: 'Get weather for a location',
+  parameters: {
+    type: 'object',
+    properties: {
+      location: { type: 'string' },
+    },
+    required: ['location'],
+  },
+  run: async ({ location }) => ({ temp: 72, conditions: 'sunny' }),
+};
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [weatherTool],
+});
+
+const stream = claude.stream('What is the weather in Tokyo?');
+
+for await (const event of stream) {
+  switch (event.type) {
+    case 'text_delta':
+      process.stdout.write(event.delta.text ?? '');
+      break;
+
+    case 'tool_call_delta':
+      // Tool arguments being streamed
+      console.log('\n[Calling tool:', event.delta.toolName, ']');
+      break;
+
+    case 'tool_execution_start':
+      console.log(`[Executing ${event.delta.toolName}...]`);
+      break;
+
+    case 'tool_execution_end':
+      console.log(`[Result: ${JSON.stringify(event.delta.result)}]`);
+      break;
+  }
+}
+```
+
+## Streaming with Structured Output
+
+Stream structured JSON output:
+
+```typescript
+import { parsedObjectMiddleware } from '@providerprotocol/ai';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      age: { type: 'integer' },
+    },
+    required: ['name', 'age'],
+  },
+  middleware: [parsedObjectMiddleware()],
+});
+
+const stream = claude.stream('Extract: John Doe is 30 years old');
+
+for await (const event of stream) {
+  if (event.type === 'object_delta') {
+    // Partial object as it's being constructed
+    console.log('Partial:', event.delta.text);
+  }
+}
+
+const turn = await stream.turn;
+console.log('Final:', turn.data); // { name: 'John Doe', age: 30 }
+```
+
+## Streaming to a Web Response
+
+Send streaming responses in a web server:
+
+<Tabs>
+  <TabItem label="Bun/Deno">
+```typescript
+Bun.serve({
+  async fetch(req) {
+    const { prompt } = await req.json();
+
+    const stream = claude.stream(prompt);
+
+    return new Response(
+      new ReadableStream({
+        async start(controller) {
+          for await (const event of stream) {
+            if (event.type === 'text_delta') {
+              controller.enqueue(
+                new TextEncoder().encode(event.delta.text ?? '')
+              );
+            }
+          }
+          controller.close();
+        },
+      }),
+      {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      }
+    );
+  },
+});
+```
+  </TabItem>
+  <TabItem label="Server-Sent Events">
+```typescript
+import { toSSE } from '@providerprotocol/ai/proxy';
+
+Bun.serve({
+  async fetch(req) {
+    const { prompt } = await req.json();
+    const stream = claude.stream(prompt);
+
+    // Convert to SSE format
+    return toSSE(stream);
+  },
+});
+```
+  </TabItem>
+</Tabs>
+
+## Event Types Reference
+
+| Event Type | Description | Delta Properties |
+|------------|-------------|------------------|
+| `text_delta` | Text content chunk | `text` |
+| `reasoning_delta` | Extended thinking content | `text` |
+| `tool_call_delta` | Tool call construction | `toolCallId`, `toolName`, `argumentsJson` |
+| `tool_execution_start` | Tool starting | `toolCallId`, `toolName`, `timestamp` |
+| `tool_execution_end` | Tool complete | `toolCallId`, `toolName`, `result`, `isError`, `timestamp` |
+| `object_delta` | Partial structured output | `text` (partial JSON) |
+| `message_start` | Message beginning | - |
+| `message_stop` | Message complete | - |
+| `content_block_start` | Content block starting | - |
+| `content_block_stop` | Content block complete | - |
+
+## Streaming with Conversation History
+
+```typescript
+import { Thread } from '@providerprotocol/ai';
+
+const thread = new Thread();
+
+const stream = claude.stream(thread, 'Hello!');
+
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+// Add the turn to history
+const turn = await stream.turn;
+thread.append(turn);
+```
+
+<Aside type="tip">
+For most use cases, filtering for `text_delta` events is sufficient. The other events are useful for building rich UIs that show tool execution status.
+</Aside>

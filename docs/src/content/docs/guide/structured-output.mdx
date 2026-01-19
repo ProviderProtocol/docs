@@ -1,0 +1,366 @@
+---
+title: Structured Output
+description: Get typed, validated JSON responses from LLMs using JSON Schema.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Structured Output
+
+Get predictable, typed JSON output from LLMs by providing a JSON Schema.
+
+## Basic Usage
+
+Provide a `structure` option with a JSON Schema:
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const extractor = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      age: { type: 'integer' },
+      email: { type: 'string', format: 'email' },
+    },
+    required: ['name', 'age'],
+  },
+});
+
+const turn = await extractor.generate(
+  'John Doe is 30 years old. His email is john@example.com'
+);
+
+console.log(turn.data);
+// { name: 'John Doe', age: 30, email: 'john@example.com' }
+```
+
+The result is available in `turn.data` as a typed object.
+
+## JSON Schema Syntax
+
+UPP uses standard JSON Schema:
+
+```typescript
+const schema = {
+  type: 'object',
+  properties: {
+    // String with constraints
+    title: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 200,
+    },
+
+    // Enum values
+    status: {
+      type: 'string',
+      enum: ['draft', 'published', 'archived'],
+    },
+
+    // Number with range
+    score: {
+      type: 'number',
+      minimum: 0,
+      maximum: 100,
+    },
+
+    // Integer
+    count: {
+      type: 'integer',
+      minimum: 0,
+    },
+
+    // Boolean
+    isActive: {
+      type: 'boolean',
+    },
+
+    // Array of strings
+    tags: {
+      type: 'array',
+      items: { type: 'string' },
+      maxItems: 10,
+    },
+
+    // Nested object
+    author: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        email: { type: 'string', format: 'email' },
+      },
+      required: ['name'],
+    },
+  },
+  required: ['title', 'status'],
+};
+```
+
+## Common Patterns
+
+### Entity Extraction
+
+```typescript
+const personExtractor = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      people: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            role: { type: 'string' },
+            organization: { type: 'string' },
+          },
+          required: ['name'],
+        },
+      },
+    },
+    required: ['people'],
+  },
+});
+
+const turn = await personExtractor.generate(`
+  The meeting was attended by Sarah Chen (CEO of TechCorp),
+  Michael Brown from Legal, and Dr. Emily Watson, the lead researcher.
+`);
+
+console.log(turn.data.people);
+// [
+//   { name: 'Sarah Chen', role: 'CEO', organization: 'TechCorp' },
+//   { name: 'Michael Brown', role: 'Legal' },
+//   { name: 'Dr. Emily Watson', role: 'Lead Researcher' }
+// ]
+```
+
+### Classification
+
+```typescript
+const classifier = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      sentiment: {
+        type: 'string',
+        enum: ['positive', 'negative', 'neutral'],
+      },
+      confidence: {
+        type: 'number',
+        minimum: 0,
+        maximum: 1,
+      },
+      topics: {
+        type: 'array',
+        items: { type: 'string' },
+      },
+    },
+    required: ['sentiment', 'confidence', 'topics'],
+  },
+});
+
+const turn = await classifier.generate(
+  'I love this product! The quality is amazing and shipping was fast.'
+);
+
+console.log(turn.data);
+// { sentiment: 'positive', confidence: 0.95, topics: ['quality', 'shipping'] }
+```
+
+### Data Transformation
+
+```typescript
+const normalizer = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'Normalize the address to a standard format.',
+  structure: {
+    type: 'object',
+    properties: {
+      street: { type: 'string' },
+      city: { type: 'string' },
+      state: { type: 'string', minLength: 2, maxLength: 2 },
+      zip: { type: 'string', pattern: '^\\d{5}(-\\d{4})?$' },
+      country: { type: 'string', default: 'USA' },
+    },
+    required: ['street', 'city', 'state', 'zip'],
+  },
+});
+
+const turn = await normalizer.generate(
+  '123 Main St., Apt 4B, San Francisco CA 94102'
+);
+
+console.log(turn.data);
+// { street: '123 Main St., Apt 4B', city: 'San Francisco', state: 'CA', zip: '94102', country: 'USA' }
+```
+
+## Streaming Structured Output
+
+Stream partial JSON as it's generated:
+
+```typescript
+import { llm, parsedObjectMiddleware } from '@providerprotocol/ai';
+
+const extractor = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      summary: { type: 'string' },
+      keyPoints: { type: 'array', items: { type: 'string' } },
+    },
+    required: ['summary', 'keyPoints'],
+  },
+  middleware: [parsedObjectMiddleware()],
+});
+
+const stream = extractor.stream('Summarize the benefits of exercise...');
+
+for await (const event of stream) {
+  if (event.type === 'object_delta') {
+    // Partial object as it's being constructed
+    console.log('Partial:', event.delta.text);
+  }
+}
+
+const turn = await stream.turn;
+console.log('Final:', turn.data);
+```
+
+## TypeScript Integration
+
+Define types that match your schema:
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  email?: string;
+}
+
+const schema = {
+  type: 'object',
+  properties: {
+    name: { type: 'string' },
+    age: { type: 'integer' },
+    email: { type: 'string' },
+  },
+  required: ['name', 'age'],
+} as const;
+
+const extractor = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: schema,
+});
+
+const turn = await extractor.generate('Alice is 25 years old');
+const person = turn.data as Person;
+console.log(person.name); // TypeScript knows this is a string
+```
+
+## With Conversation History
+
+Use structured output in multi-turn conversations:
+
+```typescript
+import { Thread } from '@providerprotocol/ai';
+
+const analyzer = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'Analyze customer feedback and extract insights.',
+  structure: {
+    type: 'object',
+    properties: {
+      sentiment: { type: 'string', enum: ['positive', 'negative', 'mixed'] },
+      issues: { type: 'array', items: { type: 'string' } },
+      suggestions: { type: 'array', items: { type: 'string' } },
+    },
+    required: ['sentiment', 'issues', 'suggestions'],
+  },
+});
+
+const thread = new Thread();
+
+// Analyze multiple pieces of feedback
+const feedbacks = [
+  'The app is great but crashes sometimes.',
+  'Love the new design! Much easier to use.',
+  'Please add dark mode, the white screen hurts my eyes.',
+];
+
+for (const feedback of feedbacks) {
+  const turn = await analyzer.generate(thread, feedback);
+  thread.append(turn);
+  console.log(turn.data);
+}
+```
+
+## Provider Support
+
+Structured output support varies by provider:
+
+| Provider | Native Support | Fallback |
+|----------|:--------------:|:--------:|
+| Anthropic | ✓ (beta) | Tool-based |
+| OpenAI | ✓ | Tool-based |
+| Google | ✓ | Tool-based |
+| xAI | | Tool-based |
+| Ollama | | Tool-based |
+
+<Aside type="note">
+When native structured output isn't available, UPP uses a tool-based fallback that instructs the model to respond using a special output tool.
+</Aside>
+
+## Error Handling
+
+Handle schema validation failures:
+
+```typescript
+try {
+  const turn = await extractor.generate('Invalid input with no data');
+  console.log(turn.data);
+} catch (error) {
+  if (error.code === 'INVALID_RESPONSE') {
+    console.error('Model output did not match schema');
+  }
+}
+```
+
+## Best Practices
+
+1. **Keep schemas simple** - Complex nested structures increase the chance of errors
+2. **Use descriptions** - Add `description` to properties to guide the model
+3. **Set reasonable constraints** - Use `minLength`, `maxLength`, `minimum`, `maximum`
+4. **Mark required fields** - Be explicit about which fields are required
+5. **Provide examples in the prompt** - Show the model what you expect
+
+```typescript
+const schema = {
+  type: 'object',
+  properties: {
+    title: {
+      type: 'string',
+      description: 'A concise title for the content',
+      minLength: 5,
+      maxLength: 100,
+    },
+    category: {
+      type: 'string',
+      description: 'The primary category',
+      enum: ['tech', 'business', 'science', 'other'],
+    },
+  },
+  required: ['title', 'category'],
+};
+```
+
+<Aside type="tip">
+For complex extraction tasks, consider breaking them into multiple simpler extractions rather than one complex schema.
+</Aside>

@@ -1,13 +1,13 @@
 ---
 title: Image Generation
-description: Generating images from text prompts.
+description: Generate and edit images with AI models.
 ---
 
-import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 
 # Image Generation
 
-Generate images from text prompts using various AI models.
+Generate images from text prompts using OpenAI, Google, and xAI.
 
 ## Basic Generation
 
@@ -17,150 +17,244 @@ import { openai } from '@providerprotocol/ai/openai';
 
 const dalle = image({
   model: openai('dall-e-3'),
-  params: { size: '1024x1024', quality: 'hd' },
+  params: {
+    size: '1024x1024',
+    quality: 'hd',
+  },
 });
 
 const result = await dalle.generate('A sunset over mountains, oil painting style');
 
-// Save the image
-await Bun.write('sunset.png', result.images[0].image.toBytes());
+// Access the generated image
+const img = result.images[0];
+console.log(img.revisedPrompt); // DALL-E's enhanced prompt
 ```
 
-## Advanced Generation
-
-Use detailed prompts with negative prompts and seeds:
+## Saving Images
 
 ```typescript
-import { stability } from '@providerprotocol/ai/stability';
+// Save as file
+const bytes = result.images[0].image.toBytes();
+await Bun.write('sunset.png', bytes);
 
-const sd = image({
-  model: stability('stable-diffusion-xl-1024-v1-0'),
-  params: {
-    steps: 30,
-    cfg_scale: 7,
-    samples: 4,
-  },
-});
+// Get as base64
+const base64 = result.images[0].image.toBase64();
 
-const result = await sd.generate({
-  prompt: 'A photorealistic cat sitting on a windowsill, golden hour lighting',
-  negativePrompt: 'cartoon, drawing, illustration, low quality, blurry',
-  seed: 12345,
-});
-
-console.log(result.images.length);  // 4
-console.log(result.metadata?.seed); // 12345
-
-// Save all images
-for (let i = 0; i < result.images.length; i++) {
-  await Bun.write(`cat-${i}.png`, result.images[i].image.toBytes());
-}
+// Get as data URL
+const dataUrl = result.images[0].image.toDataURL();
 ```
 
-## Streaming Progress
+## Provider Options
 
-Some models support streaming progress updates:
+### DALL-E (OpenAI)
 
 ```typescript
-if (sd.capabilities.streaming && sd.stream) {
-  const stream = sd.stream({
-    prompt: 'A cyberpunk cityscape at night, neon lights, rain',
-  });
+import { image } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
 
-  for await (const event of stream) {
-    switch (event.type) {
-      case 'progress':
-        console.log(`${event.percent}% - ${event.stage}`);
-        break;
-      case 'preview':
-        // Display low-res preview
-        displayPreview(event.image, event.index);
-        break;
-      case 'complete':
-        console.log(`Image ${event.index} complete`);
-        break;
-    }
-  }
-
-  const finalResult = await stream.result;
-  console.log(`Generated ${finalResult.images.length} images`);
-}
-```
-
-## Provider Comparison
-
-<Tabs>
-  <TabItem label="DALL-E 3">
-```typescript
 const dalle = image({
   model: openai('dall-e-3'),
   params: {
-    size: '1024x1024',  // or '1792x1024', '1024x1792'
-    quality: 'hd',       // 'standard' or 'hd'
-    style: 'vivid',      // 'vivid' or 'natural'
+    size: '1024x1024',    // or '1792x1024', '1024x1792'
+    quality: 'hd',         // 'standard' or 'hd'
+    style: 'vivid',        // 'vivid' or 'natural'
   },
 });
 
 const result = await dalle.generate('A serene Japanese garden');
 
 // DALL-E 3 often revises prompts for better results
-console.log(result.metadata?.revisedPrompt);
+console.log(result.images[0].revisedPrompt);
 ```
-  </TabItem>
-  <TabItem label="Stable Diffusion">
-```typescript
-const sd = image({
-  model: stability('stable-diffusion-xl-1024-v1-0'),
-  params: {
-    steps: 30,
-    cfg_scale: 7,
-    samples: 4,
-    style_preset: 'photographic',
-  },
-});
 
-const result = await sd.generate({
-  prompt: 'A serene Japanese garden',
-  negativePrompt: 'ugly, blurry, low quality',
-  seed: 42,
-});
-```
-  </TabItem>
-  <TabItem label="Imagen">
+**Models:** `dall-e-3` (highest quality, 1 image per request), `dall-e-2` (faster, multiple images, supports editing)
+
+### Imagen (Google)
+
 ```typescript
+import { image } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
 const imagen = image({
   model: google('imagen-3.0-generate-001'),
   params: {
-    sampleCount: 4,
+    numberOfImages: 4,
     aspectRatio: '16:9',
   },
 });
 
 const result = await imagen.generate('A serene Japanese garden');
 ```
-  </TabItem>
-</Tabs>
+
+### xAI
+
+```typescript
+import { image } from '@providerprotocol/ai';
+import { xai } from '@providerprotocol/ai/xai';
+
+const aurora = image({
+  model: xai('grok-2-image'),
+});
+
+const result = await aurora.generate('A futuristic cityscape');
+```
 
 ## Multiple Images
 
-Generate multiple images in a single request:
+Generate multiple images at once (where supported):
 
 ```typescript
-const sd = image({
-  model: stability('stable-diffusion-xl-1024-v1-0'),
-  params: { samples: 4 },
+const dalle2 = image({
+  model: openai('dall-e-2'),
+  params: {
+    n: 4,               // Generate 4 images
+    size: '512x512',
+  },
 });
 
-const result = await sd.generate('Abstract art, vibrant colors');
+const result = await dalle2.generate('A cute robot');
 
-for (const [index, generated] of result.images.entries()) {
-  await Bun.write(`art-${index}.png`, generated.image.toBytes());
+for (const img of result.images) {
+  console.log('Generated:', img.image.mimeType);
 }
 ```
 
 <Aside type="note">
-The maximum number of images depends on the model. Check `capabilities.maxImages` for the limit.
+DALL-E 3 only generates one image per request. Use DALL-E 2 or Imagen for multiple images.
 </Aside>
+
+## Image Editing
+
+Edit existing images (DALL-E 2):
+
+```typescript
+import { image, Image } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+const dalle2 = image({
+  model: openai('dall-e-2'),
+});
+
+const original = await Image.fromPath('./room.png');
+const mask = await Image.fromPath('./mask.png'); // Transparent areas get edited
+
+const result = await dalle2.edit({
+  image: original,
+  mask: mask,
+  prompt: 'Add a potted plant in the corner',
+});
+```
+
+## Image Variations
+
+Generate variations of an existing image:
+
+```typescript
+const original = await Image.fromPath('./artwork.png');
+
+const result = await dalle2.vary({
+  image: original,
+  n: 4,
+});
+```
+
+## Result Structure
+
+```typescript
+interface ImageResult {
+  images: GeneratedImage[];
+  metadata?: Record<string, unknown>;
+}
+
+interface GeneratedImage {
+  image: Image;           // The generated image
+  revisedPrompt?: string; // Enhanced prompt (DALL-E 3)
+  metadata?: Record<string, unknown>;
+}
+```
+
+## Streaming (Where Supported)
+
+Some providers support streaming generation progress:
+
+```typescript
+const stream = dalle.stream('A detailed landscape');
+
+for await (const event of stream) {
+  if (event.type === 'image_delta') {
+    console.log('Progress:', event.delta.data?.length, 'bytes');
+  }
+}
+
+const result = await stream.result;
+```
+
+## Prompt Engineering
+
+Tips for better results:
+
+```typescript
+// Be specific about style
+await dalle.generate(
+  'A sunset over mountains, impressionist oil painting, ' +
+  'vibrant colors, visible brushstrokes'
+);
+
+// Specify composition
+await dalle.generate(
+  'A robot, centered composition, studio lighting, ' +
+  'white background, product photography'
+);
+
+// Include technical details
+await dalle.generate(
+  'Isometric view of a cozy coffee shop interior, ' +
+  'soft lighting, warm colors, detailed furniture'
+);
+```
+
+## Capabilities by Provider
+
+| Feature | DALL-E 3 | DALL-E 2 | Imagen | xAI |
+|---------|:--------:|:--------:|:------:|:---:|
+| Generate | ✓ | ✓ | ✓ | ✓ |
+| Edit | | ✓ | | |
+| Variations | | ✓ | | |
+| Multiple images | | ✓ | ✓ | |
+| HD quality | ✓ | | ✓ | |
+
+## Size Options
+
+### DALL-E 3
+- `1024x1024` (square)
+- `1792x1024` (landscape)
+- `1024x1792` (portrait)
+
+### DALL-E 2
+- `256x256`
+- `512x512`
+- `1024x1024`
+
+### Imagen
+- Various aspect ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`
+
+## Error Handling
+
+```typescript
+import { UPPError, ErrorCode } from '@providerprotocol/ai';
+
+try {
+  const result = await dalle.generate('...');
+} catch (error) {
+  if (error instanceof UPPError) {
+    if (error.code === ErrorCode.ContentFiltered) {
+      console.error('Prompt was blocked by content filter');
+    } else if (error.code === ErrorCode.InvalidRequest) {
+      console.error('Invalid parameters:', error.message);
+    }
+  }
+}
+```
 
 ## Working with Generated Images
 
@@ -175,25 +269,49 @@ const bytes = generated.image.toBytes();
 const base64 = generated.image.toBase64();
 
 // Get data URL for web display
-const dataUrl = generated.image.toDataUrl();
+const dataUrl = generated.image.toDataURL();
 
 // Check dimensions
 console.log(generated.image.width, generated.image.height);
 console.log(generated.image.mimeType); // 'image/png'
 ```
 
-## Error Handling
+## Complete Example
 
 ```typescript
-try {
-  const result = await dalle.generate('A portrait');
-} catch (error) {
-  if (error instanceof UPPError) {
-    if (error.code === 'CONTENT_FILTERED') {
-      console.log('Image was filtered for content policy');
-    } else if (error.code === 'RATE_LIMITED') {
-      console.log('Rate limited, try again later');
-    }
-  }
+import { image } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+async function generateProductImage(description: string) {
+  const dalle = image({
+    model: openai('dall-e-3'),
+    params: {
+      size: '1024x1024',
+      quality: 'hd',
+      style: 'natural',
+    },
+  });
+
+  const result = await dalle.generate(
+    `Professional product photography of ${description}, ` +
+    'studio lighting, white background, high detail'
+  );
+
+  const bytes = result.images[0].image.toBytes();
+  const filename = `product-${Date.now()}.png`;
+  await Bun.write(filename, bytes);
+
+  return {
+    filename,
+    revisedPrompt: result.images[0].revisedPrompt,
+  };
 }
+
+const { filename, revisedPrompt } = await generateProductImage('wireless earbuds');
+console.log('Saved to:', filename);
+console.log('DALL-E prompt:', revisedPrompt);
 ```
+
+<Aside type="caution">
+Image generation costs can add up quickly. Check provider pricing and consider implementing usage limits.
+</Aside>

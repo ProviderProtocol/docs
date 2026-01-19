@@ -1,0 +1,336 @@
+---
+title: Error Handling
+description: Understanding and handling errors in UPP.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Error Handling
+
+All UPP errors are normalized to `UPPError` with consistent error codes across providers.
+
+## UPPError
+
+```typescript
+import { UPPError, ErrorCode } from '@providerprotocol/ai';
+
+try {
+  const turn = await claude.generate('Hello');
+} catch (error) {
+  if (error instanceof UPPError) {
+    console.log(error.code);       // Error code (e.g., 'RATE_LIMITED')
+    console.log(error.message);    // Human-readable message
+    console.log(error.provider);   // Provider name (e.g., 'anthropic')
+    console.log(error.modality);   // 'llm', 'embedding', or 'image'
+    console.log(error.statusCode); // HTTP status code (if applicable)
+    console.log(error.cause);      // Original error (if any)
+  }
+}
+```
+
+## Error Codes
+
+| Code | Description | Common Causes |
+|------|-------------|---------------|
+| `AUTHENTICATION_FAILED` | Invalid or missing API key | Wrong key, expired key, revoked key |
+| `RATE_LIMITED` | Too many requests | Exceeded rate limits |
+| `CONTEXT_LENGTH_EXCEEDED` | Input too long | Too many tokens in request |
+| `MODEL_NOT_FOUND` | Model doesn't exist | Typo in model name, model deprecated |
+| `INVALID_REQUEST` | Malformed request | Invalid parameters, unsupported features |
+| `INVALID_RESPONSE` | Unexpected response | Provider returned malformed data |
+| `CONTENT_FILTERED` | Content policy violation | Request or response blocked |
+| `QUOTA_EXCEEDED` | Billing limit reached | Out of credits, spending cap hit |
+| `PROVIDER_ERROR` | Provider-side error | API outage, internal error |
+| `NETWORK_ERROR` | Connection failed | DNS failure, connection refused |
+| `TIMEOUT` | Request timed out | Slow response, network issues |
+| `CANCELLED` | Request aborted | AbortSignal triggered |
+
+## Handling Specific Errors
+
+```typescript
+import { UPPError, ErrorCode } from '@providerprotocol/ai';
+
+try {
+  const turn = await claude.generate('Hello');
+} catch (error) {
+  if (!(error instanceof UPPError)) {
+    throw error; // Re-throw unexpected errors
+  }
+
+  switch (error.code) {
+    case ErrorCode.RateLimited:
+      // Wait and retry (or let retry strategy handle it)
+      console.log('Rate limited, please wait...');
+      break;
+
+    case ErrorCode.AuthenticationFailed:
+      // Check API key configuration
+      console.error('Invalid API key');
+      break;
+
+    case ErrorCode.ContextLengthExceeded:
+      // Reduce input size
+      console.error('Input too long, truncate conversation');
+      break;
+
+    case ErrorCode.ContentFiltered:
+      // Content policy violation
+      console.error('Request blocked by content filter');
+      break;
+
+    case ErrorCode.ModelNotFound:
+      // Check model name
+      console.error('Model not found:', error.message);
+      break;
+
+    case ErrorCode.QuotaExceeded:
+      // Billing issue
+      console.error('Out of credits');
+      break;
+
+    case ErrorCode.Timeout:
+      // Request took too long
+      console.error('Request timed out');
+      break;
+
+    case ErrorCode.NetworkError:
+      // Connection issues
+      console.error('Network error:', error.message);
+      break;
+
+    case ErrorCode.ProviderError:
+      // Provider-side issue
+      console.error('Provider error:', error.message);
+      break;
+
+    default:
+      console.error('Unexpected error:', error.message);
+  }
+}
+```
+
+## Retry Strategies
+
+UPP automatically retries transient errors when configured:
+
+```typescript
+import { llm, ExponentialBackoff } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  config: {
+    retryStrategy: new ExponentialBackoff({
+      maxAttempts: 3,
+      baseDelay: 1000,  // 1 second
+      maxDelay: 30000,  // 30 seconds max
+    }),
+  },
+});
+```
+
+### Retryable Errors
+
+These errors are automatically retried:
+- `RATE_LIMITED` - Rate limit exceeded
+- `NETWORK_ERROR` - Connection issues
+- `TIMEOUT` - Request timeout
+- `PROVIDER_ERROR` - Server errors (5xx)
+
+### Non-Retryable Errors
+
+These errors fail immediately:
+- `AUTHENTICATION_FAILED` - Invalid API key
+- `INVALID_REQUEST` - Bad request parameters
+- `MODEL_NOT_FOUND` - Model doesn't exist
+- `CONTENT_FILTERED` - Content policy violation
+- `QUOTA_EXCEEDED` - Out of credits
+- `CANCELLED` - Manually aborted
+
+## Custom Retry Strategy
+
+Create custom retry logic:
+
+```typescript
+import { RetryStrategy, UPPError, ErrorCode } from '@providerprotocol/ai';
+
+class CustomRetryStrategy implements RetryStrategy {
+  private attempts = 0;
+
+  onRetry(error: UPPError, attempt: number): number | null {
+    this.attempts = attempt;
+
+    // Stop after 5 attempts
+    if (attempt >= 5) {
+      return null;
+    }
+
+    // Longer wait for rate limits
+    if (error.code === ErrorCode.RateLimited) {
+      return 5000; // 5 seconds
+    }
+
+    // Quick retry for network errors
+    if (error.code === ErrorCode.NetworkError) {
+      return 500; // 500ms
+    }
+
+    // Default exponential backoff
+    return Math.min(1000 * Math.pow(2, attempt), 30000);
+  }
+
+  reset(): void {
+    this.attempts = 0;
+  }
+}
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  config: {
+    retryStrategy: new CustomRetryStrategy(),
+  },
+});
+```
+
+## Timeouts
+
+Configure request timeouts:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  config: {
+    timeout: 30000, // 30 seconds
+  },
+});
+```
+
+## Abort Requests
+
+Cancel requests with AbortController:
+
+```typescript
+const controller = new AbortController();
+
+// Cancel after 10 seconds
+setTimeout(() => controller.abort(), 10000);
+
+try {
+  const turn = await claude.generate('Write a long essay', {
+    signal: controller.signal,
+  });
+} catch (error) {
+  if (error instanceof UPPError && error.code === ErrorCode.Cancelled) {
+    console.log('Request was cancelled');
+  }
+}
+```
+
+## Streaming Error Handling
+
+Handle errors during streaming:
+
+```typescript
+try {
+  const stream = claude.stream('Tell me a story');
+
+  for await (const event of stream) {
+    process.stdout.write(event.delta?.text ?? '');
+  }
+} catch (error) {
+  if (error instanceof UPPError) {
+    if (error.code === ErrorCode.Cancelled) {
+      console.log('\nStream cancelled');
+    } else {
+      console.error('\nStream error:', error.message);
+    }
+  }
+}
+```
+
+## Tool Execution Errors
+
+Tool errors are reported to the model, not thrown:
+
+```typescript
+const tool = {
+  name: 'risky_operation',
+  description: 'An operation that might fail',
+  parameters: { type: 'object', properties: {} },
+  run: async () => {
+    throw new Error('Something went wrong');
+  },
+};
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [tool],
+});
+
+// Tool error is sent back to model, which explains the failure
+const turn = await claude.generate('Run the risky operation');
+console.log(turn.response.text);
+// "I tried to run the operation but encountered an error..."
+```
+
+To throw tool errors instead:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [tool],
+  toolStrategy: {
+    onError: (tool, params, error) => {
+      throw error; // Re-throw to abort the request
+    },
+  },
+});
+```
+
+## HTTP Status Code Mapping
+
+| HTTP Status | Error Code |
+|-------------|------------|
+| 400 | `INVALID_REQUEST` |
+| 401, 403 | `AUTHENTICATION_FAILED` |
+| 402 | `QUOTA_EXCEEDED` |
+| 404 | `MODEL_NOT_FOUND` |
+| 408 | `TIMEOUT` |
+| 413 | `CONTEXT_LENGTH_EXCEEDED` |
+| 429 | `RATE_LIMITED` |
+| 451 | `CONTENT_FILTERED` |
+| 5xx | `PROVIDER_ERROR` |
+
+## Best Practices
+
+1. **Always catch UPPError** - Handle errors appropriately for your use case
+2. **Use retry strategies** - Let UPP handle transient failures automatically
+3. **Set appropriate timeouts** - Prevent hanging requests
+4. **Log errors with context** - Include provider, modality, and error code
+5. **Graceful degradation** - Have fallback behavior for critical paths
+
+```typescript
+import { UPPError, ErrorCode } from '@providerprotocol/ai';
+
+async function generateWithFallback(prompt: string) {
+  try {
+    return await primaryModel.generate(prompt);
+  } catch (error) {
+    if (error instanceof UPPError) {
+      // Log for debugging
+      console.error(`${error.provider}/${error.modality}: ${error.code} - ${error.message}`);
+
+      // Try fallback for certain errors
+      if ([ErrorCode.RateLimited, ErrorCode.ProviderError].includes(error.code)) {
+        console.log('Trying fallback model...');
+        return await fallbackModel.generate(prompt);
+      }
+    }
+    throw error;
+  }
+}
+```
+
+<Aside type="tip">
+During development, log the full error including `error.cause` to see the original provider error message.
+</Aside>

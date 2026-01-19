@@ -1,103 +1,235 @@
 ---
 title: Providers
-description: How UPP providers work and how to use them.
+description: All supported AI providers and how to use them.
 ---
 
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Providers
 
-Providers are vendor-specific adapters that expose one or more modality interfaces (LLM, embedding, image).
-
-## Import Patterns
-
-Providers are imported from their respective modules:
-
-```typescript
-import { openai } from '@providerprotocol/ai/openai';
-import { anthropic } from '@providerprotocol/ai/anthropic';
-import { google } from '@providerprotocol/ai/google';
-import { stability } from '@providerprotocol/ai/stability';
-import { voyage } from '@providerprotocol/ai/voyage';
-```
-
-## Using Providers
-
-All providers use the same pattern—a single factory per provider:
-
-<Tabs>
-  <TabItem label="LLM">
-```typescript
-import { llm } from '@providerprotocol/ai';
-import { anthropic } from '@providerprotocol/ai/anthropic';
-import { openai } from '@providerprotocol/ai/openai';
-import { google } from '@providerprotocol/ai/google';
-
-// Anthropic
-const claude = llm({ model: anthropic('claude-sonnet-4-20250514') });
-
-// OpenAI
-const gpt = llm({ model: openai('gpt-4o') });
-
-// Google
-const gemini = llm({ model: google('gemini-pro') });
-```
-  </TabItem>
-  <TabItem label="Embedding">
-```typescript
-import { embedding } from '@providerprotocol/ai';
-import { openai } from '@providerprotocol/ai/openai';
-import { google } from '@providerprotocol/ai/google';
-import { voyage } from '@providerprotocol/ai/voyage';
-
-// OpenAI
-const embedder1 = embedding({ model: openai('text-embedding-3-small') });
-
-// Google
-const embedder2 = embedding({ model: google('text-embedding-004') });
-
-// Voyage
-const embedder3 = embedding({ model: voyage('voyage-3') });
-```
-  </TabItem>
-  <TabItem label="Image">
-```typescript
-import { image } from '@providerprotocol/ai';
-import { openai } from '@providerprotocol/ai/openai';
-import { google } from '@providerprotocol/ai/google';
-import { stability } from '@providerprotocol/ai/stability';
-
-// OpenAI
-const dalle = image({ model: openai('dall-e-3') });
-
-// Google
-const imagen = image({ model: google('imagen-3.0-generate-001') });
-
-// Stability
-const sdxl = image({ model: stability('stable-diffusion-xl-1024-v1-0') });
-```
-  </TabItem>
-</Tabs>
+UPP supports seven AI providers out of the box. Each provider is a separate import that can be used with `llm()`, `embedding()`, or `image()`.
 
 ## Provider Capabilities
 
-Not all providers support all modalities:
+| Provider | LLM | Embedding | Image | Notes |
+|----------|:---:|:---------:|:-----:|-------|
+| **Anthropic** | ✓ | | | Claude models, extended thinking, computer use |
+| **OpenAI** | ✓ | ✓ | ✓ | GPT-4, embeddings, DALL-E |
+| **Google** | ✓ | ✓ | ✓ | Gemini models, Imagen |
+| **xAI** | ✓ | | ✓ | Grok models |
+| **Ollama** | ✓ | ✓ | | Local models |
+| **OpenRouter** | ✓ | ✓ | | Multi-provider gateway |
+| **Proxy** | ✓ | ✓ | ✓ | Custom API endpoints |
 
-| Provider | LLM | Embedding | Image |
-|----------|-----|-----------|-------|
-| Anthropic | ✓ | - | - |
-| OpenAI | ✓ | ✓ | ✓ |
-| Google | ✓ | ✓ | ✓ |
-| Stability | - | - | ✓ |
-| Voyage | - | ✓ | - |
+## Anthropic
 
-<Aside type="caution">
-Using a modality that a provider doesn't support will throw a `UPPError` with code `INVALID_REQUEST`.
+Claude models with advanced features like extended thinking and structured outputs.
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant.',
+  params: {
+    max_tokens: 4096,
+    temperature: 0.7,
+  },
+});
+
+const turn = await claude.generate('Explain quantum computing');
+```
+
+**Available models:** `claude-sonnet-4-20250514`, `claude-opus-4-20250514`, `claude-3-5-haiku-20241022`
+
+### Beta Features
+
+Anthropic offers beta features via the `betas` option:
+
+```typescript
+import { anthropic, betas } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514', {
+    betas: [betas.structuredOutputs],
+  }),
+});
+```
+
+## OpenAI
+
+GPT models with two API modes: Responses (modern) and Completions (legacy).
+
+```typescript
+import { llm, embedding, image } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+// LLM
+const gpt = llm({ model: openai('gpt-4o') });
+
+// Embeddings
+const embedder = embedding({
+  model: openai('text-embedding-3-large'),
+  params: { dimensions: 1536 },
+});
+
+// Image generation
+const dalle = image({
+  model: openai('dall-e-3'),
+  params: { size: '1024x1024', quality: 'hd' },
+});
+```
+
+### API Modes
+
+OpenAI supports two LLM APIs:
+
+```typescript
+// Modern Responses API (default, recommended)
+const modern = llm({ model: openai('gpt-4o') });
+
+// Legacy Chat Completions API
+const legacy = llm({ model: openai('gpt-4o', { api: 'completions' }) });
+```
+
+**LLM models:** `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`, `o1`, `o1-mini`, `o3-mini`
+
+**Embedding models:** `text-embedding-3-small`, `text-embedding-3-large`
+
+**Image models:** `dall-e-3`, `dall-e-2`
+
+## Google
+
+Gemini models with multimodal capabilities.
+
+```typescript
+import { llm, embedding, image } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+// LLM
+const gemini = llm({ model: google('gemini-2.0-flash') });
+
+// Embeddings
+const embedder = embedding({
+  model: google('text-embedding-004'),
+});
+
+// Image generation
+const imagen = image({
+  model: google('imagen-3.0-generate-001'),
+});
+```
+
+**LLM models:** `gemini-2.0-flash`, `gemini-1.5-pro`, `gemini-1.5-flash`
+
+**Embedding models:** `text-embedding-004`
+
+## xAI
+
+Grok models with multiple API modes.
+
+```typescript
+import { llm, image } from '@providerprotocol/ai';
+import { xai } from '@providerprotocol/ai/xai';
+
+// LLM
+const grok = llm({ model: xai('grok-2') });
+
+// Image generation
+const aurora = image({ model: xai('grok-2-image') });
+```
+
+### API Modes
+
+xAI supports multiple API modes:
+
+```typescript
+// Default mode
+const grok = llm({ model: xai('grok-2') });
+
+// Explicit mode selection
+const grokOpenAI = llm({ model: xai('grok-2', { api: 'openai' }) });
+```
+
+**LLM models:** `grok-2`, `grok-2-mini`, `grok-beta`
+
+## Ollama
+
+Run models locally with Ollama.
+
+```typescript
+import { llm, embedding } from '@providerprotocol/ai';
+import { ollama } from '@providerprotocol/ai/ollama';
+
+// LLM
+const local = llm({
+  model: ollama('llama3.2'),
+  config: {
+    baseUrl: 'http://localhost:11434', // Default
+  },
+});
+
+// Embeddings
+const embedder = embedding({
+  model: ollama('nomic-embed-text'),
+});
+```
+
+<Aside type="note">
+Ollama must be running locally. Install from [ollama.com](https://ollama.com) and pull models with `ollama pull llama3.2`.
 </Aside>
 
-## Provider-Specific Parameters
+**Popular models:** `llama3.2`, `llama3.1`, `mistral`, `codellama`, `nomic-embed-text`
 
-Each provider exports its own parameter types for type-safe configuration:
+## OpenRouter
+
+Access multiple providers through a single API.
+
+```typescript
+import { llm, embedding } from '@providerprotocol/ai';
+import { openrouter } from '@providerprotocol/ai/openrouter';
+
+// Use any model available on OpenRouter
+const model = llm({
+  model: openrouter('anthropic/claude-sonnet-4'),
+  config: {
+    headers: {
+      'HTTP-Referer': 'https://myapp.com',
+      'X-Title': 'My Application',
+    },
+  },
+});
+```
+
+OpenRouter provides access to models from many providers with a unified API and billing.
+
+## Proxy Provider
+
+Connect to custom API endpoints or build your own AI gateway.
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { proxy } from '@providerprotocol/ai/proxy';
+
+const custom = llm({
+  model: proxy('https://my-api.example.com/ai'),
+  config: {
+    headers: {
+      'Authorization': 'Bearer my-platform-token',
+    },
+  },
+});
+```
+
+The proxy provider is useful for:
+- Building API gateways with custom authentication
+- Adding usage tracking and billing
+- Proxying requests through corporate firewalls
+
+## Provider Parameters
+
+Each provider exports typed parameters for type-safe configuration:
 
 ```typescript
 import { llm } from '@providerprotocol/ai';
@@ -109,68 +241,85 @@ const claude = llm({
   params: {
     max_tokens: 4096,
     temperature: 0.7,
-    // TypeScript knows these are valid Anthropic params
-  } as AnthropicLLMParams,
+    top_p: 0.9,
+  } satisfies AnthropicLLMParams,
 });
 ```
-
-Available parameter types:
 
 | Provider | LLM Params | Embedding Params | Image Params |
 |----------|------------|------------------|--------------|
 | Anthropic | `AnthropicLLMParams` | - | - |
 | OpenAI | `OpenAILLMParams` | `OpenAIEmbedParams` | `OpenAIImageParams` |
 | Google | `GoogleLLMParams` | `GoogleEmbedParams` | `GoogleImageParams` |
-| Stability | - | - | `StabilityImageParams` |
+| xAI | `XAILLMParams` | - | `XAIImageParams` |
+| Ollama | `OllamaLLMParams` | `OllamaEmbedParams` | - |
 
-## Provider Internal Structure
+## Environment Variables
 
-Internally, each provider combines modality handlers:
+UPP automatically reads API keys from environment variables:
+
+```bash
+ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=...
+XAI_API_KEY=...
+OPENROUTER_API_KEY=...
+```
+
+You can also provide keys explicitly in the config:
 
 ```typescript
-// @providerprotocol/ai/openai/index.ts
-import { createLLMHandler } from './llm';
-import { createEmbeddingHandler } from './embed';
-import { createImageHandler } from './image';
-
-export const openai = createProvider({
-  name: 'openai',
-  modalities: {
-    llm: createLLMHandler(),
-    embedding: createEmbeddingHandler(),
-    image: createImageHandler(),
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  config: {
+    apiKey: process.env.MY_CUSTOM_KEY,
   },
 });
 ```
 
-## Handler Interfaces
+See the [Configuration](/guide/configuration) guide for advanced key management options.
 
-Each modality has its own handler interface:
+## Using Multiple Providers
 
+<Tabs>
+  <TabItem label="LLM">
 ```typescript
-/**
- * Handler for LLM operations
- */
-interface LLMHandler<TParams = unknown> {
-  bind(modelId: string): BoundLLMModel<TParams>;
-}
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+import { openai } from '@providerprotocol/ai/openai';
+import { google } from '@providerprotocol/ai/google';
 
-/**
- * Handler for embedding operations
- */
-interface EmbeddingHandler<TParams = unknown> {
-  readonly supportedInputs: ('text' | 'image')[];
-  bind(modelId: string): BoundEmbeddingModel<TParams>;
-}
-
-/**
- * Handler for image operations
- */
-interface ImageHandler<TParams = unknown> {
-  bind(modelId: string): BoundImageModel<TParams>;
-}
+const claude = llm({ model: anthropic('claude-sonnet-4-20250514') });
+const gpt = llm({ model: openai('gpt-4o') });
+const gemini = llm({ model: google('gemini-2.0-flash') });
 ```
+  </TabItem>
+  <TabItem label="Embedding">
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+import { google } from '@providerprotocol/ai/google';
+import { ollama } from '@providerprotocol/ai/ollama';
+
+const openaiEmbed = embedding({ model: openai('text-embedding-3-small') });
+const googleEmbed = embedding({ model: google('text-embedding-004') });
+const localEmbed = embedding({ model: ollama('nomic-embed-text') });
+```
+  </TabItem>
+  <TabItem label="Image">
+```typescript
+import { image } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+import { google } from '@providerprotocol/ai/google';
+import { xai } from '@providerprotocol/ai/xai';
+
+const dalle = image({ model: openai('dall-e-3') });
+const imagen = image({ model: google('imagen-3.0-generate-001') });
+const aurora = image({ model: xai('grok-2-image') });
+```
+  </TabItem>
+</Tabs>
 
 <Aside type="tip">
-For detailed information on implementing providers, see the [Provider Implementation Guide](/providers/implementation/).
+For information on building your own provider, see the [Provider Implementation Guide](/guide/providers).
 </Aside>

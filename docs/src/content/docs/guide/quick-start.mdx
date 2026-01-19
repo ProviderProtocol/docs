@@ -3,7 +3,7 @@ title: Quick Start
 description: Get up and running with UPP in minutes.
 ---
 
-import { Tabs, TabItem, Steps, Aside, Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
 
 # Quick Start
 
@@ -29,10 +29,10 @@ Get up and running with the Unified Provider Protocol in minutes.
   </TabItem>
 </Tabs>
 
-## Basic LLM Usage
+## Your First LLM Call
 
 <Steps>
-1. **Import the library and provider**
+1. **Import the library and a provider**
 
    ```typescript
    import { llm } from '@providerprotocol/ai';
@@ -44,9 +44,6 @@ Get up and running with the Unified Provider Protocol in minutes.
    ```typescript
    const claude = llm({
      model: anthropic('claude-sonnet-4-20250514'),
-     config: {
-       apiKey: process.env.ANTHROPIC_API_KEY,
-     },
      system: 'You are a helpful assistant.',
    });
    ```
@@ -55,68 +52,27 @@ Get up and running with the Unified Provider Protocol in minutes.
 
    ```typescript
    const turn = await claude.generate('What is the capital of France?');
-   console.log(turn.response.text); // "The capital of France is Paris."
+   console.log(turn.response.text);
+   // "The capital of France is Paris."
    ```
 </Steps>
 
-## Import Styles
-
-UPP supports two import styles—choose what works best for your codebase:
-
-### Namespace Style (Recommended)
-
-```typescript
-import { ai } from '@providerprotocol/ai';
-import { anthropic } from '@providerprotocol/ai/anthropic';
-
-const claude = ai.llm({
-  model: anthropic('claude-sonnet-4-20250514'),
-  system: 'You are a helpful assistant.',
-});
-
-const embedder = ai.embedding({
-  model: anthropic('voyage-3'),
-});
-```
-
-### Direct Import Style
-
-```typescript
-import { llm, embedding } from '@providerprotocol/ai';
-import { openai } from '@providerprotocol/ai/openai';
-
-const gpt = llm({ model: openai('gpt-4o') });
-const embedder = embedding({ model: openai('text-embedding-3-small') });
-```
-
-## Working with Conversations
-
-UPP gives you full control over conversation history:
-
-```typescript
-const claude = llm({
-  model: anthropic('claude-sonnet-4-20250514'),
-  system: 'You are a helpful assistant.',
-});
-
-// User manages their own history
-const history: Message[] = [];
-
-// First turn
-const turn1 = await claude.generate(history, 'My name is Alice.');
-history.push(...turn1.messages);
-
-// Second turn (history preserved)
-const turn2 = await claude.generate(history, 'What is my name?');
-history.push(...turn2.messages);
-
-console.log(turn2.response.text); // "Your name is Alice."
-```
+<Aside type="tip" title="API Keys">
+UPP automatically reads API keys from environment variables:
+- `ANTHROPIC_API_KEY`
+- `OPENAI_API_KEY`
+- `GOOGLE_API_KEY`
+- `OLLAMA_API_KEY` (optional)
+- `OPENROUTER_API_KEY`
+- `XAI_API_KEY`
+</Aside>
 
 ## Streaming Responses
 
+Stream tokens as they arrive:
+
 ```typescript
-const stream = claude.stream(history, 'Write a haiku about programming.');
+const stream = claude.stream('Write a haiku about coding.');
 
 for await (const event of stream) {
   if (event.type === 'text_delta') {
@@ -126,34 +82,68 @@ for await (const event of stream) {
 
 // Get the complete turn after streaming
 const turn = await stream.turn;
-history.push(...turn.messages);
 ```
 
-## Using Embeddings
+## Multi-Turn Conversations
+
+Maintain conversation history:
+
+```typescript
+import { Message } from '@providerprotocol/ai';
+
+const history: Message[] = [];
+
+// First turn
+const turn1 = await claude.generate(history, 'My name is Alice.');
+history.push(...turn1.messages);
+
+// Second turn - model remembers context
+const turn2 = await claude.generate(history, 'What is my name?');
+history.push(...turn2.messages);
+
+console.log(turn2.response.text);
+// "Your name is Alice."
+```
+
+## Using Different Providers
+
+Switch providers by changing the import:
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+import { google } from '@providerprotocol/ai/google';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+// OpenAI
+const gpt = llm({ model: openai('gpt-4o') });
+
+// Google
+const gemini = llm({ model: google('gemini-2.0-flash') });
+
+// Anthropic
+const claude = llm({ model: anthropic('claude-sonnet-4-20250514') });
+```
+
+## Embeddings
+
+Generate vector embeddings:
 
 ```typescript
 import { embedding } from '@providerprotocol/ai';
 import { openai } from '@providerprotocol/ai/openai';
 
 const embedder = embedding({
-  model: openai('text-embedding-3-large'),
-  params: { dimensions: 1536 },
+  model: openai('text-embedding-3-small'),
 });
 
-// Single embedding
-const result = await embedder.embed('What is the capital of France?');
+const result = await embedder.embed('Hello, world!');
 console.log(result.vector.length); // 1536
-
-// Batch embedding
-const batch = await embedder.embedBatch([
-  'First document',
-  'Second document',
-  'Third document',
-]);
-console.log(batch.embeddings.length); // 3
 ```
 
-## Generating Images
+## Image Generation
+
+Generate images from text:
 
 ```typescript
 import { image } from '@providerprotocol/ai';
@@ -161,25 +151,17 @@ import { openai } from '@providerprotocol/ai/openai';
 
 const dalle = image({
   model: openai('dall-e-3'),
-  params: { size: '1024x1024', quality: 'hd' },
+  params: { size: '1024x1024' },
 });
 
-const result = await dalle.generate('A sunset over mountains, oil painting style');
-console.log(result.images.length); // 1
-
-// Save the image
+const result = await dalle.generate('A sunset over mountains');
 const imageData = result.images[0].image.toBytes();
-await Bun.write('sunset.png', imageData);
 ```
-
-<Aside type="tip" title="Environment Variables">
-For production use, store API keys in environment variables. UPP will automatically read common env var names like `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, etc., if `config.apiKey` is not explicitly provided.
-</Aside>
 
 ## Next Steps
 
-- Learn about [Design Principles](/spec/design-principles/)
-- Understand the [Architecture](/spec/architecture/)
-- Explore [Tools and Function Calling](/spec/llm/tools/)
-- Read about [Structured Outputs](/spec/llm/structured/)
-- See the full [SDK Reference](/sdk/)
+- [Providers](/guide/providers) - All supported AI providers
+- [Streaming](/guide/streaming) - Real-time response handling
+- [Tools](/guide/tools) - Function calling
+- [Conversations](/guide/conversations) - Managing chat history
+- [Configuration](/guide/configuration) - API keys, retries, timeouts

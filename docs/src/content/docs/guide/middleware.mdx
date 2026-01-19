@@ -1,0 +1,371 @@
+---
+title: Middleware
+description: Intercept and transform requests, responses, and streams.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Middleware
+
+Middleware lets you intercept and transform requests, responses, and stream events.
+
+## Basic Middleware
+
+```typescript
+import { llm, Middleware } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const loggingMiddleware: Middleware = {
+  name: 'logging',
+
+  onStart(ctx) {
+    console.log('Request starting:', ctx.modelId);
+    ctx.state.set('startTime', Date.now());
+  },
+
+  onEnd(ctx) {
+    const duration = Date.now() - (ctx.state.get('startTime') as number);
+    console.log(`Request completed in ${duration}ms`);
+  },
+};
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [loggingMiddleware],
+});
+```
+
+## Middleware Interface
+
+```typescript
+interface Middleware {
+  readonly name: string;
+
+  // Lifecycle hooks
+  onStart?(ctx: MiddlewareContext): void | Promise<void>;
+  onEnd?(ctx: MiddlewareContext): void | Promise<void>;
+  onError?(error: Error, ctx: MiddlewareContext): void | Promise<void>;
+
+  // Request/Response hooks
+  onRequest?(ctx: MiddlewareContext): void | Promise<void>;
+  onResponse?(ctx: MiddlewareContext): void | Promise<void>;
+
+  // Stream hooks (LLM, Image)
+  onStreamEvent?(
+    event: StreamEvent,
+    ctx: StreamContext
+  ): StreamEvent | StreamEvent[] | null;
+  onStreamEnd?(ctx: StreamContext): void | Promise<void>;
+
+  // Tool hooks (LLM only)
+  onToolCall?(tool: Tool, params: unknown, ctx: MiddlewareContext): void | Promise<void>;
+  onToolResult?(tool: Tool, result: unknown, ctx: MiddlewareContext): void | Promise<void>;
+}
+```
+
+## Middleware Context
+
+```typescript
+interface MiddlewareContext {
+  readonly modality: 'llm' | 'embedding' | 'image';
+  readonly modelId: string;
+  readonly provider: string;
+  readonly streaming: boolean;
+
+  request: AnyRequest;     // Mutable - modify before sending
+  response?: AnyResponse;  // Mutable - modify after receiving
+
+  readonly state: Map<string, unknown>;  // Share data between hooks
+  readonly startTime: number;
+  endTime?: number;
+}
+```
+
+## Built-in Middleware
+
+### Logging Middleware
+
+```typescript
+import { llm, loggingMiddleware } from '@providerprotocol/ai';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [
+    loggingMiddleware({
+      level: 'debug',      // 'debug', 'info', 'warn', 'error'
+      logRequest: true,
+      logResponse: true,
+      logTiming: true,
+    }),
+  ],
+});
+```
+
+### Parsed Object Middleware
+
+Stream partial JSON for structured output:
+
+```typescript
+import { llm, parsedObjectMiddleware } from '@providerprotocol/ai';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: { /* schema */ },
+  middleware: [parsedObjectMiddleware()],
+});
+
+const stream = claude.stream('Extract data...');
+
+for await (const event of stream) {
+  if (event.type === 'object_delta') {
+    console.log('Partial:', event.delta.text);
+  }
+}
+```
+
+## Request Transformation
+
+Modify requests before they're sent:
+
+```typescript
+const addMetadataMiddleware: Middleware = {
+  name: 'add-metadata',
+
+  onRequest(ctx) {
+    // Add custom headers
+    ctx.request.config = {
+      ...ctx.request.config,
+      headers: {
+        ...ctx.request.config?.headers,
+        'X-Request-ID': crypto.randomUUID(),
+      },
+    };
+  },
+};
+```
+
+## Response Transformation
+
+Modify responses after they're received:
+
+```typescript
+const sanitizeMiddleware: Middleware = {
+  name: 'sanitize',
+
+  onResponse(ctx) {
+    if (ctx.modality === 'llm' && ctx.response) {
+      // Sanitize response content
+      for (const message of ctx.response.messages) {
+        // Process message content
+      }
+    }
+  },
+};
+```
+
+## Stream Event Transformation
+
+Filter or transform stream events:
+
+```typescript
+const filterMiddleware: Middleware = {
+  name: 'filter',
+
+  onStreamEvent(event, ctx) {
+    // Filter out reasoning blocks
+    if (event.type === 'reasoning_delta') {
+      return null; // Remove this event
+    }
+
+    // Transform text events
+    if (event.type === 'text_delta') {
+      return {
+        ...event,
+        delta: {
+          ...event.delta,
+          text: event.delta.text?.toUpperCase(),
+        },
+      };
+    }
+
+    return event;
+  },
+};
+```
+
+## Error Handling
+
+Handle errors in middleware:
+
+```typescript
+const errorMiddleware: Middleware = {
+  name: 'error-handler',
+
+  onError(error, ctx) {
+    console.error(`Error in ${ctx.provider}/${ctx.modelId}:`, error.message);
+
+    // Log to external service
+    logToMonitoring({
+      error: error.message,
+      provider: ctx.provider,
+      model: ctx.modelId,
+      duration: ctx.endTime ? ctx.endTime - ctx.startTime : 0,
+    });
+  },
+};
+```
+
+## Tool Interception
+
+Monitor or modify tool calls:
+
+```typescript
+const toolMiddleware: Middleware = {
+  name: 'tool-monitor',
+
+  onToolCall(tool, params, ctx) {
+    console.log(`Tool called: ${tool.name}`, params);
+  },
+
+  onToolResult(tool, result, ctx) {
+    console.log(`Tool result: ${tool.name}`, result);
+  },
+};
+```
+
+## Execution Order
+
+Multiple middleware execute in specific order:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [first, second, third],
+});
+
+// Execution order:
+// Request phase:  first → second → third
+// Response phase: third → second → first (reverse)
+// Error phase:    all notified
+```
+
+## Sharing State
+
+Use the context state map to share data between hooks:
+
+```typescript
+const timingMiddleware: Middleware = {
+  name: 'timing',
+
+  onStart(ctx) {
+    ctx.state.set('startTime', performance.now());
+  },
+
+  onRequest(ctx) {
+    ctx.state.set('requestTime', performance.now());
+  },
+
+  onResponse(ctx) {
+    const requestTime = ctx.state.get('requestTime') as number;
+    console.log('Response latency:', performance.now() - requestTime, 'ms');
+  },
+
+  onEnd(ctx) {
+    const startTime = ctx.state.get('startTime') as number;
+    console.log('Total time:', performance.now() - startTime, 'ms');
+  },
+};
+```
+
+## Async Middleware
+
+Hooks can be async:
+
+```typescript
+const authMiddleware: Middleware = {
+  name: 'auth',
+
+  async onRequest(ctx) {
+    // Fetch fresh token
+    const token = await refreshAuthToken();
+    ctx.request.config = {
+      ...ctx.request.config,
+      headers: {
+        ...ctx.request.config?.headers,
+        'Authorization': `Bearer ${token}`,
+      },
+    };
+  },
+};
+```
+
+## Complete Example
+
+```typescript
+import { llm, Middleware, UPPError } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+// Analytics middleware
+const analyticsMiddleware: Middleware = {
+  name: 'analytics',
+
+  onStart(ctx) {
+    ctx.state.set('requestId', crypto.randomUUID());
+    ctx.state.set('startTime', Date.now());
+  },
+
+  onRequest(ctx) {
+    const requestId = ctx.state.get('requestId');
+    console.log(`[${requestId}] Starting ${ctx.provider}/${ctx.modelId}`);
+  },
+
+  onResponse(ctx) {
+    const requestId = ctx.state.get('requestId');
+    const duration = Date.now() - (ctx.state.get('startTime') as number);
+
+    // Track usage
+    trackAnalytics({
+      requestId,
+      provider: ctx.provider,
+      model: ctx.modelId,
+      duration,
+      streaming: ctx.streaming,
+    });
+  },
+
+  onError(error, ctx) {
+    const requestId = ctx.state.get('requestId');
+
+    trackError({
+      requestId,
+      provider: ctx.provider,
+      model: ctx.modelId,
+      error: error instanceof UPPError ? error.code : 'UNKNOWN',
+      message: error.message,
+    });
+  },
+
+  onStreamEvent(event, ctx) {
+    // Count tokens for streaming
+    if (event.type === 'text_delta') {
+      const tokens = (ctx.state.get('streamTokens') as number) || 0;
+      ctx.state.set('streamTokens', tokens + 1);
+    }
+    return event;
+  },
+
+  onStreamEnd(ctx) {
+    const tokens = ctx.state.get('streamTokens');
+    console.log('Streamed tokens:', tokens);
+  },
+};
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [analyticsMiddleware],
+});
+```
+
+<Aside type="tip">
+Keep middleware focused on a single concern. Compose multiple small middleware rather than building one large one.
+</Aside>

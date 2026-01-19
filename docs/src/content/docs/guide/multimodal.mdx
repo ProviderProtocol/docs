@@ -1,0 +1,335 @@
+---
+title: Multimodal Content
+description: Working with images, documents, audio, and video in LLM requests.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Multimodal Content
+
+UPP supports multimodal input including images, PDFs, audio, and video.
+
+## Images
+
+### From File
+
+```typescript
+import { llm, Image } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+});
+
+// Load image from file
+const img = await Image.fromPath('./photo.png');
+
+const turn = await claude.generate([img, 'What is in this image?']);
+console.log(turn.response.text);
+```
+
+### From URL
+
+```typescript
+const img = Image.fromURL('https://example.com/image.jpg');
+
+const turn = await claude.generate([
+  img,
+  'Describe this image in detail.',
+]);
+```
+
+### From Base64
+
+```typescript
+const base64Data = 'iVBORw0KGgoAAAANSUhEUgAA...';
+const img = Image.fromBase64(base64Data, 'image/png');
+
+const turn = await claude.generate([img, 'What do you see?']);
+```
+
+### From Bytes
+
+```typescript
+const bytes = await Bun.file('./image.png').bytes();
+const img = Image.fromBytes(new Uint8Array(bytes), 'image/png');
+```
+
+## Documents (PDFs)
+
+### From File
+
+```typescript
+import { llm, Document } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+});
+
+const doc = await Document.fromPath('./report.pdf');
+
+const turn = await claude.generate([
+  doc,
+  'Summarize the key findings in this document.',
+]);
+```
+
+### From URL
+
+```typescript
+const doc = Document.fromURL('https://example.com/whitepaper.pdf');
+
+const turn = await claude.generate([doc, 'What is the main thesis?']);
+```
+
+### From Base64
+
+```typescript
+const doc = Document.fromBase64(base64PdfData, 'application/pdf');
+```
+
+### Plain Text Documents
+
+```typescript
+const textDoc = Document.fromText(`
+  Meeting Notes - January 15, 2025
+
+  Attendees: Alice, Bob, Charlie
+  Topics discussed:
+  1. Q4 results
+  2. Q1 planning
+  3. Team expansion
+`);
+
+const turn = await claude.generate([textDoc, 'Who attended the meeting?']);
+```
+
+## Audio
+
+```typescript
+import { llm, Audio } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+const gemini = llm({
+  model: google('gemini-2.0-flash'),
+});
+
+const audio = await Audio.fromPath('./recording.mp3');
+
+const turn = await gemini.generate([audio, 'Transcribe this audio']);
+```
+
+<Aside type="note">
+Audio input support varies by provider. Check the [Providers](/guide/providers) guide for capability details.
+</Aside>
+
+## Video
+
+```typescript
+import { llm, Video } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+const gemini = llm({
+  model: google('gemini-2.0-flash'),
+});
+
+const video = await Video.fromPath('./clip.mp4');
+
+const turn = await gemini.generate([
+  video,
+  'Describe what happens in this video.',
+]);
+```
+
+## Mixed Content
+
+Combine multiple content types in a single request:
+
+```typescript
+const img1 = await Image.fromPath('./chart1.png');
+const img2 = await Image.fromPath('./chart2.png');
+const doc = await Document.fromPath('./data.pdf');
+
+const turn = await claude.generate([
+  'Here are two charts and a report.',
+  img1,
+  img2,
+  doc,
+  'Compare the charts to the data in the report. Are they consistent?',
+]);
+```
+
+## Image Analysis Examples
+
+### Object Detection
+
+```typescript
+const img = await Image.fromPath('./street.jpg');
+
+const turn = await claude.generate([
+  img,
+  'List all objects you can identify in this image.',
+]);
+```
+
+### Text Extraction (OCR)
+
+```typescript
+const img = await Image.fromPath('./receipt.jpg');
+
+const turn = await claude.generate([
+  img,
+  'Extract all text from this receipt including prices.',
+]);
+```
+
+### Comparison
+
+```typescript
+const before = await Image.fromPath('./before.jpg');
+const after = await Image.fromPath('./after.jpg');
+
+const turn = await claude.generate([
+  'Compare these two images:',
+  before,
+  after,
+  'What are the main differences?',
+]);
+```
+
+## Document Analysis Examples
+
+### Summarization
+
+```typescript
+const doc = await Document.fromPath('./research-paper.pdf');
+
+const turn = await claude.generate([
+  doc,
+  'Provide a 3-paragraph summary of this research paper.',
+]);
+```
+
+### Question Answering
+
+```typescript
+const doc = await Document.fromPath('./manual.pdf');
+
+const turn = await claude.generate([
+  doc,
+  'How do I reset the device to factory settings?',
+]);
+```
+
+### Data Extraction
+
+```typescript
+const invoice = await Document.fromPath('./invoice.pdf');
+
+const extractor = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  structure: {
+    type: 'object',
+    properties: {
+      invoiceNumber: { type: 'string' },
+      date: { type: 'string' },
+      total: { type: 'number' },
+      lineItems: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            description: { type: 'string' },
+            quantity: { type: 'number' },
+            price: { type: 'number' },
+          },
+        },
+      },
+    },
+  },
+});
+
+const turn = await extractor.generate([
+  invoice,
+  'Extract the invoice details.',
+]);
+
+console.log(turn.data);
+```
+
+## Content in Conversation History
+
+Images and documents work with conversation history:
+
+```typescript
+import { Thread } from '@providerprotocol/ai';
+
+const thread = new Thread();
+const img = await Image.fromPath('./diagram.png');
+
+// First turn with image
+const turn1 = await claude.generate(thread, [
+  img,
+  'What does this diagram show?',
+]);
+thread.append(turn1);
+
+// Follow-up question (model remembers the image)
+const turn2 = await claude.generate(thread, 'What does the blue box represent?');
+thread.append(turn2);
+```
+
+## Provider Capabilities
+
+Multimodal support varies by provider:
+
+| Provider | Images | Documents | Audio | Video |
+|----------|:------:|:---------:|:-----:|:-----:|
+| Anthropic | ✓ | ✓ (PDF) | | |
+| OpenAI | ✓ | | ✓ | |
+| Google | ✓ | ✓ | ✓ | ✓ |
+| xAI | ✓ | | | |
+| Ollama | ✓ | | | |
+
+<Aside type="caution">
+Using unsupported content types will throw a `UPPError`. Check `model.capabilities` to verify support.
+</Aside>
+
+## Supported Formats
+
+### Images
+- PNG (`image/png`)
+- JPEG (`image/jpeg`)
+- GIF (`image/gif`)
+- WebP (`image/webp`)
+
+### Documents
+- PDF (`application/pdf`)
+- Plain text (`text/plain`)
+
+### Audio
+- MP3 (`audio/mpeg`)
+- WAV (`audio/wav`)
+- M4A (`audio/mp4`)
+
+### Video
+- MP4 (`video/mp4`)
+- WebM (`video/webm`)
+
+## Best Practices
+
+1. **Optimize image size** - Resize large images before sending to reduce latency and costs
+2. **Use appropriate formats** - JPEG for photos, PNG for screenshots/diagrams
+3. **Be specific in prompts** - Tell the model exactly what to look for
+4. **Handle missing support gracefully** - Check capabilities before using multimodal features
+
+```typescript
+// Check capabilities before using features
+if (claude.capabilities.imageInput) {
+  const img = await Image.fromPath('./photo.jpg');
+  const turn = await claude.generate([img, 'Describe this']);
+} else {
+  console.log('Image input not supported');
+}
+```

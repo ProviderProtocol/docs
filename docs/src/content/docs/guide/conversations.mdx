@@ -1,0 +1,332 @@
+---
+title: Conversations
+description: Managing multi-turn conversations and chat history.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Conversations
+
+UPP gives you full control over conversation history. You can use raw arrays or the `Thread` utility class.
+
+## Understanding Turns
+
+Every call to `generate()` or `stream()` produces a `Turn`:
+
+```typescript
+const turn = await claude.generate('Hello!');
+
+// A Turn contains:
+console.log(turn.messages);      // All messages from this call
+console.log(turn.response);      // The final assistant message
+console.log(turn.usage);         // Token usage
+console.log(turn.cycles);        // Number of inference cycles
+console.log(turn.toolExecutions); // Tools called (if any)
+```
+
+For a simple request without tools, the turn contains two messages:
+1. Your `UserMessage`
+2. The `AssistantMessage` response
+
+## Using Raw Arrays
+
+The simplest approach is a plain array:
+
+```typescript
+import { llm, Message } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant.',
+});
+
+const history: Message[] = [];
+
+// First turn
+const turn1 = await claude.generate(history, 'My name is Alice.');
+history.push(...turn1.messages);
+
+// Second turn - model remembers context
+const turn2 = await claude.generate(history, 'What is my name?');
+history.push(...turn2.messages);
+
+console.log(turn2.response.text);
+// "Your name is Alice."
+```
+
+## Using the Thread Class
+
+`Thread` provides convenience methods for common operations:
+
+```typescript
+import { llm, Thread } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant.',
+});
+
+const thread = new Thread();
+
+// Generate and append in one step
+const turn1 = await claude.generate(thread, 'My name is Bob.');
+thread.append(turn1);
+
+const turn2 = await claude.generate(thread, 'What did I tell you?');
+thread.append(turn2);
+
+console.log(turn2.response.text);
+// "You told me your name is Bob."
+console.log(thread.length);
+// 4 messages
+```
+
+## Thread Methods
+
+### Building Threads
+
+```typescript
+const thread = new Thread();
+
+// Add messages programmatically
+thread.user('Hello!');
+thread.assistant('Hi there! How can I help?');
+
+// Append a turn (adds all messages from the turn)
+const turn = await claude.generate(thread, 'What is 2+2?');
+thread.append(turn);
+```
+
+### Accessing Messages
+
+```typescript
+// Get all messages
+const messages = thread.messages;
+
+// Get by type
+const userMessages = thread.filter('user');
+const assistantMessages = thread.filter('assistant');
+
+// Get recent messages
+const last5 = thread.tail(5);
+
+// Iterate
+for (const message of thread) {
+  console.log(message.type, message.text);
+}
+```
+
+### Slicing and Truncating
+
+Manage context window by keeping only recent messages:
+
+```typescript
+// Keep only last 20 messages
+const recentThread = thread.slice(-20);
+
+// Or truncate in place
+const messages = thread.tail(20);
+const truncatedThread = new Thread(messages);
+```
+
+### Clearing
+
+```typescript
+thread.clear();
+console.log(thread.length); // 0
+```
+
+## Persistence
+
+Save and restore conversations:
+
+<Tabs>
+  <TabItem label="Save">
+```typescript
+// Convert to JSON
+const json = thread.toJSON();
+
+// Save to file
+await Bun.write('conversation.json', JSON.stringify(json, null, 2));
+
+// Or localStorage
+localStorage.setItem('chat', JSON.stringify(json));
+```
+  </TabItem>
+  <TabItem label="Restore">
+```typescript
+// Load from file
+const data = await Bun.file('conversation.json').json();
+const thread = Thread.fromJSON(data);
+
+// Or from localStorage
+const json = JSON.parse(localStorage.getItem('chat')!);
+const thread = Thread.fromJSON(json);
+
+// Continue the conversation
+const turn = await claude.generate(thread, 'Continue where we left off');
+thread.append(turn);
+```
+  </TabItem>
+</Tabs>
+
+## Thread JSON Format
+
+```typescript
+interface ThreadJSON {
+  id: string;
+  messages: MessageJSON[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface MessageJSON {
+  id: string;
+  type: 'user' | 'assistant' | 'tool_result';
+  content: ContentBlock[];
+  toolCalls?: ToolCall[];
+  results?: ToolResult[];
+  metadata?: MessageMetadata;
+  timestamp: string;
+}
+```
+
+## Message Types
+
+UPP has three message types:
+
+### UserMessage
+
+Messages from the user:
+
+```typescript
+import { UserMessage } from '@providerprotocol/ai';
+
+const msg = new UserMessage('Hello!');
+// Or with content blocks
+const msg2 = new UserMessage([
+  { type: 'text', text: 'What is in this image?' },
+  { type: 'image', source: { type: 'url', url: 'https://...' }, mimeType: 'image/png' },
+]);
+```
+
+### AssistantMessage
+
+Responses from the model:
+
+```typescript
+// Usually from turn.response
+const assistant = turn.response;
+
+console.log(assistant.text);         // Text content
+console.log(assistant.toolCalls);    // Tool calls (if any)
+console.log(assistant.hasToolCalls); // Boolean
+```
+
+### ToolResultMessage
+
+Results from tool executions:
+
+```typescript
+// Usually created automatically by UPP
+// But you can create them manually:
+import { ToolResultMessage } from '@providerprotocol/ai';
+
+const results = new ToolResultMessage([
+  { toolCallId: 'call_123', result: { temp: 72 } },
+]);
+```
+
+## Turns with Tools
+
+When tools are involved, a turn contains multiple messages:
+
+```typescript
+const turn = await claude.generate('What is the weather in Tokyo?');
+
+// Turn messages:
+// 1. UserMessage: "What is the weather in Tokyo?"
+// 2. AssistantMessage: { toolCalls: [{ name: 'get_weather', ... }] }
+// 3. ToolResultMessage: [{ result: '72°F, sunny' }]
+// 4. AssistantMessage: "The weather in Tokyo is 72°F and sunny!"
+
+console.log(turn.messages.length);  // 4
+console.log(turn.cycles);           // 2 (initial + after tool)
+```
+
+## Token Usage
+
+Track token consumption:
+
+```typescript
+const turn = await claude.generate('Write a poem');
+
+console.log(turn.usage.inputTokens);   // Input tokens
+console.log(turn.usage.outputTokens);  // Output tokens
+console.log(turn.usage.totalTokens);   // Total
+console.log(turn.usage.cacheReadTokens);  // Cache hits
+console.log(turn.usage.cacheWriteTokens); // Cache writes (Anthropic)
+
+// Per-cycle breakdown
+if (turn.usage.cycles) {
+  for (const cycle of turn.usage.cycles) {
+    console.log('Cycle:', cycle.inputTokens, cycle.outputTokens);
+  }
+}
+```
+
+## Streaming with History
+
+```typescript
+const thread = new Thread();
+
+const stream = claude.stream(thread, 'Tell me a story');
+
+for await (const event of stream) {
+  if (event.type === 'text_delta') {
+    process.stdout.write(event.delta.text ?? '');
+  }
+}
+
+// Append the completed turn
+const turn = await stream.turn;
+thread.append(turn);
+```
+
+## Context Window Management
+
+Manage long conversations to stay within model limits:
+
+```typescript
+const MAX_MESSAGES = 50;
+
+async function chat(thread: Thread, userInput: string) {
+  // Truncate if too long
+  if (thread.length > MAX_MESSAGES) {
+    const recent = thread.slice(-MAX_MESSAGES);
+    thread.clear();
+    thread.push(...recent.messages);
+  }
+
+  const turn = await claude.generate(thread, userInput);
+  thread.append(turn);
+
+  return turn.response.text;
+}
+```
+
+## When to Use Thread vs Array
+
+| Scenario | Recommendation |
+|----------|----------------|
+| Simple one-off queries | No history needed |
+| Multi-turn chat | Thread |
+| Persistence required | Thread with serialization |
+| Custom history logic | Raw array |
+| Maximum control | Raw array |
+
+<Aside type="note">
+UPP intentionally does not manage conversation history internally. This gives you full control over context management, pruning, and storage strategies.
+</Aside>

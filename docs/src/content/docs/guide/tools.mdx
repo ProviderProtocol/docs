@@ -1,0 +1,430 @@
+---
+title: Tools & Function Calling
+description: Give LLMs the ability to call functions and interact with external systems.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Tools & Function Calling
+
+Tools allow LLMs to call functions you define, enabling them to fetch data, perform calculations, or interact with external systems.
+
+## Defining a Tool
+
+A tool has a name, description, parameter schema, and a run function:
+
+```typescript
+import { llm, Tool } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+
+const getWeather: Tool = {
+  name: 'get_weather',
+  description: 'Get the current weather for a location',
+  parameters: {
+    type: 'object',
+    properties: {
+      location: {
+        type: 'string',
+        description: 'City name (e.g., "San Francisco")',
+      },
+      unit: {
+        type: 'string',
+        enum: ['celsius', 'fahrenheit'],
+        description: 'Temperature unit',
+      },
+    },
+    required: ['location'],
+  },
+  run: async ({ location, unit = 'fahrenheit' }) => {
+    // Your implementation here
+    const data = await fetchWeatherAPI(location);
+    return {
+      location,
+      temperature: unit === 'celsius' ? data.tempC : data.tempF,
+      conditions: data.conditions,
+    };
+  },
+};
+```
+
+## Using Tools
+
+Pass tools to the `llm()` options:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  system: 'You are a helpful assistant with access to weather data.',
+  tools: [getWeather],
+});
+
+const turn = await claude.generate('What is the weather in Tokyo?');
+console.log(turn.response.text);
+// "The weather in Tokyo is currently 72°F and sunny."
+```
+
+UPP automatically:
+1. Sends tools to the model
+2. Executes tool calls when the model requests them
+3. Sends results back to the model
+4. Continues until the model produces a final response
+
+## Tool Execution Flow
+
+```
+User: "What's the weather in Tokyo?"
+    │
+    ▼
+┌─────────────────────────────┐
+│ Model decides to call tool  │
+│ get_weather({location:      │
+│   "Tokyo"})                 │
+└─────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────┐
+│ UPP executes tool.run()     │
+│ Result: {temp: 72, ...}     │
+└─────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────┐
+│ Model receives result       │
+│ Generates final response    │
+└─────────────────────────────┘
+    │
+    ▼
+"The weather in Tokyo is 72°F and sunny."
+```
+
+## Multiple Tools
+
+Provide multiple tools for complex tasks:
+
+```typescript
+const tools: Tool[] = [
+  {
+    name: 'get_weather',
+    description: 'Get current weather for a location',
+    parameters: {
+      type: 'object',
+      properties: {
+        location: { type: 'string' },
+      },
+      required: ['location'],
+    },
+    run: async ({ location }) => fetchWeather(location),
+  },
+  {
+    name: 'search_web',
+    description: 'Search the web for information',
+    parameters: {
+      type: 'object',
+      properties: {
+        query: { type: 'string' },
+      },
+      required: ['query'],
+    },
+    run: async ({ query }) => searchWeb(query),
+  },
+  {
+    name: 'calculate',
+    description: 'Perform mathematical calculations',
+    parameters: {
+      type: 'object',
+      properties: {
+        expression: { type: 'string', description: 'Math expression to evaluate' },
+      },
+      required: ['expression'],
+    },
+    run: async ({ expression }) => eval(expression), // Use a safe math parser in production
+  },
+];
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools,
+});
+```
+
+## Tool Strategy
+
+Control tool execution with `toolStrategy`:
+
+```typescript
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: [getWeather, searchWeb],
+  toolStrategy: {
+    // Maximum tool execution rounds (default: 10)
+    maxIterations: 5,
+
+    // Called before each tool execution
+    onBeforeCall: (tool, params) => {
+      console.log(`Calling ${tool.name} with`, params);
+      return true; // Return false to block execution
+    },
+
+    // Called after each tool execution
+    onAfterCall: (tool, params, result) => {
+      console.log(`${tool.name} returned:`, result);
+    },
+
+    // Called when a tool throws an error
+    onError: (tool, params, error) => {
+      console.error(`${tool.name} failed:`, error);
+    },
+
+    // Called when max iterations reached
+    onMaxIterations: (iterations) => {
+      console.warn(`Reached max iterations: ${iterations}`);
+    },
+  },
+});
+```
+
+## Tool Approval
+
+Require approval before executing sensitive tools:
+
+```typescript
+const deleteFile: Tool = {
+  name: 'delete_file',
+  description: 'Delete a file from the filesystem',
+  parameters: {
+    type: 'object',
+    properties: {
+      path: { type: 'string' },
+    },
+    required: ['path'],
+  },
+  // Approval function - return true to allow, false to block
+  approval: async ({ path }) => {
+    const answer = await prompt(`Delete ${path}? (y/n) `);
+    return answer.toLowerCase() === 'y';
+  },
+  run: async ({ path }) => {
+    await fs.unlink(path);
+    return { success: true };
+  },
+};
+```
+
+## Accessing Tool Executions
+
+The Turn contains information about all tool executions:
+
+```typescript
+const turn = await claude.generate('What is the weather in NYC and LA?');
+
+// All tool executions
+for (const execution of turn.toolExecutions) {
+  console.log('Tool:', execution.toolName);
+  console.log('Args:', execution.arguments);
+  console.log('Result:', execution.result);
+  console.log('Duration:', execution.duration, 'ms');
+  console.log('Error:', execution.isError);
+}
+
+// Number of inference cycles (1 + tool rounds)
+console.log('Cycles:', turn.cycles);
+```
+
+## Parallel Tool Calls
+
+When the model requests multiple tools simultaneously, they execute in parallel:
+
+```typescript
+// User asks: "What's the weather in NYC, LA, and Chicago?"
+// Model calls get_weather 3 times in parallel
+const turn = await claude.generate(
+  'What is the weather in NYC, LA, and Chicago?'
+);
+
+// All three executed concurrently
+console.log(turn.toolExecutions.length); // 3
+```
+
+## Streaming with Tools
+
+Tool execution events appear in the stream:
+
+```typescript
+const stream = claude.stream('What is the weather in Tokyo?');
+
+for await (const event of stream) {
+  switch (event.type) {
+    case 'text_delta':
+      process.stdout.write(event.delta.text ?? '');
+      break;
+
+    case 'tool_call_delta':
+      console.log('\n[Tool call]', event.delta.toolName);
+      break;
+
+    case 'tool_execution_start':
+      console.log(`[Executing ${event.delta.toolName}...]`);
+      break;
+
+    case 'tool_execution_end':
+      console.log(`[Result: ${JSON.stringify(event.delta.result)}]`);
+      break;
+  }
+}
+```
+
+## Tool Metadata
+
+Add provider-specific metadata to tools:
+
+```typescript
+const tool: Tool = {
+  name: 'search',
+  description: 'Search for information',
+  parameters: { type: 'object', properties: {} },
+  metadata: {
+    // Anthropic-specific: enable prompt caching
+    anthropic: {
+      cache_control: { type: 'ephemeral' },
+    },
+  },
+  run: async () => ({ results: [] }),
+};
+```
+
+## JSON Schema for Parameters
+
+Tool parameters use JSON Schema:
+
+```typescript
+const createUser: Tool = {
+  name: 'create_user',
+  description: 'Create a new user account',
+  parameters: {
+    type: 'object',
+    properties: {
+      name: {
+        type: 'string',
+        minLength: 1,
+        maxLength: 100,
+      },
+      email: {
+        type: 'string',
+        format: 'email',
+      },
+      age: {
+        type: 'integer',
+        minimum: 0,
+        maximum: 150,
+      },
+      role: {
+        type: 'string',
+        enum: ['admin', 'user', 'guest'],
+        default: 'user',
+      },
+      tags: {
+        type: 'array',
+        items: { type: 'string' },
+        maxItems: 10,
+      },
+    },
+    required: ['name', 'email'],
+  },
+  run: async (params) => createUserInDB(params),
+};
+```
+
+## Error Handling in Tools
+
+Return errors gracefully or let them propagate:
+
+```typescript
+const riskyTool: Tool = {
+  name: 'risky_operation',
+  description: 'An operation that might fail',
+  parameters: { type: 'object', properties: {} },
+  run: async () => {
+    try {
+      return await performRiskyOperation();
+    } catch (error) {
+      // Return error as result (model sees error message)
+      return { error: error.message };
+    }
+  },
+};
+```
+
+If a tool throws an exception, UPP catches it and reports it to the model as an error result.
+
+## Complete Example
+
+```typescript
+import { llm, Tool, Thread } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+// Define tools
+const tools: Tool[] = [
+  {
+    name: 'get_stock_price',
+    description: 'Get the current stock price for a ticker symbol',
+    parameters: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Stock ticker (e.g., AAPL)',
+        },
+      },
+      required: ['symbol'],
+    },
+    run: async ({ symbol }) => {
+      const price = await fetchStockPrice(symbol);
+      return { symbol, price, currency: 'USD' };
+    },
+  },
+  {
+    name: 'calculate_return',
+    description: 'Calculate investment return',
+    parameters: {
+      type: 'object',
+      properties: {
+        principal: { type: 'number' },
+        currentValue: { type: 'number' },
+      },
+      required: ['principal', 'currentValue'],
+    },
+    run: async ({ principal, currentValue }) => {
+      const returnPct = ((currentValue - principal) / principal) * 100;
+      return { returnPercentage: returnPct.toFixed(2) + '%' };
+    },
+  },
+];
+
+// Create LLM with tools
+const gpt = llm({
+  model: openai('gpt-4o'),
+  system: 'You are a financial assistant.',
+  tools,
+  toolStrategy: {
+    maxIterations: 5,
+    onBeforeCall: (tool, params) => {
+      console.log(`→ ${tool.name}(${JSON.stringify(params)})`);
+      return true;
+    },
+  },
+});
+
+// Use in conversation
+const thread = new Thread();
+const turn = await gpt.generate(
+  thread,
+  'I bought 100 shares of AAPL at $150 each. What is my return?'
+);
+
+thread.append(turn);
+console.log(turn.response.text);
+```
+
+<Aside type="tip">
+Keep tool descriptions concise but descriptive. The model uses descriptions to decide when and how to call tools.
+</Aside>

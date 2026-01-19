@@ -1,0 +1,268 @@
+---
+title: Embeddings
+description: Generate vector embeddings for semantic search and similarity.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Embeddings
+
+Generate vector embeddings for semantic search, similarity comparison, and RAG applications.
+
+## Basic Usage
+
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+const embedder = embedding({
+  model: openai('text-embedding-3-small'),
+});
+
+const result = await embedder.embed('What is machine learning?');
+
+console.log(result.vector.length);     // 1536
+console.log(result.tokens);            // Token count
+console.log(result.dimensions);        // 1536
+```
+
+## Batch Embedding
+
+Embed multiple texts efficiently:
+
+```typescript
+const documents = [
+  'Machine learning is a subset of artificial intelligence.',
+  'Neural networks are inspired by biological brains.',
+  'Deep learning uses multiple layers of neural networks.',
+];
+
+const results = await embedder.embed(documents);
+
+for (const result of results.embeddings) {
+  console.log(`Document ${result.index}:`, result.vector.length);
+}
+
+console.log('Total tokens:', results.usage.totalTokens);
+```
+
+## Provider Options
+
+### OpenAI
+
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+const embedder = embedding({
+  model: openai('text-embedding-3-large'),
+  params: {
+    dimensions: 1024, // Reduce dimensions (default: 3072)
+  },
+});
+```
+
+**Models:**
+- `text-embedding-3-small` - 1536 dimensions, fast
+- `text-embedding-3-large` - 3072 dimensions, higher quality
+
+### Google
+
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { google } from '@providerprotocol/ai/google';
+
+const embedder = embedding({
+  model: google('text-embedding-004'),
+});
+```
+
+### Ollama (Local)
+
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { ollama } from '@providerprotocol/ai/ollama';
+
+const embedder = embedding({
+  model: ollama('nomic-embed-text'),
+  config: {
+    baseUrl: 'http://localhost:11434',
+  },
+});
+```
+
+### OpenRouter
+
+```typescript
+import { embedding } from '@providerprotocol/ai';
+import { openrouter } from '@providerprotocol/ai/openrouter';
+
+const embedder = embedding({
+  model: openrouter('openai/text-embedding-3-small'),
+});
+```
+
+## Chunked Mode for Large Datasets
+
+For large datasets, use chunked mode to get progress updates:
+
+```typescript
+const documents = loadLargeDataset(); // Thousands of documents
+
+const stream = embedder.embed(documents, { chunked: true });
+
+let processed = 0;
+for await (const chunk of stream) {
+  processed += chunk.embeddings.length;
+  console.log(`Processed ${processed}/${documents.length}`);
+}
+
+// Get final results
+const results = await stream.results;
+```
+
+## Input Types
+
+### Document vs Query
+
+Some models optimize differently for documents vs queries:
+
+```typescript
+// Embedding documents for storage
+const docResult = await embedder.embed(documents, {
+  inputType: 'document',
+});
+
+// Embedding queries for search
+const queryResult = await embedder.embed('search query', {
+  inputType: 'query',
+});
+```
+
+### Text Input
+
+```typescript
+// String
+await embedder.embed('Simple text');
+
+// Text block
+await embedder.embed({ type: 'text', text: 'Text block' });
+
+// Array of strings
+await embedder.embed(['Text 1', 'Text 2', 'Text 3']);
+```
+
+## Similarity Search
+
+Compare embeddings using cosine similarity:
+
+```typescript
+function cosineSimilarity(a: number[], b: number[]): number {
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+
+  for (let i = 0; i < a.length; i++) {
+    dotProduct += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+// Embed documents and query
+const docs = ['Paris is in France', 'Tokyo is in Japan', 'NYC is in USA'];
+const docEmbeddings = await embedder.embed(docs);
+
+const query = 'What is the capital of France?';
+const queryEmbedding = await embedder.embed(query);
+
+// Find most similar document
+const similarities = docEmbeddings.embeddings.map((doc, i) => ({
+  text: docs[i],
+  score: cosineSimilarity(queryEmbedding.vector, doc.vector),
+}));
+
+similarities.sort((a, b) => b.score - a.score);
+console.log('Most relevant:', similarities[0]);
+// { text: 'Paris is in France', score: 0.89 }
+```
+
+## RAG Pattern
+
+Use embeddings for Retrieval-Augmented Generation:
+
+```typescript
+import { llm, embedding } from '@providerprotocol/ai';
+import { openai } from '@providerprotocol/ai/openai';
+
+const embedder = embedding({ model: openai('text-embedding-3-small') });
+const gpt = llm({ model: openai('gpt-4o') });
+
+// Index documents
+const documents = [
+  'UPP supports Anthropic, OpenAI, Google, xAI, Ollama, and OpenRouter.',
+  'Use llm() for chat, embedding() for vectors, image() for generation.',
+  'Thread is an optional utility for managing conversation history.',
+];
+const docEmbeddings = await embedder.embed(documents);
+
+// Search function
+async function findRelevant(query: string, topK = 3) {
+  const queryEmbed = await embedder.embed(query);
+
+  const scored = documents.map((doc, i) => ({
+    text: doc,
+    score: cosineSimilarity(queryEmbed.vector, docEmbeddings.embeddings[i].vector),
+  }));
+
+  return scored.sort((a, b) => b.score - a.score).slice(0, topK);
+}
+
+// RAG query
+async function askWithContext(question: string) {
+  const relevant = await findRelevant(question);
+  const context = relevant.map(r => r.text).join('\n');
+
+  return gpt.generate([
+    { type: 'text', text: `Context:\n${context}\n\nQuestion: ${question}` },
+  ]);
+}
+
+const turn = await askWithContext('What providers does UPP support?');
+console.log(turn.response.text);
+```
+
+## Embedding Model Capabilities
+
+| Model | Provider | Dimensions | Max Input |
+|-------|----------|-----------|-----------|
+| text-embedding-3-small | OpenAI | 1536 | 8191 tokens |
+| text-embedding-3-large | OpenAI | 3072 | 8191 tokens |
+| text-embedding-004 | Google | 768 | 2048 tokens |
+| nomic-embed-text | Ollama | 768 | 8192 tokens |
+
+## Best Practices
+
+1. **Batch when possible** - Embedding multiple texts is more efficient
+2. **Match models** - Use the same model for documents and queries
+3. **Normalize vectors** - Most similarity functions assume unit vectors
+4. **Consider dimensions** - Lower dimensions = faster search, less storage
+5. **Use input types** - Specify `document` vs `query` when supported
+
+```typescript
+// Efficient batching
+const BATCH_SIZE = 100;
+const allEmbeddings = [];
+
+for (let i = 0; i < documents.length; i += BATCH_SIZE) {
+  const batch = documents.slice(i, i + BATCH_SIZE);
+  const results = await embedder.embed(batch);
+  allEmbeddings.push(...results.embeddings);
+}
+```
+
+<Aside type="tip">
+For production RAG systems, consider using a vector database like Pinecone, Weaviate, or pgvector instead of in-memory similarity search.
+</Aside>
