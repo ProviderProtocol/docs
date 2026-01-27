@@ -140,7 +140,36 @@ console.log(thread.length); // 0
 
 ## Persistence
 
-Save and restore conversations:
+### Using Persistence Middleware
+
+The persistence middleware automatically loads and saves threads around each request:
+
+```typescript
+import { llm } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+import { persistenceMiddleware, PersistenceAdapter } from '@providerprotocol/ai/middleware/persistence';
+
+const adapter = new PersistenceAdapter({
+  id: 'conversation-123',
+  load: async (id) => loadThreadFromDatabase(id),
+  save: async (id, thread, turn) => {
+    await saveThreadToDatabase(id, thread);
+  },
+});
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [persistenceMiddleware({ adapter })],
+});
+
+// History is loaded automatically before each request
+// and saved automatically after completion
+const turn = await claude.generate('Hello!');
+```
+
+### Manual Serialization
+
+For more control, use `toJSON()` and `fromJSON()`:
 
 <Tabs>
   <TabItem label="Save">

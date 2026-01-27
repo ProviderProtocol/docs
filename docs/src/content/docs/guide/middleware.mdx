@@ -44,11 +44,13 @@ interface Middleware {
   // Lifecycle hooks
   onStart?(ctx: MiddlewareContext): void | Promise<void>;
   onEnd?(ctx: MiddlewareContext): void | Promise<void>;
-  onError?(error: Error, ctx: MiddlewareContext): void | Promise<void>;
+  onError?(error: Error, ctx: MiddlewareContext): void | Promise<void>;  // Non-cancellation errors
+  onAbort?(ctx: MiddlewareContext): void | Promise<void>;  // Called on cancellation
 
   // Request/Response hooks
   onRequest?(ctx: MiddlewareContext): void | Promise<void>;
   onResponse?(ctx: MiddlewareContext): void | Promise<void>;
+  onTurn?(turn: Turn, ctx: MiddlewareContext): void | Promise<void>;  // LLM only
 
   // Stream hooks (LLM, Image)
   onStreamEvent?(
@@ -128,6 +130,36 @@ for await (const event of stream) {
   }
 }
 ```
+
+### Persistence Middleware
+
+Load and save conversation threads around LLM requests:
+
+```typescript
+import { llm, Thread } from '@providerprotocol/ai';
+import { anthropic } from '@providerprotocol/ai/anthropic';
+import { persistenceMiddleware, PersistenceAdapter } from '@providerprotocol/ai/middleware/persistence';
+
+const adapter = new PersistenceAdapter({
+  id: 'conversation-123',
+  load: async (id) => loadThreadFromDatabase(id), // Thread | ThreadJSON | null
+  save: async (id, thread, turn) => {
+    await saveThreadToDatabase(id, thread);
+    if (turn) {
+      await saveTurnToDatabase(id, turn);
+    }
+  },
+});
+
+const claude = llm({
+  model: anthropic('claude-sonnet-4-20250514'),
+  middleware: [persistenceMiddleware({ adapter })],
+});
+
+const turn = await claude.generate('Hello!');
+```
+
+The persistence middleware automatically loads conversation history before each request and saves the updated thread after completion. The `save` callback receives the complete thread and the new turn (if any).
 
 ### Pub-Sub Middleware (Stream Resumption)
 
@@ -359,22 +391,27 @@ const filterMiddleware: Middleware = {
 
 ## Error Handling
 
-Handle errors in middleware:
+Handle errors in middleware. The `onError` hook is called for non-cancellation errors, while `onAbort` is called when a request is cancelled:
 
 ```typescript
 const errorMiddleware: Middleware = {
   name: 'error-handler',
 
   onError(error, ctx) {
+    // Called for non-cancellation errors
     console.error(`Error in ${ctx.provider}/${ctx.modelId}:`, error.message);
 
-    // Log to external service
     logToMonitoring({
       error: error.message,
       provider: ctx.provider,
       model: ctx.modelId,
       duration: ctx.endTime ? ctx.endTime - ctx.startTime : 0,
     });
+  },
+
+  onAbort(ctx) {
+    // Called when request is cancelled
+    console.log(`Request cancelled: ${ctx.provider}/${ctx.modelId}`);
   },
 };
 ```
@@ -410,7 +447,9 @@ const claude = llm({
 // Execution order:
 // Request phase:  first → second → third
 // Response phase: third → second → first (reverse)
-// Error phase:    all notified
+// Turn phase:     third → second → first (reverse, LLM only)
+// Error phase:    all notified (non-cancellation errors)
+// Abort phase:    all notified (cancellation only)
 ```
 
 ## Sharing State
@@ -507,6 +546,16 @@ const analyticsMiddleware: Middleware = {
       error: error instanceof UPPError ? error.code : 'UNKNOWN',
       message: error.message,
     });
+  },
+
+  onAbort(ctx) {
+    const requestId = ctx.state.get('requestId');
+    console.log(`[${requestId}] Request cancelled`);
+  },
+
+  onTurn(turn, ctx) {
+    const requestId = ctx.state.get('requestId');
+    console.log(`[${requestId}] Turn completed with ${turn.messages.length} messages`);
   },
 
   onStreamEvent(event, ctx) {

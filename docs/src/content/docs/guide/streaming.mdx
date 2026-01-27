@@ -102,6 +102,10 @@ console.log('\n\nTotal tokens:', turn.usage.totalTokens);
 console.log('Response:', turn.response.text);
 ```
 
+<Aside type="tip">
+If you access `stream.turn` without iterating the stream first, it will automatically drain the stream for you. This is useful when you only care about the final result.
+</Aside>
+
 The Turn contains everything from the inference:
 - All messages produced
 - Token usage
